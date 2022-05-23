@@ -118,6 +118,16 @@
             <div class="card-body">
               <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block" alt="...">
               <div>
+                <p class="card-text">Buddisht</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block" alt="...">
+              <div>
                 <p class="card-text">History</p>
               </div>
             </div>
