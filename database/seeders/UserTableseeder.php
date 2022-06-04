@@ -17,7 +17,7 @@ class UserTableseeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
+        DB::table('user')->delete();
 
         $this->createNewUsers();
         
@@ -25,58 +25,37 @@ class UserTableseeder extends Seeder
 
     protected function createNewUsers()
     {
-        $password = Hash::make('cj'); // Default user password
+        $password = Hash::make('viduhalapwd'); // Default user password
 
         $d = [
 
-            ['name' => 'Heshan namal',
-                'email' => 'cj@cj.com',
-                'username' => 'cj',
+            ['user_name' => 'Heshan namal',
+                'email' => 'admin@admin.com',
                 'password' => $password,
-                'user_type' => 'super_admin',
+                'user_type' => 'admin',
                 'contact'=> '0717731831',
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Kushan maduranga',
-            'email' => 'admin@admin.com',
-            'password' => $password,
-            'user_type' => 'admin',
-            'username' => 'admin',
-            'contact'=> '0717731856',
-            'remember_token' => Str::random(10),
-            ],
-            ['name' => 'Kushan maduranga2',
-            'email' => 'admin2@admin.com',
-            'password' => $password,
-            'user_type' => 'student',
-            'username' => 'student2',
-            'contact'=> '0717731832',
-            'remember_token' => Str::random(10),
-            ],
-
-            ['name' => 'Lochana dewi',
+            ['user_name' => 'Lochana dewi',
                 'email' => 'teacher@teacher.com',
                 'user_type' => 'teacher',
-                'username' => 'teacher',
                 'password' => $password,
                 'contact'=> '0717731833',
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Milinda ama',
+            ['user_name' => 'Adhil sddiq',
                 'email' => 'classteacher@classteacher.com',
                 'user_type' => 'class_teacher',
-                'username' => 'class teacher',
                 'password' => $password,
                 'contact'=> '0717731834',
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Adhil sddiq',
+            ['user_name' => 'Milinda samaranayake',
                 'email' => 'student@student.com',
                 'user_type' => 'student',
-                'username' => 'student',
                 'password' => $password,
                 'contact'=> '0717731834',
                 'remember_token' => Str::random(10),

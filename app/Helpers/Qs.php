@@ -22,7 +22,7 @@ class Qs
     }
     public static function getTeamAd()  //  admin group---
     {
-        return ['admin', 'super_admin'];    
+        return ['admin'];    
     }
     public static function getTeamTe()  // teacher group---
     {
@@ -34,7 +34,7 @@ class Qs
     }
     public static function getTeamAll()  // all types group---
     {
-        return ['admin', 'super_admin','teacher', 'class_teacher','student'];
+        return ['admin','teacher', 'class_teacher','student'];
     }
     
 

@@ -1,5 +1,5 @@
-@extends('layouts.dashboard')
-@extends('layouts.navigation')
+@extends('layouts.MasterDashboard')
+
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
 @endsection
@@ -7,82 +7,75 @@
 <div class="container_AssStudent ">
         <header>Registration</header>
 
-        <form action="#" class="{{ in_array(Route::currentRouteName(), ['addstd', 'marks.year_selector', 'pins.enter']) ? 'active' : '' }}">
-            <div class="form first">
-                <div class="details personal">
-                    <span class="title">Student Details</span>
-
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>Full Name</label>
-                            <input type="text" placeholder="Enter your name" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Date of Birth</label>
-                            <input type="date" placeholder="Enter birth date" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Email</label>
-                            <input type="text" placeholder="Enter your email" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Mobile Number</label>
-                            <input type="number" placeholder="Enter mobile number" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Gender</label>
-                            <select required>
-                                <option disabled selected>Select gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Others</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Grade</label>
-                            <select required>
-                                <option>Grade 1</option>
-                                <option>Grade 2</option>
-                                <option>Grade 3</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <label>Class</label>
-                            <select required>
-                                <option>Class A</option>
-                                <option>Class B</option>
-                                <option>Class C</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                        <label>Password</label>
-                            <select required>
-                                <option disabled selected>Default Password</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="buttons">
-                        <div class="backBtn">
-                            <i class="uil uil-navigator"></i>
-                            <span class="btnText">Clear</span>
-                        </div>
-                        
-                        <button class="sumbit">
-                            <span class="btnText">Submit</span>
-                            <i class="uil uil-navigator"></i>
-                        </button>
-                    </div>
-                 
+        <form class="row g-3">
+            <div class="col-md-4">
+                <label for="inputEmail4" class="form-label">Full name</label>
+                <input type="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-4">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail4">
             </div>
 
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
 
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            </div>
+
+            <div class="col-12">
+                <label for="inputAddress2" class="form-label">Address 2</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            </div>
+
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" id="inputCity">
+            </div>
+
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">State</label>
+                <select id="inputState" class="form-select">
+                <option selected>Choose...</option>
+                <option>...</option>
+                </select>
+            </div>
             
+            <div class="col-md-2">
+                <label for="inputZip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="inputZip">
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                    Check me out
+                </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
         </form>
-    </div>
-    @endsection
+</div>
+@endsection

@@ -112,7 +112,7 @@
                     
                     <div class="p-2 flex-grow-1 bd-highlight">@yield('content')</div>
                     <div class=" p-2 bd-highlight NoticeBoard">
-                    <div class=" dropdown-list animated--grow-in">
+                    <div class=" dropdown-list animated--grow-in ">
                                         <h6 class="dropdown-header">Notification center</h6>
                                         <a class="dropdown-item d-flex align-items-center" href="#">
                                             <div class="dropdown-list-image me-3"><img class="rounded-circle" src="{{asset('assets/front/images/avatars/avatar4.jpeg')}}">
@@ -120,7 +120,7 @@
                                             </div>
                                             <div class="fw-bold">
                                                 <div class="text-truncate"><span>Hi there! I am wondering if you can help me with a problem I've been having.</span></div>
-                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
+                                                <p class="small text-gray-500 mb-0 ">Emily Fowler - 58m</p>
                                             </div>
                                         </a><a class="dropdown-item d-flex align-items-center" href="#">
                                             <div class="dropdown-list-image me-3"><img class="rounded-circle" src="{{asset('assets/front/images/avatars/avatar2.jpeg')}}">
