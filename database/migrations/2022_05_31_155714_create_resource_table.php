@@ -15,7 +15,7 @@ class CreateResourceTable extends Migration
     {
         Schema::create('resource', function (Blueprint $table) {
             $table->id();
-            $table->integer('term')->nullable(false);
+            $table->string('term')->nullable(false);
             $table->string('week')->nullable(true);
             $table->string('extra_week')->nullable(true);
             $table->string('day')->nullable(false);

@@ -15,13 +15,15 @@ class CreateAttentivenessCheckQuestionTable extends Migration
     {
         Schema::create('attentiveness_check_question', function (Blueprint $table) {
             $table->id();
-            $table->integer('question_no')->nullable(false);
+            $table->unsignedBigInteger('a_check_id');
+            $table->string('question')->nullable(false);
             $table->string('option_1')->nullable(false);
             $table->string('option_2')->nullable(false);
             $table->string('option_3')->nullable(false);
             $table->string('option_4')->nullable(false);
             $table->string('correct_answer')->nullable(false);
             $table->timestamps();
+            $table->foreign('a_check_id')->references('id')->on('attentiveness_check')->onDelete('cascade');
         });
     }
 

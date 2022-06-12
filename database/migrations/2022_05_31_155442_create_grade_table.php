@@ -16,6 +16,8 @@ class CreateGradeTable extends Migration
         Schema::create('grade', function (Blueprint $table) {
             $table->id();
             $table->string('grade_name')->nullable(false);
+            $table->unsignedBigInteger('admin_id');
+            $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
             $table->timestamps();
            
         });

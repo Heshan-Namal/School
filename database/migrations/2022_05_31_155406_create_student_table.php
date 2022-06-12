@@ -22,6 +22,7 @@ class CreateStudentTable extends Migration
             $table->string('guardian_email', 100)->unique();
             $table->string('guardian_contact_no')->nullable(false);
             $table->longText('address')->nullable(false);
+            $table->string('photo')->default(Qs::getDefaultUserImage());
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('grade_id');
             $table->unsignedBigInteger('admin_id');

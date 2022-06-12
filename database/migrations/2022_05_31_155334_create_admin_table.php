@@ -19,6 +19,7 @@ class CreateAdminTable extends Migration
             $table->integer('contact_no')->nullable(false);
             $table->longText('adress')->nullable(false);
             $table->unsignedBigInteger('user_id');
+            $table->string('photo')->default(Qs::getDefaultUserImage());
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
