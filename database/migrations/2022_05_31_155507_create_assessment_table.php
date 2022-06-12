@@ -19,7 +19,7 @@ class CreateAssessmentTable extends Migration
             $table->integer('term')->nullable(false);
             $table->string('week')->nullable(true);
             $table->string('extra_week')->nullable(true);
-            $table->date('assigned_date')->nullable(false);
+            $table->date('assigned_day')->nullable(false);
             $table->date('due_date')->nullable(false);
             $table->enum('status',['published', 'draft', 'disabled'])->defualt('draft')->nullable(false);
             $table->integer('no_of_questions')->nullable(true);
