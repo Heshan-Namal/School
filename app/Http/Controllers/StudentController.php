@@ -143,9 +143,9 @@ class StudentController extends Controller
             ->orderBy('attentiveness_check.id', 'desc')
             ->get();
 
-        $student_id = Auth::user()->id; //id in user table does not match id in student table :\
-        $admission_no = Student::where('id',$student_id)->get();
-        dd($admission_no);
+        $student_id = Auth::user()->id;
+        $admission_no = Student::where('user_id',$student_id)->get();
+        
 
         $completed_quizes = DB::table('student_attentiveness_check')
             ->join('attentiveness_check', 'attentiveness_check.id', '=', 'student_attentiveness_check.A_check_id')
