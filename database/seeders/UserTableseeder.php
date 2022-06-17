@@ -29,39 +29,35 @@ class UserTableseeder extends Seeder
 
         $d = [
 
-            ['user_name' => 'Heshan namal',
+            [
                 'email' => 'admin@admin.com',
-                'password' => $password,
                 'user_type' => 'admin',
-                'contact'=> '0717731831',
+                'password' => $password,
                 'remember_token' => Str::random(10),
             ],
 
-            ['user_name' => 'Lochana dewi',
+            [
                 'email' => 'teacher@teacher.com',
                 'user_type' => 'teacher',
                 'password' => $password,
-                'contact'=> '0717731833',
                 'remember_token' => Str::random(10),
             ],
 
-            ['user_name' => 'Adhil sddiq',
+            [
                 'email' => 'classteacher@classteacher.com',
                 'user_type' => 'class_teacher',
                 'password' => $password,
-                'contact'=> '0717731834',
                 'remember_token' => Str::random(10),
             ],
 
-            ['user_name' => 'Milinda samaranayake',
+            [
                 'email' => 'student@student.com',
                 'user_type' => 'student',
                 'password' => $password,
-                'contact'=> '0717731834',
                 'remember_token' => Str::random(10),
             ],
         ];
-        DB::table('users')->insert($d);
+        DB::table('user')->insert($d);
     }
 
 

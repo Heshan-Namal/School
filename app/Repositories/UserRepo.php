@@ -9,6 +9,6 @@ use App\Models\User;
 class UserRepo {
     public function getAll()
     {
-        return User::orderBy('name', 'asc')->get();
+     //   return User::orderBy('name', 'asc')->get();
     }
 }
