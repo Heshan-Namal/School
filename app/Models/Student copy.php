@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $table = "student";
+    protected $table = "Student";
     public function getass()
     {
         // need to declare relation and object tables

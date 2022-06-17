@@ -14,7 +14,8 @@ use App\Http\Controllers\Teacher_roleController;
 use App\Http\Controllers\Student_subjectController;
 use App\Http\Controllers\Subject_teacherController;
 use App\Http\Controllers\TimetableController;
-use App\Http\Controllers\AssController;
+use App\Http\Controllers\Submit_assesmentController;
+use App\Http\Controllers\AssesmentController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\HomeController;
@@ -68,4 +69,11 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 });
-
+Route::get('/subjects',[TeacherController::class,'mySubjects'])->name('teacher.subjects');
+Route::get('/materials/{classid}/{subjectid}',[TeacherController::class,'teacherMaterials'])->name('teacher.materials');
+Route::get('/assesments/{classid}/{subjectid}',[AssesmentController::class,'index'])->name('ass.index');
+Route::post('/store/{classid}/{subjectid}',[AssesmentController::class,'store'])->name('ass.store');
+Route::get('/assesmentquiz',[AssesmentController::class,'assquiz'])->name('ass.quiz');
+Route::put('/update',[AssesmentController::class,'assquestion_update'])->name('assquestion.update');
+Route::get('/assesmentshow/{id}',[AssesmentController::class,'assquizshow'])->name('ass.quizshow');
+Route::get('/submited/{classid}/{subjectid}',[Submit_assesmentController::class,'index'])->name('ass.sumitindex');

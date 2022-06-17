@@ -265,6 +265,7 @@ height: 42px;
   color: #fff;
 
 }
+
 /* term drop down  */
 .term-dropbtn {
   background-color: #3498DB;
@@ -362,4 +363,97 @@ height: 42px;
 .wide-card:hover {
   border: 0.5px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
+
+}
+
+/*teacher */
+
+.hh .card {
+  max-width: 900px;
+  min-height: 0px;
+  height: 115px;
+  margin: 10px 10px 10px 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  background-color: #90d0fafd;
+  box-shadow: none;
+  margin-bottom: unset;
+  border: none;
+}
+
+.item .card,
+.table.card {
+  background-color: #f7f1f1;
+}
+
+.owl-nav button.owl-next,
+.owl-nav button.owl-prev {
+  color: #fff;
+  margin-left: 10px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  height: 28px;
+  width: 38px;
+}
+
+.timetable {
+  color: #000;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.kk .card {
+  max-width: none;
+  width: 300px;
+  max-height: none;
+  height: 50px;
+  margin: 10px 10px 10px 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  background-color: #fff;
+  text-align: unset;
+  box-shadow: none;
+  margin-bottom: unset;
+  border: none;
+}
+
+.table-card {
+
+  text-align: unset;
+  max-width: none;
+  min-height: none;
+  box-shadow: none;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.d-card {
+
+  text-align: unset;
+  max-width: none;
+  min-height: none;
+  box-shadow: none;
+  margin-bottom: 20px;
+  border: rgb(212, 216, 231) 0.5px solid;
+}
+
+.table {
+  font-weight: bold;
+  color: #000;
+
+}
+
+.b-card {
+  margin-left: 250px;
+  background-color: #fff;
+  margin-top: 15px;
+  text-align: unset;
+  max-width: 800px;
+  min-height: none;
+  box-shadow: none;
+  margin-bottom: 20px;
+  border: none;
 }

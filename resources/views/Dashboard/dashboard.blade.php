@@ -188,7 +188,8 @@
        @endif
        @if(Qs::userIsTeamTe())
 
-       <div class="row">
+      @include('Dashboard.teacherdashboard')
+       {{-- <div class="row">
         <div class="col-sm-3">
           <div class="card">
             <div class="card-body">
@@ -239,7 +240,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}} 
 
        @endif
 </div>

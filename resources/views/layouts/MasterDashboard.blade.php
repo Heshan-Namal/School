@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{{asset('assets/front/fonts/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome5-overrides.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/front/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
     @yield('style')
 </head>
 
@@ -111,7 +115,7 @@
                    
                     
                     <div class="p-2 flex-grow-1 bd-highlight">@yield('content')</div>
-                    <div class=" p-2 bd-highlight NoticeBoard">
+                    {{-- <div class=" p-2 bd-highlight NoticeBoard">
                     <div class=" dropdown-list animated--grow-in ">
                                         <h6 class="dropdown-header">Notification center</h6>
                                         <a class="dropdown-item d-flex align-items-center" href="#">
@@ -149,7 +153,7 @@
                                         </a><a class="dropdown-item text-center small text-gray-500 mt-1" href="#">Show All Alerts</a>
                                     </div>
      
-                    </div>
+                    </div> --}}
                     
                     
 
@@ -172,6 +176,9 @@
     <script src="{{asset('assets/front/js/termDropdown.js')}}"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="{{asset('assets/front/js/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('assets/front/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('assets/front/js/carousel.js')}}"></script>
     @yield('script')
 </body>
 

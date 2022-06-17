@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Classroom extends Model
 {
     use HasFactory;
-    protected $table = "student";
-    public function getass()
+    protected $table = "class";
+
+
+    public function getsubjects()
     {
         // need to declare relation and object tables
-        return $this->hasMany(\App\Models\Student::class,\App\Models\Student_assesment::class);
+        return $this->hasMany(\App\Models\Classroom::class,\App\Models\Subject_class::class);
 
     }
 }
