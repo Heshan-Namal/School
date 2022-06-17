@@ -31,7 +31,6 @@ class UserTableseeder extends Seeder
 
             [
                 'email' => 'admin@admin.com',
-                'password' => $password,
                 'user_type' => 'admin',
                 'remember_token' => Str::random(10),
             ],

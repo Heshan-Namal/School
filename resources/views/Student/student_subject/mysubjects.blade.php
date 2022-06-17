@@ -1,22 +1,22 @@
-@extends('layouts.student')
+@extends('layouts.MasterDashboard')
 
 @section('content')
-    <section>
-    <div ><p>Today is {{ Carbon\Carbon::now()->format('y-m-d') }} </p>
-    </div>
-    <!--container-->
-    <div class="container-fluid pb-4">
-        <h2 class="text-center">My Subjects</h2><br>
-        <div class="row row-cols-2">
+
+    <div class="content">
+        <div class="row ">
             @foreach($data as $key=>$item)
-            <div class="col">
-                <a style="text-decoration: none" href="{{route('student.subject',[$item->class_id,$item->subject_id])}}">
-                <div class="row text-center mb-3 me-3" id="img" style="height:10rem">
-                    <div class="col-md-3 rounded-start bg-secondary position-relative">
-                        <span class="text-white my-auto position-absolute top-50 start-50 translate-middle h6">{{$item->subject}}</span>
+            <div class="col-sm-3">
+                <a style="text-decoration: none" href="{{route('Student.student.subject_week',[$item->class_id,$item->subject_id])}}">
+               
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block" alt="...">
+                            <div>
+                                <p class="card-text">{{$item->subject}}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-9 rounded-end"></div>
-                </div>
+               
                 </a>
             </div>
             @endforeach
