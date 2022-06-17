@@ -125,13 +125,12 @@ class Submit_assesmentController extends Controller
     public function updatemarks(Request $req,$id)
     {
 
-        $ass=Assignment_student::find($id);
+        $ass=Student_assesment::find($id);
 
         $ass->ass_marks=$req->marks;
         $assid=$ass->assignment_id;
         //dd($ass);
         $ass->save();
-
         return redirect()->route('submit.view',compact('assid'))->with('message','Assesment Questions Updated successfully');
     }
 

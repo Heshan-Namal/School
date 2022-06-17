@@ -1,4 +1,3 @@
-
         <form action="{{route('res.store',[$classid,$subjectid])}}" method="POST" enctype="multipart/form-data">@csrf
             <div class="form-group row">
                 <div class="col-3">

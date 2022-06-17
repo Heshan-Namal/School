@@ -17,6 +17,7 @@ use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\Attentiveness_checkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();   //Auth route
+// Auth::routes();   //Auth route
 
 
 Route::group(['middleware' => 'auth'], function () {

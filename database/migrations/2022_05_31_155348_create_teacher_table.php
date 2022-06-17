@@ -19,13 +19,12 @@ class CreateTeacherTable extends Migration
             $table->string('full_name')->nullable(false);
             $table->string('contact_no')->nullable(false);
             $table->longText('address')->nullable(false);
-            $table->string('photo')->default(Qs::getDefaultUserImage());
+            // $table->string('photo')->default(Qs::getDefaultUserImage());
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('admin_id');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
-
         });
     }
 

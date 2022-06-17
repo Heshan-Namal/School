@@ -22,6 +22,13 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects-grid-cards.html">About us</a></li>
+                    <li>       
+            
+                <div class="d-flex justify-content-center align-items-center content">
+                   <a href="{{ route('login') }}"><button class="btn btn-outline-primary btn-lg" type="button" >Sign in</button></a>
+                </div>
+            
+        </li>
                 </ul>
             </div>
         </div>

@@ -152,8 +152,10 @@
                                             </div>
                                         </a><a class="dropdown-item text-center small text-gray-500 mt-1" href="#">Show All Alerts</a>
                                     </div>
-
+     
                     </div> --}}
+                    
+                    
 
 
 
@@ -179,6 +181,7 @@
     <script src="{{asset('assets/front/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/front/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/front/js/carousel.js')}}"></script>
+    @yield('script')
 </body>
 
 </html>

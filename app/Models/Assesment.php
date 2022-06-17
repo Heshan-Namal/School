@@ -22,5 +22,4 @@ class Assesment extends Model
         return $this->belongsToMany(\App\Models\Assesment::class,\App\Models\Student_assesment::class);
 
     }
-
 }
