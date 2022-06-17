@@ -12,14 +12,14 @@ class Assesment extends Model
     protected $guarded=[];
 
 
+    public function getStudent()
+    {
+    	return $this->belongsToMany(\App\Models\Student::class);
+    }
     public function getassstd()
     {
         // need to declare relation and object tables
         return $this->belongsToMany(\App\Models\Assesment::class,\App\Models\Student_assesment::class);
 
-    }
-    public function getStudent()
-    {
-    	return $this->belongsToMany(\App\Models\Student::class);
     }
 }

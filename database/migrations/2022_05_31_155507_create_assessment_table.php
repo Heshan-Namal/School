@@ -15,7 +15,7 @@ class CreateAssessmentTable extends Migration
     {
         Schema::create('assessment', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable(false);
+            $table->string('title')->nullable(false);;
             $table->string('description')->nullable(true);
             $table->string('term')->nullable(false);
             $table->string('week')->nullable(true);

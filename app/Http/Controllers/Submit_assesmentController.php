@@ -88,23 +88,21 @@ class Submit_assesmentController extends Controller
                 ->get();
             }
         }
+        // ->whereDate('due_date', '>', Carbon::now())
+        // ->orderBy('due_date','asc')
+
+        $nearas=DB::table('student_assessment')
+            ->join('assessment','student_assessment.assessment_id','=','assessment.id')
+            ->join('student','student.admission_no','=','student_assessment.admission_no')
+            ->select('assessment.title','assessment.due_date',DB::raw('count(*) as count'))
+            ->where('assessment.class_id',$classid)
+            ->where('assessment.subject_id',$subjectid)
+            ->groupBy('assessment.title','assessment.due_date')
+            ->orderBy('due_date','asc')
+            ->get();
 
 
-        // $detail=DB::table('Subject_class')
-        // ->where('Subject_class.class_id','=',$classid)
-        // ->where('Subject_class.subject_id','=',$subjectid)
-        // ->join('Subject','Subject.id','=','Subject_class.subject_id')
-        // ->join('Class','Class.id','=','Subject_class.class_id')
-        // ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
-        // ->get();
-
-
-        //dd($assments);
-        //dd($detail);
-        //dd($teacherid);
-        //dd($assignments);
-
-        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid']));
+        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid','nearas']));
 
 
 
@@ -113,36 +111,26 @@ class Submit_assesmentController extends Controller
     }
     public function subassview($id)
     {
-        $sub=DB::table('Assignment_student')
-                ->join('Assignment','Assignment_student.assignment_id','=','Assignment.id')
-                ->join('Student','Student.id','=','Assignment_student.student_id')
-                ->select('Assignment_student.id as id','Student.name as name','Assignment.type as type','Assignment_student.submission_name as file','Assignment_student.uploaded_date as date','Assignment_student.ass_marks as marks')
-                ->where('Assignment_student.assignment_id',$id)
+        $sub=DB::table('student_assessment')
+                ->join('assessment','student_assessment.assessment_id','=','assessment.id')
+                ->join('student','student.admission_no','=','student_assessment.admission_no')
+                ->select('student_assessment.id as id','Student.full_name as name','assessment.assessment_type as type','student_assessment.answer_file as file','student_assessment.uploaded_date as date','student_assessment.assessment_marks as marks')
+                ->where('student_assessment.assessment_id',$id)
                 ->get();
 
-        //$n=Assignment_question::where('ass_id',$id)->get()->count();
-       // $questions=Assignment_question::where('ass_id',$id)->get();
-        //$assignment=Assignment::find($id);
-        // $assments=Assignment::get();
-        //dd($sub);
-        return view('Ass.submitview',compact('sub'));
+
+        return view('teacher.Assesments.submited_students',compact('sub'));
     }
 
     public function updatemarks(Request $req,$id)
     {
 
-        $ass=Assignment_student::find($id);
+        $ass=Student_assesment::find($id);
 
         $ass->ass_marks=$req->marks;
         $assid=$ass->assignment_id;
         //dd($ass);
         $ass->save();
-        //$n=Assignment_question::where('ass_id',$id)->get()->count();
-       // $questions=Assignment_question::where('ass_id',$id)->get();
-        //$assignment=Assignment::find($id);
-        // $assments=Assignment::get();
-        //dd($sub);
-        //dd($ass);
         return redirect()->route('submit.view',compact('assid'))->with('message','Assesment Questions Updated successfully');
     }
 

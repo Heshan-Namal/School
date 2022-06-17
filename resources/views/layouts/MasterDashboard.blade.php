@@ -21,14 +21,14 @@
 
 <body id="page-top">
     <div id="wrapper">
-   
+
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
                         <!-- droup down nav items-->
                         <img class="rounded-circle" src="{{asset('assets/front/images/avatars/avatar4.jpeg')}}">
-                        
+
                         <div class="navDroupdown form-control border-0 small">
                             <input  type="text" class="navtext" placeholder="Home" readonly>
                             <div class="navOption ">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                    
+
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                         </form>
@@ -56,7 +56,7 @@
                                     </form>
                                 </div>
                             </li>
-                            
+
                             <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                             </li>
-                            
+
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">{{ auth()->user()->name }} <br>({{ auth()->user()->user_type }})  </span><img class="border rounded-circle img-profile" src="{{ auth()->user()->photo }}"></a>
@@ -108,12 +108,12 @@
                                 </div>
                             </li>
                         </ul>
-                        
+
                     </div>
                 </nav>
                 <div class="container-fluid d-flex bd-highlight ">
-                   
-                    
+
+
                     <div class="p-2 flex-grow-1 bd-highlight">@yield('content')</div>
                     {{-- <div class=" p-2 bd-highlight NoticeBoard">
                     <div class=" dropdown-list animated--grow-in ">
@@ -158,8 +158,10 @@
                     
 
 
-                    
-                </div>                   
+
+
+
+                </div>
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">

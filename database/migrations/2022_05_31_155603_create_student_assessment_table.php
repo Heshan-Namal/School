@@ -20,10 +20,10 @@ class CreateStudentAssessmentTable extends Migration
             $table->date('uploaded_date')->nullable(false);
             $table->string('answer_file');
             $table->string('assessment_marks');
-            $table->timestamps();
             $table->foreign('admission_no')->references('admission_no')->on('student')->onDelete('cascade');
             $table->foreign('assessment_id')->references('id')->on('assessment')->onDelete('cascade');
             $table->unique(['admission_no','assessment_id']);
+            $table->timestamps();
         });
     }
 

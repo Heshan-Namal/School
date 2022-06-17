@@ -6,6 +6,8 @@ use App\Models\Assessment_quiz_question;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use Carbon\Carbon;
 class AssesmentController extends Controller
 {
     public function index(Request $request ,$classid,$subjectid)
@@ -66,7 +68,27 @@ class AssesmentController extends Controller
                 ->get();
             }
         }
-
+        $exnum = DB::table('assessment')
+            ->where('assessment.class_id',$classid)
+            ->where('assessment.subject_id',$subjectid)
+           ->whereDate('due_date', '<', Carbon::now())
+           ->count();
+           $pubnum = DB::table('assessment')
+           ->where('assessment.class_id',$classid)
+           ->where('assessment.subject_id',$subjectid)
+           ->where('status', '!=', 'published')
+           ->count();
+           $allnum = DB::table('assessment')
+           ->where('assessment.class_id',$classid)
+           ->where('assessment.subject_id',$subjectid)
+           ->count();
+           $nearex = DB::table('assessment')
+           ->where('assessment.class_id',$classid)
+           ->where('assessment.subject_id',$subjectid)
+           ->whereDate('due_date', '>', Carbon::now())
+           ->orderBy('due_date','asc')
+           ->get();
+        //    dd($nearex);
 
         // $detail=DB::table('Subject_class')
         // ->where('Subject_class.class_id','=',$classid)
@@ -77,7 +99,7 @@ class AssesmentController extends Controller
         // ->get();
 
 
-       return view('teacher.Assesments.index',compact(['assments','classid','subjectid']));
+       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid']));
 
 
 

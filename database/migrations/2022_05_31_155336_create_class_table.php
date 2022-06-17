@@ -21,9 +21,9 @@ class CreateClassTable extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->timestamps();
             $table->foreign('grade_id')->references('id')->on('grade')->onDelete('cascade');
-            $table->foreign('teacher_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teacher')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
-           
+
         });
     }
 

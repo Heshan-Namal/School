@@ -7,7 +7,7 @@
         <div class="card">
             <form action="#" method="GET" class="form-inline">@csrf
             <div class="form-group row">
-                <h4 class="timetable">Uploded Assesments</h4>
+                <h4 class="timetable">Uploded Resources</h4>
                     <div class="col-sm-3" >
                         <select name="term" id="term" onchange="getselector(this.value);" class="form-control">
                             <option value="" value="" disabled selected>Select Term</option>
@@ -65,10 +65,9 @@
             </form>
         </div>
         </div>
-        {{-- <div class="col-4">
+        <div class="col-4">
         <div class="d-card mt-3">
-            <div class="card-header table">View Submited Assesments
-            <a href="{{route('ass.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
+            <div class="card-header table">View Submited Assesments</div>
             <div class="card-body">
                 <p>3 students submit ass1</p>
                 <p>4 students submit ass2</p>
@@ -76,7 +75,7 @@
 
         </div>
 
-    </div> --}}
+    </div>
     <div class="table-card mt-5">
         <div class="text-end">
             <button type="submit" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Resource</button>
@@ -86,16 +85,14 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
+            <th scope="col">Chapter</th>
             <th scope="col">Term</th>
             <th scope="col">Week</th>
             <th scope="col">Day</th>
-            <th scope="col">Type</th>
-            <th scope="col">Resources</th>
+            <th scope="col">Resources Type</th>
+            <th scope="col">Resource</th>
             <th scope="col">View</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col"></th>
         </tr>
         </thead>
 
@@ -107,28 +104,29 @@
             @foreach($res as $key=> $r)
           <tr>
             <th scope="row">{{$key+1}}</th>
-            <td>{{$r->title}}</td>
-            <td>{{$r->description}}</td>
+            <td>{{$r->chapter}}</td>
             <td>{{$r->term}}</td>
             @if ($r->week==null)
-                <td>{{$r->extraweek}}</td>
+                <td>{{$r->extra_week}}</td>
             @else
                   <td>{{$r->week}}</td>
             @endif
             <td>{{$r->day}}</td>
-            <td>{{$r->type}}</td>
-            @if($r->type == 'rlink')
-            <td>{{$r->file}}</a></td>
-              <td><a href="{{$r->file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
-            @elseif ($r->type == 'clink')
-              <td>{{$r->file}}</a></td>
-              <td><a href="{{$r->file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
+            <td>{{$r->resource_type}}</td>
+            @if($r->resource_type == 'reference_link')
+            <td>{{$r->resource_file}}</a></td>
+              <td><a href="{{$r->resource_file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
+            @elseif ($r->resource_type == 'clink')
+              <td>{{$r->resource_file}}</a></td>
+              <td><a href="{{$r->resource_file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
             @else
-              <td>{{$r->file}}</a></td>
-              <td><a href="http://127.0.0.1:8000/assignments/{{$r->file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
+              <td>{{$r->resource_file}}</a></td>
+              <td><a href="http://127.0.0.1:8000/notes/{{$r->resource_file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
             @endif
-            <td><a href="#"><button class="btn btn-primary btn-sm">Edit</button></a> </td>
-            <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
+            <td class="btn-toolbar">
+                <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square "></i> </button>
+                <button class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
+            </td>
 
           </tr>
 
@@ -177,7 +175,7 @@
 
 
 
-<script src="{{asset('assets/front/js/optionselector.js')}}"></script>
+<script src="{{asset('assets/front/js/resourcesselector.js')}}"></script>
 
 
 @endsection

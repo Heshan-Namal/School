@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Attentiveness_check extends Model
 {
     use HasFactory;
+    protected $table = "attentiveness_check";
+    protected $guarded=[];
 
-    protected $table='attentiveness_check';
+    public function getquestions(){
+        return $this->hasMany(\App\Models\Questions::class);
+    }
 }

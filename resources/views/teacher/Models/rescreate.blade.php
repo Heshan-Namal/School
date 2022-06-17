@@ -1,12 +1,3 @@
-{{-- modal for create --}}
-<div class="modal fade" id="createmodal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="example1ModalLabel">Add a Resourcrs for the Class</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
         <form action="{{route('res.store',[$classid,$subjectid])}}" method="POST" enctype="multipart/form-data">@csrf
             <div class="form-group row">
                 <div class="col-3">
@@ -71,7 +62,7 @@
                 </div>
             </div>
                    <div class="form-group mb-2">
-                       <label for="name">Title</label>
+                       <label for="name">Chapter</label>
                        <input type="text" class="form-control " name="title">
                        {{-- @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -80,7 +71,7 @@
                         @enderror --}}
                    </div>
                    <div class="form-group mb-2">
-                       <label for="name">Description</label>
+                       <label for="name">Topic</label>
                        <textarea class="form-control " name="description"></textarea>
                        {{-- @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -102,9 +93,9 @@
                 <div class="form-group mb-2">
                     <label for="name" >Resources Type</label>
                     <select name="type" id="type" onchange="gettypeselector(this.value);" class="form-control">
-                        <option value="file" selected>Uploade a Note</option>
-                        <option value="rlink">Reference Link</option>
-                        <option value="clink">Class Link</option>
+                        <option value="note" selected>Uploade a Note</option>
+                        <option value="reference_link">Reference Link</option>
+                        <option value="class_link">Class Link</option>
                   </select>
 
                 </div>
@@ -136,11 +127,4 @@
                 </div>
 
         </form>
-
-        </div>
-
-
-      </div>
-    </div>
-  </div>
 

@@ -4,10 +4,11 @@
 <div class="content">
     <div class="row hh">
         <div class="col-8">
+        <div class="row">
         <div class="card">
             <form action="#" method="GET" class="form-inline">@csrf
             <div class="form-group row">
-                <h4 class="timetable">Uploded Assesments</h4>
+                <h4 class="timetable mb-2 mt-3">Uploded Assesments</h4>
                     <div class="col-sm-3" >
                         <select name="term" id="term" onchange="getselector(this.value);" class="form-control">
                             <option value="" value="" disabled selected>Select Term</option>
@@ -65,21 +66,84 @@
             </form>
         </div>
         </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="card-body">
+                        <p class="timetable" >Num of All Assesments</p>
+                        <p class="text-end" >{{$allnum}}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="card-body">
+                        <p class="timetable" >Not Published Assesments</p>
+                        <p class="text-end" >{{$pubnum}}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="card-body">
+                        <p class="timetable" >Num of Expired Assesments</p>
+                        <p class="text-end" >{{$exnum}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
         <div class="col-4">
         <div class="d-card mt-3">
-            <div class="card-header table">View Submited Assesments
+            <div class="card-header timetable">View Submited Assesments
             <a href="{{route('ass.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
             <div class="card-body">
-                <p>3 students submit ass1</p>
-                <p>4 students submit ass2</p>
+               <p class="card-header">Nearly going to Expired Assesments</p>
+               <table class="overflow-y:auto;"><tr><th></th><th></th><th></th></tr>
+               @foreach($nearex as $key=> $n)
+               <tr>
+               <td><p class="mx-4">{{$n->title}}</p></td>
+               <td><p class="mx-4">{{$n->due_date}}</p></td>
+               <td><p class="btn btn-danger btn-sm mx-4"><i class="bi bi-bell"></i></p></td>
+               </tr>
+               {{-- <div class="row">
+                <div class="col-2">
+                    <p>{{$n->title}}</p>
+                </div>
+                <div class="col-2">
+                    <p>{{$n->due_date}}</p>
+                </div>
+               </div> --}}
+               @endforeach
+               </table>
             </div>
 
         </div>
 
     </div>
-    <div class="table-card mt-5">
+
+
+</div>
+
+    <div class="table-card">
         <div class="text-end">
-            <button type="submit" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Assesment</button>
+            <div class="row">
+            <form action="?" class="col-sm-2 me-auto" >
+                <div class="input-group">
+                    <button type="submit" class="btn btn-primary"> Go!</button>
+                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+
+                 </div>
+            </form>
+            <div class="col-3">
+                <button type="submit" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Assesment</button>
+            </div>
+
+            </div>
+
             {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
         </div>
         @if($assments->count()>0)
@@ -166,12 +230,6 @@
 
 
     </div>
-
-
-
-
-
-</div>
 
 {{-- modal for create --}}
 <div class="modal fade" id="createmodal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">

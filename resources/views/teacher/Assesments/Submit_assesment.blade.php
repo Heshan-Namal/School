@@ -1,11 +1,12 @@
 @extends('layouts.MasterDashboard')
 @section('content')
-<div class="row hh          ">
+<div class="row hh">
     <div class="col-8">
+        <div class="row">
         <div class="card">
             <form action="#" method="GET" class="form-inline">@csrf
             <div class="form-group row">
-                <h4 class="timetable">Uploded Assesments</h4>
+                <h4 class="timetable mb-2 mt-3">Submited Assesments</h4>
                     <div class="col-sm-3" >
                         <select name="term" id="term" onchange="getselector(this.value);" class="form-control">
                             <option value="" value="" disabled selected>Select Term</option>
@@ -63,18 +64,79 @@
             </form>
         </div>
         </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="card-body">
+                        <p class="timetable" >Late Submission Students</p>
+                        <p class="text-end" >Published</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="card-body">
+                        <p class="timetable" >In this week Expired Assesments</p>
+                        <p class="text-end" >Published</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="card-body">
+                        <p class="timetable" >Num of Students Notsubmit any Assesments</p>
+                        <p class="text-end" >Published</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+        <div class="col-4">
+            <div class="d-card mt-3">
+                <div class="card-header timetable">View Submited Assesments</div>
+                <div class="card-body">
+                   <table class="overflow-y:auto;">
+                    <div class="card-header mx-4">
+                        <tr><th>Title</th><th>Due Date</th><th>Num of Submits</th></tr>
+                    </div>
+
+                    @foreach($nearas as $key=> $n)
+                   <tr>
+                   <td><p class="mx-4">{{$n->title}}</p></td>
+                   <td><p class="mx-4 rounded-circle">{{$n->due_date}}</p></td>
+                   <td><p class="mx-4 rounded-circle">{{$n->count}}</p></td>
+                   </tr>
+                   @endforeach
+                   {{-- <div class="row">
+                    <div class="col-2">
+                        <p>{{$n->title}}</p>
+                    </div>
+                    <div class="col-2">
+                        <p>{{$n->due_date}}</p>
+                    </div>
+                   </div> --}}
+
+                   </table>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-8">
             {{-- <div class="card-body"> --}}
                 @if (session('message'))
                     <div class="alert alert-success" role="alert">
                         {{ session('message') }}
                     </div>
                 @endif
-<div class="table-card">
+<div class="table-card mt-5">
     <table class="table table-success table-hover m-0">
 <thead>
 <tr>
@@ -98,15 +160,14 @@
   <td>{{$a->title}}</td>
   <td>{{$a->term}}</td>
   @if ($a->week==null)
-      <td>{{$a->extraweek}}</td>
+      <td>{{$a->extra_week}}</td>
   @else
         <td>{{$a->week}}</td>
   @endif
   <td>{{$a->day}}</td>
-  <td>{{$a->type}}</td>
+  <td>{{$a->assessment_type}}</td>
   <td>{{$a->count}}</td>
   <td><a href="{{route('submit.view',[$a->id])}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
-
 </tr>
 
 @endforeach
@@ -122,6 +183,9 @@
 </div>
 
             {{-- </div> --}}
+        </div>
+        <div class="col-8">
+
         </div>
     </div>
 @endsection

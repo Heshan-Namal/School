@@ -20,7 +20,7 @@ class UserTableseeder extends Seeder
         DB::table('user')->delete();
 
         $this->createNewUsers();
-        
+
     }
 
     protected function createNewUsers()
@@ -32,7 +32,6 @@ class UserTableseeder extends Seeder
             [
                 'email' => 'admin@admin.com',
                 'user_type' => 'admin',
-                'password' => $password,
                 'remember_token' => Str::random(10),
             ],
 
