@@ -22,7 +22,6 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects-grid-cards.html">About us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cv.html">Q&amp;A</a></li>
                 </ul>
             </div>
         </div>
@@ -33,7 +32,7 @@
     <!--Footer-->
     <footer class="page-footer">
         <div class="container">
-            <div class="links"><a href="#">About me</a><a href="#">Contact me</a><a href="#">Projects</a></div>
+            <!-- <div class="links"><a href="#">About me</a><a href="#">Contact me</a><a href="#">Projects</a></div> -->
             <div class="social-icons"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram-outline"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a></div>
         </div>
     </footer>
