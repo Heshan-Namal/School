@@ -17,7 +17,7 @@ class CreateStudentSubjectTable extends Migration
             $table->id();
             $table->unsignedBigInteger('subject_id');
             $table->string('admission_no');
-            $table->foreign('admission_no')->references('id')->on('student')->onDelete('cascade');
+            $table->foreign('admission_no')->references('admission_no')->on('student')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subject')->onDelete('cascade');
             $table->timestamps();
         });

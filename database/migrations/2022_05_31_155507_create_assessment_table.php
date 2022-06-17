@@ -15,15 +15,15 @@ class CreateAssessmentTable extends Migration
     {
         Schema::create('assessment', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->integer('term')->nullable(false);
+            $table->string('title')->nullable(false);;
+            $table->string('description')->nullable(true);
+            $table->string('term')->nullable(false);
             $table->string('week')->nullable(true);
             $table->string('extra_week')->nullable(true);
-            $table->date('assigned_day')->nullable(false);
+            $table->string('day')->nullable(false);
             $table->date('due_date')->nullable(false);
-            $table->enum('status',['published', 'draft', 'disabled'])->defualt('draft')->nullable(false);
-            $table->integer('no_of_questions')->nullable(true);
-            $table->enum('assessment_type',['mcq_quiz', 'upload_file'])->defualt('draft')->nullable(true);
+            $table->enum('status',['published', 'draft', 'disabled'])->default('draft')->nullable(false);
+            $table->enum('assessment_type',['mcq_quiz', 'upload_file'])->nullable(false);
             $table->integer('allocated_marks')->nullable(false);
             $table->string('assessment_file')->nullable(true);
             $table->unsignedBigInteger('subject_id');

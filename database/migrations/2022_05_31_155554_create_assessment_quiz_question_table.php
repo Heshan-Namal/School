@@ -16,7 +16,7 @@ class CreateAssessmentQuizQuestionTable extends Migration
         Schema::create('assessment_quiz_question', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('assessment_id')->nullable(false);
-            $table->integer('question_no')->nullable(false);
+            $table->string('question')->nullable(false);
             $table->string('option_1')->nullable(false);
             $table->string('option_2')->nullable(false);
             $table->string('option_3')->nullable(false);

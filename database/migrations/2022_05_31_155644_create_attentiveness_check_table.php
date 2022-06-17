@@ -16,13 +16,13 @@ class CreateAttentivenessCheckTable extends Migration
         Schema::create('attentiveness_check', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('term')->nullable(false);
+            $table->string('term')->nullable(false);
             $table->string('week')->nullable(true);
             $table->string('extra_week')->nullable(true);
-            $table->string('day')->nullable(false);
+            $table->Date('date')->nullable(false);
             $table->string('period')->nullable(false);
-            $table->enum('status',['published', 'draft', 'disabled'])->defualt('draft')->nullable(false);
-            $table->integer('quiz_duration')->nullable(false);
+            $table->enum('status',['published', 'draft', 'disabled'])->default('draft')->nullable(false);
+            $table->string('quiz_duration')->nullable(false);
             $table->integer('no_of_questions')->nullable(false);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('class_id');
