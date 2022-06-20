@@ -16,11 +16,11 @@ class CreateStudentAttentivenessCheckTable extends Migration
         Schema::create('student_attentiveness_check', function (Blueprint $table) {
             $table->id();
             $table->string('admission_no');
-            $table->integer('total_points')->nullable(false);
             $table->unsignedBigInteger('A_check_id');
+            $table->integer('total_points')->nullable(false);
             $table->foreign('admission_no')->references('admission_no')->on('student')->onDelete('cascade');
-            $table->foreign('A_check_id')->references('id')->on('attentiveness_check')->onDelete('cascade');
-
+            $table->foreign('A_check_id')->references('id')->on('attentiveness_check_question')->onDelete('cascade');
+            $table->unique(['admission_no','A_check_id']);
             $table->timestamps();
         });
     }

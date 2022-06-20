@@ -22,7 +22,7 @@ class CreateStudentAssessmentTable extends Migration
             $table->string('assessment_marks');
             $table->foreign('admission_no')->references('admission_no')->on('student')->onDelete('cascade');
             $table->foreign('assessment_id')->references('id')->on('assessment')->onDelete('cascade');
-                $table->unique(['admission_no','assessment_id']);
+            $table->unique(['admission_no','assessment_id']);
             $table->timestamps();
         });
     }

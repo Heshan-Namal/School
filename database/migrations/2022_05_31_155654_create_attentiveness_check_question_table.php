@@ -21,7 +21,7 @@ class CreateAttentivenessCheckQuestionTable extends Migration
             $table->string('option_2')->nullable(false);
             $table->string('option_3')->nullable(false);
             $table->string('option_4')->nullable(false);
-            $table->string('correct_answer')->nullable(false);
+            $table->enum('correct_answer',['option_1', 'option_2', 'option_3','option_4'])->nullable(false);
             $table->timestamps();
             $table->foreign('a_check_id')->references('id')->on('attentiveness_check')->onDelete('cascade');
         });

@@ -5,8 +5,9 @@ use App\Models\Assesment;
 use App\Models\Assessment_quiz_question;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
+use Carbon\Carbon;
 class AssesmentController extends Controller
 {
     public function index(Request $request ,$classid,$subjectid)

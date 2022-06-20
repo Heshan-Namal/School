@@ -169,7 +169,6 @@ class Submit_assesmentController extends Controller
         $assid=$ass->assessment_id;
         //dd($assid);
         $ass->save();
-
         return redirect()->route('submit.view',compact('assid'))->with('message','Assesment Questions Updated successfully');
     }
 
