@@ -3,18 +3,17 @@
 
 <div class="content">
     <div class="row">
-        
+
 <div class="table-card">
     <table class="table table-success table-hover m-0">
   <thead>
     <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Type</th>
-        <th scope="col">Allocated Marks</th>
+        <th scope="col">Date</th>
+        <th scope="col">Period</th>
+        <th scope="col">Quiz Duration</th>
         <th scope="col">Status</th>
-        <th scope="col">Due date</th>
         <th scope="col">Num of Questions</th>
         <th scope="col">add question</th>
 
@@ -23,14 +22,13 @@
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>{{$assignment->title}}</td>
-      <td>{{$assignment->description}}</></td>
-      <td>{{$assignment->assessment_type}}</td>
-      <td>{{$assignment->allocated_marks}}</td>
-      <td>{{$assignment->status}}</td>
-      <td>{{$assignment->due_date}}</td>
+      <td>{{$question->title}}</td>
+      <td>{{$question->date}}</td>
+      <td>{{$question->period}}</td>
+      <td>{{$question->quiz_duration}}</td>
+      <td>{{$question->status}}</td>
       <td>{{$n}}</td>
-      <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$assignment->id}}">Add Question</td>
+      <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$question->id}}">Add Question</td>
     </tr>
   </tbody>
 </table>
@@ -38,7 +36,7 @@
 
 </div>
 
-<h2 class="table">View Questions on {{$assignment->title}} </h2>
+<h2 class="table">View Questions on {{$question->title}} </h2>
 @if($questions->count() > 0)
 <div class="b-card">
 <div class="row">
@@ -91,7 +89,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{{route('ass.quiz')}}" method="GET" >@csrf
+            <form action="{{route('question.store')}}" method="POST" >@csrf
                    <div class="form-group mb-2">
                        <label for="name">Enter Question</label>
                        <textarea class="form-control @error('question') is-invalid @enderror" name="question" id="question"></textarea>

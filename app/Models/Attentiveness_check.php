@@ -12,6 +12,6 @@ class Attentiveness_check extends Model
     protected $guarded=[];
 
     public function getquestions(){
-        return $this->hasMany(\App\Models\Questions::class);
+        return $this->hasMany(\App\Models\Attentiveness_check_Question::class);
     }
 }

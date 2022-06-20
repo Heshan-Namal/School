@@ -1,4 +1,4 @@
-<form action="{{route('quiz.store',[$classid,$subjectid])}}" method="POST" enctype="multipart/form-data">@csrf
+<form action="{{route('ass.update')}}" method="POST" enctype="multipart/form-data">@csrf
     <div class="form-group row">
         <div class="col-3">
         <select name="term" id="term" class="form-control">
@@ -28,7 +28,7 @@
         </select>
         </div>
 
-        {{-- <div class="col-3">
+        <div class="col-3">
         <select name="day" id="day" class="form-control">
               <option value="monday" selected>Monday</option>
               <option value="tuesday">Tuesday</option>
@@ -38,7 +38,7 @@
 
 
         </select>
-        </div> --}}
+        </div>
         <div hidden class="row my-2" id="extra">
             <div class="col-4">
                 <p id="p">Add Extra week </p>
@@ -55,7 +55,7 @@
             </div>
         </div>
             <div class="col-4">
-                <input type="text" class="form-control " name="extraweek">
+                <input type="text" class="form-control " name="extraweek" id="extra_week">
             </div>
 
 
@@ -63,46 +63,44 @@
     </div>
            <div class="form-group mb-2">
                <label for="name">Title</label>
-               <input type="text" class="form-control " name="title">
-               {{-- @error('title')
+               <input type="text" class="form-control " name="title" id="title">
+               @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                @enderror --}}
+                @enderror
            </div>
-           <div class="form-group mb-4">
-            <label for="name">Assign Date</label>
-            <input type="Date" class="form-control " name="date">
-            </div>
+           <div class="form-group mb-2">
+            <label for="name">Description</label>
+            <textarea class="form-control " name="description" id="description"></textarea>
+            @error('description')
+                     <span class="invalid-feedback" role="alert">
+                         <strong>{{ $message }}</strong>
+                     </span>
+             @enderror
+        </div>
 
-            <div class="form-group mb-4">
-                <label for="name">Period</label>
-                <select name="period" id="period" class="form-control">
-                    <option value="period1" selected>Period 1</option>
-                    <option value="period2">Period 2</option>
-                    <option value="period3">Period 3</option>
-                    <option value="period4">Period 4</option>
-                    <option value="period5">Period 5</option>
-                    <option value="period6">Period 6</option>
-                    <option value="period7">Period 7</option>
-                    <option value="period8">Period 8</option>
-              </select>
-            </div>
 
-           <div class="form-group mb-4">
-               <!-- <label for="name">Class_id</label> -->
-               <input type="hidden" class="form-control " name="class_id" value="{{$classid}}">
-
-           </div>
-           <div class="form-group mb-4">
-               <!-- <label for="name">Subject_id</label> -->
-               <input type="hidden" class="form-control" name="subject_id" value="{{$subjectid}}">
-
-           </div>
-
+           <div class="form-group mb-2">
+            <label for="name">Due Date</label>
+            <input type="Date" class="form-control @error('due_date') is-invalid @enderror" name="due_date" id="due_date">
+            @error('due_date')
+                     <span class="invalid-feedback" role="alert">
+                         <strong>{{ $message }}</strong>
+                     </span>
+             @enderror
+        </div>
         <div class="form-group mb-2">
-            <label for="name">quiz_duration</label>
-            <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" placeholder="00:00:00">
+            <label for="name" >Assesment Type</label>
+            <select name="type" id="assessment_type" onchange="gettypeselector(this.value);" class="form-control">
+                <option value="upload_file">Uploade a assignment</option>
+                <option value="mcq_quiz">MCQ-Quiz</option>
+          </select>
+
+        </div>
+        <div class="form-group mb-2">
+            <label for="name">Allocated Markes</label>
+            <input type="number" class="form-control @error('a_marks') is-invalid @enderror" name="a_marks" id="allocated_marks">
             @error('a_marks')
                      <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>
@@ -110,6 +108,15 @@
              @enderror
         </div>
 
+           <div class="form-group mb-4" id="file">
+               <label for="name" id="file">Upload the Assignment</label>
+               <input type="file" class="form-control" name="assignments" id="assessment_file">
+               @error('assignments')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                @enderror
+           </div>
 
 
         <div class="form-group">

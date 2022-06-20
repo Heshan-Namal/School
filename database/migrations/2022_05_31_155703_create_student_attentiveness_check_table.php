@@ -19,7 +19,7 @@ class CreateStudentAttentivenessCheckTable extends Migration
             $table->integer('total_points')->nullable(false);
             $table->unsignedBigInteger('A_check_id');
             $table->foreign('admission_no')->references('admission_no')->on('student')->onDelete('cascade');
-            $table->foreign('A_check_id')->references('id')->on('attentiveness_check_question')->onDelete('cascade');
+            $table->foreign('A_check_id')->references('id')->on('attentiveness_check')->onDelete('cascade');
 
             $table->timestamps();
         });

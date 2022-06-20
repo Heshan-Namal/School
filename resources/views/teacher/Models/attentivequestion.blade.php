@@ -1,4 +1,4 @@
-<form action="{{route('question.store',[$classid,$subjectid])}}" method="POST" >@csrf
+<form action="{{route('question.store')}}" method="POST" >@csrf
     <div class="form-group mb-2">
         <label for="name">Enter Question</label>
         <textarea class="form-control @error('question') is-invalid @enderror" name="question" id="question"></textarea>

@@ -47,7 +47,7 @@ function getweekselector(value){
 
 var editModal = document.getElementById('editModal')
 editModal.addEventListener('show.bs.modal', function (event) {
-    //    console.log("plzz");
+   // alert('open');
     // Button that triggered the modal
     var button = event.relatedTarget
     // Extract info from data-bs-* attributes
@@ -77,3 +77,52 @@ editModal.addEventListener('show.bs.modal', function (event) {
 
 
 })
+
+var assedit=document.getElementById('editassmodal')
+assedit.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    console.log("plzz");
+    alert('open');
+    // var id = button.getAttribute('data-bs-id')
+    // var title = button.getAttribute('data-bs-title')
+    // var description = button.getAttribute('data-bs-description')
+    // var term = button.getAttribute('data-bs-term')
+    // var week = button.getAttribute('data-bs-week')
+    // var extra_week = button.getAttribute('data-bs-extra_week')
+    // var day = button.getAttribute('data-bs-day')
+    // var due_date = button.getAttribute('data-bs-due_date')
+    // var assessment_type = button.getAttribute('data-bs-assessment_type')
+    // var allocated_marks = button.getAttribute('data-bs-allocated_marks')
+    // var assessment_file = button.getAttribute('data-bs-assessment_file')
+    // var i = assedit.querySelector('.modal-body #id')
+    // var t = assedit.querySelector('.modal-body #title')
+    // var d = assedit.querySelector('.modal-body #description')
+    // var te = assedit.querySelector('.modal-body #term')
+    // var we = assedit.querySelector('.modal-body #week')
+    // var ex = assedit.querySelector('.modal-body #extra_week')
+    // var da = assedit.querySelector('.modal-body #day')
+    // var du = assedit.querySelector('.modal-body #due_date')
+    // var a_t = assedit.querySelector('.modal-body #assessment_type')
+    // var m= assedit.querySelector('.modal-body #allocated_marks')
+    // var f = assedit.querySelector('.modal-body #assessment_file')
+
+    // i.value = id
+    // t.value = title
+    // d.value = description
+    // te.value = term
+    // we.value = week
+    // ex.value = extra_week
+    // da.value = day
+    // du.value = due_date
+    // a_t.value = assessment_type
+    // m.value = allocated_marks
+    // f.value = assessment_file
+
+
+})
+
+function changestatus(){
+    document.getElementById('addq').disabled = true;
+    document.getElementById('edit').disabled = true;
+    document.getElementById('published').disabled = true;
+}

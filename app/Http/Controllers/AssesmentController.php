@@ -87,16 +87,6 @@ class AssesmentController extends Controller
            ->whereDate('due_date', '>', Carbon::now())
            ->orderBy('due_date','asc')
            ->get();
-        //    dd($nearex);
-
-        // $detail=DB::table('Subject_class')
-        // ->where('Subject_class.class_id','=',$classid)
-        // ->where('Subject_class.subject_id','=',$subjectid)
-        // ->join('Subject','Subject.id','=','Subject_class.subject_id')
-        // ->join('Class','Class.id','=','Subject_class.class_id')
-        // ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
-        // ->get();
-
 
        return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid']));
 
@@ -106,8 +96,7 @@ class AssesmentController extends Controller
     public function store(Request $req,$classid,$subjectid)
     {
 
-        //return dd($req->assignments->getClientOriginalName());
-        //dd($req);
+
         if(isset($req->assignments)){
             $path=$req->assignments;
             $name = $path->getClientOriginalName();
@@ -202,5 +191,39 @@ class AssesmentController extends Controller
         return redirect()->route('ass.quizshow',compact('id'))->with('message','Assesment Questions Updated successfully');
 
 
+    }
+    public function update(Request $req)
+    {
+        dd($req);
+        $ass=Assignment::find($id);
+        if($req->has('assignments')){
+            $path=$req->assignments;
+            $name = $path->getClientOriginalName();
+            $path->move('Ass',$name);
+        }else{
+            $name=$ass->assignments;
+        }
+
+        $ass->title=$req->title;
+        $ass->description=$req->description;
+        $ass->assignments=$name;
+        $classid=$req->class_id;
+        $subjectid=$req->subject_id;
+        $ass->save();
+        //return dd($req->assignments->getClientOriginalName());
+
+        return redirect()->route('ass.index',[$classid,$subjectid])->with('message','Assignment Updated successfully');
+
+
+    }
+
+
+    public function changeStatus(Request $request ,$id)
+    {
+        $ass=Assesment::find($id);
+        Assesment::where('id',$id)->update(['status'=>$request->status]);
+        // $assments=Assignment::get();
+        return back();
+        //dd($request);
     }
 }

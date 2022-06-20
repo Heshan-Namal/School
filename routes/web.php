@@ -14,6 +14,7 @@ use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\Submit_assesmentController;
 use App\Http\Controllers\AssesmentController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\Submit_attentiveness_checkController;
 use App\Http\Controllers\Attentiveness_checkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
@@ -44,6 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/dashboard', [HomeController::class,'dashboard'])->name('dashboard');
+    Route::get('/', [HomeController::class,'back'])->name('back');
+
 
     //Student routes
     Route::controller(StudentController::class)->group(function () {
@@ -79,13 +82,23 @@ Route::put('/update',[AssesmentController::class,'assquestion_update'])->name('a
 Route::get('/assesmentshow/{id}',[AssesmentController::class,'assquizshow'])->name('ass.quizshow');
 Route::get('/submited/{classid}/{subjectid}',[Submit_assesmentController::class,'index'])->name('ass.sumitindex');
 Route::get('/submitedview/{assid}',[Submit_assesmentController::class,'subassview'])->name('submit.view');
+Route::put('/marks/{id}',[Submit_assesmentController::class,'updatemarks'])->name('update.marks');
 Route::get('/res/{classid}/{subjectid}',[ResourcesController::class,'index'])->name('res.index');
 Route::post('/res/{classid}/{subjectid}/store',[ResourcesController::class,'store'])->name('res.store');
 Route::get('/Attentiveness_check/{classid}/{subjectid}',[Attentiveness_checkController::class,'index'])->name('quiz.index');
 Route::post('/attentive-store/{classid}/{subjectid}',[Attentiveness_checkController::class,'store'])->name('quiz.store');
+Route::post('/attentive-questionstore',[Attentiveness_checkController::class,'qstore'])->name('question.store');
+Route::post('/change/{id}',[Attentiveness_checkController::class,'changeStatus'])->name('attentive.status');
+Route::get('/attentiveshow/{id}',[Attentiveness_checkController::class,'attentiveshow'])->name('att.quizshow');
+Route::get('/attentive-submited/{classid}/{subjectid}',[Submit_attentiveness_checkController::class,'index'])->name('attentive.sumitindex');
+Route::get('/student-submitedview/{assid}',[Submit_attentiveness_checkController::class,'sub_attentiveview'])->name('attentive-submit');
+Route::post('/ass/{id}',[AssesmentController::class,'changeStatus'])->name('ass.status');
+
+
 //notdone
-Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');
-Route::post('/attentive-questionstore',[QuestionsController::class,'store'])->name('question.store');
+Route::put('/ass-update',[AssesmentController::class,'update'])->name('ass.update');
+//Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');
+//Route::post('/attentive-questionstore',[QuestionsController::class,'store'])->name('question.store');
 
 
 // Route::middleware(['auth','teacher'])->group(function (){

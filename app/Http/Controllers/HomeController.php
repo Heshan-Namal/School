@@ -35,7 +35,11 @@ class HomeController extends Controller
         if(Qs::userIsTeamAll()){
             $d['users'] = $this->user->getAll();
         }
-           
+
         return view('Dashboard.dashboard', $d);
+    }
+    public function back()
+    {
+        return redirect()->back();
     }
 }
