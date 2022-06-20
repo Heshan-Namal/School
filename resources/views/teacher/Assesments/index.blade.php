@@ -184,7 +184,7 @@
           <td>{{$ass->due_date}}</td>
           <td>{{$ass->assessment_type}}</td>
           @if($ass->assessment_type == 'mcq_quiz')
-            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}" >Add Question</td>
+            <td><button id="addq" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}" >Add Question</td>
             <td><a href="{{route('ass.quizshow',[$ass->id])}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
           @else
           <td>{{$ass->assessment_file}}</a></td>
@@ -193,19 +193,12 @@
           <td>{{$ass->allocated_marks}}</td>
           <td>{{$ass->status}}</td>
           <td class="btn-toolbar">
-            @if($ass->status=='draft')
-                <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square "></i> </button>
-            @else
-            <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled><i class="bi bi-pencil-square "></i> </button>
-            @endif
-         <button class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
-          <form action="#" method="POST">@csrf
-              @if($ass->status=='draft')
-              <button class="btn btn-success btn-sm mx-1" ><i class="bi bi-upload"></i></button>
-                {{-- <input type="submit" name="status" value="{{}}" class="btn btn-success btn-sm "> --}}
-              @else
-              <button class="btn btn-success btn-sm mx-1" disabled><i class="bi bi-upload"></i></button>
-              @endif
+          <button id="edit" class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#editassmodal" data-bs-id="{{$ass->id}}" data-bs-title="{{$ass->title}}" data-bs-description="{{$ass->description}}"
+            data-bs-term="{{$ass->term}}" data-bs-week="{{$ass->week}}" data-bs-extra_week="{{$ass->extra_week}}" data-bs-day="{{$ass->day}}" data-bs-due_date="{{$ass->due_date}}" data-bs-assessment_type="{{$ass->assessment_type}}"
+            data-bs-allocated_marks="{{$ass->allocated_marks}}" data-bs-assessment_file="{{$ass->assessment_file}}"><i class="bi bi-pencil-square "></i> </button>
+            <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
+          <form action="{{route('ass.status',[$ass->id])}}" method="POST">@csrf
+            <button id="published" class="btn btn-success btn-sm mx-1" type="submit" name="status" value="published" onclick="changestatus();"><i class="bi bi-upload"></i></button>
             </td>
 
 
@@ -257,10 +250,25 @@
         <div class="modal-body table">
             @include('teacher.Models.q_create')
         </div>
-
     </div>
   </div>
 </div>
+
+ {{-- modal for edit --}}
+ <div class="modal fade" id="editassmodal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Edit an Assesments for the Class</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            @include('teacher.Models.assedit')
+        </div>
+    </div>
+  </div>
+</div>
+
 
 
 

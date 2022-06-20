@@ -1,3 +1,4 @@
+
 @extends('layouts.MasterDashboard')
 @section('content')
 <div class="content">
@@ -5,7 +6,7 @@
         <div class="col-3">
         <div class="sub-card">
             <div class="card-body">
-                <p class="timetable">Numer of Students submit Assesment</p>
+                <p class="timetable">Participate Students</p>
                 <p>{{$nums}}</p>
             </div>
         </div>
@@ -13,24 +14,33 @@
         <div class="col-3">
             <div class="sub-card">
                 <div class="card-body">
-                    <p class="timetable">Num Students Late Submissions</p>
-                    <p>{{$late}}</p>
+                    <p class="timetable">Participation precentage for lesson</p>
+                    @if ($std!=0)
+                    <p>{{ number_format($p->count / $std * 100, 2) }}%</p>
+                    @else
+                    <p> No checks </p>
+                    @endif
+
                 </div>
             </div>
             </div>
             <div class="col-3">
                 <div class="sub-card">
                     <div class="card-body">
-                        <p class="timetable">Not add marks for Submission</p>
-                        <p>{{$mar}}</p>
+                        <p class="timetable">Absent minded Students</p>
+                        <p>{{$abs}}</p>
                     </div>
                 </div>
                 </div>
                 <div class="col-3">
                     <div class="sub-card">
                         <div class="card-body">
-                            <p class="timetable">Num Students not submited Assesment</p>
-                            <p>{{$notsub}}</p>
+                            <p class="timetable">Knowledge prrecentage for lesson</p>
+                            @if ($std!=0)
+                            <p>{{ number_format($sum->sum /$nums, 2) }}%</p>
+                            @else
+                            <p> No checks </p>
+                            @endif
 
                         </div>
                     </div>
@@ -38,7 +48,7 @@
     </div>
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-6">
 
                 @if (session('message'))
                     <div class="alert alert-success" role="alert">
@@ -52,12 +62,10 @@
 
             <tr>
               <th scope="col">#</th>
-              <th scope="col">name</th>
-              <th scope="col">submisson file</th>
-              <th scope="col">Due Date</th>
-              <th scope="col">uploaded date</th>
+              <th scope="col">Admision Num</th>
+              <th scope="col">Student Name</th>
+              <th scope="col">Submited Time</th>
               <th scope="col">marks</th>
-
             </tr>
             </thead>
             <tbody>
@@ -66,28 +74,10 @@
                 @foreach($sub as $key=> $s)
             <tr>
               <th scope="row">{{$key+1}}</th>
+              <td>{{$s->admision_no}}</td>
               <td>{{$s->name}}</td>
-              @if($s->type == 'upload_file')
-                <td>{{$s->file}}</td>
-                @else
-                <td>Type is MCQ</td>
-              @endif
-              <td>{{$s->due_date}}</td>
-              <td>{{$s->date}}</td>
-              @if(($s->marks != null) && ($s->type != 'mcq_quiz'))
-                <form action="{{route('update.marks',[$s->id])}}" method="POST" > @method('PUT') @csrf
-                <td><input type="text" disabled name="marks" value="{{$s->marks}}" class="col-sm-2" id="marks{{$s->id}}">
-                <button type="submit" hidden name="save" class="btn btn-primary btn-sm col-sm-2" id="save{{$s->id}}" ><i class="bi bi-check2-circle"></i></button>
-                </form>
-                <button type="submit" name="edit" class="btn btn-success btn-sm " onclick="editmarks({{$s->id}});" id="edit{{$s->id}}"><i class="bi bi-pencil-square "></i></button></td>
-
-              @elseif (($s->marks == null) && ($s->type != 'mcq_quiz'))
-              <td><input type="submit" value="Enter Marks" id="enter{{$s->id}}" class="btn btn-warning btn-sm " onclick="entermarks({{$s->id}});">
-              <form action="{{route('update.marks',[$s->id])}}" method="POST" > @method('PUT') @csrf
-              <input type="text" hidden name="marks" class="col-sm-2" id="marks{{$s->id}}">
-              <button type="submit" hidden name="save" class="btn btn-primary btn-sm col-sm-2" id="save{{$s->id}}" ><i class="bi bi-check2-circle"></i></button>
-            </form>
-              @endif
+              <td>{{ \Carbon\Carbon::parse($s->created_at)->format('h:m:s') }}</td>
+              <td>{{$s->marks}}</td>
 
 
 
@@ -108,15 +98,16 @@
 </div>
         <div class="col-4">
             <div class="d-card mt-3">
-                <div class="card-header timetable">Highest Marks In the Class</div>
+                <div class="card-header timetable">Highest Marks In the Attentive Check</div>
                 <div class="card-body">
 
-                   <table><tr><th class="col">Admision_No</th><th class="col">Name</th><th>Marks</th></tr>
+                   <table><tr><th class="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th><th scope="col">Uploaded Time</th></tr>
                  @foreach($hm as $key=> $h)
                    <tr>
                    <td><p class="mx-4">{{$h->admission_no}}</p></td>
                    <td><p class="mx-4">{{$h->full_name}}</p></td>
-                   <td><p class="mx-4">{{$h->assessment_marks}}</p></td>
+                   <td><p class="mx-4">{{$h->total_points}}</p></td>
+                   <td><p class="mx-4">{{ \Carbon\Carbon::parse($h->uploaded_time)->format('h:m:s') }}</p></td>
                    </tr>
                    {{-- <div class="row">
                     <div class="col-2">
@@ -126,7 +117,7 @@
                         <p>{{$n->due_date}}</p>
                     </div>
                    </div> --}}
-@endforeach
+                @endforeach
                    </table>
                 </div>
 
