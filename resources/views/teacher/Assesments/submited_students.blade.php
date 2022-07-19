@@ -1,38 +1,98 @@
 @extends('layouts.MasterDashboard')
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
-    <div class="row">
+    <div class="row hh mb-5">
         <div class="col-3">
         <div class="sub-card">
-            <div class="card-body">
-                <p class="timetable">Numer of Students submit Assesment</p>
-                <p>{{$nums}}</p>
-            </div>
+            <div class="row g-0">
+                <div class="col-md-4 mt-3">
+                  <img
+                    src="{{asset('assets/front/images/ass/subass2.png')}}"
+                    alt="Trendy Pants and Shoes"
+                    class="img-fluid rounded-start d-flex mx-2"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <p class="card-text">
+                        Numer of Students submit Assesment
+                        <p>{{$nums}}</p>
+
+                    </p>
+                  </div>
+                </div>
+              </div>
+
         </div>
         </div>
         <div class="col-3">
             <div class="sub-card">
-                <div class="card-body">
-                    <p class="timetable">Num Students Late Submissions</p>
-                    <p>{{$late}}</p>
-                </div>
+                <div class="row g-0">
+                    <div class="col-md-4 mt-3">
+                      <img
+                        src="{{asset('assets/front/images/ass/subass1.png')}}"
+                        alt="Trendy Pants and Shoes"
+                        class="img-fluid rounded-start d-flex mx-2"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <p class="card-text">
+                          Num Students Late Submissions
+                            <p>{{$late}}</p>
+
+                        </p>
+                      </div>
+                    </div>
+                  </div>
             </div>
             </div>
             <div class="col-3">
                 <div class="sub-card">
-                    <div class="card-body">
-                        <p class="timetable">Not add marks for Submission</p>
-                        <p>{{$mar}}</p>
-                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/no_pub.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                               Not add marks for Submission
+                                <p>{{$mar}}</p>
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
                 </div>
                 </div>
                 <div class="col-3">
                     <div class="sub-card">
-                        <div class="card-body">
-                            <p class="timetable">Num Students not submited Assesment</p>
-                            <p>{{$notsub}}</p>
+                        <div class="row g-0">
+                            <div class="col-md-4 mt-3">
+                              <img
+                                src="{{asset('assets/front/images/ass/ass.png')}}"
+                                alt="Trendy Pants and Shoes"
+                                class="img-fluid rounded-start d-flex"
+                              />
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <p class="card-text">
+                                    Num Students not submited Assesment
+                                   <span class="value rounded-circle ms-5">
+                                    {{$notsub}}
+                                </span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
 
-                        </div>
                     </div>
                     </div>
     </div>
@@ -45,7 +105,9 @@
                         {{ session('message') }}
                     </div>
                 @endif
-
+            <div class="head mb-4">
+                <p><u>Submitted Student Details</u> :-</p>
+            </div>
 <div class="table-card mt-5">
     <table class="table table-success table-hover m-0">
             <thead>
@@ -107,11 +169,10 @@
 </div>
 </div>
         <div class="col-4">
-            <div class="d-card mt-3">
-                <div class="card-header timetable">Highest Marks In the Class</div>
+            <div class="d-card overflow-auto mt-3">
+                <div class="card-header card-text">Highest Ten Marks In the Class :-</div>
                 <div class="card-body">
-
-                   <table><tr><th class="col">Admision_No</th><th class="col">Name</th><th>Marks</th></tr>
+                   <table class="table p-2"><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th></tr>
                  @foreach($hm as $key=> $h)
                    <tr>
                    <td><p class="mx-4">{{$h->admission_no}}</p></td>

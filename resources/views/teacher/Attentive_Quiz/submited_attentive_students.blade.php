@@ -1,53 +1,112 @@
 
 @extends('layouts.MasterDashboard')
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-3">
         <div class="sub-card">
-            <div class="card-body">
-                <p class="timetable">Participate Students</p>
-                <p>{{$nums}}</p>
-            </div>
+            <div class="row g-0">
+                <div class="col-md-4 mt-3">
+                  <img
+                    src="{{asset('assets/front/images/ass/s_a1.png')}}"
+                    alt="Trendy Pants and Shoes"
+                    class="img-fluid rounded-start d-flex mx-2"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <p class="card-text">
+                        Participate Students
+                        <p>{{$nums}}</p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
         </div>
         </div>
         <div class="col-3">
             <div class="sub-card">
-                <div class="card-body">
-                    <p class="timetable">Participation precentage for lesson</p>
-                    @if ($std!=0)
-                    <p>{{ number_format($p->count / $std * 100, 2) }}%</p>
-                    @else
-                    <p> No checks </p>
-                    @endif
+                <div class="row g-0">
+                    <div class="col-md-4 mt-3">
+                      <img
+                        src="{{asset('assets/front/images/ass/s_a3.png')}}"
+                        alt="Trendy Pants and Shoes"
+                        class="img-fluid rounded-start d-flex mx-2"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <p class="card-text">
+                            Participation precentage for lesson
+                            @if ($std!=0)
+                            <p>{{ number_format($p->count / $std * 100, 2) }}%</p>
+                            @else
+                            <p> No checks </p>
+                            @endif
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-                </div>
             </div>
             </div>
             <div class="col-3">
                 <div class="sub-card">
-                    <div class="card-body">
-                        <p class="timetable">Absent minded Students</p>
-                        <p>{{$abs}}</p>
-                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/s_a2.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                Absent minded Students
+                                <p>{{$abs}}</p>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
                 </div>
                 </div>
                 <div class="col-3">
                     <div class="sub-card">
-                        <div class="card-body">
-                            <p class="timetable">Knowledge prrecentage for lesson</p>
-                            @if ($std!=0)
-                            <p>{{ number_format($sum->sum /$nums, 2) }}%</p>
-                            @else
-                            <p> No checks </p>
-                            @endif
+                        <div class="row g-0">
+                            <div class="col-md-4 mt-3">
+                              <img
+                                src="{{asset('assets/front/images/ass/s_a4.png')}}"
+                                alt="Trendy Pants and Shoes"
+                                class="img-fluid rounded-start d-flex mx-2"
+                              />
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <p class="card-text">
+                                    Knowledge prrecentage for lesson
+                                    @if ($std!=0)
+                                    <p>{{ number_format($sum->sum /$nums, 2) }}%</p>
+                                    @else
+                                    <p> No checks </p>
+                                    @endif
+                                </p>
+                              </div>
+                            </div>
+                          </div>
 
-                        </div>
                     </div>
                     </div>
     </div>
-
-    <div class="row">
+    <div class="row mt-3">
+        <div class="head mt-1">
+            <p><u>Submitted Students Attentiveness Checks Details</u> :-</p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-evenly">
         <div class="col-6">
 
                 @if (session('message'))
@@ -96,12 +155,12 @@
 </table>
 </div>
 </div>
-        <div class="col-4">
-            <div class="d-card mt-3">
-                <div class="card-header timetable">Highest Marks In the Attentive Check</div>
+        <div class="col-4 at">
+            <div class="d-card overflow-auto mt-3">
+                <div class="card-header card-text">Highest Ten Marks In the Attentive Check</div>
                 <div class="card-body">
 
-                   <table><tr><th class="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th><th scope="col">Uploaded Time</th></tr>
+                   <table class="table "><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th><th scope="col">Submited Time</th></tr>
                  @foreach($hm as $key=> $h)
                    <tr>
                    <td><p class="mx-4">{{$h->admission_no}}</p></td>

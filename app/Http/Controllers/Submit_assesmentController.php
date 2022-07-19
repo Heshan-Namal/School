@@ -98,7 +98,8 @@ class Submit_assesmentController extends Controller
             ->where('assessment.class_id',$classid)
             ->where('assessment.subject_id',$subjectid)
             ->groupBy('assessment.title','assessment.due_date')
-            ->orderBy('due_date','asc')
+            ->orderBy('due_date','desc')
+            ->limit(5)
             ->get();
 
 
@@ -151,6 +152,7 @@ class Submit_assesmentController extends Controller
                 ->select('student_assessment.id as id','student.full_name','student.admission_no','student_assessment.assessment_marks')
                 ->where('student_assessment.assessment_id',$id)
                 ->orderBy('student_assessment.assessment_marks','desc')
+                ->limit(10)
                 ->get();
 
                 $notsub=((int)$std-(int)$nums);

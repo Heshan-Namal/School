@@ -3,7 +3,7 @@
 
 <div class="content">
     <div class="row">
-        
+
 <div class="table-card">
     <table class="table table-success table-hover m-0">
   <thead>

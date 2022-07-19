@@ -85,6 +85,7 @@ class Submit_attentiveness_checkController extends Controller
         ->select('student_attentiveness_check.id as id','student.full_name','student.admission_no','student_attentiveness_check.total_points','student_attentiveness_check.created_at as uploaded_time')
         ->where('student_attentiveness_check.A_check_id',$id)
         ->orderBy('student_attentiveness_check.total_points','desc')
+        ->limit(10)
         ->get();
 
         $nums=DB::table('student_attentiveness_check')

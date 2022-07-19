@@ -16,13 +16,20 @@ class AssesmentController extends Controller
         $term=$request->term;
         $week=$request->week;
         $day=$request->day;
-        // dd($week);
+
         if(($term==NULL)||($term=='allt')){
             $assments=DB::table('assessment')
-        ->where('assessment.class_id','=',$classid)
-        ->where('assessment.subject_id','=',$subjectid)
-        ->where('assessment.title','like',"%{$search}%")
-        ->get();
+            ->where('assessment.class_id','=',$classid)
+                ->where('assessment.subject_id','=',$subjectid)
+                ->where(function($query) use ($search){
+                $query->where('assessment.title', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.assessment_file', 'LIKE', '%'.$search.'%');
+                })
+                ->get();
+
+
+
         // ->paginate(3);
 
         }
@@ -89,7 +96,15 @@ class AssesmentController extends Controller
            ->orderBy('due_date','asc')
            ->get();
 
-       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid']));
+        $detail=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->get();
+
+       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid','detail']));
 
 
 
@@ -164,22 +179,23 @@ class AssesmentController extends Controller
 
     public function assquestion_update(Request $req)
     {
+        //  dd($req->id);
 
         $req->validate([
 
             'id'=>'required',
             'question'=>'required',
-            'option_1'=>'required',
-            'option_2'=>'required',
-            'option_3'=>'required',
-            'option_4'=>'required',
+            'answer1'=>'required',
+            'answer2'=>'required',
+            'answer3'=>'required',
+            'answer4'=>'required',
             'correct_answer'=>'required',
 
 
         ]);
 
         $question=Assessment_quiz_question::find($req->id);
-        $id=$question->ass_id;
+        $id=$question->assessment_id;
         $question->question=$req->question;
         $question->option_1=$req->answer1;
         $question->option_2=$req->answer2;
@@ -193,24 +209,33 @@ class AssesmentController extends Controller
 
 
     }
-    public function update(Request $req)
+    public function assessmentupdate(Request $req)
     {
-        dd($req);
-        $ass=Assignment::find($id);
+        //dd($req);
+        $ass=Assesment::find($req->assid);
         if($req->has('assignments')){
             $path=$req->assignments;
             $name = $path->getClientOriginalName();
-            $path->move('Ass',$name);
+            $path->move('assignments',$name);
         }else{
             $name=$ass->assignments;
         }
 
         $ass->title=$req->title;
         $ass->description=$req->description;
-        $ass->assignments=$name;
-        $classid=$req->class_id;
-        $subjectid=$req->subject_id;
+        $ass->term=$req->term;
+        $ass->week=$req->week;
+        $ass->day=$req->day;
+        $ass->extra_week=$req->extraweek;
+        $ass->due_date=$req->due_date;
+        $ass->allocated_marks=$req->a_marks;
+        $ass->assessment_type=$req->type;
+        $ass->assessment_file=$name;
+        $classid=$ass->class_id;
+        $subjectid=$ass->subject_id;
+
         $ass->save();
+        //dd($classid);
         //return dd($req->assignments->getClientOriginalName());
 
         return redirect()->route('ass.index',[$classid,$subjectid])->with('message','Assignment Updated successfully');

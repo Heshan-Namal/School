@@ -1,5 +1,6 @@
 @extends('layouts.MasterDashboard')
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
 <div class="row hh">
     <div class="col-8">
@@ -65,50 +66,94 @@
             </form>
         </div>
         </div>
+        <div class="row mb-4">
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/subass1.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                               Late Submission Students
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/subass2.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                In this week Expired Assesments
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/no_pub.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                Num of Students Notsubmit any Assesments
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+        </div>
         <div class="row">
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Late Submission Students</p>
-                        <p class="text-end" >Published</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >In this week Expired Assesments</p>
-                        <p class="text-end" >Published</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Num of Students Notsubmit any Assesments</p>
-                        <p class="text-end" >Published</p>
-                    </div>
-                </div>
-
+            <div class="head mt-4">
+                <p><u>Student Submitted Assesments</u> :-</p>
             </div>
         </div>
         </div>
         <div class="col-4">
-            <div class="d-card mt-3">
-                <div class="card-header timetable">View Submited Assesments</div>
+            <div class="d-card overflow-auto mt-3">
+                <div class="card-header card-text">View nearly expired Assesments submits:-</div>
+                <div class="jj">
                 <div class="card-body">
-                   <table class="overflow-y:auto;">
-                    <div class="card-header mx-4">
-                        <tr><th>Title</th><th>Due Date</th><th>Num of Submits</th></tr>
-                    </div>
-
+                    <table class="table "><tr><th scope="col" class="mx-2">Title</th><th scope="col">Due Date</th><th scope="col">Num of Submits</th></tr>
                     @foreach($nearas as $key=> $n)
                    <tr>
-                   <td><p class="mx-4">{{$n->title}}</p></td>
-                   <td><p class="mx-4 rounded-circle">{{$n->due_date}}</p></td>
-                   <td><p class="mx-4 rounded-circle">{{$n->count}}</p></td>
+                   <td><p class="mx-3">{{$n->title}}</p></td>
+                   <td><p class="mx-3 rounded-circle">{{$n->due_date}}</p></td>
+                   <td><p class="mx-3 rounded-circle">{{$n->count}}</p></td>
                    </tr>
                    @endforeach
                    {{-- <div class="row">
@@ -121,6 +166,7 @@
                    </div> --}}
 
                    </table>
+                </div>
                 </div>
 
             </div>
@@ -137,6 +183,7 @@
                         {{ session('message') }}
                     </div>
                 @endif
+
 <div class="table-card mt-5">
     <table class="table table-success table-hover m-0">
 <thead>

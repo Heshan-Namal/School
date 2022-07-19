@@ -18,7 +18,8 @@ use App\Http\Controllers\Submit_attentiveness_checkController;
 use App\Http\Controllers\Attentiveness_checkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
-use App\Http\Controllers\Auth;
+use App\Http\Controllers\Teacher_dashController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();   //Auth route
+Auth::routes();   //Auth route
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -94,10 +95,11 @@ Route::get('/attentiveshow/{id}',[Attentiveness_checkController::class,'attentiv
 Route::get('/attentive-submited/{classid}/{subjectid}',[Submit_attentiveness_checkController::class,'index'])->name('attentive.sumitindex');
 Route::get('/student-submitedview/{assid}',[Submit_attentiveness_checkController::class,'sub_attentiveview'])->name('attentive-submit');
 Route::post('/ass/{id}',[AssesmentController::class,'changeStatus'])->name('ass.status');
-
+Route::get('/students/{classid}/{subjectid}',[TeacherController::class,'mystudents'])->name('class.students');
+Route::get('/lead/',[Teacher_dashController::class,'leader'])->name('lead.index');
 
 //notdone
-Route::put('/ass-update',[AssesmentController::class,'update'])->name('ass.update');
+Route::put('/ass_update',[AssesmentController::class,'assessmentupdate'])->name('ass.update');
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');
 //Route::post('/attentive-questionstore',[QuestionsController::class,'store'])->name('question.store');
 

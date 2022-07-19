@@ -22,18 +22,18 @@ function gettypeselector(select1){
     document.getElementById('link').hidden = true;
    }
 }
-    var exampleModal = document.getElementById('qModal')
-            exampleModal.addEventListener('show.bs.modal', function (event) {
-            //    console.log("plzz");
-            // Button that triggered the modal
-            var button = event.relatedTarget
-            // Extract info from data-bs-* attributes
-            var id = button.getAttribute('data-bs-id')
-            var modalBodyInput = exampleModal.querySelector('.modal-body #assid')
-            modalBodyInput.value = id
+    // var exampleModal = document.getElementById('qModal')
+    //         exampleModal.addEventListener('show.bs.modal', function (event) {
+    //         //    console.log("plzz");
+    //         // Button that triggered the modal
+    //         var button = event.relatedTarget
+    //         // Extract info from data-bs-* attributes
+    //         var id = button.getAttribute('data-bs-id')
+    //         var modalBodyInput = exampleModal.querySelector('.modal-body #assid')
+    //         modalBodyInput.value = id
 
 
-            })
+    //         })
 function getweekselector(value){
 
     if(value=='extra'){
@@ -45,35 +45,51 @@ function getweekselector(value){
     }
 }
 
-var editModal = document.getElementById('editModal')
-editModal.addEventListener('show.bs.modal', function (event) {
-    //    console.log("plzz");
-    // Button that triggered the modal
-    var button = event.relatedTarget
-    // Extract info from data-bs-* attributes
-    var id = button.getAttribute('data-bs-id')
-    var question = button.getAttribute('data-bs-question')
-    var answer1 = button.getAttribute('data-bs-answer1')
-    var answer2 = button.getAttribute('data-bs-answer2')
-    var answer3 = button.getAttribute('data-bs-answer3')
-    var answer4 = button.getAttribute('data-bs-answer4')
-    var correct_answer = button.getAttribute('data-bs-correct_answer')
-    var i = editModal.querySelector('.modal-body #id')
-    var q = editModal.querySelector('.modal-body #question')
-    var a1 = editModal.querySelector('.modal-body #answer1')
-    var a2 = editModal.querySelector('.modal-body #answer2')
-    var a3 = editModal.querySelector('.modal-body #answer3')
-    var a4 = editModal.querySelector('.modal-body #answer4')
-    var c = editModal.querySelector('.modal-body #correct_answer')
+// var editModal = document.getElementById('editModal')
+// editModal.addEventListener('show.bs.modal', function (event) {
+//     //    console.log("plzz");
+//     // Button that triggered the modal
+//     var button = event.relatedTarget
+//     // Extract info from data-bs-* attributes
+//     var id = button.getAttribute('data-bs-id')
+//     var question = button.getAttribute('data-bs-question')
+//     var answer1 = button.getAttribute('data-bs-answer1')
+//     var answer2 = button.getAttribute('data-bs-answer2')
+//     var answer3 = button.getAttribute('data-bs-answer3')
+//     var answer4 = button.getAttribute('data-bs-answer4')
+//     var correct_answer = button.getAttribute('data-bs-correct_answer')
+//     var i = editModal.querySelector('.modal-body #id')
+//     var q = editModal.querySelector('.modal-body #question')
+//     var a1 = editModal.querySelector('.modal-body #answer1')
+//     var a2 = editModal.querySelector('.modal-body #answer2')
+//     var a3 = editModal.querySelector('.modal-body #answer3')
+//     var a4 = editModal.querySelector('.modal-body #answer4')
+//     var c = editModal.querySelector('.modal-body #correct_answer')
 
-    i.value = id
-    q.value = question
-    a1.value = answer1
-    a2.value = answer2
-    a3.value = answer3
-    a4.value = answer4
-    c.value = correct_answer
+//     i.value = id
+//     q.value = question
+//     a1.value = answer1
+//     a2.value = answer2
+//     a3.value = answer3
+//     a4.value = answer4
+//     c.value = correct_answer
 
 
 
+// })
+
+$('#search').on('keyup',function(){
+    $value=$(this).val();
+    $.ajax({
+
+        type:'get',
+        url:"{{ route('search') }}",
+        data:{'search':$value},
+
+        success:function(data){
+            console.log(data);
+            $('#content').html(data);
+        }
+
+    });
 })
