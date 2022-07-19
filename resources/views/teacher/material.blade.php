@@ -1,6 +1,6 @@
+@foreach($detail as $key=> $d)
 @extends('layouts.MasterDashboard')
-
-
+@endforeach
 @section('content')
 <div class="content">
 
@@ -72,7 +72,7 @@
   </div>
   <div class="col-sm-3">
     <div class="card">
-        <a href="#" style="text-decoration:none;">
+        <a href="{{route('class.students',[$classid,$subjectid])}}" style="text-decoration:none;">
       <div class="card-body">
         <img src="{{asset('assets/front/images/avatars/student.png')}}" class="rounded mx-auto d-block" alt="...">
         <h2 class="card-title fw-bold">VIEW</h2>

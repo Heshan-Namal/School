@@ -1,13 +1,14 @@
 @extends('layouts.MasterDashboard')
 
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
     <div class="row hh">
         <div class="col-8">
         <div class="card">
             <form action="#" method="GET" class="form-inline">@csrf
             <div class="form-group row">
-                <h4 class="timetable">Uploded Resources</h4>
+                <h4 class="timetable mb-2 mt-3">Uploded Resources</h4>
                     <div class="col-sm-3" >
                         <select name="term" id="term" onchange="getselector(this.value);" class="form-control">
                             <option value="" value="" disabled selected>Select Term</option>
@@ -64,23 +65,60 @@
         </div>
             </form>
         </div>
-        </div>
-        <div class="col-4">
-        <div class="d-card mt-3">
-            <div class="card-header table">View Submited Assesments</div>
-            <div class="card-body">
-                <p>3 students submit ass1</p>
-                <p>4 students submit ass2</p>
+        <div class="row mt-5">
+            <div class="col-12 re">
+            <div class="d-card overflow-auto">
+                <div class="card-header colo card-text">Recently Uploaded Class Link</div>
+                <div class="card-body">
+                    <table class="table"><tr><th scope="col">Chapter</th><th scope="col">Link</th><th scope="col">Date</th></tr>
+                        @foreach($clink as $key=> $c)
+                        <tr>
+                        <td><p >{{$c->chapter}}</p></td>
+                        <td><p>{{$c->resource_file}}</p></td>
+                        <td><p >{{ \Carbon\Carbon::parse($c->created_at)->format('d/m/Y') }}</p></td>
+                        </tr>
+                        @endforeach
+                        </table>
+                </div>
+
             </div>
-
-        </div>
-
+            </div>
     </div>
-    <div class="table-card mt-5">
-        <div class="text-end">
-            <button type="submit" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Resource</button>
-            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
         </div>
+    <div class="col-4 mt-3">
+        <div class="d-card overflow-auto ">
+            <div class="card-header colo card-text">Recently Uploaded Notes</div>
+            <div class="card-body  ">
+                <table class="table"><tr><th scope="col">Chapter</th><th scope="col">Note</th><th scope="col">Date</th></tr>
+                    @foreach($note as $key=> $n)
+                    <tr>
+                    <td><p >{{$n->chapter}}</p></td>
+                    <td><a href="http://127.0.0.1:8000/notes/{{$n->resource_file}}"><p >{{$n->resource_file}}</p></a></td>
+                    <td><p >{{ \Carbon\Carbon::parse($n->created_at)->format('d/m/Y') }}</p></td>
+                    </tr>
+                    @endforeach
+                    </table>
+            </div>
+        </div>
+
+        </div>
+
+
+        <div class="row mt-2">
+            <div class="head">
+                <p><u>Uploaded All Resources</u> :-</p>
+            </div>
+        </div>
+
+        <div class="text-end">
+            <div class="input-group">
+                <button type="submit" class="btn btn-primary"> Go!</button>
+                <input type="text" placeholder="Search" id="search" class="form-control">
+             </div>
+
+            <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Resource</button>
+            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
+
     <table class="table table-success table-hover m-0">
         <thead>
         <tr>
@@ -115,24 +153,27 @@
             <td>{{$r->resource_type}}</td>
             @if($r->resource_type == 'reference_link')
             <td>{{$r->resource_file}}</a></td>
-              <td><a href="{{$r->resource_file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
+              <td><a href="{{$r->resource_file}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
             @elseif ($r->resource_type == 'clink')
               <td>{{$r->resource_file}}</a></td>
-              <td><a href="{{$r->resource_file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
+              <td><a href="{{$r->resource_file}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
             @else
               <td>{{$r->resource_file}}</a></td>
-              <td><a href="http://127.0.0.1:8000/notes/{{$r->resource_file}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
+              <td><a href="http://127.0.0.1:8000/notes/{{$r->resource_file}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
             @endif
             <td class="btn-toolbar">
                 <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square "></i> </button>
-                <button class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
+                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
             </td>
 
           </tr>
 
           @endforeach
+          <table class="table">
+          <tbody id="content">
 
-
+          </tbody>
+          </table>
 
           @else
           <p>No Assesments assign yet</p>
@@ -145,7 +186,6 @@
         </table>
 
 
-    </div>
 
 
 
@@ -167,14 +207,14 @@
     </div>
   </div>
 </div>
+    </div>
 
 
 
 
 
 
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('assets/front/js/resourcesselector.js')}}"></script>
 
 

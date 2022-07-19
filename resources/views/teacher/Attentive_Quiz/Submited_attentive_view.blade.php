@@ -1,43 +1,83 @@
 @extends('layouts.MasterDashboard')
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
-    <div class="row">
-        <div class="col-3">
-        <div class="box-card">
-            <div class="card-body">
-                <p class="timetable">ToDay Submited Attentiveness Checks</p>
-                <p>{{$count}}</p>
-            </div>
-        </div>
-        </div>
-        <div class="col-3">
-            <div class="box-card">
-                <div class="card-body">
-                    <p class="timetable">Overall Today Paricipation</p>
-                    @if (($std!=0) && ($count!=0))
-                    <p>{{ number_format($at * 100 / ($std * $count) , 2) }}%</p>
-                    @else
-                    <p> No checks </p>
-                    @endif
-
+    <div class="row d-flex justify-content-evenly">
+        <div class="col-3 ">
+        <div class="sub-card">
+            <div class="row g-0">
+                <div class="col-md-4 mt-3">
+                  <img
+                    src="{{asset('assets/front/images/ass/a1.png')}}"
+                    alt="Trendy Pants and Shoes"
+                    class="img-fluid rounded-start d-flex mx-2"
+                  />
                 </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <p class="card-text">
+                        ToDay Submited Attentiveness Checks
+                        <p>{{$count}}</p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+        </div>
+        <div class="col-3">
+            <div class="sub-card">
+                <div class="row g-0">
+                    <div class="col-md-4 mt-3">
+                      <img
+                        src="{{asset('assets/front/images/ass/a2.png')}}"
+                        alt="Trendy Pants and Shoes"
+                        class="img-fluid rounded-start d-flex mx-2"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <p class="card-text">
+                            Overall Today Paricipation
+                            @if (($std!=0) && ($count!=0))
+                                <p>{{ number_format($at * 100 / ($std * $count) , 2) }}%</p>
+                            @else
+                                <p> No checks </p>
+                            @endif
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
             </div>
             </div>
             <div class="col-3">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable">Overall Today Result precentage</p>
-                        @if (($std!=0) && ($count!=0))
-                        <p>{{ number_format($r / ($std * $count) , 2) }}%</p>
-                        @else
-                        <p> No checks </p>
-                        @endif
+                <div class="sub-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/a3.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                Overall Today Result precentage
+                                @if (($std!=0) && ($count!=0))
+                                <p>{{ number_format($r / ($std * $count) , 2) }}%</p>
+                                @else
+                                <p> No checks </p>
+                                @endif
+                            </p>
+                          </div>
+                        </div>
+                      </div>
 
-                    </div>
                 </div>
                 </div>
     </div>
-
     <div class="row">
         <div class="col-8">
 
@@ -46,6 +86,11 @@
                         {{ session('message') }}
                     </div>
                 @endif
+    <div class="row mt-5">
+        <div class="head mt-4">
+            <p><u>Today Submitted Attentiveness Checks</u> :-</p>
+        </div>
+    </div>
 
 <div class="table-card mt-5">
     <table class="table table-success table-hover m-0">
@@ -98,11 +143,10 @@
 </div>
 </div>
         <div class="col-4">
-            <div class="d-card mt-3">
-                <div class="card-header timetable">Highest Marks for an Assignmrnt</div>
+            <div class="d-card overflow-auto mt-5">
+                <div class="card-header card-text">Highest Marks for an Assignmrnt</div>
                 <div class="card-body">
-
-                   <table><tr><th scope="col">Title</th><th scope="col">Marks</th><th>Uploaded Time</th></tr>
+                    <table class="table "><tr><th scope="col">Title</th><th scope="col">Marks</th><th scope="col">uploaded Time</th></tr>
                  @foreach($hmark as $key=> $h)
                    <tr>
                    <td><p class="mx-4">{{$h->title}}</p></td>

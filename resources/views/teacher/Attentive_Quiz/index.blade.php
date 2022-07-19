@@ -1,6 +1,7 @@
 @extends('layouts.MasterDashboard')
 
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
     <div class="row hh">
         <div class="col-8">
@@ -53,50 +54,95 @@
             </form>
         </div>
         </div>
+        <div class="row mb-5">
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/q1.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                Num of All Attentive Quizes
+                                <p class="text-end" >{{$uplod}}</p>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/no_pub.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                Not Published Attentive Quizes
+                                <p class="text-end" >{{$stat}}</p>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/q3.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                <p class="timetable" >Today Quizes</p>
+                                <p class="text-end" >{{$today}}</p>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+        </div>
         <div class="row">
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Num of All Attentive Quizes</p>
-                        <p class="text-end" >{{$uplod}}</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Not Published Attentive Quizes</p>
-                        <p class="text-end" >{{$stat}}</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Today Quizes</p>
-                        <p class="text-end" >{{$today}}</p>
-                    </div>
-                </div>
-
+            <div class="head mt-4">
+                <p><u>All Uploaded Attentive Quizes</u> :-</p>
             </div>
         </div>
         </div>
         <div class="col-4">
-        <div class="d-card mt-3">
-            <div class="card-header timetable">Submited Attentive Quizes
+        <div class="d-card overflow-auto mt-3">
+            <div class="card-header card-text">Submited Attentive Quizes
                 <a href="{{route('attentive.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
             <div class="card-body">
-               <p class="card-header">To Day Sheduled Quizes</p>
-               <table class="overflow-y:auto;"><tr><th></th><th></th><th></th><th></th></tr>
-@foreach ($list as $key=>$l )
-
-
+               <p class="card-header card-text">To Day Sheduled Quizes</p>
+               <table class="table"><tr><th scope="col" class="mx-2">Title</th><th scope="col">Period</th><th scope="col">Status</th><th scope="col"></th></tr>
+        @foreach ($list as $key=>$l )
                <tr>
-               <td><p class="mx-4">{{$l->title}}</p></td>
-               <td><p class="mx-4">{{$l->period}}</p></td>
-               <td><p class="mx-4">{{$l->status}}</p></td>
+               <td><p class="mx-2">{{$l->title}}</p></td>
+               <td><p class="mx-2">{{$l->period}}</p></td>
+               <td><p class="mx-2">{{$l->status}}</p></td>
                <td><p class="btn btn-warning btn-sm mx-4"><i class="bi bi-bell"></i></p></td>
                </tr>
                {{-- <div class="row">
@@ -129,7 +175,7 @@
                  </div>
             </form>
             <div class="col-3">
-                <button type="submit" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Quize</button>
+                <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Quize</button>
             </div>
 
             </div>

@@ -63,6 +63,21 @@ class ResourcesController extends Controller
             }
         }
 
+        $note=DB::table('resource')
+        ->where('resource.class_id','=',$classid)
+        ->where('resource.subject_id','=',$subjectid)
+        ->where('resource.resource_type','=','note')
+        ->orderBy('resource.created_at','desc')
+        ->limit(4)
+        ->get();
+
+        $clink=DB::table('resource')
+        ->where('resource.class_id','=',$classid)
+        ->where('resource.subject_id','=',$subjectid)
+        ->where('resource.resource_type','=','class_link')
+        ->orderBy('resource.created_at','desc')
+        ->limit(4)
+        ->get();
 
         // $detail=DB::table('Subject_class')
         // ->where('Subject_class.class_id','=',$classid)
@@ -72,7 +87,7 @@ class ResourcesController extends Controller
         // ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
         // ->get();
 
-       return view('teacher.Resources.index',compact(['res','classid','subjectid']));
+       return view('teacher.Resources.index',compact(['res','classid','subjectid','note','clink']));
 
 
 

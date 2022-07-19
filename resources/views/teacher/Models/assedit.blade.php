@@ -1,4 +1,7 @@
-<form action="{{route('ass.update')}}" method="POST" enctype="multipart/form-data">@csrf
+
+    <form action="{{route('ass.update')}}" method="POST" enctype="multipart/form-data">@method('PUT')
+        @csrf
+
     <div class="form-group row">
         <div class="col-3">
         <select name="term" id="term" class="form-control">
@@ -109,8 +112,9 @@
         </div>
 
            <div class="form-group mb-4" id="file">
-               <label for="name" id="file">Upload the Assignment</label>
-               <input type="file" class="form-control" name="assignments" id="assessment_file">
+               <label for="assignments">Upload the Assignment</label>
+               <input type="file" class="form-control" name="assignments" >
+               <input type="text" disabled class="form-control"  id="assessment_file">
                @error('assignments')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -118,7 +122,11 @@
                 @enderror
            </div>
 
+           <div class="form-group mb-4">
+            <!-- <label for="name">Quiz_id</label> -->
+            <input type="hidden" class="form-control " name="assid" id="assid">
 
+        </div>
         <div class="form-group">
            <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
