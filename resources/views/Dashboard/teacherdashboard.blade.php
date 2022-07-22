@@ -11,13 +11,13 @@
         <div class="col-3 mx-3">
             <div class="d-card  mt-3 ">
                 <h4 class="card-header card-text colo d-flex justify-content-center">Leader Board</h4>
-                <div class="row">
-                    <form action="{{route('lead.index')}}" method="GET" class="form-inline">@csrf
-                        <label for="min" class="card-text">From :</label>
+                <div class="row mx-2">
+                    <form action="{{route('dashboard')}}" method="GET" class="form-inline">@csrf
+                        <label for="min" class="card-text ">From :</label>
                         <input type="Date" class="form-control d-in" name="mindata" required>
                         <label for="max" class="card-text">To :</label>
                         <input type="Date" class="form-control d-in" name="maxdata" required>
-                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-primary mx-4" type="submit">Save</button>
                     </form>
                 </div>
                 <div class="row">

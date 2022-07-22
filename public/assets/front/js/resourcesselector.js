@@ -78,18 +78,3 @@ function getweekselector(value){
 
 // })
 
-$('#search').on('keyup',function(){
-    $value=$(this).val();
-    $.ajax({
-
-        type:'get',
-        url:"{{ route('search') }}",
-        data:{'search':$value},
-
-        success:function(data){
-            console.log(data);
-            $('#content').html(data);
-        }
-
-    });
-})
