@@ -17,6 +17,7 @@ class CreateClassRecordTable extends Migration
             $table->id();
             $table->date('day')->nullable(false);
             $table->string('period')->nullable(false);
+            $table->string('term')->nullable(false);
             $table->string('record')->nullable(false);
             $table->enum('teacher_attendance',['yes', 'no'])->nullable(false);
             $table->unsignedBigInteger('subject_id');

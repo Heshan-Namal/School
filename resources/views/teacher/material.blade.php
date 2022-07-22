@@ -59,7 +59,7 @@
   </div>
   <div class="col-sm-3">
     <div class="card">
-        <a href="#" style="text-decoration:none;">
+        <a href="{{route('class.recordbook',[$classid,$subjectid])}}" style="text-decoration:none;">
       <div class="card-body">
         <img src="{{asset('assets/front/images/avatars/teacher.png')}}" class="rounded mx-auto d-block" alt="...">
         <h2 class="card-title fw-bold">ADD</h2>

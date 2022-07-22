@@ -18,7 +18,7 @@ use App\Http\Controllers\Submit_attentiveness_checkController;
 use App\Http\Controllers\Attentiveness_checkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
-use App\Http\Controllers\Teacher_dashController;
+use App\Http\Controllers\Teacher_RecordBookController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -95,11 +95,16 @@ Route::get('/attentiveshow/{id}',[Attentiveness_checkController::class,'attentiv
 Route::get('/attentive-submited/{classid}/{subjectid}',[Submit_attentiveness_checkController::class,'index'])->name('attentive.sumitindex');
 Route::get('/student-submitedview/{assid}',[Submit_attentiveness_checkController::class,'sub_attentiveview'])->name('attentive-submit');
 Route::post('/ass/{id}',[AssesmentController::class,'changeStatus'])->name('ass.status');
+Route::put('/ass_update',[AssesmentController::class,'assessmentupdate'])->name('ass.update');
 Route::get('/students/{classid}/{subjectid}',[TeacherController::class,'mystudents'])->name('class.students');
-Route::get('/lead/',[Teacher_dashController::class,'leader'])->name('lead.index');
+Route::get('/record-book/{classid}/{subjectid}',[Teacher_RecordBookController::class,'index'])->name('class.recordbook');
+Route::post('/recordstore/{classid}/{subjectid}',[Teacher_RecordBookController::class,'store'])->name('record.store');
+Route::put('/record_update/{classid}/{subjectid}',[Teacher_RecordBookController::class,'update'])->name('rec.update');
+
+// Route::get('/lead/',[Teacher_dashController::class,'leader'])->name('lead.index');
 
 //notdone
-Route::put('/ass_update',[AssesmentController::class,'assessmentupdate'])->name('ass.update');
+
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');
 //Route::post('/attentive-questionstore',[QuestionsController::class,'store'])->name('question.store');
 
