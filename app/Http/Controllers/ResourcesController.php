@@ -11,16 +11,22 @@ class ResourcesController extends Controller
     public function index(Request $request ,$classid,$subjectid)
     {
         //dd($res);
+        $search=$request->search;
         $term=$request->term;
         $week=$request->week;
         $day=$request->day;
-        if($term==NULL){
+        if(($term==NULL)||($term=='allt')){
             $res=DB::table('resource')
         ->where('resource.class_id','=',$classid)
         ->where('resource.subject_id','=',$subjectid)
-        ->get();
+        ->where(function($query) use ($search){
+            $query->where('resource.chapter', 'LIKE', '%'.$search.'%')
+                    ->orWhere('resource.resource_type', 'LIKE', '%'.$search.'%')
+                    ->orWhere('resource.topic', 'LIKE', '%'.$search.'%');
+            })
+            ->get();
         }
-        elseif($week==NULL){
+        elseif($week=='allw'){
             $res=DB::table('resource')
             ->where('resource.class_id','=',$classid)
             ->where('resource.subject_id','=',$subjectid)
@@ -135,5 +141,44 @@ class ResourcesController extends Controller
 
 
 
+    }
+
+
+    public function resupdate(Request $req)
+    {
+       // dd($req);
+        $res=Resource::find($req->resid);
+        if(isset($req->file)){
+            $path=$req->file;
+            $name = $path->getClientOriginalName();
+            $path->move('notes',$name);
+        }else{
+            $name=$req->link;
+        }
+
+        $res->chapter=$req->chapter;
+        $res->topic=$res->topic;
+        $res->term=$req->term;
+        $res->week=$req->week;
+        $res->day=$req->day;
+        $res->extra_week=$req->extraweek;
+        $res->resource_type=$req->type;
+        $res->resource_file=$name;
+        $classid=$res->class_id;
+        $subjectid=$res->subject_id;
+
+        $res->save();
+        //dd($classid);
+        //return dd($req->assignments->getClientOriginalName());
+
+        return redirect()->route('res.index',[$classid,$subjectid])->with('message','Resources updated successfully');
+
+
+    }
+
+    public function destroy_res(Request $req){
+        $res=Resource::find($req->resid);
+        $res->delete();
+        return back()->with('message','Succesfully Deleted the Record');
     }
 }

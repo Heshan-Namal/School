@@ -100,9 +100,13 @@ Route::get('/students/{classid}/{subjectid}',[TeacherController::class,'mystuden
 Route::get('/record-book/{classid}/{subjectid}',[Teacher_RecordBookController::class,'index'])->name('class.recordbook');
 Route::post('/recordstore/{classid}/{subjectid}',[Teacher_RecordBookController::class,'store'])->name('record.store');
 Route::put('/record_update/{classid}/{subjectid}',[Teacher_RecordBookController::class,'update'])->name('rec.update');
-
-// Route::get('/lead/',[Teacher_dashController::class,'leader'])->name('lead.index');
-
+Route::put('/att_update',[Attentiveness_checkController::class,'attupdate'])->name('att.update');
+Route::delete('destroy_att',[Attentiveness_checkController::class,'destroy_att'])->name('att.delete');
+Route::delete('destroy_ass',[AssesmentController::class,'destroy_ass'])->name('ass.delete');
+Route::delete('destroy_assquestion',[AssesmentController::class,'destroy_assq'])->name('assque.delete');
+Route::put('/res_update',[ResourcesController::class,'resupdate'])->name('res.update');
+Route::delete('destroy_res',[ResourcesController::class,'destroy_res'])->name('res.delete');
+Route::delete('destroy_attquestion',[Attentiveness_checkController::class,'destroy_attq'])->name('attque.delete');
 //notdone
 
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');

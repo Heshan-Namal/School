@@ -9,6 +9,7 @@
     <div class="row">
         <h2 class="card-text">WEEK {{$week}}  & Today is {{$day}}</h2>
     </div>
+
     <div class="row">
         @if($record->count()>0)
             @foreach($record as $key=>$r)
@@ -64,7 +65,23 @@
     </div>
     <div class="row" id="term1">
         <h2 class="head">First Term Record Book</h2>
+
         @if($term1->count()>0)
+
+        <div class="text-end">
+            <div class="row">
+
+            <form action="?" class="col-sm-2 me-auto mb-2" >
+                <div class="input-group">
+                    <button type="submit" class="btn btn-primary"> Go!</button>
+                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+
+                 </div>
+            </form>
+            </div>
+
+            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
+        </div>
         <table class="table table-success table-hover m-0">
 
             <thead>
@@ -103,6 +120,22 @@
     <div class="row" id="term2" hidden>
         <h2 class="head">Second Term Record Book</h2>
         @if($term2->count()>0)
+
+        <div class="text-end mb-2">
+            <div class="row">
+
+            <form action="?" class="col-sm-2 me-auto " >
+                <div class="input-group">
+                    <button type="submit" class="btn btn-primary" onclick="refreshdiv();"> Go!</button>
+                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+
+                 </div>
+            </form>
+            </div>
+
+            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
+        </div>
+    <div id="section2">
         <table class="table table-success table-hover m-0">
 
             <thead>
@@ -137,10 +170,24 @@
 
             @endif
         </table>
+</div>
     </div>
     <div class="row" id="term3" hidden>
         <h2 class="head">Third Term Record Book</h2>
         @if($term3->count()>0)
+
+        <div class="text-end mb-2">
+            <div class="row">
+            <form action="?" class="col-sm-2 me-auto " >
+                <div class="input-group">
+                    <button type="submit" class="btn btn-primary"> Go!</button>
+                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+                 </div>
+            </form>
+            </div>
+        </div>
+
+
         <table class="table table-success table-hover m-0">
             <thead>
             <tr>

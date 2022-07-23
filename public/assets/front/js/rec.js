@@ -33,3 +33,7 @@ function changeterm(select1){
    }
 
 }
+
+function refreshdiv() {
+    $('#section2').load(location.href + " #section2");
+}

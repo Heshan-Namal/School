@@ -126,11 +126,89 @@ if(assedit){
      })
 
 }
+var deleteModal = document.getElementById('deleteModal')
+if(deleteModal){
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+
+        var button = event.relatedTarget
+        var id = button.getAttribute('data-bs-id')
+        var i = deleteModal.querySelector('.modal-body #assid')
+        i.value = id
+     })
+
+}
+
+var deletequeModal = document.getElementById('deletequeModal')
+if(deletequeModal){
+    deletequeModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var id = button.getAttribute('data-bs-id')
+        var i = deletequeModal.querySelector('.modal-body #assqid')
+        i.value = id
+     })
+
+}
+
+
+var deleteattqModal = document.getElementById('deleteattqModal')
+if(deleteattqModal){
+    deleteattqModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var id = button.getAttribute('data-bs-id')
+        var i = deleteattqModal.querySelector('.modal-body #attqid')
+        i.value = id
+     })
+
+}
+
+
+var attedit=document.getElementById('editattModal')
+if(attedit){
+    attedit.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        //  console.log("plzz");
+         //alert('open');
+         var id = button.getAttribute('data-bs-id')
+         var title = button.getAttribute('data-bs-title')
+         var term = button.getAttribute('data-bs-term')
+         var week = button.getAttribute('data-bs-week')
+         var extra_week = button.getAttribute('data-bs-extra_week')
+         var day = button.getAttribute('data-bs-day')
+         var period = button.getAttribute('data-bs-period')
+         var duration = button.getAttribute('data-bs-duration')
+         var i = attedit.querySelector('.modal-body #quizid')
+         var t = attedit.querySelector('.modal-body #title')
+         var te = attedit.querySelector('.modal-body #term')
+         var we = attedit.querySelector('.modal-body #week')
+         var ex = attedit.querySelector('.modal-body #extra_week')
+         var da = attedit.querySelector('.modal-body #date')
+         var pe = attedit.querySelector('.modal-body #period')
+         var du = attedit.querySelector('.modal-body #duration')
+
+
+         i.value = id
+         t.value = title
+         te.value = term
+         we.value = week
+         ex.value = extra_week
+         da.value = day
+         pe.value = period
+         du.value = duration
 
 
 
-function changestatus(){
-    document.getElementById('addq').disabled = true;
-    document.getElementById('edit').disabled = true;
-    document.getElementById('published').disabled = true;
+     })
+
+}
+
+
+var deleteattModal = document.getElementById('deleteattModal')
+if(deleteattModal){
+    deleteattModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var id = button.getAttribute('data-bs-id')
+        var i = deleteattModal.querySelector('.modal-body #quizid')
+        i.value = id
+     })
+
 }

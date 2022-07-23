@@ -182,6 +182,7 @@
 
         <div class="text-end">
             <div class="row">
+
             <form action="?" class="col-sm-2 me-auto" >
                 <div class="input-group">
                     <button type="submit" class="btn btn-primary"> Go!</button>
@@ -197,6 +198,11 @@
 
             {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
         </div>
+        @if (session('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+        @endif
         @if($assments->count()>0)
     <table class="table table-success table-hover m-0">
         <thead>
@@ -235,7 +241,11 @@
           <td>{{$ass->due_date}}</td>
           <td>{{$ass->assessment_type}}</td>
           @if($ass->assessment_type == 'mcq_quiz')
-            <td><button id="addq" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}" >Add Question</td>
+            @if($ass->status=='published')
+            <td><button class="btn btn-success btn-sm" disabled data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}">Add Question</td>
+            @else
+            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}">Add Question</td>
+            @endif
             <td><a href="{{route('ass.quizshow',[$ass->id])}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
           @else
           <td>{{$ass->assessment_file}}</a></td>
@@ -244,16 +254,23 @@
           <td>{{$ass->allocated_marks}}</td>
           <td>{{$ass->status}}</td>
           <td class="btn-toolbar">
+            @if($ass->status=='published')
+            <button class="btn btn-primary btn-sm " disabled><i class="bi bi-pencil-square"></i></button>
+            <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{$ass->id}}"><i class="bi bi-trash"></i></button>
+            <button id="published" class="btn btn-success btn-sm mx-1" type="submit" name="status" value="published" disabled><i class="bi bi-upload"></i></button>
+            @else
           <button class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#editassModal" data-bs-id="{{$ass->id}}" data-bs-title="{{$ass->title}}" data-bs-description="{{$ass->description}}"
             data-bs-term="{{$ass->term}}" data-bs-week="{{$ass->week}}" data-bs-extra_week="{{$ass->extra_week}}" data-bs-day="{{$ass->day}}" data-bs-due_date="{{$ass->due_date}}" data-bs-assessment_type="{{$ass->assessment_type}}"
             data-bs-allocated_marks="{{$ass->allocated_marks}}" data-bs-assessment_file="{{$ass->assessment_file}}" ><i class="bi bi-pencil-square "></i> </button>
-            <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
-          <form action="{{route('ass.status',[$ass->id])}}" method="POST">@csrf
-            <button id="published" class="btn btn-success btn-sm mx-1" type="submit" name="status" value="published" onclick="changestatus();"><i class="bi bi-upload"></i></button>
-            </td>
+            <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{$ass->id}}"><i class="bi bi-trash"></i></button>
+            <form action="{{route('ass.status',[$ass->id])}}" method="POST">@csrf
+            <button id="published" class="btn btn-success btn-sm mx-1" type="submit" id="pub" name="status" value="published"><i class="bi bi-upload"></i></button>
+        </form>
+        @endif
+        </td>
 
 
-          </form>
+
 
         </tr>
 
@@ -314,6 +331,20 @@
         </div>
         <div class="modal-body table">
             @include('teacher.Models.assedit')
+        </div>
+    </div>
+  </div>
+</div>
+{{-- delete modal --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            @include('teacher.Models.deletemodal')
         </div>
     </div>
   </div>

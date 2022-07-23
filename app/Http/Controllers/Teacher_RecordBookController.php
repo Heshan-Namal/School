@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 
 class Teacher_RecordBookController extends Controller
 {
-    public function index($classid,$subjectid)
+    public function index(Request $request,$classid,$subjectid)
     {
+        $search=$request->search;
         $now = Carbon::now();
         $c_week=$now->weekOfYear;
         if ((1<$c_week) && (16>$c_week)) {
@@ -52,17 +53,32 @@ class Teacher_RecordBookController extends Controller
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term1')
-            ->get();
+            ->where(function($query) use ($search){
+                $query->where('class_record.day', 'LIKE', '%'.$search.'%')
+                        ->orWhere('class_record.period', 'LIKE', '%'.$search.'%')
+                        ->orWhere('class_record.record', 'LIKE', '%'.$search.'%');
+                })
+                ->get();
             $term2=DB::table('class_record')
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term2')
-            ->get();
+            ->where(function($query) use ($search){
+                $query->where('class_record.day', 'LIKE', '%'.$search.'%')
+                        ->orWhere('class_record.period', 'LIKE', '%'.$search.'%')
+                        ->orWhere('class_record.record', 'LIKE', '%'.$search.'%');
+                })
+                ->get();
             $term3=DB::table('class_record')
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term3')
-            ->get();
+            ->where(function($query) use ($search){
+                $query->where('class_record.day', 'LIKE', '%'.$search.'%')
+                        ->orWhere('class_record.period', 'LIKE', '%'.$search.'%')
+                        ->orWhere('class_record.record', 'LIKE', '%'.$search.'%');
+                })
+                ->get();
 
         return view('teacher.Record_Book.index',compact(['week','record','day','classid','subjectid','term','book','term1','term2','term3']));
     }

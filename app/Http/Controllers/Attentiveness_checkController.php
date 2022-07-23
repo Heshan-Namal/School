@@ -40,16 +40,24 @@ class Attentiveness_checkController extends Controller
 
     public function index(Request $request ,$classid,$subjectid)
     {
+        $search=$request->search;
         $term=$request->term;
         $week=$request->week;
+
       //  $day=$request->day;
-        if($term==NULL){
+        if(($term==NULL)||($term=='allt')){
             $quizes=DB::table('attentiveness_check')
         ->where('attentiveness_check.class_id','=',$classid)
         ->where('attentiveness_check.subject_id','=',$subjectid)
+        ->where(function($query) use ($search){
+            $query->where('attentiveness_check.title', 'LIKE', '%'.$search.'%')
+                    ->orWhere('attentiveness_check.date', 'LIKE', '%'.$search.'%')
+                    ->orWhere('attentiveness_check.period', 'LIKE', '%'.$search.'%');
+            })
+
         ->get();
         }
-        elseif($week==NULL){
+        elseif($week=='allw'){
             $quizes=DB::table('attentiveness_check')
             ->where('attentiveness_check.class_id','=',$classid)
             ->where('attentiveness_check.subject_id','=',$subjectid)
@@ -114,8 +122,9 @@ class Attentiveness_checkController extends Controller
         }else{
             return back()->with('message','You didnt Add Questions for Attentive Quiz');
         }
-        return back();
+        return back()->with('message','Published Successfull');
         //dd($request);
+        //return redirect()->route('submit.view',compact('assid'))->with('message','Assesment Marks Updated successfully');
     }
 
     public function qstore(Request $req)
@@ -144,4 +153,42 @@ class Attentiveness_checkController extends Controller
         $question=Attentiveness_check::find($id);
         return view('teacher.Attentive_Quiz.Attentive_quetionView',compact(['question','n','questions']));
     }
+
+
+    public function attupdate(Request $req)
+    {
+        //dd($req->period);
+        $att=Attentiveness_check::find($req->quizid);
+
+
+        $att->title=$req->title;
+        $att->term=$req->term;
+        $att->week=$req->week;
+        $att->date=$req->date;
+        $att->extra_week=$req->extraweek;
+        $att->period=$req->period;
+        $att->quiz_duration=$req->duration;
+
+
+        $att->save();
+        //dd($classid);
+        //return dd($req->assignments->getClientOriginalName());
+
+        return redirect()->route('quiz.index',[$att->class_id,$att->subject_id])->with('message','Attentiveness Check Updated successfully');
+
+
+    }
+
+    public function destroy_att(Request $req){
+        //dd($req->quizid);
+        $att=Attentiveness_check::find($req->quizid);
+        $att->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+    public function destroy_attq(Request $req){
+        $attq=Attentiveness_check_Question::find($req->attqid);
+        $attq->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+
 }
