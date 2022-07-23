@@ -218,7 +218,8 @@ class AssesmentController extends Controller
             $name = $path->getClientOriginalName();
             $path->move('assignments',$name);
         }else{
-            $name=$ass->assignments;
+            $name=$ass->assessment_file;
+
         }
 
         $ass->title=$req->title;
@@ -243,13 +244,31 @@ class AssesmentController extends Controller
 
     }
 
-
     public function changeStatus(Request $request ,$id)
     {
         $ass=Assesment::find($id);
+        if($ass->assessment_type=='mcq_quiz'){
+            $n=Assessment_quiz_question::where('assessment_id',$id)->get()->count();
+            if($n>0){
+                Assesment::where('id',$id)->update(['status'=>$request->status]);
+            }else{
+                return back()->with('message','You didnt Add Questions for Assessment');
+            }
+        }
         Assesment::where('id',$id)->update(['status'=>$request->status]);
-        // $assments=Assignment::get();
-        return back();
-        //dd($request);
+        return back()->with('message','Published Successfull');
     }
+
+    public function destroy_ass(Request $req){
+        $ass=Assesment::find($req->assid);
+        $ass->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+    public function destroy_assq(Request $req){
+        $ass=Assessment_quiz_question::find($req->assqid);
+        $ass->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+
+
 }
