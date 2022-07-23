@@ -167,13 +167,13 @@
     <div class="table-card">
         <div class="text-end">
             <div class="row">
-            <form action="?" class="col-sm-2 me-auto" >
-                <div class="input-group">
-                    <button type="submit" class="btn btn-primary"> Go!</button>
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+                <form action="?" class="col-sm-2 me-auto" >
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary"> Go!</button>
+                        <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
 
-                 </div>
-            </form>
+                     </div>
+                </form>
             <div class="col-3">
                 <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Quize</button>
             </div>
@@ -183,6 +183,11 @@
             {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
         </div>
 <div class="col-9">
+        @if (session('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('message') }}
+                </div>
+        @endif
     <table class="table table-success table-hover m-0">
         <thead>
             <tr>
@@ -215,14 +220,21 @@
               <td>{{$quiz->period}}</td>
               <td>{{$quiz->quiz_duration}}</td>
               <td>{{$quiz->status}}</td>
-              <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$quiz->id}}" >Add Question</td>
+              <td>
+                @if($quiz->status=='draft')
+                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$quiz->id}}" >Add Question</td>
+                @else
+                <button class="btn btn-success btn-sm" disabled data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$quiz->id}}" >Add Question</td>
+                @endif
                 <td class="btn-toolbar">
-                    @if($quiz->status=='draft')
-                        <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square "></i> </button>
-                    @else
-                    <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled><i class="bi bi-pencil-square "></i> </button>
-                    @endif
-                 <button class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
+                @if($quiz->status=='draft')
+                <button class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#editattModal" data-bs-id="{{$quiz->id}}" data-bs-title="{{$quiz->title}}"
+                    data-bs-term="{{$quiz->term}}" data-bs-week="{{$quiz->week}}" data-bs-extra_week="{{$quiz->extra_week}}" data-bs-day="{{$quiz->date}}" data-bs-period="{{$quiz->period}}"
+                    data-bs-duration="{{$quiz->quiz_duration}}"><i class="bi bi-pencil-square "></i> </button>
+                @else
+                <button class="btn btn-primary btn-sm mx-1"  disabled><i class="bi bi-pencil-square "></i> </button>
+                @endif
+                <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteattModal" data-bs-id="{{$quiz->id}}"><i class="bi bi-trash"></i></button>
                   <form action="{{route('attentive.status',$quiz->id)}}" method="POST">@csrf
                       @if($quiz->status=='draft')
                       <button class="btn btn-success btn-sm mx-1" type="submit" name="status" value="published" ><i class="bi bi-upload"></i></button>
@@ -234,8 +246,6 @@
               </form>
               <a href="{{route('att.quizshow',[$quiz->id])}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a>
             </td>
-
-
 
               <!-- <div id="id01" class="modal">
                   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
@@ -256,7 +266,7 @@
 
 
             @else
-            <p>No Quizes assign yet</p>
+            <p>No Attentiveness Check assign yet</p>
             @endif
           </tbody>
         </table>
@@ -295,7 +305,50 @@
   </div>
 </div>
 
+{{-- modal for edit --}}
+<div class="modal fade" id="editattModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Edit the Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            @include('teacher.Models.attedit')
+        </div>
+    </div>
+  </div>
+</div>
 
+
+{{-- delete modal --}}
+<div class="modal fade" id="deleteattModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            <form action="{{route('att.delete')}}" method="post"> @method('delete')
+                @csrf
+                <h5>Are you Shure You want to delete this record</h5>
+                <input type="hidden" id="quizid" name="quizid" >
+
+
+                <div class="form-group">
+                    <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                     <button class="btn btn-danger" type="submit">Yes</button>
+                   </div>
+                 </div>
+
+            </form>
+
+        </div>
+    </div>
+  </div>
+</div>
 
 
 

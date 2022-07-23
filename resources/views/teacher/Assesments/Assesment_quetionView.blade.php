@@ -16,7 +16,7 @@
         <th scope="col">Status</th>
         <th scope="col">Due date</th>
         <th scope="col">Num of Questions</th>
-        <th scope="col">add question</th>
+        <th scope="col">Add Question</th>
 
     </tr>
   </thead>
@@ -30,8 +30,12 @@
       <td>{{$assignment->status}}</td>
       <td>{{$assignment->due_date}}</td>
       <td>{{$n}}</td>
+      @if($assignment->status=='draft')
       <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$assignment->id}}">Add Question</td>
-    </tr>
+    @else
+    <td class="timetable">You Published Already Cant Add Questions</td>
+    @endif
+</tr>
   </tbody>
 </table>
 </div>
@@ -62,11 +66,14 @@
         </ol>
         <div class="card-footer"><label>Correct Answer :- {{$q->correct_answer}}</label>
 
+          @if($assignment->status=='draft')
          <button class="btn btn-primary btn-sm ms-5"  data-bs-toggle="modal"
          data-bs-target="#editModal" data-bs-id="{{$q->id}}" data-bs-question="{{$q->question}}" data-bs-answer1="{{$q->option_1}}"
          data-bs-answer2="{{$q->option_2}}" data-bs-answer3="{{$q->option_3}}" data-bs-answer4="{{$q->option_4}}" data-bs-correct_answer="{{$q->correct_answer}}"><i class="bi bi-pencil-square"></i></button>
-         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
+         <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deletequeModal" data-bs-id="{{$q->id}}"><i class="bi bi-trash"></i></button>
+         @endif
         </div>
+
     </div>
 
 
@@ -82,6 +89,39 @@
 </div>
 </div>
 </div>
+
+{{-- delete modal --}}
+<div class="modal fade" id="deletequeModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            <form action="{{route('assque.delete')}}" method="post"> @method('delete')
+                @csrf
+                <h5>Are you Shure You want to delete this record</h5>
+                <input type="hidden" id="assqid" name="assqid" >
+
+
+                <div class="form-group">
+                    <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                     <button class="btn btn-danger" type="submit">Yes</button>
+                   </div>
+                 </div>
+
+            </form>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 {{-- modal for Question --}}
 <div class="modal fade" id="qModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

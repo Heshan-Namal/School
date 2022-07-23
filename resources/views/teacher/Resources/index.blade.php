@@ -109,16 +109,28 @@
                 <p><u>Uploaded All Resources</u> :-</p>
             </div>
         </div>
-
         <div class="text-end">
-            <div class="input-group">
-                <button type="submit" class="btn btn-primary"> Go!</button>
-                <input type="text" placeholder="Search" id="search" class="form-control">
-             </div>
+            <div class="row">
 
-            <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Resource</button>
-            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
+            <form action="?" class="col-sm-2 me-auto" >
+                <div class="input-group">
+                    <button type="submit" class="btn btn-primary"> Go!</button>
+                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
 
+                 </div>
+            </form>
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Resource</button>
+            </div>
+
+            </div>
+        </div>
+
+        @if (session('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+        @endif
     <table class="table table-success table-hover m-0">
         <thead>
         <tr>
@@ -162,8 +174,10 @@
               <td><a href="http://127.0.0.1:8000/notes/{{$r->resource_file}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
             @endif
             <td class="btn-toolbar">
-                <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square "></i> </button>
-                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#editresModal" data-bs-id="{{$r->id}}" data-bs-chapter="{{$r->chapter}}" data-bs-topic="{{$r->topic}}"
+                    data-bs-term="{{$r->term}}" data-bs-week="{{$r->week}}" data-bs-extra_week="{{$r->extra_week}}" data-bs-day="{{$r->day}}" data-bs-resource_type="{{$r->resource_type}}"
+                    data-bs-resource_file="{{$r->resource_file}}" ><i class="bi bi-pencil-square "></i> </button>
+                    <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteresModal" data-bs-id="{{$r->id}}"><i class="bi bi-trash"></i></button>
             </td>
 
           </tr>
@@ -191,7 +205,7 @@
 
 
 
-</div>
+
 
 {{-- modal for create --}}
 <div class="modal fade" id="createmodal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
@@ -210,6 +224,49 @@
     </div>
 
 
+    {{-- modal for edit --}}
+ <div class="modal fade" id="editresModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Edit an Assesments for the Class</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            @include('teacher.Models.resedit')
+        </div>
+    </div>
+  </div>
+</div>
+
+{{-- delete modal --}}
+<div class="modal fade" id="deleteresModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            <form action="{{route('res.delete')}}" method="post"> @method('delete')
+                @csrf
+                <h5>Are you Shure You want to delete this record</h5>
+                <input type="hidden" id="resid" name="resid" >
+
+
+                <div class="form-group">
+                    <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                     <button class="btn btn-danger" type="submit">Yes</button>
+                   </div>
+                 </div>
+
+            </form>
+
+        </div>
+    </div>
+  </div>
+</div>
 
 
 
