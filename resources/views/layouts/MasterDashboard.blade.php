@@ -182,6 +182,7 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+
     
     <script src="{{asset('assets/front/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/front/js/chart.min.js')}}"></script>
@@ -194,6 +195,10 @@
     <script src="{{asset('assets/front/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/front/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/front/js/carousel.js')}}"></script>
+
+
+    <!-- Your application script -->
+
 
     @yield('script')
 </body>

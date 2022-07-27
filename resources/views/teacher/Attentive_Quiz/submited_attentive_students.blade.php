@@ -157,7 +157,7 @@
 </div>
         <div class="col-4 at">
             <div class="d-card overflow-auto mt-3">
-                <div class="card-header card-text">Highest Ten Marks In the Attentive Check</div>
+                <div class="card-header colo card-text">Highest Ten Marks In the Attentive Check</div>
                 <div class="card-body">
 
                    <table class="table "><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th><th scope="col">Submited Time</th></tr>

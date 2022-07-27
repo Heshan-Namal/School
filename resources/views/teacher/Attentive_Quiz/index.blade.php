@@ -133,7 +133,7 @@
         </div>
         <div class="col-4">
         <div class="d-card overflow-auto mt-3">
-            <div class="card-header card-text">Submited Attentive Quizes
+            <div class="card-header colo card-text">Submited Attentive Quizes
                 <a href="{{route('attentive.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
             <div class="card-body">
                <p class="card-header card-text">To Day Sheduled Quizes</p>

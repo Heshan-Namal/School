@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-3 mx-3">
             <div class="d-card  mt-3 ">
-                <h4 class="card-header card-text colo d-flex justify-content-center">Leader Board</h4>
+                <h4 class="card-header card-text colo d-flex justify-content-center">Assesment Board</h4>
                 <div class="row mx-2">
                     <form action="{{route('dashboard')}}" method="GET" class="form-inline">@csrf
                         <label for="min" class="card-text ">From :</label>
@@ -89,25 +89,19 @@
             </div>
             <div class="row">
                 <div class="week-card mt-3 ">
-                    <h4 class="card-header colo card-text d-flex justify-content-center">Weekly Activity</h4>
+                    <h4 class="card-header colo card-text d-flex justify-content-center">Activity</h4>
                     <div class="row my-4">
-                    <div class="col-3">
-                        <select name="term" id="term" class="form-control d-in">
-                              <option value="term1" class="card-text" selected>All classes</option>
-                              <option value="term2">term 2</option>
-                              <option value="term3">term 3</option>
-                        </select>
-                        </div>
+                        <div class="timetable">You have</div>
                     </div>
-                    <div class="row my-2">
+                    <div class="row">
                         <div class="col-4">
-                            <p>djchdcv dscbuicv jvdud edsves  e evwsrb</p>
+                            <p class="timetable"><b>{{$cc}}</b> Classes</p>
                         </div>
                         <div class="col-4">
-                            <p>djchdcv dscbuicv jvdudayvuy wiiusbvbv9wrvbjfvbu</p>
+                            <p class="timetable"><b>{{$nc}}</b> Assesments are gonig to Expired</p>
                         </div>
                         <div class="col-4">
-                            <p>djchdcv dscbuicv jvdudjgdcve sdvcjshdcirg sbdcvyerov eisbiuevr</p>
+                            <p class="timetable"><b>{{$ac}}</b> Attentive checks need to published</p>
                         </div>
                     </div>
                 </div>
@@ -217,8 +211,17 @@
                 </div>
                 </div>
 </div>
+<div class="row mb-4">
+    <div class="col-5 text-center mb-5">
+        <h4 class="table mt-5">
+            Assesment precentage paricipation of your Subject on Your classes
+        </h4>
+        </div>
+    <div class="col-7">
+        <div id="chart3" style="height: 400px;"></div>
+    </div>
+</div>
 <div class="row">
-    <div class="col-5"></div>
     <div class="col-7">
         <img
             src="{{asset('assets/front/images/ass/dpic1.jpg')}}"
@@ -226,6 +229,28 @@
             class="img-fluid rounded-start d-flex imgk "
             />
     </div>
+    <div class="col-5 text-center mb-5">
+        <h4 class="table mt-5">
+            You must Update the Record Book After finish your Period. It will helps to manage your Teaching
+        </h4>
+        </div>
+
 </div>
 </div>
+
+<script src="https://unpkg.com/chart.js@^2.9.3/dist/Chart.min.js"></script>
+<script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
+<script>
+const chart3 = new Chartisan({
+    el: '#chart3',
+    url: "@chart('classpres_chart')",
+    hooks: new ChartisanHooks()
+      .colors(['#797EF6','#4ADEDE','#1E2F97'])
+      // .datasets('doughnut')
+      // .pieColors(),
+      .datasets([{ type: 'bar', fill: false,
+      borderColor: "['#4299E1','#FE0045','#C07EF1','#67C560','#ECC94B']",}]),
+
+      });
+</script>
 @endsection

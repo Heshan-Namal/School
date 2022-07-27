@@ -78,7 +78,22 @@ class HomeController extends Controller
             ->orderBy('class.class_name')
             ->get();
 
-            return view('Dashboard.Teacherdashboard',compact(['leaders','data']));
+        $cc=DB::table('teacher_subject')
+        ->where('teacher_subject.teacher_id','=',Auth::user()->id)
+        ->join('subject','subject.id','=','teacher_subject.subject_id')
+        ->join('subject_class','subject_class.subject_id','=','subject.id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->count();
+        $ac=DB::table('attentiveness_check')
+        ->where('attentiveness_check.teacher_id','=',Auth::user()->id)
+        ->where('attentiveness_check.status', '=', 'draft')
+        ->count();
+        $nc = DB::table('assessment')
+           ->where('assessment.teacher_id',Auth::user()->id)
+           ->whereDate('due_date', '>', Carbon::now())
+           ->count();
+
+            return view('Dashboard.Teacherdashboard',compact(['leaders','data','cc','ac','nc']));
         }
 
 

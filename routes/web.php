@@ -107,6 +107,11 @@ Route::delete('destroy_assquestion',[AssesmentController::class,'destroy_assq'])
 Route::put('/res_update',[ResourcesController::class,'resupdate'])->name('res.update');
 Route::delete('destroy_res',[ResourcesController::class,'destroy_res'])->name('res.delete');
 Route::delete('destroy_attquestion',[Attentiveness_checkController::class,'destroy_attq'])->name('attque.delete');
+
+Route::get('std/export/{classid}/{subjectid}', [TeacherController::class, 'export'])->name('std.export');
+Route::get('std/exportpdf/{classid}/{subjectid}', [TeacherController::class, 'exportpdf'])->name('std.exportpdf');
+Route::get('rec/export/{classid}/{subjectid}/{term}', [Teacher_RecordBookController::class, 'export'])->name('rec.export');
+Route::get('rec/exportpdf/{classid}/{subjectid}/{term}', [Teacher_RecordBookController::class, 'exportpdf'])->name('rec.exportpdf');
 //notdone
 
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');

@@ -79,7 +79,7 @@
                 </div>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-7">
 
                 @if (session('message'))
                     <div class="alert alert-success" role="alert">
@@ -141,34 +141,59 @@
     </tbody>
 </table>
 </div>
+
+
 </div>
-        <div class="col-4">
-            <div class="d-card overflow-auto mt-5">
-                <div class="card-header card-text">Highest Marks for an Assignmrnt</div>
-                <div class="card-body">
-                    <table class="table "><tr><th scope="col">Title</th><th scope="col">Marks</th><th scope="col">uploaded Time</th></tr>
-                 @foreach($hmark as $key=> $h)
-                   <tr>
-                   <td><p class="mx-4">{{$h->title}}</p></td>
-                   <td><p class="mx-4">{{$h->max}}</p></td>
-                   <td><p class="mx-4">{{$h->uploaded_time}}</p></td>
-                   </tr>
-                   {{-- <div class="row">
-                    <div class="col-2">
-                        <p>{{$n->title}}</p>
-                    </div>
-                    <div class="col-2">
-                        <p>{{$n->due_date}}</p>
-                    </div>
-                   </div> --}}
-    @endforeach
-                   </table>
-                </div>
-
+<div class="col-4 mx-5">
+    <div class="d-card overflow-auto mt-5">
+        <div class="card-header colo card-text">Highest Marks for an Assignmrnt</div>
+        <div class="card-body">
+            <table class="table "><tr><th scope="col">Title</th><th scope="col">Marks</th><th scope="col">uploaded Time</th></tr>
+         @foreach($hmark as $key=> $h)
+           <tr>
+           <td><p class="mx-4">{{$h->title}}</p></td>
+           <td><p class="mx-4">{{$h->max}}</p></td>
+           <td><p class="mx-4">{{$h->uploaded_time}}</p></td>
+           </tr>
+           {{-- <div class="row">
+            <div class="col-2">
+                <p>{{$n->title}}</p>
             </div>
-
+            <div class="col-2">
+                <p>{{$n->due_date}}</p>
+            </div>
+           </div> --}}
+@endforeach
+           </table>
         </div>
+
+    </div>
+
+
+</div>
+<div class="row"></div>
+<div class="row mt-3 mb-4">
+    <div class="col-6 "><h4 class="timetable mt-4 text-center">Current Month Attentive checks that you include Summery as Precentage </h4></div>
+    <div class="col-6"><div id="chart4" style="height: 400px;"></div></div>
+</div>
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
+<script src="https://unpkg.com/chart.js@^2.9.3/dist/Chart.min.js"></script>
+<script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
 
+<script>
+
+
+const chart4 = new Chartisan({
+      el: '#chart4',
+      url: "@chart('attentive_chart')"+ "?classid={{$classid}}" +"&subjectid={{$subjectid}}",
+      hooks: new ChartisanHooks()
+        .colors(['rgba(10,114,724,5)','#FE0045','#C07EF1','#67C560','#ECC94B'])
+        // .datasets('doughnut')
+        // .pieColors(),
+        .datasets([{ type: 'bar', fill: false,
+        borderColor: "['#4299E1','#FE0045','#C07EF1','#67C560','#ECC94B']",}]),
+
+        });
+</script>
 @endsection

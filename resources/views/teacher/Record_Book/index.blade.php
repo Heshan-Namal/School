@@ -70,17 +70,12 @@
 
         <div class="text-end">
             <div class="row">
-
-            <form action="?" class="col-sm-2 me-auto mb-2" >
-                <div class="input-group">
-                    <button type="submit" class="btn btn-primary"> Go!</button>
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-
-                 </div>
-            </form>
-            </div>
-
-            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
+                <div class="text-end mb-3">
+                   <input type="text"  name="search" placeholder="Search" id="search">
+                   <a href="{{route('rec.export',[$classid,$subjectid,'term2'])}}"><button type="button">Excel</button></a>
+                   <a href="{{route('rec.exportpdf',[$classid,$subjectid,'term2'])}}"><button type="button">PDF</button></a>
+               </div>
+               </div>
         </div>
         <table class="table table-success table-hover m-0">
 
@@ -94,7 +89,7 @@
 
             </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
               @foreach($term1 as $key=> $t1)
             <tr>
               <th scope="row">{{$key+1}}</th>
@@ -120,22 +115,14 @@
     <div class="row" id="term2" hidden>
         <h2 class="head">Second Term Record Book</h2>
         @if($term2->count()>0)
-
-        <div class="text-end mb-2">
             <div class="row">
-
-            <form action="?" class="col-sm-2 me-auto " >
-                <div class="input-group">
-                    <button type="submit" class="btn btn-primary" onclick="refreshdiv();"> Go!</button>
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-
-                 </div>
-            </form>
+             <div class="text-end mb-3">
+                <input type="text"  name="search" placeholder="Search" id="search">
+                <a href="{{route('rec.export',[$classid,$subjectid,'term2'])}}"><button type="button">Excel</button></a>
+                <a href="{{route('rec.exportpdf',[$classid,$subjectid,'term2'])}}"><button type="button">PDF</button></a>
+            </div>
             </div>
 
-            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
-        </div>
-    <div id="section2">
         <table class="table table-success table-hover m-0">
 
             <thead>
@@ -148,7 +135,7 @@
 
             </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
               @foreach($term2 as $key=> $t1)
             <tr>
               <th scope="row">{{$key+1}}</th>
@@ -170,21 +157,20 @@
 
             @endif
         </table>
-</div>
+
     </div>
     <div class="row" id="term3" hidden>
         <h2 class="head">Third Term Record Book</h2>
         @if($term3->count()>0)
 
-        <div class="text-end mb-2">
+        <div class="text-end">
             <div class="row">
-            <form action="?" class="col-sm-2 me-auto " >
-                <div class="input-group">
-                    <button type="submit" class="btn btn-primary"> Go!</button>
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-                 </div>
-            </form>
-            </div>
+                <div class="text-end mb-3">
+                   <input type="text"  name="search" placeholder="Search" id="search">
+                   <a href="{{route('rec.export',[$classid,$subjectid,'term2'])}}"><button type="button">Excel</button></a>
+                   <a href="{{route('rec.exportpdf',[$classid,$subjectid,'term2'])}}"><button type="button">PDF</button></a>
+               </div>
+               </div>
         </div>
 
 
@@ -199,7 +185,7 @@
 
             </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
               @foreach($term3 as $key=> $t1)
             <tr>
               <th scope="row">{{$key+1}}</th>
@@ -240,6 +226,7 @@
   </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('assets/front/js/rec.js')}}"></script>
 @endsection
 
