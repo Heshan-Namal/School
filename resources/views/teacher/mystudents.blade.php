@@ -35,6 +35,23 @@
         </div>
     </div>
     <div class="row mt-4">
+        <div class="text-end">
+            <div class="row">
+
+            <form action="?" class="col-sm-2 me-auto" >
+                <div class="input-group">
+                    <button type="submit" class="btn btn-primary"> Go!</button>
+                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+                 </div>
+            </form>
+            <div class="col-3">
+                <a href="{{route('std.export',[$classid,$subjectid])}}"><button type="button">Excel</button></a>
+                <a href="{{route('std.exportpdf',[$classid,$subjectid])}}"><button type="button">PDF</button></a>
+            </div>
+            </div>
+
+            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
+        </div>
 
     <table class="table table-success table-hover mt-2">
         <thead>

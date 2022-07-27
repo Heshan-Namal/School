@@ -149,6 +149,8 @@
               <input type="text" hidden name="marks" class="col-sm-2" id="marks{{$s->id}}">
               <button type="submit" hidden name="save" class="btn btn-primary btn-sm col-sm-2" id="save{{$s->id}}" ><i class="bi bi-check2-circle"></i></button>
             </form>
+            @else
+                <td>{{$s->marks}}</td>
               @endif
 
 
@@ -170,7 +172,7 @@
 </div>
         <div class="col-4">
             <div class="d-card overflow-auto mt-3">
-                <div class="card-header card-text">Highest Ten Marks In the Class :-</div>
+                <div class="card-header colo card-text">Highest Ten Marks In the Class :-</div>
                 <div class="card-body">
                    <table class="table p-2"><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th></tr>
                  @foreach($hm as $key=> $h)

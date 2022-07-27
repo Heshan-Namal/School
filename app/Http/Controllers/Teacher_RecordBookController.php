@@ -7,6 +7,8 @@ use App\Models\ClassRecordBook;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Exports\RecordBookExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class Teacher_RecordBookController extends Controller
@@ -53,32 +55,17 @@ class Teacher_RecordBookController extends Controller
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term1')
-            ->where(function($query) use ($search){
-                $query->where('class_record.day', 'LIKE', '%'.$search.'%')
-                        ->orWhere('class_record.period', 'LIKE', '%'.$search.'%')
-                        ->orWhere('class_record.record', 'LIKE', '%'.$search.'%');
-                })
-                ->get();
+            ->get();
             $term2=DB::table('class_record')
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term2')
-            ->where(function($query) use ($search){
-                $query->where('class_record.day', 'LIKE', '%'.$search.'%')
-                        ->orWhere('class_record.period', 'LIKE', '%'.$search.'%')
-                        ->orWhere('class_record.record', 'LIKE', '%'.$search.'%');
-                })
-                ->get();
+            ->get();
             $term3=DB::table('class_record')
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term3')
-            ->where(function($query) use ($search){
-                $query->where('class_record.day', 'LIKE', '%'.$search.'%')
-                        ->orWhere('class_record.period', 'LIKE', '%'.$search.'%')
-                        ->orWhere('class_record.record', 'LIKE', '%'.$search.'%');
-                })
-                ->get();
+            ->get();
 
         return view('teacher.Record_Book.index',compact(['week','record','day','classid','subjectid','term','book','term1','term2','term3']));
     }
@@ -125,6 +112,14 @@ class Teacher_RecordBookController extends Controller
 
     }
 
+    public function export($classid,$subjectid,$term)
+    {
+        return Excel::download(new RecordBookExport($classid,$subjectid,$term), 'recordbook.xlsx');
+    }
 
+    public function exportpdf($classid,$subjectid,$term)
+    {
+        return (new RecordBookExport($classid,$subjectid,$term))->download('recordbook.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
 
+    }
 }

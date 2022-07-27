@@ -149,7 +149,7 @@
         </div>
         <div class="col-4">
             <div class="d-card overflow-auto mt-3 ">
-                <div class="card-header card-text">View Submited Assesments
+                <div class="card-header colo card-text">View Submited Assesments
                     <a href="{{route('ass.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
                     <div class="card-body  ">
                     <p class="card-header">Nearly going to Expired Assesments</p>

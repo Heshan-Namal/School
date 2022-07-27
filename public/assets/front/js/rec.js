@@ -33,7 +33,23 @@ function changeterm(select1){
    }
 
 }
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+// $(document).ready(function () {
+//     // Listen to click event on the submit button
 
+//   });
 function refreshdiv() {
-    $('#section2').load(location.href + " #section2");
+
+    $('#btn2').submit(function (e) {
+
+        e.preventDefault();
+
+      });
 }

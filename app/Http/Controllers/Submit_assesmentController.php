@@ -112,6 +112,7 @@ class Submit_assesmentController extends Controller
     }
     public function subassview($id)
     {
+
         $sub=DB::table('student_assessment')
                 ->join('assessment','student_assessment.assessment_id','=','assessment.id')
                 ->join('student','student.admission_no','=','student_assessment.admission_no')
