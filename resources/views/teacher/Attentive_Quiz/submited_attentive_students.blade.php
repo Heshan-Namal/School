@@ -105,9 +105,18 @@
         <div class="head mt-1">
             <p><u>Submitted Students Attentiveness Checks Details</u> :-</p>
         </div>
+        <div class="text-end">
+            <form action="?" class="col-sm-2 me-auto" >
+                <div class="input-group">
+                    <button type="submit" class="btn btn-primary"> Go!</button>
+                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+
+                 </div>
+            </form>
+        </div>
     </div>
-    <div class="row d-flex justify-content-evenly">
-        <div class="col-6">
+    <div class="row ">
+        <div class="col-7">
 
                 @if (session('message'))
                     <div class="alert alert-success" role="alert">
@@ -115,7 +124,7 @@
                     </div>
                 @endif
 
-<div class="table-card mt-5">
+<div class="table-card mt-2">
     <table class="table table-success table-hover m-0">
             <thead>
 
@@ -124,7 +133,7 @@
               <th scope="col">Admision Num</th>
               <th scope="col">Student Name</th>
               <th scope="col">Submited Time</th>
-              <th scope="col">marks</th>
+              <th scope="col">marks(less than 50=red)</th>
             </tr>
             </thead>
             <tbody>
@@ -136,7 +145,12 @@
               <td>{{$s->admision_no}}</td>
               <td>{{$s->name}}</td>
               <td>{{ \Carbon\Carbon::parse($s->created_at)->format('h:m:s') }}</td>
-              <td>{{$s->marks}}</td>
+              @if ($s->marks<50)
+              <td style="color: #FF0000 ; text-align:center">{{$s->marks}}</td>
+              @else
+              <td style="color: #2c0379;text-align:center">{{$s->marks}}</td>
+              @endif
+
 
 
 
@@ -148,7 +162,20 @@
 
 
             @else
-            <p>No Assesments assign yet</p>
+            <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
             @endif
 
     </tbody>

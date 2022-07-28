@@ -135,7 +135,20 @@
 
 
             @else
-            <p>No Assesments assign yet</p>
+            <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
             @endif
 
     </tbody>

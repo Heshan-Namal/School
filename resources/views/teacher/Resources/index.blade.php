@@ -131,6 +131,7 @@
                         {{ session('message') }}
                     </div>
         @endif
+
     <table class="table table-success table-hover m-0">
         <thead>
         <tr>
@@ -179,7 +180,6 @@
                     data-bs-resource_file="{{$r->resource_file}}" ><i class="bi bi-pencil-square "></i> </button>
                     <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteresModal" data-bs-id="{{$r->id}}"><i class="bi bi-trash"></i></button>
             </td>
-
           </tr>
 
           @endforeach
@@ -190,7 +190,20 @@
           </table>
 
           @else
-          <p>No Assesments assign yet</p>
+          <div class="d-flex justify-content-center mb-5">
+            <div class="search-card">
+                <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 mt-3 ">
+                        <img
+                          src="{{asset('assets/front/images/ass/rec.png')}}"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start d-flex "
+                        />
+                      </div>
+                </div>
+                </div>
+          </div>
           @endif
 
 
@@ -198,12 +211,6 @@
         </tbody>
 
         </table>
-
-
-
-
-
-
 
 
 
@@ -244,20 +251,27 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+            <h3 class="modal-title table del text-center" id="example1ModalLabel">Delete Record</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
         <div class="modal-body table">
             <form action="{{route('res.delete')}}" method="post"> @method('delete')
                 @csrf
                 <h5>Are you Shure You want to delete this record</h5>
+                <div class="row d-flex justify-content-end">
+                    <div class="col-4 ">
+                        <img
+                          src="{{asset('assets/front/images/ass/delete.png')}}"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start d-flex "
+                        />
+                      </div>
+                </div>
                 <input type="hidden" id="resid" name="resid" >
-
-
-                <div class="form-group">
+                <div class="form-group d-flex justify-content-center">
                     <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                      <button class="btn btn-danger" type="submit">Yes</button>
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                    </div>
                  </div>
 

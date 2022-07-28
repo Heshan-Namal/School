@@ -245,12 +245,9 @@ const chart3 = new Chartisan({
     el: '#chart3',
     url: "@chart('classpres_chart')",
     hooks: new ChartisanHooks()
-      .colors(['#797EF6','#4ADEDE','#1E2F97'])
-      // .datasets('doughnut')
-      // .pieColors(),
-      .datasets([{ type: 'bar', fill: false,
-      borderColor: "['#4299E1','#FE0045','#C07EF1','#67C560','#ECC94B']",}]),
-
+                .colors(['#797EF6','#4ADEDE','#1E2F97'])
+                .datasets([{ type: 'line', fill: false,
+            borderColor: "#797EF6",}]),
       });
 </script>
 @endsection

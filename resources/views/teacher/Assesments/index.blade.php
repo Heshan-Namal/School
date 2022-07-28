@@ -280,12 +280,20 @@
 
         </tbody>
         @else
-        <div class="table-card">
-        <div class="card-header">No Assesments assign yet</div>
-        <div class="card-body">
-        <img src="{{asset('assets/front/images/notfound.jpg')}}" alt="...">
-        </div>
-        </div>
+        <div class="d-flex justify-content-center mb-5">
+            <div class="search-card">
+                <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 mt-3 ">
+                        <img
+                          src="{{asset('assets/front/images/ass/rec.png')}}"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start d-flex "
+                        />
+                      </div>
+                </div>
+                </div>
+          </div>
         @endif
         </table>
 
@@ -340,7 +348,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
+          <h3 class="modal-title table del text-center" id="example1ModalLabel">Delete Record</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body table">

@@ -266,7 +266,20 @@
 
 
             @else
-            <p>No Attentiveness Check assign yet</p>
+            <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
             @endif
           </tbody>
         </table>
@@ -326,23 +339,29 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+            <h3 class="modal-title table del text-center" id="example1ModalLabel">Delete Record</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
         <div class="modal-body table">
             <form action="{{route('att.delete')}}" method="post"> @method('delete')
                 @csrf
                 <h5>Are you Shure You want to delete this record</h5>
+                <div class="row d-flex justify-content-end">
+                    <div class="col-4 ">
+                        <img
+                          src="{{asset('assets/front/images/ass/delete.png')}}"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start d-flex "
+                        />
+                      </div>
+                </div>
                 <input type="hidden" id="quizid" name="quizid" >
-
-
-                <div class="form-group">
+                <div class="form-group d-flex justify-content-center">
                     <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                      <button class="btn btn-danger" type="submit">Yes</button>
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                    </div>
                  </div>
-
             </form>
 
         </div>
