@@ -108,8 +108,17 @@
             <div class="head mb-4">
                 <p><u>Submitted Student Details</u> :-</p>
             </div>
-<div class="table-card mt-5">
-    <table class="table table-success table-hover m-0">
+            <div class="text-end">
+                <form action="?" class="col-sm-2 me-auto" >
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary"> Go!</button>
+                        <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+
+                     </div>
+                </form>
+            </div>
+<div class="table-card mt-2">
+    <table class="table table-success table-hover m-0" style="border-spacing:0px;">
             <thead>
 
             <tr>
@@ -118,7 +127,7 @@
               <th scope="col">submisson file</th>
               <th scope="col">Due Date</th>
               <th scope="col">uploaded date</th>
-              <th scope="col">marks</th>
+              <th scope="col">Marks(less than 50=red)</th>
 
             </tr>
             </thead>
@@ -150,9 +159,13 @@
               <button type="submit" hidden name="save" class="btn btn-primary btn-sm col-sm-2" id="save{{$s->id}}" ><i class="bi bi-check2-circle"></i></button>
             </form>
             @else
-                <td>{{$s->marks}}</td>
-              @endif
+                @if ($s->marks<50)
+                <td style="color: #FF0000 ;text-align:center">{{$s->marks}}</td>
+                @else
+                <td style="color: #2c0379;text-align:center">{{$s->marks}}</td>
+                @endif
 
+              @endif
 
 
 
@@ -163,7 +176,20 @@
 
 
             @else
-            <p>No Assesments assign yet</p>
+            <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
             @endif
 
     </tbody>

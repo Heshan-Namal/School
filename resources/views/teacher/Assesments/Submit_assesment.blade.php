@@ -141,6 +141,15 @@
             <div class="head mt-4">
                 <p><u>Student Submitted Assesments</u> :-</p>
             </div>
+            <div class="text-end">
+                <form action="?" class="col-sm-2 me-auto" >
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary"> Go!</button>
+                        <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+
+                     </div>
+                </form>
+            </div>
             <div class="col-10">
                 {{-- <div class="card-body"> --}}
                     @if (session('message'))
@@ -149,7 +158,7 @@
                         </div>
                     @endif
 
-    <div class="table-card mt-5">
+    <div class="table-card mt-2">
         <table class="table table-success table-hover m-0">
     <thead>
     <tr>
@@ -188,7 +197,20 @@
 
 
     @else
-    <p>No Assesments assign yet</p>
+    <div class="d-flex justify-content-center mb-5">
+        <div class="search-card">
+            <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-4 mt-3 ">
+                    <img
+                      src="{{asset('assets/front/images/ass/rec.png')}}"
+                      alt="Trendy Pants and Shoes"
+                      class="img-fluid rounded-start d-flex "
+                    />
+                  </div>
+            </div>
+            </div>
+      </div>
     @endif
 
     </tbody>

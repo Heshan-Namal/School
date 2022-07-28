@@ -4,11 +4,14 @@
 @section('content')
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
+    <div class="row mt-3 mb-3">
+        <h1 class="timetable cd-head text-center mb-2">Class Students Records</h1>
+    </div>
     <div class="row  d-flex justify-content-end ">
         <div class="col-4">
             <div class="box-card">
                 <div class="row g-0">
-                    <div class="col-md-4 mt-3">
+                    <div class="col-md-4 ">
                       <img
                         src="{{asset('assets/front/images/ass/s.png')}}"
                         alt="Trendy Pants and Shoes"
@@ -27,14 +30,13 @@
             </div>
 
         </div>
+    </div>
 
     </div>
-    <div class="row mt-2">
-        <div class="head">
-            <p><u>Class Students Details :-</u> :-</p>
-        </div>
+    <div class="row">
+        <h2 class="card-text">Students Details :-</h2>
     </div>
-    <div class="row mt-4">
+    <div class="row">
         <div class="text-end">
             <div class="row">
 
@@ -60,8 +62,8 @@
                 <th scope="col">Admission Number</th>
                 <th scope="col">Student Name</th>
                 <th scope="col">Guardian Email</th>
-                <th scope="col">Submited Assesment Precentage</th>
-                <th scope="col">Assesment Marks Average</th>
+                <th scope="col">Submited Assesment Precentage(red<40)</th>
+                <th scope="col">Assesment Marks Average(red<40)</th>
             </tr>
         </thead>
             <tbody>
@@ -77,7 +79,7 @@
             @else
             <td>{{$sub[$s->admission_no]}}%</td>
             @endif
-            @if ($mark[$s->admission_no] <15.0)
+            @if ($mark[$s->admission_no] <40.0)
             <td><span style="color:#FF0000">{{$mark[$s->admission_no]}}</td>
             @else
             <td>{{$mark[$s->admission_no]}}</td>

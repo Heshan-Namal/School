@@ -5,12 +5,16 @@
 <div class="content">
 
 
-    <h1 class="timetable colo text-center mb-5">Record Book</h1>
-    <div class="row">
-        <h2 class="card-text">WEEK {{$week}}  & Today is {{$day}}</h2>
+
+    <div class="row mb-5">
+        <h1 class="timetable cd-head text-center mb-2">Record Book</h1>
+        <div class="bg d-flex justify-content-center">
+            <h2 class="card-text">WEEK {{$week}}  & {{$day}}</h2>
+        </div>
+
     </div>
 
-    <div class="row">
+    <div class="row d-flex justify-content-evenly">
         @if($record->count()>0)
             @foreach($record as $key=>$r)
             <div class="col-sm-3">
@@ -50,13 +54,28 @@
               </div>
               @endforeach
               @else
-              <h4 class="table">You Dont have any Periods Today</h4>
+              <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="rec-font">You Dont have any Periods Today</h4></div>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
+
             @endif
     </div>
 
-    <div class="row mt-4">
-        <div class="col-12 d-flex justify-content-center">
-        <div class="input-group-prepend mx-4 mb-5">
+    <div class="row mt-4 mb-3">
+        <div class="col-12 d-flex justify-content-center bg">
+        <div class="input-group-prepend mx-4 mb-2 mt-2">
         <button class="btn btn-md btn-primary mx-4 " onclick="changeterm('term1')" >First Term</button>
         <button class="btn btn-md btn-primary mx-4" onclick="changeterm('term2')">Second Term</button>
         <button class="btn btn-md btn-primary mx-4" onclick="changeterm('term3')" >Third Term</button>
@@ -102,12 +121,20 @@
             @endforeach
             </tbody>
             @else
-            <div class="table-card">
-            <div class="card-header">No Records assign yet</div>
-            <div class="card-body">
-            <img src="{{asset('assets/front/images/notfound.jpg')}}" alt="...">
-            </div>
-            </div>
+            <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
 
             @endif
         </table>
@@ -148,13 +175,20 @@
             @endforeach
             </tbody>
             @else
-            <div class="table-card">
-            <div class="card-header">No Records assign yet</div>
-            <div class="card-body">
-            <img src="{{asset('assets/front/images/notfound.jpg')}}" alt="...">
-            </div>
-            </div>
-
+            <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
             @endif
         </table>
 
@@ -198,12 +232,20 @@
             @endforeach
             </tbody>
             @else
-            <div class="table-card">
-            <div class="card-header">No Records assign yet</div>
-            <div class="card-body">
-            <img src="{{asset('assets/front/images/notfound.jpg')}}" alt="...">
-            </div>
-            </div>
+            <div class="d-flex justify-content-center mb-5">
+                <div class="search-card">
+                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4 mt-3 ">
+                            <img
+                              src="{{asset('assets/front/images/ass/rec.png')}}"
+                              alt="Trendy Pants and Shoes"
+                              class="img-fluid rounded-start d-flex "
+                            />
+                          </div>
+                    </div>
+                    </div>
+              </div>
 
             @endif
         </table>

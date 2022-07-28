@@ -70,13 +70,20 @@ class Submit_attentiveness_checkController extends Controller
 
 
     }
-    public function sub_attentiveview($id)
+    public function sub_attentiveview(Request $request,$id)
     {
+        $search=$request->search;
         $sub=DB::table('student_attentiveness_check')
         ->join('attentiveness_check','student_attentiveness_check.A_check_id','=','attentiveness_check.id')
         ->join('student','student_attentiveness_check.admission_no','=','student.admission_no')
         ->select('student_attentiveness_check.admission_no as admision_no','student_attentiveness_check.A_check_id as id','student.full_name as name','student_attentiveness_check.created_at','student_attentiveness_check.total_points as marks')
         ->where('student_attentiveness_check.A_check_id',$id)
+        ->where(function($query) use ($search){
+            $query->where('student.full_name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('student_attentiveness_check.admission_no', 'LIKE', '%'.$search.'%')
+                    ->orWhere('student.full_name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('student_attentiveness_check.total_points', 'LIKE', '%'.$search.'%');
+        })
         ->get();
 
         $hm=DB::table('student_attentiveness_check')

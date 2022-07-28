@@ -70,7 +70,7 @@ class TeacherController extends Controller
                 }
                 else{
                     $mar=(float)$a->sum/(float)$ass;//collection
-                    $mark[$s->admission_no]=$mar;
+                    $mark[$s->admission_no]=round($mar,2);
                 }
             }else{
                 $mark[$s->admission_no]=0.0;
@@ -87,7 +87,7 @@ class TeacherController extends Controller
 
             if(($ass!=null)){
                 $st_sub=((float)$st_ass/(float)$ass)*100;
-                $sub[$s->admission_no]=$st_sub;
+                $sub[$s->admission_no]=round($st_sub,2);
             }else{
                 $sub[$s->admission_no]=0.0;
             }
@@ -136,7 +136,7 @@ class TeacherController extends Controller
                        }
                        else{
                            $mar=(float)$a->sum/(float)$ass;//collection
-                           $mark[$s->admission_no]=$mar;
+                           $mark[$s->admission_no]=round($mar,2);
                        }
                    }else{
                        $mark[$s->admission_no]=0.0;
@@ -153,7 +153,7 @@ class TeacherController extends Controller
 
                    if(($ass!=null)){
                        $st_sub=((float)$st_ass/(float)$ass)*100;
-                       $sub[$s->admission_no]=$st_sub;
+                       $sub[$s->admission_no]=round($st_sub,2);
                    }else{
                        $sub[$s->admission_no]=0.0;
                    }
@@ -187,7 +187,7 @@ class TeacherController extends Controller
                        }
                        else{
                            $mar=(float)$a->sum/(float)$ass;//collection
-                           $mark[$s->admission_no]=$mar;
+                           $mark[$s->admission_no]=round($mar,2);
                        }
                    }else{
                        $mark[$s->admission_no]=0.0;
@@ -204,7 +204,7 @@ class TeacherController extends Controller
 
                    if(($ass!=null)){
                        $st_sub=((float)$st_ass/(float)$ass)*100;
-                       $sub[$s->admission_no]=$st_sub;
+                       $sub[$s->admission_no]=round($st_sub,2);
                    }else{
                        $sub[$s->admission_no]=0.0;
                    }

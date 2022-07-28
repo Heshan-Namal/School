@@ -1,9 +1,8 @@
 @extends('layouts.MasterDashboard')
 @section('content')
-
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
-    <div class="row">
-
+    <div class="row mb-4">
 <div class="table-card">
     <table class="table table-success table-hover m-0">
   <thead>
@@ -41,8 +40,10 @@
 </div>
 
 </div>
-
-<h2 class="table">View Questions on {{$assignment->title}} </h2>
+<div class="bg d-flex justify-content-center mb-5">
+    <h2 class="card-text">View Questions on {{$assignment->title}}</h2>
+</div>
+{{-- <h2 class="table">View Questions on {{$assignment->title}} </h2> --}}
 @if($questions->count() > 0)
 <div class="b-card">
 <div class="row">
@@ -54,34 +55,45 @@
             </div>
         @endif
     @foreach($questions as $key=>$q)
-    <div class="d-card">
-    <div class="card-header"><label>{{$key+1}}.{{$q->question}}</label></div>
-
+    <div class="row">
+    <div class="q-card">
+    <div class="card-header bg table"><h5>{{$key+1}}.{{$q->question}}</h5></div>
     <ol   class="ul-list"  style="list-style-type: lower-alpha;" >
-        <li>&nbsp;<input type="radio" {{$q->correct_answer=='answer1' ? 'checked' : ''}}  /> {{$q->option_1}}   </li>
-        <li>&nbsp;<input type="radio"  {{$q->correct_answer=='answer2' ? 'checked' : ''}}  /> {{$q->option_2}}   </li>
-        <li>&nbsp;<input type="radio"  {{$q->correct_answer=='answer3' ? 'checked' : ''}}  /> {{$q->option_3}}   </li>
-        <li>&nbsp;<input type="radio"  {{$q->correct_answer=='answer4' ? 'checked' : ''}}  /> {{$q->option_4}}   </li>
-
+        <li class="mb-3">&nbsp;<input type="radio" {{$q->correct_answer=='answer1' ? 'checked' : ''}}  /> {{$q->option_1}}   </li>
+        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='answer2' ? 'checked' : ''}}  /> {{$q->option_2}}   </li>
+        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='answer3' ? 'checked' : ''}}  /> {{$q->option_3}}   </li>
+        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='answer4' ? 'checked' : ''}}  /> {{$q->option_4}}   </li>
         </ol>
-        <div class="card-footer"><label>Correct Answer :- {{$q->correct_answer}}</label>
-
-          @if($assignment->status=='draft')
+        <div class="card-footer correct timetable"><h5>Correct Answer :- {{$q->correct_answer}}</h5>
+        <div class="text-end">
+        @if($assignment->status=='draft')
          <button class="btn btn-primary btn-sm ms-5"  data-bs-toggle="modal"
          data-bs-target="#editModal" data-bs-id="{{$q->id}}" data-bs-question="{{$q->question}}" data-bs-answer1="{{$q->option_1}}"
          data-bs-answer2="{{$q->option_2}}" data-bs-answer3="{{$q->option_3}}" data-bs-answer4="{{$q->option_4}}" data-bs-correct_answer="{{$q->correct_answer}}"><i class="bi bi-pencil-square"></i></button>
          <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deletequeModal" data-bs-id="{{$q->id}}"><i class="bi bi-trash"></i></button>
          @endif
+                </div>
         </div>
 
+
     </div>
-
-
-
-
+    </div>
     @endforeach
 @else
-    <p>No question Assign Yet</p>
+<div class="d-flex justify-content-center mb-5">
+    <div class="search-card">
+        <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4 mt-3 ">
+                <img
+                  src="{{asset('assets/front/images/ass/rec.png')}}"
+                  alt="Trendy Pants and Shoes"
+                  class="img-fluid rounded-start d-flex "
+                />
+              </div>
+        </div>
+        </div>
+  </div>
 @endif
 
 
@@ -95,20 +107,27 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title table" id="example1ModalLabel">Delete A Record</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+            <h3 class="modal-title table del text-center" id="example1ModalLabel">Delete Record</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
         <div class="modal-body table">
             <form action="{{route('assque.delete')}}" method="post"> @method('delete')
                 @csrf
                 <h5>Are you Shure You want to delete this record</h5>
+                <div class="row d-flex justify-content-end">
+                    <div class="col-4 ">
+                        <img
+                          src="{{asset('assets/front/images/ass/delete.png')}}"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start d-flex "
+                        />
+                      </div>
+                </div>
                 <input type="hidden" id="assqid" name="assqid" >
-
-
-                <div class="form-group">
+                <div class="form-group d-flex justify-content-center">
                     <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                      <button class="btn btn-danger" type="submit">Yes</button>
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                    </div>
                  </div>
 

@@ -11,6 +11,7 @@ class Submit_assesmentController extends Controller
 {
     public function index(Request $request,$classid,$subjectid)
     {
+        $search=$request->search;
         $term=$request->term;
         $week=$request->week;
         $day=$request->day;
@@ -21,6 +22,11 @@ class Submit_assesmentController extends Controller
             ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.extra_week','assessment.day',DB::raw('count(*) as count'))
             ->where('assessment.class_id',$classid)
             ->where('assessment.subject_id',$subjectid)
+            ->where(function($query) use ($search){
+                $query->where('assessment.title', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.day', 'LIKE', '%'.$search.'%');
+            })
             ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day')
             ->get();
         }
@@ -110,14 +116,20 @@ class Submit_assesmentController extends Controller
 
 
     }
-    public function subassview($id)
+    public function subassview(Request $request,$id)
     {
-
+        $search=$request->search;
         $sub=DB::table('student_assessment')
                 ->join('assessment','student_assessment.assessment_id','=','assessment.id')
                 ->join('student','student.admission_no','=','student_assessment.admission_no')
                 ->select('student_assessment.id as id','student.full_name as name','assessment.due_date','assessment.assessment_type as type','student_assessment.answer_file as file','student_assessment.uploaded_date as date','student_assessment.assessment_marks as marks')
                 ->where('student_assessment.assessment_id',$id)
+                ->where(function($query) use ($search){
+                    $query->where('student.full_name', 'LIKE', '%'.$search.'%')
+                            ->orWhere('student_assessment.uploaded_date', 'LIKE', '%'.$search.'%')
+                            ->orWhere('student_assessment.assessment_marks', 'LIKE', '%'.$search.'%')
+                            ->orWhere('student_assessment.answer_file', 'LIKE', '%'.$search.'%');
+                })
                 ->get();
 
                 $nums=DB::table('student_assessment')
@@ -128,9 +140,11 @@ class Submit_assesmentController extends Controller
                 $late=DB::table('student_assessment')
                 ->join('assessment','student_assessment.assessment_id','=','assessment.id')
                 ->where('student_assessment.assessment_id',$id)
-                ->where('student_assessment.uploaded_date','<','assessment.due_date',)
+                ->select('student_assessment.uploaded_date','assessment.due_date')
+                ->where('assessment.due_date','<','student_assessment.uploaded_date',)
                 ->count();
-               // dd($late);
+
+                //dd($late);
                 $mar=DB::table('student_assessment')
                 ->where('student_assessment.assessment_id',$id)
                 ->where('student_assessment.assessment_marks','=',0)
