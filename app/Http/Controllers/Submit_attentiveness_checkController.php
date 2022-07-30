@@ -21,7 +21,7 @@ class Submit_attentiveness_checkController extends Controller
         ->whereDate('attentiveness_check.date', '=', Carbon::now())
         ->distinct()
         ->count('student_attentiveness_check.A_check_id');
-
+        //dd($count);
 
 
         $result=DB::table('student_attentiveness_check')
@@ -43,7 +43,7 @@ class Submit_attentiveness_checkController extends Controller
         ->select('attentiveness_check.id','attentiveness_check.title','attentiveness_check.date','attentiveness_check.quiz_duration','attentiveness_check.uploaded_time',DB::raw('count(*) as count'))
         ->groupBy('attentiveness_check.id','attentiveness_check.title','attentiveness_check.date','attentiveness_check.quiz_duration','attentiveness_check.uploaded_time')
         ->get();
-
+//dd($quizes);
         $hmark=DB::table('student_attentiveness_check')
         ->join('attentiveness_check','student_attentiveness_check.A_check_id','=','attentiveness_check.id')
         ->join('student','student_attentiveness_check.admission_no','=','student.admission_no')
@@ -61,7 +61,7 @@ class Submit_attentiveness_checkController extends Controller
         foreach($quizes as $a){
             $at=$at+$a->count;
         }
-      //dd($r);
+      //dd($at);
 
         return view('teacher.Attentive_Quiz.Submited_attentive_view',compact(['quizes','classid','subjectid','hmark','std','count','at','r']));
 
@@ -84,7 +84,7 @@ class Submit_attentiveness_checkController extends Controller
                     ->orWhere('student.full_name', 'LIKE', '%'.$search.'%')
                     ->orWhere('student_attentiveness_check.total_points', 'LIKE', '%'.$search.'%');
         })
-        ->get();
+        ->paginate(15);
 
         $hm=DB::table('student_attentiveness_check')
         ->join('attentiveness_check','student_attentiveness_check.A_check_id','=','attentiveness_check.id')

@@ -182,7 +182,7 @@
 
             {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
         </div>
-<div class="col-9">
+<div class="col-12">
         @if (session('message'))
                 <div class="alert alert-success" role="alert">
                     {{ session('message') }}
@@ -283,6 +283,9 @@
             @endif
           </tbody>
         </table>
+        <div class="pagination justify-content-end mt-3">
+            {!! $quizes->links() !!}
+        </div>
 </div>
 
     </div>

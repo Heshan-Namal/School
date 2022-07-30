@@ -28,7 +28,7 @@ class AssesmentController extends Controller
                         ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
                         ->orWhere('assessment.assessment_file', 'LIKE', '%'.$search.'%');
                 })
-                ->get();
+                ->paginate(10);
 
 
 
@@ -40,7 +40,7 @@ class AssesmentController extends Controller
             ->where('assessment.class_id','=',$classid)
             ->where('assessment.subject_id','=',$subjectid)
             ->where('assessment.term','=',$term)
-            ->get();
+            ->paginate(10);
         }elseif($day==NULL){
             if($week == 'extra'){
                 $assments=DB::table('assessment')
@@ -48,14 +48,14 @@ class AssesmentController extends Controller
                 ->where('assessment.subject_id','=',$subjectid)
                 ->where('assessment.term','=',$term)
                 ->whereNotNull('assessment.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $assments=DB::table('assessment')
                 ->where('assessment.class_id','=',$classid)
                 ->where('assessment.subject_id','=',$subjectid)
                 ->where('assessment.term','=',$term)
                 ->where('assessment.week','=',$week)
-                ->get();
+                ->paginate(10);
             }
 
         }else{
@@ -66,7 +66,7 @@ class AssesmentController extends Controller
                 ->where('assessment.term','=',$term)
                 ->where('assessment.day','=',$day)
                 ->whereNotNull('assessment.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $assments=DB::table('assessment')
                 ->where('assessment.class_id','=',$classid)
@@ -74,7 +74,7 @@ class AssesmentController extends Controller
                 ->where('assessment.term','=',$term)
                 ->where('assessment.week','=',$week)
                 ->where('assessment.day','=',$day)
-                ->get();
+                ->paginate(10);
             }
         }
         $exnum = DB::table('assessment')

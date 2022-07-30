@@ -28,7 +28,7 @@ class Submit_assesmentController extends Controller
                         ->orWhere('assessment.day', 'LIKE', '%'.$search.'%');
             })
             ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day')
-            ->get();
+            ->paginate(10);
         }
         elseif($week=='allw'){
             $assignments=DB::table('student_assessment')
@@ -130,7 +130,7 @@ class Submit_assesmentController extends Controller
                             ->orWhere('student_assessment.assessment_marks', 'LIKE', '%'.$search.'%')
                             ->orWhere('student_assessment.answer_file', 'LIKE', '%'.$search.'%');
                 })
-                ->get();
+                ->paginate(15);
 
                 $nums=DB::table('student_assessment')
                 ->where('student_assessment.assessment_id',$id)

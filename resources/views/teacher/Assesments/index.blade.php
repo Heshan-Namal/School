@@ -296,8 +296,10 @@
           </div>
         @endif
         </table>
-
-
+        <div class="pagination justify-content-end mt-3">
+        {!! $assments->links() !!}
+        </div>
+</div>
 
 {{-- modal for create --}}
 <div class="modal fade" id="createmodal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">

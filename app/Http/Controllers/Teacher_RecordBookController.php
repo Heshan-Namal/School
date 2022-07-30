@@ -15,7 +15,6 @@ class Teacher_RecordBookController extends Controller
 {
     public function index(Request $request,$classid,$subjectid)
     {
-        $search=$request->search;
         $now = Carbon::now();
         $c_week=$now->weekOfYear;
         if ((1<$c_week) && (16>$c_week)) {
@@ -55,17 +54,17 @@ class Teacher_RecordBookController extends Controller
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term1')
-            ->get();
+            ->paginate(10);
             $term2=DB::table('class_record')
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term2')
-            ->get();
+            ->paginate(1);
             $term3=DB::table('class_record')
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term3')
-            ->get();
+            ->paginate(10);
 
         return view('teacher.Record_Book.index',compact(['week','record','day','classid','subjectid','term','book','term1','term2','term3']));
     }

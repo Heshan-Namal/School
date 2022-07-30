@@ -24,14 +24,14 @@ class ResourcesController extends Controller
                     ->orWhere('resource.resource_type', 'LIKE', '%'.$search.'%')
                     ->orWhere('resource.topic', 'LIKE', '%'.$search.'%');
             })
-            ->get();
+            ->paginate(10);
         }
         elseif($week=='allw'){
             $res=DB::table('resource')
             ->where('resource.class_id','=',$classid)
             ->where('resource.subject_id','=',$subjectid)
             ->where('resource.term','=',$term)
-            ->get();
+            ->paginate(10);
         }elseif($day==NULL){
             if($week == 'extra'){
                 $res=DB::table('resource')
@@ -39,14 +39,14 @@ class ResourcesController extends Controller
                 ->where('resource.subject_id','=',$subjectid)
                 ->where('resource.term','=',$term)
                 ->whereNotNull('resource.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $res=DB::table('resource')
                 ->where('resource.class_id','=',$classid)
                 ->where('resource.subject_id','=',$subjectid)
                 ->where('resource.term','=',$term)
                 ->where('resource.week','=',$week)
-                ->get();
+                ->paginate(10);
             }
 
         }else{
@@ -57,7 +57,7 @@ class ResourcesController extends Controller
                 ->where('resource.term','=',$term)
                 ->where('resource.day','=',$day)
                 ->whereNotNull('resource.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $res=DB::table('resource')
                 ->where('resource.class_id','=',$classid)
@@ -65,7 +65,7 @@ class ResourcesController extends Controller
                 ->where('resource.term','=',$term)
                 ->where('resource.week','=',$week)
                 ->where('resource.day','=',$day)
-                ->get();
+                ->paginate(10);
             }
         }
 

@@ -19,6 +19,7 @@ use App\Http\Controllers\Attentiveness_checkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\Teacher_RecordBookController;
+use App\Http\Controllers\ClassTeacherController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -112,7 +113,11 @@ Route::get('std/export/{classid}/{subjectid}', [TeacherController::class, 'expor
 Route::get('std/exportpdf/{classid}/{subjectid}', [TeacherController::class, 'exportpdf'])->name('std.exportpdf');
 Route::get('rec/export/{classid}/{subjectid}/{term}', [Teacher_RecordBookController::class, 'export'])->name('rec.export');
 Route::get('rec/exportpdf/{classid}/{subjectid}/{term}', [Teacher_RecordBookController::class, 'exportpdf'])->name('rec.exportpdf');
-//notdone
+
+//classteacher
+Route::get('/myclass-students',[ClassTeacherController::class,'mystudents'])->name('myclass.students');
+Route::get('student-detail/{id}',[ClassTeacherController::class,'student_view'])->name('myclass.studentview');
+
 
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');
 //Route::post('/attentive-questionstore',[QuestionsController::class,'store'])->name('question.store');

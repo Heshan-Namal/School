@@ -66,7 +66,7 @@
     </div>
            <div class="form-group mb-2">
                <label for="name">Title</label>
-               <input type="text" class="form-control " name="title" id="title">
+               <input type="text" class="form-control " name="title" id="title" required>
                @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -86,7 +86,7 @@
 
            <div class="form-group mb-2">
             <label for="name">Due Date</label>
-            <input type="Date" class="form-control @error('due_date') is-invalid @enderror" name="due_date" id="due_date">
+            <input type="Date" class="form-control @error('due_date') is-invalid @enderror" name="due_date" id="due_date" required>
             @error('due_date')
                      <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>
@@ -103,7 +103,7 @@
         </div>
         <div class="form-group mb-2">
             <label for="name">Allocated Markes</label>
-            <input type="number" class="form-control @error('a_marks') is-invalid @enderror" name="a_marks" id="allocated_marks">
+            <input type="number" class="form-control @error('a_marks') is-invalid @enderror" name="a_marks" id="allocated_marks" required>
             @error('a_marks')
                      <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>

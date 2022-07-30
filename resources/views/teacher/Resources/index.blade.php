@@ -188,7 +188,9 @@
 
           </tbody>
           </table>
-
+          <div class="pagination justify-content-end mt-3">
+            {!! $res->links() !!}
+            </div>
           @else
           <div class="d-flex justify-content-center mb-5">
             <div class="search-card">
