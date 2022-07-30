@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Pagination\Paginator;
 use ConsoleTVs\Charts\Registrar as Charts;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,12 +25,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Charts $charts)
     {
         //
+        Paginator::useBootstrap();
         $charts->register([
             \App\Charts\ParticipateChart::class,
             \App\Charts\ResultAssChart::class,
             \App\Charts\ClasspresChart::class,
             \App\Charts\AttentiveChart::class,
-            \App\Charts\TodayAttentiveChart::class
+            \App\Charts\TodayAttentiveChart::class,
+            \App\Charts\StudentAttentiveChart::class,
+            \App\Charts\StudentAssChart::class
         ]);
     }
 }

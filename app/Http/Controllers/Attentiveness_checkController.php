@@ -55,14 +55,14 @@ class Attentiveness_checkController extends Controller
                     ->orWhere('attentiveness_check.period', 'LIKE', '%'.$search.'%');
             })
 
-        ->get();
+        ->paginate(10);
         }
         elseif($week=='allw'){
             $quizes=DB::table('attentiveness_check')
             ->where('attentiveness_check.class_id','=',$classid)
             ->where('attentiveness_check.subject_id','=',$subjectid)
             ->where('attentiveness_check.term','=',$term)
-            ->get();
+            ->paginate(10);
         }else{
             if($week == 'extra'){
                 $quizes=DB::table('attentiveness_check')
@@ -70,14 +70,14 @@ class Attentiveness_checkController extends Controller
                 ->where('attentiveness_check.subject_id','=',$subjectid)
                 ->where('attentiveness_check.term','=',$term)
                 ->whereNotNull('attentiveness_check.extraweek')
-                ->get();
+                ->paginate(10);
             }else{
                 $quizes=DB::table('attentiveness_check')
                 ->where('attentiveness_check.class_id','=',$classid)
                 ->where('attentiveness_check.subject_id','=',$subjectid)
                 ->where('attentiveness_check.term','=',$term)
                 ->where('attentiveness_check.week','=',$week)
-                ->get();
+                ->paginate(10);
             }
         }
         $list=DB::table('attentiveness_check')

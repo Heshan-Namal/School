@@ -194,34 +194,41 @@
 
     </tbody>
 </table>
-</div>
-</div>
-        <div class="col-4">
-            <div class="d-card overflow-auto mt-3">
-                <div class="card-header colo card-text">Highest Ten Marks In the Class :-</div>
-                <div class="card-body">
-                   <table class="table p-2"><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th></tr>
-                 @foreach($hm as $key=> $h)
-                   <tr>
-                   <td><p class="mx-4">{{$h->admission_no}}</p></td>
-                   <td><p class="mx-4">{{$h->full_name}}</p></td>
-                   <td><p class="mx-4">{{$h->assessment_marks}}</p></td>
-                   </tr>
-                   {{-- <div class="row">
-                    <div class="col-2">
-                        <p>{{$n->title}}</p>
-                    </div>
-                    <div class="col-2">
-                        <p>{{$n->due_date}}</p>
-                    </div>
-                   </div> --}}
-@endforeach
-                   </table>
-                </div>
 
+</div>
+<div class="pagination justify-content-end mt-3">
+    {!! $sub->links() !!}
+    </div>
+</div>
+<div class="col-4">
+    <div class="d-card overflow-auto mt-3">
+        <div class="card-header colo card-text">Highest Ten Marks In the Class :-</div>
+        <div class="card-body">
+           <table class="table p-2"><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th></tr>
+         @foreach($hm as $key=> $h)
+           <tr>
+           <td><p class="mx-4">{{$h->admission_no}}</p></td>
+           <td><p class="mx-4">{{$h->full_name}}</p></td>
+           <td><p class="mx-4">{{$h->assessment_marks}}</p></td>
+           </tr>
+           {{-- <div class="row">
+            <div class="col-2">
+                <p>{{$n->title}}</p>
             </div>
-
+            <div class="col-2">
+                <p>{{$n->due_date}}</p>
+            </div>
+           </div> --}}
+@endforeach
+           </table>
         </div>
+
+    </div>
+
+</div>
+</div>
+
+
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
 

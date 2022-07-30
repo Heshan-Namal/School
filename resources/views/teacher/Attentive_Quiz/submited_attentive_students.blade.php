@@ -180,6 +180,9 @@
 
     </tbody>
 </table>
+<div class="pagination justify-content-end mt-3">
+    {!! $sub->links() !!}
+</div>
 </div>
 </div>
         <div class="col-4 at">
@@ -205,6 +208,7 @@
                    </div> --}}
                 @endforeach
                    </table>
+
                 </div>
 
             </div>

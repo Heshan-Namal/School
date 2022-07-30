@@ -215,6 +215,9 @@
 
     </tbody>
     </table>
+    <div class="pagination justify-content-end mt-3">
+        {!! $assignments->links() !!}
+        </div>
     </div>
 
                 {{-- </div> --}}

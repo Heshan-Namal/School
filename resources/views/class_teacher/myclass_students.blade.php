@@ -1,11 +1,11 @@
-@foreach($detail as $key=> $d)
+
 @extends('layouts.MasterDashboard')
-@endforeach
+
 @section('content')
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
     <div class="row mt-3 mb-3">
-        <h1 class="timetable cd-head text-center mb-2">Class Students Records</h1>
+        <h1 class="timetable cd-head text-center mb-2">My Class Students Records</h1>
     </div>
     <div class="row  d-flex justify-content-end ">
         <div class="col-4">
@@ -47,8 +47,8 @@
                  </div>
             </form>
             <div class="col-3">
-                <a href="{{route('std.export',[$classid,$subjectid])}}"><button type="button">Excel</button></a>
-                <a href="{{route('std.exportpdf',[$classid,$subjectid])}}"><button type="button">PDF</button></a>
+                <a href="#"><button type="button">Excel</button></a>
+                <a href="#"><button type="button">PDF</button></a>
             </div>
             </div>
 
@@ -61,9 +61,12 @@
                 <th scope="col">#</th>
                 <th scope="col">Admission Number</th>
                 <th scope="col">Student Name</th>
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Guardian Name</th>
                 <th scope="col">Guardian Email</th>
-                <th scope="col">Submited Assesment Precentage(red<40)</th>
-                <th scope="col">Assesment Marks Average(red<40)</th>
+                <th scope="col">Guardian Contact Number</th>
+                <th scope="col">More Performance Details</th>
+
             </tr>
         </thead>
             <tbody>
@@ -73,20 +76,13 @@
             <th scope="row">{{$key+1}}</th>
             <td>{{$s->admission_no}}</td>
             <td>{{$s->full_name}}</td>
+            <td>{{$s->dob}}</td>
+            <td>{{$s->guardian_name}}</td>
             <td>{{$s->guardian_email}}</td>
-            @if ($sub[$s->admission_no] <40)
-            <td><span style="color:#FF0000">{{$sub[$s->admission_no]}}%</td>
-            @else
-            <td>{{$sub[$s->admission_no]}}%</td>
-            @endif
-            @if ($mark[$s->admission_no] <40.0)
-            <td><span style="color:#FF0000">{{$mark[$s->admission_no]}}</td>
-            @else
-            <td>{{$mark[$s->admission_no]}}</td>
-            @endif
-
+            <td>{{$s->guardian_contact_no}}</td>
+            <td><a href="{{route('myclass.studentview',[$s->admission_no])}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
         </tr>
-
+        {{-- {{route('ass.quizshow',[$ass->id])}} --}}
         @endforeach
 
 

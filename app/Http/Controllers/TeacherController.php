@@ -47,7 +47,7 @@ class TeacherController extends Controller
                             ->orWhere('student.full_name', 'LIKE', '%'.$search.'%')
                             ->orWhere('student.guardian_email', 'LIKE', '%'.$search.'%');
                     })
-                    ->get();
+                    ->paginate(15);
 
                 //dd($std);
 

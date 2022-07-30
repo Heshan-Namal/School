@@ -138,6 +138,9 @@
 
             @endif
         </table>
+        {{-- <div class="pagination justify-content-end mt-3">
+            {!! $term1->links() !!}
+        </div> --}}
     </div>
     <div class="row" id="term2" hidden>
         <h2 class="head">Second Term Record Book</h2>
@@ -191,7 +194,9 @@
               </div>
             @endif
         </table>
-
+        <div class="pagination justify-content-end mt-3">
+            {!! $term2->links() !!}
+            </div>
     </div>
     <div class="row" id="term3" hidden>
         <h2 class="head">Third Term Record Book</h2>
@@ -249,11 +254,14 @@
 
             @endif
         </table>
+        {{-- <div class="pagination justify-content-end mt-3">
+            {!! $term3->links() !!}
+            </div> --}}
     </div>
 
 </div>
 
-
+{{-- Edit Record --}}
 <div class="modal fade" id="editrecModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
