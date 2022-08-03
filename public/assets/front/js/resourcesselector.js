@@ -22,18 +22,7 @@ function gettypeselector(select1){
     document.getElementById('link').hidden = true;
    }
 }
-    var exampleModal = document.getElementById('qModal')
-            exampleModal.addEventListener('show.bs.modal', function (event) {
-            //    console.log("plzz");
-            // Button that triggered the modal
-            var button = event.relatedTarget
-            // Extract info from data-bs-* attributes
-            var id = button.getAttribute('data-bs-id')
-            var modalBodyInput = exampleModal.querySelector('.modal-body #assid')
-            modalBodyInput.value = id
 
-
-            })
 function getweekselector(value){
 
     if(value=='extra'){
@@ -45,35 +34,61 @@ function getweekselector(value){
     }
 }
 
-var editModal = document.getElementById('editModal')
-editModal.addEventListener('show.bs.modal', function (event) {
-    //    console.log("plzz");
-    // Button that triggered the modal
-    var button = event.relatedTarget
-    // Extract info from data-bs-* attributes
-    var id = button.getAttribute('data-bs-id')
-    var question = button.getAttribute('data-bs-question')
-    var answer1 = button.getAttribute('data-bs-answer1')
-    var answer2 = button.getAttribute('data-bs-answer2')
-    var answer3 = button.getAttribute('data-bs-answer3')
-    var answer4 = button.getAttribute('data-bs-answer4')
-    var correct_answer = button.getAttribute('data-bs-correct_answer')
-    var i = editModal.querySelector('.modal-body #id')
-    var q = editModal.querySelector('.modal-body #question')
-    var a1 = editModal.querySelector('.modal-body #answer1')
-    var a2 = editModal.querySelector('.modal-body #answer2')
-    var a3 = editModal.querySelector('.modal-body #answer3')
-    var a4 = editModal.querySelector('.modal-body #answer4')
-    var c = editModal.querySelector('.modal-body #correct_answer')
+var resedit=document.getElementById('editresModal')
+if(resedit){
+    resedit.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        //  console.log("plzz");
+          //alert('open');
+         var id = button.getAttribute('data-bs-id')
+         var chapter = button.getAttribute('data-bs-chapter')
+         var topic = button.getAttribute('data-bs-topic')
+         var term = button.getAttribute('data-bs-term')
+         var week = button.getAttribute('data-bs-week')
+         var extra_week = button.getAttribute('data-bs-extra_week')
+         var day = button.getAttribute('data-bs-day')
+         var resource_type = button.getAttribute('data-bs-resource_type')
 
-    i.value = id
-    q.value = question
-    a1.value = answer1
-    a2.value = answer2
-    a3.value = answer3
-    a4.value = answer4
-    c.value = correct_answer
+         var resource_file = button.getAttribute('data-bs-resource_file')
+         var i = resedit.querySelector('.modal-body #resid')
+         var t = resedit.querySelector('.modal-body #chapter')
+         var d = resedit.querySelector('.modal-body #topic')
+         var te = resedit.querySelector('.modal-body #term')
+         var we = resedit.querySelector('.modal-body #week')
+         var ex = resedit.querySelector('.modal-body #extra_week')
+         var da = resedit.querySelector('.modal-body #day')
+         var a_t = resedit.querySelector('.modal-body #resource_type')
+         var f = resedit.querySelector('.modal-body #resource_file')
+         var l = resedit.querySelector('.modal-body #link')
+         i.value = id
+         t.value = chapter
+         d.value = topic
+         te.value = term
+         we.value = week
+         ex.value = extra_week
+         da.value = day
+         a_t.value = resource_type
+         f.value=''
+         l.value=''
+         if (resource_type == 'note') {
+            f.value = resource_file
 
+        }else{
+            l.value=resource_file
+        }
 
+     })
 
-})
+}
+var deleteresModal = document.getElementById('deleteresModal')
+if(deleteresModal){
+    deleteresModal.addEventListener('show.bs.modal', function (event) {
+
+        var button = event.relatedTarget
+        var id = button.getAttribute('data-bs-id')
+        var i = deleteresModal.querySelector('.modal-body #resid')
+        i.value = id
+     })
+
+}
+

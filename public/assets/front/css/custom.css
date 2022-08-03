@@ -274,112 +274,6 @@ height: 42px;
   border-radius: 10px;
 }
 
-
-/*teacher */
-
-.hh .card{
-    max-width:700px;
-
-    min-height:0px;
-    height: 115px;
-    margin: 10px 10px 10px 10px;
-    padding-right: 15px;
-    padding-left: 15px;
-    background-color: #90d0fafd;
-    box-shadow: none;
-    margin-bottom: unset;
-    border: none;
-}
-.item .card,.table.card{
-    background-color:#f7f1f1;
-}
-.owl-nav button.owl-next,.owl-nav button.owl-prev{
-    color:#fff;
-    margin-left: 10px;
-    border: none;
-    outline: none;
-    font-size: 20px;
-    height: 28px;
-    width: 38px;
-}
-.timetable{
-    color: #000;
-    font-weight: bold;
-    /* //margin-top: 15px; */
-    /* margin-bottom: 20px; */
-    text-align: left;
-}
-.kk .card{
-    max-width:none;
-    width: 300px;
-    max-height:none;
-    height: 50px;
-    margin: 10px 10px 10px 10px;
-    padding-right: 15px;
-    padding-left: 15px;
-    background-color: #fff;
-    text-align:unset;
-    box-shadow: none;
-    margin-bottom: unset;
-    border: none;
-}
-.table-card{
-
-    text-align: unset;
-    max-width: none;
-    min-height: none;
-    box-shadow: none;
-    margin-bottom: 20px;
-    border:none;
-  }
-  .d-card{
-
-    text-align: unset;
-    max-width: none;
-    min-height:fit-content;
-    box-shadow: none;
-    margin-bottom: 20px;
-    border:rgb(212, 216, 231) 0.5px solid;
-  }
-  .table{
-    font-weight:500;
-    color: #000;
-
-  }
-  .b-card{
-    margin-left: 250px;
-    background-color: #fff;
-    margin-top: 15px;
-    text-align: unset;
-    max-width: 800px;
-    min-height: none;
-    box-shadow: none;
-    margin-bottom: 20px;
-    border:none;
-  }
-  .box-card{
-    margin-top: 25px;
-    text-align: unset;
-    max-width: none;
-    width: 250px;
-    height: 100px;
-    min-height: 0;
-    box-shadow: none;
-    border:rgb(212, 216, 231) 0.5px solid;
-  }
-  .sub-card{
-    margin-top: 25px;
-    text-align: unset;
-    max-width: none;
-    width: 300px;
-    height: 150px;
-    min-height: 0;
-    box-shadow: none;
-    border:rgb(212, 216, 231) 0.5px solid;
-  }
-/* .btn {
-    width: 100px;
-  } */
 .term-dropbtn:hover,
 .term-dropbtn:focus {
   background-color: #2980B9;
@@ -470,43 +364,84 @@ height: 42px;
 }
 
 /*teacher */
+/* .hh .card{
+    max-width:700px;
 
-.hh .card {
-  max-width: 900px;
-  min-height: 0px;
-  height: 115px;
-  margin: 10px 10px 10px 10px;
-  padding-right: 15px;
-  padding-left: 15px;
-  background-color: #90d0fafd;
-  box-shadow: none;
-  margin-bottom: unset;
-  border: none;
+    min-height:0px;
+    height: 115px;
+    margin: 10px 10px 10px 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: #90d0fafd;
+    box-shadow: none;
+    margin-bottom: unset;
+    border: none;
+} */
+.item .card,.table.card{
+    background-color:#f7f1f1;
+}
+.owl-nav button.owl-next,.owl-nav button.owl-prev{
+    color:#fff;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    height: 28px;
+    width: 38px;
+}
+.timetable{
+    color: #000;
+    font-weight: bold;
+    /* //margin-top: 15px; */
+    /* margin-bottom: 20px; */
+    text-align: left;
 }
 
-.item .card,
-.table.card {
-  background-color: #f7f1f1;
-}
+  .d-card{
 
-.owl-nav button.owl-next,
-.owl-nav button.owl-prev {
-  color: #fff;
-  margin-left: 10px;
-  border: none;
-  outline: none;
-  font-size: 20px;
-  height: 28px;
-  width: 38px;
-}
+    text-align: unset;
+    max-width: none;
+    min-height:fit-content;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border:rgb(212, 216, 231) 0.5px solid;
+  }
 
-.timetable {
-  color: #000;
-  font-weight: bold;
-  margin-top: 15px;
-  margin-bottom: 20px;
-  text-align: left;
-}
+  .b-card{
+    margin-left: 250px;
+    background-color: #fff;
+    margin-top: 15px;
+    text-align: unset;
+    max-width: 800px;
+    min-height: none;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border:none;
+  }
+  /* .box-card{
+    margin-top: 25px;
+    text-align: unset;
+    max-width: none;
+    width: 250px;
+    height: 100px;
+    min-height: 0;
+    box-shadow: none;
+    border:rgb(212, 216, 231) 0.5px solid;
+  } */
+  /* .sub-card{
+    background-color: #fff;
+    margin-top: 25px;
+    text-align: unset;
+    max-width: none;
+    width: 300px;
+    height: 150px;
+    min-height: 0;
+    box-shadow: none;
+    border:rgb(212, 216, 231) 0.5px solid;
+  } */
+/* .btn {
+    width: 100px;
+  } */
 
 .kk .card {
   max-width: none;
@@ -523,7 +458,7 @@ height: 42px;
   border: none;
 }
 
-.table-card {
+/* .table-card {
 
   text-align: unset;
   max-width: none;
@@ -531,32 +466,36 @@ height: 42px;
   box-shadow: none;
   margin-bottom: 20px;
   border: none;
-}
-
-.d-card {
-
-  text-align: unset;
-  max-width: none;
-  min-height: none;
-  box-shadow: none;
-  margin-bottom: 20px;
-  border: rgb(212, 216, 231) 0.5px solid;
-}
+} */
 
 .table {
-  font-weight: bold;
+  font-weight:normal;
   color: #000;
 
 }
+.table tr:last-child td{
+    border:none;
+  }
 
-.b-card {
-  margin-left: 250px;
-  background-color: #fff;
-  margin-top: 15px;
-  text-align: unset;
-  max-width: 800px;
-  min-height: none;
-  box-shadow: none;
-  margin-bottom: 20px;
-  border: none;
+.classname
+{
+    font-size: 30px;
+    font-weight:bold;
+    color: #1F2F98;
+    min-height: 0px;
+    margin: 0px 0px 0px 0px;
+}
+.classnum
+{
+    font-size: 35px;
+    font-weight:bold;
+    color: #fff;
+    min-height: 0px;
+
+}
+.box{
+    width: 80px;
+    height: 60px;
+    background-color: #1CA7EC;
+    text-align: center;
 }

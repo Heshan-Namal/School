@@ -1,4 +1,6 @@
+
 @extends('layouts.MasterDashboard')
+
 
 @section('content')
 <div class="content">

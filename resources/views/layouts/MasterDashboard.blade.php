@@ -41,11 +41,23 @@
                                 <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
                             </div>
                         </div>
+                        @if (isset($d))
+                        <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="box mx-3 rounded">
+                                <p class="classnum">{{$d->class}}</p>
+                            </div>
 
-
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <p class="classname">:{{$d->subject}}</p>
+                        </div>
+                        </div>
+                        @else
+                            <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                        </form>
+                            </form>
+                        @endif
+
+
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
@@ -152,10 +164,10 @@
                                             </div>
                                         </a><a class="dropdown-item text-center small text-gray-500 mt-1" href="#">Show All Alerts</a>
                                     </div>
-     
+
                     </div> --}}
-                    
-                    
+
+
 
 
 
@@ -170,6 +182,8 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+
+    
     <script src="{{asset('assets/front/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/front/js/chart.min.js')}}"></script>
     <script src="{{asset('assets/front/js/bs-init.js')}}"></script>
@@ -181,6 +195,11 @@
     <script src="{{asset('assets/front/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/front/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/front/js/carousel.js')}}"></script>
+
+
+    <!-- Your application script -->
+
+
     @yield('script')
 </body>
 

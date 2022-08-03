@@ -1,5 +1,7 @@
 @extends('layouts.MasterDashboard')
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
+<div class="content">
 <div class="row hh">
     <div class="col-8">
         <div class="row">
@@ -64,50 +66,175 @@
             </form>
         </div>
         </div>
+        {{-- <div class="row mb-4">
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/subass1.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                               Late Submission Students
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/subass2.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                In this week Expired Assesments
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/no_pub.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                Num of Students Notsubmit any Assesments
+
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+        </div> --}}
         <div class="row">
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Late Submission Students</p>
-                        <p class="text-end" >Published</p>
-                    </div>
-                </div>
-
+            <div class="head mt-4">
+                <p><u>Student Submitted Assesments</u> :-</p>
             </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >In this week Expired Assesments</p>
-                        <p class="text-end" >Published</p>
-                    </div>
-                </div>
+            <div class="text-end">
+                <form action="?" class="col-sm-2 me-auto" >
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary"> Go!</button>
+                        <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
 
+                     </div>
+                </form>
             </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Num of Students Notsubmit any Assesments</p>
-                        <p class="text-end" >Published</p>
-                    </div>
-                </div>
+            <div class="col-10">
+                {{-- <div class="card-body"> --}}
+                    @if (session('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('message') }}
+                        </div>
+                    @endif
 
+    <div class="table-card mt-2">
+        <table class="table table-success table-hover m-0">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Term</th>
+      <th scope="col">Week</th>
+      <th scope="col">Day</th>
+      <th scope="col">Type</th>
+      <th scope="col">Count</th>
+      <th scope="col">View</th>
+
+    </tr>
+    </thead>
+    <tbody id="myTable">
+    @if($assignments->count()>0)
+
+      @foreach($assignments as $key=> $a)
+    <tr>
+      <th scope="row">{{$key+1}}</th>
+      <td>{{$a->title}}</td>
+      <td>{{$a->term}}</td>
+      @if ($a->week==null)
+          <td>{{$a->extra_week}}</td>
+      @else
+            <td>{{$a->week}}</td>
+      @endif
+      <td>{{$a->day}}</td>
+      <td>{{$a->assessment_type}}</td>
+      <td>{{$a->count}}</td>
+      <td><a href="{{route('submit.view',[$a->id])}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
+    </tr>
+
+    @endforeach
+
+
+
+    @else
+    <div class="d-flex justify-content-center mb-5">
+        <div class="search-card">
+            <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-4 mt-3 ">
+                    <img
+                      src="{{asset('assets/front/images/ass/rec.png')}}"
+                      alt="Trendy Pants and Shoes"
+                      class="img-fluid rounded-start d-flex "
+                    />
+                  </div>
+            </div>
+            </div>
+      </div>
+    @endif
+
+    </tbody>
+    </table>
+    <div class="pagination justify-content-end mt-3">
+        {!! $assignments->links() !!}
+        </div>
+    </div>
+
+                {{-- </div> --}}
             </div>
         </div>
         </div>
         <div class="col-4">
-            <div class="d-card mt-3">
-                <div class="card-header timetable">View Submited Assesments</div>
+            <div class="d-card overflow-auto mt-3">
+                <div class="card-header colo "><h5 class="timetable text-center">View nearly expired Assesments submits:-</h5></div>
+                <div class="jj">
                 <div class="card-body">
-                   <table class="overflow-y:auto;">
-                    <div class="card-header mx-4">
-                        <tr><th>Title</th><th>Due Date</th><th>Num of Submits</th></tr>
-                    </div>
-
+                    <table class="table "><tr><th scope="col" class="mx-2">Title</th><th scope="col">Due Date</th><th scope="col">Num of Submits</th></tr>
                     @foreach($nearas as $key=> $n)
                    <tr>
-                   <td><p class="mx-4">{{$n->title}}</p></td>
-                   <td><p class="mx-4 rounded-circle">{{$n->due_date}}</p></td>
-                   <td><p class="mx-4 rounded-circle">{{$n->count}}</p></td>
+                   <td><p class="mx-3">{{$n->title}}</p></td>
+                   <td><p class="mx-3 rounded-circle">{{$n->due_date}}</p></td>
+                   <td><p class="mx-3 rounded-circle">{{$n->count}}</p></td>
                    </tr>
                    @endforeach
                    {{-- <div class="row">
@@ -121,6 +248,7 @@
 
                    </table>
                 </div>
+                </div>
 
             </div>
 
@@ -129,63 +257,23 @@
     </div>
 
     <div class="row">
-        <div class="col-8">
-            {{-- <div class="card-body"> --}}
-                @if (session('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
-<div class="table-card mt-5">
-    <table class="table table-success table-hover m-0">
-<thead>
-<tr>
-  <th scope="col">#</th>
-  <th scope="col">Title</th>
-  <th scope="col">Term</th>
-  <th scope="col">Week</th>
-  <th scope="col">Day</th>
-  <th scope="col">Type</th>
-  <th scope="col">Count</th>
-  <th scope="col">View</th>
-
-</tr>
-</thead>
-<tbody>
-@if($assignments->count()>0)
-
-  @foreach($assignments as $key=> $a)
-<tr>
-  <th scope="row">{{$key+1}}</th>
-  <td>{{$a->title}}</td>
-  <td>{{$a->term}}</td>
-  @if ($a->week==null)
-      <td>{{$a->extra_week}}</td>
-  @else
-        <td>{{$a->week}}</td>
-  @endif
-  <td>{{$a->day}}</td>
-  <td>{{$a->assessment_type}}</td>
-  <td>{{$a->count}}</td>
-  <td><a href="{{route('submit.view',[$a->id])}}"><button class="btn btn-primary btn-sm">View</button></a> </td>
-</tr>
-
-@endforeach
-
-
-
-@else
-<p>No Assesments assign yet</p>
-@endif
-
-</tbody>
-</table>
-</div>
-
-            {{-- </div> --}}
-        </div>
-        <div class="col-8">
-
+        <div class="col-8"></div>
+        <div class="col-4">
+            <div id="chart2" style="height: 400px;"></div>
         </div>
     </div>
+</div>
+<script src="https://unpkg.com/chart.js@^2.9.3/dist/Chart.min.js"></script>
+<script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
+<script>
+const chart2 = new Chartisan({
+      el: '#chart2',
+      url: "@chart('result_ass_chart')"+ "?classid={{$classid}}" +"&subjectid={{$subjectid}}",
+      hooks: new ChartisanHooks()
+        .colors(['#797EF6'])
+                .datasets([{ type: 'bar', fill: true,
+            borderColor: "rgba(75,192,192,1)",}]),
+        });
+</script>
+
 @endsection
