@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Viduhala</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{asset('assets/front/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome-all.min.css')}}">
@@ -113,8 +114,12 @@
                 </nav>
                 <div class="container-fluid d-flex bd-highlight ">
 
+                
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                    <button type="button" class="btn btn-primary btn-sm">Go back</button>
+                        @yield('content')
 
-                    <div class="p-2 flex-grow-1 bd-highlight">@yield('content')</div>
+                    </div>
                     {{-- <div class=" p-2 bd-highlight NoticeBoard">
                     <div class=" dropdown-list animated--grow-in ">
                                         <h6 class="dropdown-header">Notification center</h6>

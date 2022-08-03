@@ -5,76 +5,62 @@
 @endsection
 @section('content')
 <div class="container_AssStudent ">
-        <header>Registration</header>
+        <header>Student Registration</header>
 
         <form class="row g-3">
             <div class="col-md-4">
-                <label for="inputEmail4" class="form-label">Full name</label>
-                <input type="email" class="form-control" id="inputEmail4">
+                <label for="inputEmail4" class="form-label">Admissition Number </label>
+                <input type="text" class="form-control" id="inputAddno">
             </div>
             <div class="col-md-4">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail4">
+                <label for="inputEmail4" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="inputName">
             </div>
 
             <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
+                <label for="inputPassword4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail">
             </div>
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
-            </div>
-
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                <input type="text" class="form-control" id="inputAddress">
             </div>
-
-            <div class="col-12">
-                <label for="inputAddress2" class="form-label">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity">
-            </div>
-
             <div class="col-md-4">
-                <label for="inputState" class="form-label">State</label>
-                <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option>...</option>
+                <label for="inputPassword4" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="inputDob">
+            </div>
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">Grade</label>
+                <select id="inputGrade" class="form-select mt-0" aria-label="Default select example">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
                 </select>
             </div>
-            
-            <div class="col-md-2">
-                <label for="inputZip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">Class</label>
+                <select id="inputClass" class="form-select mt-0" aria-label="Default select example">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Guardian Name</label>
+                <input type="text" class="form-control" id="inputGurdianName">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Guardian Email</label>
+                <input type="email" class="form-control" id="inputGurdianEmail">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Guardian Contact Number</label>
+                <input type="text" class="form-control" id="inputGurdianNumber">
             </div>
             <div class="col-12">
-                <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                    Check me out
-                </label>
-                </div>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-primary">Add Student</button>
             </div>
         </form>
 </div>
