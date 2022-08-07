@@ -9,9 +9,8 @@
             $newquizarr = [];
             $missedquizarr = [];
             foreach($quizListarr as $key => $item){
-
-                $validtime=$item['quiz_duration'];
-                $minutes=$validtime;
+                $validtime=explode(":",$item['quiz_duration'] );
+                $minutes=$validtime[1];
                 $start = Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$item['updated_at'],'Asia/Colombo');
                 $end = Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$item['updated_at'],'Asia/Colombo')->addMinutes((int)$minutes);
                 $now = Carbon\Carbon::now('Asia/Colombo');
@@ -43,11 +42,13 @@
                                             <button class="btn btn-outline-primary mx-1 position-absolute top-50 end-0 translate-middle-y" id="control">Attemt Quiz</button>
                                         </a>
                                     </div>
-                                    <div class=" card-body row row-cols-2 ">
-                                        <span class="h5 col ">From  :  {{$item['updated_at']}}</span>
-                                        <span class="h5 col text-end">To  :  {{$item['end_time']}}</span>
-                                        <span class="h5 col mt-2">Subject  :  {{$item['subject_name']}}</span>
-                                    
+                                    <div class=" card-body wide-card">
+                                        <div class="row row-cols-2">
+                                            <span class="h5 col mt-2">Subject  :  {{$item['subject_name']}}</span>
+                                            <span class="h5 col ">Duration  :  {{$item['quiz_duration']}}</span>
+                                            <span class="h5 col ">From  :  {{$item['updated_at']}}</span>
+                                            <span class="h5 col text-end">To  :  {{$item['end_time']}}</span>
+                                        </div>
                                     </div>
                             </div>
                         @endforeach    
@@ -64,29 +65,37 @@
         <div class="col-sm-12">
             <div class="card wide-card mt-4"  style="background-color:#44D62C10">
                 <div class="card-header bg-success text-white">
-                    <span class="my-auto h3" >Completed Quizzes</span>
+                    <span class="my-auto h3 " >Completed Quizzes</span>
                 </div>
+                
                 @if(isset($attemptedquizarr))
                     @foreach($attemptedquizarr as $item)
                         @php 
-                            $validtime=$item['quiz_duration'];
-                            $minutes=$validtime;
-
+                            $validtime=explode(":",$item['quiz_duration'] );
+                            $minutes=$validtime[1];
                             $start = Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$item['updated_at'],'Asia/Colombo');
                             $end = Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$item['updated_at'],'Asia/Colombo')->addMinutes((int)$minutes);
                             $item['end_time']=$end->format('Y-m-d H:i:s');
                             $now = Carbon\Carbon::now('Asia/Colombo');
                         @endphp
                         <div class="card wide-card m-3">
-                            <span class=" card-header h3 my-auto">{{$item['title']}}</span>
-                            <div class=" card-body wide-card row row-cols-2 ">
-                                <span class="h5 col ">From  :  {{$item['updated_at']}}</span>
-                                <span class="h5 col text-end">To  :  {{$item['end_time']}}</span>
-                                <span class="h5 col mt-2">Subject  :  {{$item['subject_name']}}</span>
+                            <div class=" card-header h3 my-auto position-relative">
+                                <span class="text-dark">{{$item['title']}}</span>
+                                <a href="{{route('Student.student.quizresult',$item['id']) }}" style="text-decoration: none;" >
+                                    <button class="btn btn-outline-primary mx-1 position-absolute top-50 end-0 translate-middle-y" id="view_results">View Quiz Results</button>
+                                </a>
+                            </div>
+                            <div class="card-body wide-card ">
+                                <div class="row row-cols-2">
+                                    <span class="h5 col mt-2">Subject  :  {{$item['subject_name']}}</span>
+                                    <span class="h5 col ">Duration  :  {{$item['quiz_duration']}}</span>
+                                    <span class="h5 col my-auto">From  :  {{$item['updated_at']}}</span><br>
+                                    <span class="h5 col my-auto text-end">To  :  {{$item['end_time']}}</span><br>
+                                </div>
                             </div>
 
                             <div class="card-footer">
-                                <span class="h5 col mt-2">Marks  :  {{$item['marks']}}</span>
+                                <span class="h4 mt-2 text-primary">Your Marks  :  {{$item['total_points']}}</span>
                             </div>
                         </div>
                     @endforeach
@@ -108,8 +117,8 @@
                 @if(isset($missedquizarr) && !empty($missedquizarr))
                     @foreach($missedquizarr as $item)
                         @php 
-                            $validtime=$item['quiz_duration'];
-                            $minutes=$validtime;
+                            $validtime=explode(":",$item['quiz_duration'] );
+                            $minutes=$validtime[1];
                             $start = Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$item['updated_at'],'Asia/Colombo');
                             $end = Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$item['updated_at'],'Asia/Colombo')->addMinutes((int)$minutes);
                             $item['end_time']=$end->format('Y-m-d H:i:s');
@@ -117,10 +126,13 @@
                         @endphp
                         <div class="card wide-card m-3">
                             <span class=" card-header h3 my-auto">{{$item['title']}}</span>
-                            <div class=" card-body row row-cols-2 ">
-                                <span class="h5 col ">From  :  {{$item['updated_at']}}</span>
-                                <span class="h5 col text-end">To  :  {{$item['end_time']}}</span>
-                                <span class="h5 col mt-2">Subject  :  {{$item['subject_name']}}</span>                                        
+                            <div class=" card-body ">
+                                <div class=" row row-cols-2">
+                                    <span class="h5 col ">From  :  {{$item['updated_at']}}</span>
+                                    <span class="h5 col text-end">To  :  {{$item['end_time']}}</span>
+                                    <span class="h5 col ">Duration  :  {{$item['quiz_duration']}}</span>
+                                    <span class="h5 col mt-2">Subject  :  {{$item['subject_name']}}</span>                                        
+                                </div>
                             </div>
                         </div>
                     @endforeach

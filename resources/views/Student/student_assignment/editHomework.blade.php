@@ -1,32 +1,30 @@
 @extends('layouts.MasterDashboard')
 
 @section('content')
-    <div ><p>Today is {{ Carbon\Carbon::now()->format('Y-m-d')}} </p>
-    </div>
     <!--container-->
-    <div class="container-fluid w-75 ps-0 ms-0">
+    <div class="container-fluid w-50 ps-0 ms-0">
           
-      <div class="card float-left">
+      <div class="card wide-card float-left">
 
         <div class="card-header">
-          <span class="h4">{{$assignment->title}}</span>
+          <span class="h4">{{$assessment->title}}</span>
         </div>
 
         <div class="card-body">
             <div class="row">
-              <span class="col-md-10">{{$assignment->description}}</span>
-              @if(isset($assignment->assignments))
-                <a href="{{ asset($assignment->assignments) }}" target="_blank" class="btn col-md-2">View</a>
+              <span class="col-md-10">{{$assessment->description}}</span>
+              @if(isset($assessment->assessments))
+                <a href="{{ asset($assessment->assessments) }}" target="_blank" class="btn col-md-2">View</a>
               @endif
             </div><hr>
-            <form class="form form-group" method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('student.storeHomework',[$class_id,$subject_id,$assignment_id]) }}" >
+            <form class="form form-group" method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('Student.student.storeHomework',[$class_id,$subject_id,$assessment_id]) }}" >
              @csrf 
 
             <div class="row row-cols-2">
                       
                 <label for="formtext" class="col-md-3 col-form-label mb-3">Submission name</label>
                 <div class="col-md-9 mb-2">
-                    <input type="text" class="form-control" name="name" placeholder="{{ $uploaded_assignment->submission_name }}" id="formtext" required>
+                    <input type="text" class="form-control" name="name" placeholder="{{ $uploaded_assessment->submission_name }}" id="formtext" required>
                 </div>
 
                 <label for="formtext" class="col-md-3 col-form-label">Choose File</label>

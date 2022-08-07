@@ -9,6 +9,8 @@ class Student extends Model
 {
     use HasFactory;
     protected $table = "student";
+    protected $guarded=[];
+
     public function getass()
     {
         // need to declare relation and object tables

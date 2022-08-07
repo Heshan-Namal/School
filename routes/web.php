@@ -17,7 +17,7 @@ use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\Attentiveness_checkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
-use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();   //Auth route
+Auth::routes();   //Auth route
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -49,9 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
     //Student routes
     Route::controller(StudentController::class)->group(function () {
         Route::get('/mysubjects/{student_id}','getSubjectsList')->name('Student.student_subject.mysubjects');
+        Route::get('/subject/{subject_id}','getSubjectData')->name('Student.student.subject_details');
         Route::get('/subject/{class_id}/{subject_id}','getSubjectWeekList')->name('Student.student.subject_week');
         Route::get('/subject/{class_id}/{subject_id}/{term_id}/{week_id}','getSubjectWeekDayList')->name('Student.student.subject_week_day');
-        //Route::get('/subject/{class_id}/{subject_id}','getSubjectData')->name('Student.student.subject');
 
 
         //student_assignment routes

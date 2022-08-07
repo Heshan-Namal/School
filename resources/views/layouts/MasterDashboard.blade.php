@@ -31,14 +31,35 @@
 
                         <div class="navDroupdown form-control border-0 small">
                             <input  type="text" class="navtext" placeholder="Home" readonly>
-                            <div class="navOption ">
-                                <a href="#"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
-                                <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
-                                <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
-                                <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
-                                <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
-                                <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
-                                <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+                            <div class="navOption">
+                                @if(Qs::userIsTeamLe())
+                                    <a href="{{route('dashboard')}}"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                    <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Class</div></a>
+                                    <a href="{{route('Student.student_subject.mysubjects',[getAdmissionNo()])}}"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                    <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+                                @endif
+
+                                @if(Qs::userIsTeamAd())
+                                    <a href="#"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                    <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
+                                    <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
+                                    <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
+                                    <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                    <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+                                @endif
+
+                                
+                                @if(Qs::userIsTeamTe())
+                                    <a href="#"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                    <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
+                                    <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
+                                    <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
+                                    <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                    <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+                                @endif
                             </div>
                         </div>
 
