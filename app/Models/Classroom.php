@@ -9,7 +9,10 @@ class Classroom extends Model
 {
     use HasFactory;
     protected $table = "class";
+    protected $guarded=[];
 
+    public $timestamps=false;
+    public $teacher_id=false;
 
     public function getsubjects()
     {

@@ -115,7 +115,7 @@
 
 }
 
-.navDroupdown .navOption div:hover {
+.navDroupdown  .navOption div:hover {
   background-color: var(--maincolor);
   color: #fff;
 
@@ -136,6 +136,7 @@
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
   border: 0.5px solid #dcdbdb;
+  
 }
 .card:hover{
 
@@ -498,4 +499,80 @@ height: 42px;
     height: 60px;
     background-color: #1CA7EC;
     text-align: center;
+}
+.card-span:hover{
+  color: var(--maincolor);
+  cursor: pointer;
+}
+.card-span-rm:hover{
+  color: #fb0001;
+  cursor: pointer;
+}
+table.table td a:hover {
+	color: #2196F3;
+}
+table.table td a.edit {
+	color: #FFC107;
+}
+table.table td a.delete {
+	color: #F44336;
+}
+table.table td i {
+	font-size: 19px;
+}
+table.table .avatar {
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.card-pointer:hover{
+  cursor: pointer;
+}
+.editprofile{
+  max-width: 300px;
+  max-height: auto;
+}
+.timecard:hover{
+  border-color: var(--maincolor);
+  
+  background-color: rgb(209, 229, 255);
+  
+  
+}
+.timecard{
+  text-align: center;
+  max-height: none;
+  max-width: 200px;
+  border-radius: 10px;
+  background-color: #fff;
+  
+}
+/* test */
+.overlays {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(hsl(0 0% 10% / 0),hsl(0 0% 10%  / 0.1) 20%,hsl(0 0% 10%  / 0.1));
+ 
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+}
+
+.containers:hover .overlays {
+  height: 100%;
+}
+
+.texts {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }

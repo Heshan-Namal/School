@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Helpers\Qs;
 
 class CreateTeacherTable extends Migration
 {
@@ -18,7 +19,7 @@ class CreateTeacherTable extends Migration
             $table->string('full_name')->nullable(false);
             $table->string('contact_no')->nullable(false);
             $table->longText('address')->nullable(false);
-            // $table->string('photo')->default(Qs::getDefaultUserImage());
+            $table->string('photo')->default(Qs::getDefaultUserImage());
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('admin_id');
             $table->timestamps();

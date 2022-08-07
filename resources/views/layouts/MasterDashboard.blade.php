@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Viduhala</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{asset('assets/front/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome-all.min.css')}}">
@@ -32,7 +33,7 @@
                         <div class="navDroupdown form-control border-0 small">
                             <input  type="text" class="navtext" placeholder="Home" readonly>
                             <div class="navOption ">
-                                <a href="#"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                <a href='{{ url("/dashboard") }}'><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
                                 <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
                                 <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
                                 <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
@@ -125,8 +126,15 @@
                 </nav>
                 <div class="container-fluid d-flex bd-highlight ">
 
+                
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                    <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary btn-sm">Go back</button></a>
+                    <div class="alert " role="alert">
+                        <span style="color:red">@error('grade_name'){{$message}}@enderror</span>
+                    </div>
+                        @yield('content')
 
-                    <div class="p-2 flex-grow-1 bd-highlight">@yield('content')</div>
+                    </div>
                     {{-- <div class=" p-2 bd-highlight NoticeBoard">
                     <div class=" dropdown-list animated--grow-in ">
                                         <h6 class="dropdown-header">Notification center</h6>
