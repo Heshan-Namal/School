@@ -1,4 +1,4 @@
-<form action="{{route('ass.quiz',[$classid,$subjectid])}}" method="GET" >@csrf
+<form action="{{route('ass.quiz')}}" method="GET" >@csrf
     <div class="form-group mb-2">
         <label for="name">Enter Question</label>
         <textarea class="form-control @error('question') is-invalid @enderror" name="question" id="question"></textarea>

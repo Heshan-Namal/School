@@ -1,8 +1,12 @@
+@foreach($detail as $key=> $d)
 @extends('layouts.MasterDashboard')
+@endforeach
 
 @section('content')
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
+
 <div class="content">
-    <div class="row hh">
+    <div class="row hh mb-2">
         <div class="col-8">
         <div class="row">
         <div class="card">
@@ -66,71 +70,119 @@
             </form>
         </div>
         </div>
+        <div class="row mb-4">
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/ass.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                               Uploaded Assesments<br>
+                               <span class="value rounded-circle ms-5">
+                                {{$allnum}}
+                            </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card">
+                    <div class="row g-0">
+                    <div class="col-md-4 mt-3">
+                      <img
+                        src="{{asset('assets/front/images/ass/no_pub.png')}}"
+                        alt="Trendy Pants and Shoes"
+                        class="img-fluid rounded-start d-flex mx-2"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <p class="card-text">
+                           Not Published Assesments
+                            <p class="text-end" >{{$pubnum}}</p>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="box-card ">
+                    <div class="row g-0">
+                        <div class="col-md-4 mt-3">
+                          <img
+                            src="{{asset('assets/front/images/ass/expired.png')}}"
+                            alt="Trendy Pants and Shoes"
+                            class="img-fluid rounded-start d-flex mx-2"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p class="card-text">
+                                Num of Expired Assesments
+                                <p class="text-end " >{{$exnum}}</p>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+        </div>
         <div class="row">
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Num of All Assesments</p>
-                        <p class="text-end" >{{$allnum}}</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Not Published Assesments</p>
-                        <p class="text-end" >{{$pubnum}}</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-4">
-                <div class="box-card">
-                    <div class="card-body">
-                        <p class="timetable" >Num of Expired Assesments</p>
-                        <p class="text-end" >{{$exnum}}</p>
-                    </div>
-                </div>
-
+            <div class="head mt-4">
+                <p><u>All Assesments</u> :-</p>
             </div>
         </div>
         </div>
         <div class="col-4">
-        <div class="d-card mt-3">
-            <div class="card-header timetable">View Submited Assesments
-            <a href="{{route('ass.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
-            <div class="card-body">
-               <p class="card-header">Nearly going to Expired Assesments</p>
-               <table class="overflow-y:auto;"><tr><th></th><th></th><th></th></tr>
-               @foreach($nearex as $key=> $n)
-               <tr>
-               <td><p class="mx-4">{{$n->title}}</p></td>
-               <td><p class="mx-4">{{$n->due_date}}</p></td>
-               <td><p class="btn btn-danger btn-sm mx-4"><i class="bi bi-bell"></i></p></td>
-               </tr>
-               {{-- <div class="row">
-                <div class="col-2">
-                    <p>{{$n->title}}</p>
+            <div class="d-card overflow-auto mt-3 ">
+                <div class="card-header colo card-text">View Submited Assesments
+                    <a href="{{route('ass.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
+                    <div class="card-body  ">
+                    <p class="card-header">Nearly going to Expired Assesments</p>
+                    <table class="table "><tr><th scope="col" class="mx-2">Assesment</th><th scope="col">Due Date</th><th scope="col"></th></tr>
+                        @foreach($nearex as $key=> $n)
+                        <tr>
+                        <td><p class="mx-2">{{$n->title}}</p></td>
+                        <td><p class="mx-2">{{$n->due_date}}</p></td>
+                        <td><p class="btn btn-danger btn-sm mx-4"><i class="bi bi-bell"></i></p></td>
+                        </tr>
+                        {{-- <div class="row">
+                         <div class="col-2">
+                             <p>{{$n->title}}</p>
+                         </div>
+                         <div class="col-2">
+                             <p>{{$n->due_date}}</p>
+                         </div>
+                        </div> --}}
+                        @endforeach
+                        </table>
                 </div>
-                <div class="col-2">
-                    <p>{{$n->due_date}}</p>
-                </div>
-               </div> --}}
-               @endforeach
-               </table>
-            </div>
 
-        </div>
+            </div>
 
     </div>
 
 
 </div>
 
-    <div class="table-card">
+
         <div class="text-end">
             <div class="row">
+
             <form action="?" class="col-sm-2 me-auto" >
                 <div class="input-group">
                     <button type="submit" class="btn btn-primary"> Go!</button>
@@ -139,13 +191,18 @@
                  </div>
             </form>
             <div class="col-3">
-                <button type="submit" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Assesment</button>
+                <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Assesment</button>
             </div>
 
             </div>
 
             {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
         </div>
+        @if (session('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+        @endif
         @if($assments->count()>0)
     <table class="table table-success table-hover m-0">
         <thead>
@@ -184,7 +241,11 @@
           <td>{{$ass->due_date}}</td>
           <td>{{$ass->assessment_type}}</td>
           @if($ass->assessment_type == 'mcq_quiz')
-            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}" >Add Question</td>
+            @if($ass->status=='published')
+            <td><button class="btn btn-success btn-sm" disabled data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}">Add Question</td>
+            @else
+            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$ass->id}}">Add Question</td>
+            @endif
             <td><a href="{{route('ass.quizshow',[$ass->id])}}"><button class="btn btn-primary btn-sm"><i class="bi bi-binoculars-fill"></i></button></a> </td>
           @else
           <td>{{$ass->assessment_file}}</a></td>
@@ -193,23 +254,23 @@
           <td>{{$ass->allocated_marks}}</td>
           <td>{{$ass->status}}</td>
           <td class="btn-toolbar">
-            @if($ass->status=='draft')
-                <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square "></i> </button>
+            @if($ass->status=='published')
+            <button class="btn btn-primary btn-sm " disabled><i class="bi bi-pencil-square"></i></button>
+            <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{$ass->id}}"><i class="bi bi-trash"></i></button>
+            <button id="published" class="btn btn-success btn-sm mx-1" type="submit" name="status" value="published" disabled><i class="bi bi-upload"></i></button>
             @else
-            <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled><i class="bi bi-pencil-square "></i> </button>
-            @endif
-         <button class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
-          <form action="#" method="POST">@csrf
-              @if($ass->status=='draft')
-              <button class="btn btn-success btn-sm mx-1" ><i class="bi bi-upload"></i></button>
-                {{-- <input type="submit" name="status" value="{{}}" class="btn btn-success btn-sm "> --}}
-              @else
-              <button class="btn btn-success btn-sm mx-1" disabled><i class="bi bi-upload"></i></button>
-              @endif
-            </td>
+          <button class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#editassModal" data-bs-id="{{$ass->id}}" data-bs-title="{{$ass->title}}" data-bs-description="{{$ass->description}}"
+            data-bs-term="{{$ass->term}}" data-bs-week="{{$ass->week}}" data-bs-extra_week="{{$ass->extra_week}}" data-bs-day="{{$ass->day}}" data-bs-due_date="{{$ass->due_date}}" data-bs-assessment_type="{{$ass->assessment_type}}"
+            data-bs-allocated_marks="{{$ass->allocated_marks}}" data-bs-assessment_file="{{$ass->assessment_file}}" ><i class="bi bi-pencil-square "></i> </button>
+            <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{$ass->id}}"><i class="bi bi-trash"></i></button>
+            <form action="{{route('ass.status',[$ass->id])}}" method="POST">@csrf
+            <button id="published" class="btn btn-success btn-sm mx-1" type="submit" id="pub" name="status" value="published"><i class="bi bi-upload"></i></button>
+        </form>
+        @endif
+        </td>
 
 
-          </form>
+
 
         </tr>
 
@@ -219,17 +280,26 @@
 
         </tbody>
         @else
-        <div class="table-card">
-        <div class="card-header">No Assesments assign yet</div>
-        <div class="card-body">
-        <img src="{{asset('assets/front/images/notfound.jpg')}}" alt="...">
-        </div>
-        </div>
+        <div class="d-flex justify-content-center mb-5">
+            <div class="search-card">
+                <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 mt-3 ">
+                        <img
+                          src="{{asset('assets/front/images/ass/rec.png')}}"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start d-flex "
+                        />
+                      </div>
+                </div>
+                </div>
+          </div>
         @endif
         </table>
-
-
-    </div>
+        <div class="pagination justify-content-end mt-3">
+        {!! $assments->links() !!}
+        </div>
+</div>
 
 {{-- modal for create --}}
 <div class="modal fade" id="createmodal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
@@ -257,7 +327,35 @@
         <div class="modal-body table">
             @include('teacher.Models.q_create')
         </div>
+    </div>
+  </div>
+</div>
 
+ {{-- modal for edit --}}
+ <div class="modal fade" id="editassModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title table" id="example1ModalLabel">Edit an Assesments for the Class</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            @include('teacher.Models.assedit')
+        </div>
+    </div>
+  </div>
+</div>
+{{-- delete modal --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="example1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title table del text-center" id="example1ModalLabel">Delete Record</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body table">
+            @include('teacher.Models.deletemodal')
+        </div>
     </div>
   </div>
 </div>

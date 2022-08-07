@@ -20,10 +20,10 @@ class CreateAttentivenessCheckTable extends Migration
             $table->string('week')->nullable(true);
             $table->string('extra_week')->nullable(true);
             $table->Date('date')->nullable(false);
+            $table->Time('uploaded_time')->nullable(true);
             $table->string('period')->nullable(false);
             $table->enum('status',['published', 'draft', 'disabled'])->default('draft')->nullable(false);
             $table->string('quiz_duration')->nullable(false);
-            $table->integer('no_of_questions')->nullable(false);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('teacher_id');

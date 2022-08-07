@@ -517,10 +517,10 @@ height: 42px;
 
 
 /*teacher */
+/* .hh .card{
+    max-width:700px;
 
-.hh .card {
-    max-width: 900px;
-    min-height: 0px;
+    min-height:0px;
     height: 115px;
     margin: 10px 10px 10px 10px;
     padding-right: 15px;
@@ -529,16 +529,12 @@ height: 42px;
     box-shadow: none;
     margin-bottom: unset;
     border: none;
+} */
+.item .card,.table.card{
+    background-color:#f7f1f1;
 }
-
-.item .card,
-.table.card {
-    background-color: #f7f1f1;
-}
-
-.owl-nav button.owl-next,
-.owl-nav button.owl-prev {
-    color: #fff;
+.owl-nav button.owl-next,.owl-nav button.owl-prev{
+    color:#fff;
     margin-left: 10px;
     border: none;
     outline: none;
@@ -546,14 +542,59 @@ height: 42px;
     height: 28px;
     width: 38px;
 }
-
-.timetable {
+.timetable{
     color: #000;
     font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 20px;
+    /* //margin-top: 15px; */
+    /* margin-bottom: 20px; */
     text-align: left;
 }
+
+  .d-card{
+
+    text-align: unset;
+    max-width: none;
+    min-height:fit-content;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border:rgb(212, 216, 231) 0.5px solid;
+  }
+
+  .b-card{
+    margin-left: 250px;
+    background-color: #fff;
+    margin-top: 15px;
+    text-align: unset;
+    max-width: 800px;
+    min-height: none;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border:none;
+  }
+  /* .box-card{
+    margin-top: 25px;
+    text-align: unset;
+    max-width: none;
+    width: 250px;
+    height: 100px;
+    min-height: 0;
+    box-shadow: none;
+    border:rgb(212, 216, 231) 0.5px solid;
+  } */
+  /* .sub-card{
+    background-color: #fff;
+    margin-top: 25px;
+    text-align: unset;
+    max-width: none;
+    width: 300px;
+    height: 150px;
+    min-height: 0;
+    box-shadow: none;
+    border:rgb(212, 216, 231) 0.5px solid;
+  } */
+/* .btn {
+    width: 100px;
+  } */
 
 .kk .card {
     max-width: none;
@@ -570,37 +611,120 @@ height: 42px;
     border: none;
 }
 
-.table-card {
-    text-align: unset;
-    max-width: none;
-    min-height: none;
-    box-shadow: none;
-    margin-bottom: 20px;
-    border: none;
-}
+/* .table-card {
 
-.d-card {
-    text-align: unset;
-    max-width: none;
-    min-height: none;
-    box-shadow: none;
-    margin-bottom: 20px;
-    border: rgb(212, 216, 231) 0.5px solid;
-}
+  text-align: unset;
+  max-width: none;
+  min-height: none;
+  box-shadow: none;
+  margin-bottom: 20px;
+  border: none;
+} */
 
 .table {
-    font-weight: bold;
-    color: #000;
+  font-weight:normal;
+  color: #000;
+
+}
+.table tr:last-child td{
+    border:none;
+  }
+
+.classname
+{
+    font-size: 30px;
+    font-weight:bold;
+    color: #1F2F98;
+    min-height: 0px;
+    margin: 0px 0px 0px 0px;
+}
+.classnum
+{
+    font-size: 35px;
+    font-weight:bold;
+    color: #fff;
+    min-height: 0px;
+
+}
+.box{
+    width: 80px;
+    height: 60px;
+    background-color: #1CA7EC;
+    text-align: center;
+}
+.card-span:hover{
+  color: var(--maincolor);
+  cursor: pointer;
+}
+.card-span-rm:hover{
+  color: #fb0001;
+  cursor: pointer;
+}
+table.table td a:hover {
+	color: #2196F3;
+}
+table.table td a.edit {
+	color: #FFC107;
+}
+table.table td a.delete {
+	color: #F44336;
+}
+table.table td i {
+	font-size: 19px;
+}
+table.table .avatar {
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.card-pointer:hover{
+  cursor: pointer;
+}
+.editprofile{
+  max-width: 300px;
+  max-height: auto;
+}
+.timecard:hover{
+  border-color: var(--maincolor);
+  
+  background-color: rgb(209, 229, 255);
+  
+  
+}
+.timecard{
+  text-align: center;
+  max-height: none;
+  max-width: 200px;
+  border-radius: 10px;
+  background-color: #fff;
+  
+}
+/* test */
+.overlays {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(hsl(0 0% 10% / 0),hsl(0 0% 10%  / 0.1) 20%,hsl(0 0% 10%  / 0.1));
+ 
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
 }
 
-.b-card {
-    margin-left: 250px;
-    background-color: #fff;
-    margin-top: 15px;
-    text-align: unset;
-    max-width: 800px;
-    min-height: none;
-    box-shadow: none;
-    margin-bottom: 20px;
-    border: none;
+.containers:hover .overlays {
+  height: 100%;
+}
+
+.texts {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }

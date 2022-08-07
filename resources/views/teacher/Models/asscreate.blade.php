@@ -55,7 +55,7 @@
             </div>
         </div>
             <div class="col-4">
-                <input type="text" class="form-control " name="extraweek">
+                <input type="text" class="form-control " name="extraweek" >
             </div>
 
 
@@ -63,7 +63,7 @@
     </div>
            <div class="form-group mb-2">
                <label for="name">Title</label>
-               <input type="text" class="form-control " name="title">
+               <input type="text" class="form-control " name="title" required>
                @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -109,7 +109,7 @@
         </div>
         <div class="form-group mb-2">
             <label for="name">Allocated Markes</label>
-            <input type="number" class="form-control @error('a_marks') is-invalid @enderror" name="a_marks">
+            <input type="number" class="form-control @error('a_marks') is-invalid @enderror" name="a_marks" required>
             @error('a_marks')
                      <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>

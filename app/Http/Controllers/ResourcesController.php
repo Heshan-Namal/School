@@ -11,21 +11,27 @@ class ResourcesController extends Controller
     public function index(Request $request ,$classid,$subjectid)
     {
         //dd($res);
+        $search=$request->search;
         $term=$request->term;
         $week=$request->week;
         $day=$request->day;
-        if($term==NULL){
+        if(($term==NULL)||($term=='allt')){
             $res=DB::table('resource')
         ->where('resource.class_id','=',$classid)
         ->where('resource.subject_id','=',$subjectid)
-        ->get();
+        ->where(function($query) use ($search){
+            $query->where('resource.chapter', 'LIKE', '%'.$search.'%')
+                    ->orWhere('resource.resource_type', 'LIKE', '%'.$search.'%')
+                    ->orWhere('resource.topic', 'LIKE', '%'.$search.'%');
+            })
+            ->paginate(10);
         }
-        elseif($week==NULL){
+        elseif($week=='allw'){
             $res=DB::table('resource')
             ->where('resource.class_id','=',$classid)
             ->where('resource.subject_id','=',$subjectid)
             ->where('resource.term','=',$term)
-            ->get();
+            ->paginate(10);
         }elseif($day==NULL){
             if($week == 'extra'){
                 $res=DB::table('resource')
@@ -33,14 +39,14 @@ class ResourcesController extends Controller
                 ->where('resource.subject_id','=',$subjectid)
                 ->where('resource.term','=',$term)
                 ->whereNotNull('resource.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $res=DB::table('resource')
                 ->where('resource.class_id','=',$classid)
                 ->where('resource.subject_id','=',$subjectid)
                 ->where('resource.term','=',$term)
                 ->where('resource.week','=',$week)
-                ->get();
+                ->paginate(10);
             }
 
         }else{
@@ -51,7 +57,7 @@ class ResourcesController extends Controller
                 ->where('resource.term','=',$term)
                 ->where('resource.day','=',$day)
                 ->whereNotNull('resource.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $res=DB::table('resource')
                 ->where('resource.class_id','=',$classid)
@@ -59,10 +65,25 @@ class ResourcesController extends Controller
                 ->where('resource.term','=',$term)
                 ->where('resource.week','=',$week)
                 ->where('resource.day','=',$day)
-                ->get();
+                ->paginate(10);
             }
         }
 
+        $note=DB::table('resource')
+        ->where('resource.class_id','=',$classid)
+        ->where('resource.subject_id','=',$subjectid)
+        ->where('resource.resource_type','=','note')
+        ->orderBy('resource.created_at','desc')
+        ->limit(4)
+        ->get();
+
+        $clink=DB::table('resource')
+        ->where('resource.class_id','=',$classid)
+        ->where('resource.subject_id','=',$subjectid)
+        ->where('resource.resource_type','=','class_link')
+        ->orderBy('resource.created_at','desc')
+        ->limit(4)
+        ->get();
 
         // $detail=DB::table('Subject_class')
         // ->where('Subject_class.class_id','=',$classid)
@@ -72,7 +93,7 @@ class ResourcesController extends Controller
         // ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
         // ->get();
 
-       return view('teacher.Resources.index',compact(['res','classid','subjectid']));
+       return view('teacher.Resources.index',compact(['res','classid','subjectid','note','clink']));
 
 
 
@@ -120,5 +141,44 @@ class ResourcesController extends Controller
 
 
 
+    }
+
+
+    public function resupdate(Request $req)
+    {
+       // dd($req);
+        $res=Resource::find($req->resid);
+        if(isset($req->file)){
+            $path=$req->file;
+            $name = $path->getClientOriginalName();
+            $path->move('notes',$name);
+        }else{
+            $name=$req->link;
+        }
+
+        $res->chapter=$req->chapter;
+        $res->topic=$res->topic;
+        $res->term=$req->term;
+        $res->week=$req->week;
+        $res->day=$req->day;
+        $res->extra_week=$req->extraweek;
+        $res->resource_type=$req->type;
+        $res->resource_file=$name;
+        $classid=$res->class_id;
+        $subjectid=$res->subject_id;
+
+        $res->save();
+        //dd($classid);
+        //return dd($req->assignments->getClientOriginalName());
+
+        return redirect()->route('res.index',[$classid,$subjectid])->with('message','Resources updated successfully');
+
+
+    }
+
+    public function destroy_res(Request $req){
+        $res=Resource::find($req->resid);
+        $res->delete();
+        return back()->with('message','Succesfully Deleted the Record');
     }
 }

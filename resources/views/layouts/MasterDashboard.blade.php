@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Viduhala</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{asset('assets/front/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome-all.min.css')}}">
@@ -60,13 +61,33 @@
                                     <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
                                     <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
                                 @endif
+                            <div class="navOption ">
+                                <a href='{{ url("/dashboard") }}'><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
+                                <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
+                                <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
+                                <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
                             </div>
                         </div>
+                        @if (isset($d))
+                        <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="box mx-3 rounded">
+                                <p class="classnum">{{$d->class}}</p>
+                            </div>
 
-
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <p class="classname">:{{$d->subject}}</p>
+                        </div>
+                        </div>
+                        @else
+                            <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                        </form>
+                            </form>
+                        @endif
+
+
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
@@ -134,8 +155,15 @@
                 </nav>
                 <div class="container-fluid d-flex bd-highlight ">
 
+                
+                    <div class="p-2 flex-grow-1 bd-highlight">
+                    <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary btn-sm">Go back</button></a>
+                    <div class="alert " role="alert">
+                        <span style="color:red">@error('grade_name'){{$message}}@enderror</span>
+                    </div>
+                        @yield('content')
 
-                    <div class="p-2 flex-grow-1 bd-highlight">@yield('content')</div>
+                    </div>
                     {{-- <div class=" p-2 bd-highlight NoticeBoard">
                     <div class=" dropdown-list animated--grow-in ">
                                         <h6 class="dropdown-header">Notification center</h6>
@@ -173,10 +201,10 @@
                                             </div>
                                         </a><a class="dropdown-item text-center small text-gray-500 mt-1" href="#">Show All Alerts</a>
                                     </div>
-     
+
                     </div> --}}
-                    
-                    
+
+
 
 
 
@@ -191,6 +219,8 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+
+    
     <script src="{{asset('assets/front/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/front/js/chart.min.js')}}"></script>
     <script src="{{asset('assets/front/js/bs-init.js')}}"></script>
@@ -202,6 +232,11 @@
     <script src="{{asset('assets/front/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/front/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/front/js/carousel.js')}}"></script>
+
+
+    <!-- Your application script -->
+
+
     @yield('script')
 </body>
 
