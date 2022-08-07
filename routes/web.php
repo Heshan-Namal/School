@@ -85,7 +85,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::group(['prefix' => 'teacher'], function(){
-            Route::get('/AddTeacher',[AdminController::class,'AddTeacher']);
+            Route::post('/AddTeacher',[AdminController::class,'AddTeacher']);
            
         });
 

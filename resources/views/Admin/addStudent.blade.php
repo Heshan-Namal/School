@@ -32,19 +32,21 @@
             <div class="col-md-4">
                 <label for="inputState" class="form-label">Grade</label>
                 <select id="inputGrade" class="form-select mt-0" aria-label="Default select example">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <option selected>Choose...</option>
+                @foreach ($grade as $item)
+                    
+                    <option value="{{$item->id}}">{{$item->grade_name}}</option>
+                @endforeach 
                 </select>
             </div>
             <div class="col-md-4">
                 <label for="inputState" class="form-label">Class</label>
                 <select id="inputClass" class="form-select mt-0" aria-label="Default select example">
                     <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    @foreach ($classroom as $item)
+                    <option value="{{$item->id}}">{{$item->class_name}}</option>
+                    @endforeach 
+                    
                 </select>
             </div>
             <div class="col-md-4">

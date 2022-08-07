@@ -33,7 +33,7 @@
                         <div class="navDroupdown form-control border-0 small">
                             <input  type="text" class="navtext" placeholder="Home" readonly>
                             <div class="navOption ">
-                                <a href="#"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                <a href='{{ url("/dashboard") }}'><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
                                 <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
                                 <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
                                 <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
@@ -128,7 +128,10 @@
 
                 
                     <div class="p-2 flex-grow-1 bd-highlight">
-                    <button type="button" class="btn btn-primary btn-sm">Go back</button>
+                    <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary btn-sm">Go back</button></a>
+                    <div class="alert " role="alert">
+                        <span style="color:red">@error('grade_name'){{$message}}@enderror</span>
+                    </div>
                         @yield('content')
 
                     </div>

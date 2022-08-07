@@ -2,9 +2,6 @@
 
 @section('content')
 <div class="content">
-<div class="alert " role="alert">
-<span style="color:red">@error('grade_name'){{$message}}@enderror</span>
-</div>
 <!-- <span style="color:red">@error('grade_name'){{$message}}@enderror</span> -->
 <div class="row">
   @foreach($list as $item)
@@ -96,12 +93,17 @@
           <div class="col-md-8">
                   <label for="inputEmail4" class="form-label">Add new Class</label>
                   <input type="text" class="form-control" name="Class_name">
-          </div>
-          <div class="col-md-8">
-                  <label for="inputEmail4" class="form-label">Assign a Teacher</label>
-                  <input type="text" class="form-control" name="Class_Teacher">
                   <input type="hidden" class="form-control" name="Grade_id" value="$(.edit_btn).val()">
           </div>
+          <div class="col-md-8">
+                <label for="inputState" class="form-label">Assign a Teacher</label>
+                <select id="inputGrade" class="form-select mt-0" aria-label="Default select example">
+                <option selected>Choose...</option>
+                  @foreach($teacher as $item3)
+                    <option value="{{ $item3->id }}">{{ $item3->full_name }}</option>
+                  @endforeach
+                </select>
+            </div>
           <div class="col-md-4 mt-5">
           
               <button type="submit" class="btn btn-primary">Add</button>
