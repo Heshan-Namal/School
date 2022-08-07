@@ -15,3 +15,7 @@ function entermarks(e){
     document.getElementById(k).hidden = false;
     document.getElementById(w).hidden =true;
 }
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })

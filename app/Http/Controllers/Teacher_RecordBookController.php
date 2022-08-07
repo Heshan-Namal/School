@@ -10,22 +10,32 @@ use Carbon\Carbon;
 use App\Exports\RecordBookExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
-
+use PDF;
 class Teacher_RecordBookController extends Controller
 {
     public function index(Request $request,$classid,$subjectid)
     {
-        $now = Carbon::now();
-        $c_week=$now->weekOfYear;
-        if ((1<$c_week) && (16>$c_week)) {
+        // $now = Carbon::now();
+        // $c_week=$now->weekOfYear;
+        // if ((1<$c_week) && (16>$c_week)) {
+        //     $term='term1';
+        //     $week=$c_week;
+        // }elseif ((17<$c_week) && (32>$c_week)) {
+        //     $term='term2';
+        //     $week=$c_week-16;
+        // }else {
+        //     $term='term3';
+        //     $week=$c_week-32;
+        // }
+        $date=Carbon::now()->format('y/m/d/l/W');
+        $datearr=explode("/",$date);
+        $week=$datearr[4]%17;
+        if ($datearr[1]>=1 && $datearr[1]<5) {
             $term='term1';
-            $week=$c_week;
-        }elseif ((17<$c_week) && (32>$c_week)) {
+        }elseif ($datearr[1]>=5 && $datearr[1]<9) {
             $term='term2';
-            $week=$c_week-16;
         }else {
             $term='term3';
-            $week=$c_week-32;
         }
         $day=Carbon::now()->format('l');
         $record=DB::table('class_timetable')
@@ -59,7 +69,7 @@ class Teacher_RecordBookController extends Controller
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
             ->where('class_record.term','=','term2')
-            ->paginate(1);
+            ->paginate(10);
             $term3=DB::table('class_record')
             ->where('class_record.class_id',$classid)
             ->where('class_record.subject_id',$subjectid)
@@ -113,12 +123,24 @@ class Teacher_RecordBookController extends Controller
 
     public function export($classid,$subjectid,$term)
     {
-        return Excel::download(new RecordBookExport($classid,$subjectid,$term), 'recordbook.xlsx');
+        $data=DB::table('class_record')
+            ->where('class_record.class_id',$classid)
+            ->where('class_record.subject_id', $subjectid)
+            ->where('class_record.term','=',$term)
+            ->get();
+        return Excel::download(new RecordBookExport($data,$term), 'recordbook.xlsx');
     }
 
     public function exportpdf($classid,$subjectid,$term)
     {
-        return (new RecordBookExport($classid,$subjectid,$term))->download('recordbook.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        $data=DB::table('class_record')
+            ->where('class_record.class_id',$classid)
+            ->where('class_record.subject_id', $subjectid)
+            ->where('class_record.term','=',$term)
+            ->get();
 
+            //  dd($data);
+        $pdf=PDF::loadView('exports.recordbook',compact(['data','term']));
+               return $pdf->download('recordbook.pdf');
     }
 }
