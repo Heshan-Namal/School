@@ -205,10 +205,10 @@
                    <label for="correct_answer">Select Correct Answer <span class="text-danger">*</span></label>
                         <select name="correct_answer" id="correct_answer" class="form-control" required>
                             <option ></option>
-                            <option  value="answer1">Answer 1</option>
-                            <option  value="answer2">Answer 2</option>
-                            <option  value="answer3">Answer 3</option>
-                            <option  value="answer4">Answer 4</option>
+                            <option  value="option_1">Answer 1</option>
+                            <option  value="option_2">Answer 2</option>
+                            <option  value="option_3">Answer 3</option>
+                            <option  value="option_4">Answer 4</option>
                         </select>
 
                    </div>

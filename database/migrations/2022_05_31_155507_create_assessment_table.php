@@ -20,7 +20,7 @@ class CreateAssessmentTable extends Migration
             $table->string('term')->nullable(false);
             $table->string('week')->nullable(true);
             $table->string('extra_week')->nullable(true);
-            $table->string('day')->nullable(false);
+            $table->string('day')->nullable(true);
             $table->date('due_date')->nullable(false);
             $table->enum('status',['published', 'draft', 'disabled'])->default('draft')->nullable(false);
             $table->enum('assessment_type',['mcq_quiz', 'upload_file'])->nullable(false);

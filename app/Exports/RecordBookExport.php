@@ -1,43 +1,33 @@
 <?php
 
 namespace App\Exports;
-
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClassRecordBook;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-class RecordBookExport implements FromQuery,WithHeadings
+class RecordBookExport implements FromView
 {
 
     use Exportable;
 
-    public function __construct($classid,$subjectid,$term)
+    public function __construct($data=array(),$term)
     {
-        $this->classid = $classid;
-        $this->subjectid = $subjectid;
+        $this->data = $data;
         $this->term = $term;
 
     }
-    public function headings(): array
+
+    public function view(): View
     {
-        return [
-            'Date',
-            'Period',
-            'Term',
-            'Record',
-            'Submited At'
-        ];
+        return view('exports.recordbook', [
+            'data' => $this->data,
+            'term'=>$this->term
+        ]);
     }
 
-    public function query()
-    {
-        return ClassRecordBook::query()->where('class_id',$this->classid)
-        ->where('subject_id', $this->subjectid)
-        ->where('term','=',$this->term)
-        ->select('day','period','term','record','updated_at');
-    }
     /**
     * @return \Illuminate\Support\Collection
     */

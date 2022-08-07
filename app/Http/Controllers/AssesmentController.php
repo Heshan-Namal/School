@@ -248,17 +248,29 @@ class AssesmentController extends Controller
 
     public function changeStatus(Request $request ,$id)
     {
+        $date=Carbon::now()->format('y/m/d/l/W');
+        $datearr=explode("/",$date);
         $ass=Assesment::find($id);
         if($ass->assessment_type=='mcq_quiz'){
             $n=Assessment_quiz_question::where('assessment_id',$id)->get()->count();
             if($n>0){
+                $input=Assesment::find($id);
+                $input->day=$datearr[3];
+                $input->week="week".$datearr[4]%17;
+                $input->save();
                 Assesment::where('id',$id)->update(['status'=>$request->status]);
             }else{
                 return back()->with('message','You didnt Add Questions for Assessment');
             }
+        }else {
+                $input=Assesment::find($id);
+                $input->day=$datearr[3];
+                $input->week="week".$datearr[4]%17;
+                $input->save();
+                Assesment::where('id',$id)->update(['status'=>$request->status]);
+                return back()->with('message','Published Successfull');
         }
-        Assesment::where('id',$id)->update(['status'=>$request->status]);
-        return back()->with('message','Published Successfull');
+
     }
 
     public function destroy_ass(Request $req){
