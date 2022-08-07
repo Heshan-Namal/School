@@ -5,6 +5,7 @@ use App\Models\Assesment;
 use App\Models\Assessment_quiz_question;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
@@ -12,17 +13,25 @@ class AssesmentController extends Controller
 {
     public function index(Request $request ,$classid,$subjectid)
     {
+
         $search=$request->search;
         $term=$request->term;
         $week=$request->week;
         $day=$request->day;
-        // dd($week);
+
         if(($term==NULL)||($term=='allt')){
             $assments=DB::table('assessment')
-        ->where('assessment.class_id','=',$classid)
-        ->where('assessment.subject_id','=',$subjectid)
-        ->where('assessment.title','like',"%{$search}%")
-        ->get();
+            ->where('assessment.class_id','=',$classid)
+                ->where('assessment.subject_id','=',$subjectid)
+                ->where(function($query) use ($search){
+                $query->where('assessment.title', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.assessment_file', 'LIKE', '%'.$search.'%');
+                })
+                ->paginate(10);
+
+
+
         // ->paginate(3);
 
         }
@@ -31,7 +40,7 @@ class AssesmentController extends Controller
             ->where('assessment.class_id','=',$classid)
             ->where('assessment.subject_id','=',$subjectid)
             ->where('assessment.term','=',$term)
-            ->get();
+            ->paginate(10);
         }elseif($day==NULL){
             if($week == 'extra'){
                 $assments=DB::table('assessment')
@@ -39,14 +48,14 @@ class AssesmentController extends Controller
                 ->where('assessment.subject_id','=',$subjectid)
                 ->where('assessment.term','=',$term)
                 ->whereNotNull('assessment.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $assments=DB::table('assessment')
                 ->where('assessment.class_id','=',$classid)
                 ->where('assessment.subject_id','=',$subjectid)
                 ->where('assessment.term','=',$term)
                 ->where('assessment.week','=',$week)
-                ->get();
+                ->paginate(10);
             }
 
         }else{
@@ -57,7 +66,7 @@ class AssesmentController extends Controller
                 ->where('assessment.term','=',$term)
                 ->where('assessment.day','=',$day)
                 ->whereNotNull('assessment.extra_week')
-                ->get();
+                ->paginate(10);
             }else{
                 $assments=DB::table('assessment')
                 ->where('assessment.class_id','=',$classid)
@@ -65,7 +74,7 @@ class AssesmentController extends Controller
                 ->where('assessment.term','=',$term)
                 ->where('assessment.week','=',$week)
                 ->where('assessment.day','=',$day)
-                ->get();
+                ->paginate(10);
             }
         }
         $exnum = DB::table('assessment')
@@ -88,18 +97,16 @@ class AssesmentController extends Controller
            ->whereDate('due_date', '>', Carbon::now())
            ->orderBy('due_date','asc')
            ->get();
-        //    dd($nearex);
 
-        // $detail=DB::table('Subject_class')
-        // ->where('Subject_class.class_id','=',$classid)
-        // ->where('Subject_class.subject_id','=',$subjectid)
-        // ->join('Subject','Subject.id','=','Subject_class.subject_id')
-        // ->join('Class','Class.id','=','Subject_class.class_id')
-        // ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
-        // ->get();
+        $detail=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->get();
 
-
-       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid']));
+       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid','detail']));
 
 
 
@@ -107,8 +114,7 @@ class AssesmentController extends Controller
     public function store(Request $req,$classid,$subjectid)
     {
 
-        //return dd($req->assignments->getClientOriginalName());
-        //dd($req);
+
         if(isset($req->assignments)){
             $path=$req->assignments;
             $name = $path->getClientOriginalName();
@@ -175,22 +181,23 @@ class AssesmentController extends Controller
 
     public function assquestion_update(Request $req)
     {
+        //  dd($req->id);
 
         $req->validate([
 
             'id'=>'required',
             'question'=>'required',
-            'option_1'=>'required',
-            'option_2'=>'required',
-            'option_3'=>'required',
-            'option_4'=>'required',
+            'answer1'=>'required',
+            'answer2'=>'required',
+            'answer3'=>'required',
+            'answer4'=>'required',
             'correct_answer'=>'required',
 
 
         ]);
 
         $question=Assessment_quiz_question::find($req->id);
-        $id=$question->ass_id;
+        $id=$question->assessment_id;
         $question->question=$req->question;
         $question->option_1=$req->answer1;
         $question->option_2=$req->answer2;
@@ -204,4 +211,66 @@ class AssesmentController extends Controller
 
 
     }
+    public function assessmentupdate(Request $req)
+    {
+        //dd($req);
+        $ass=Assesment::find($req->assid);
+        if($req->has('assignments')){
+            $path=$req->assignments;
+            $name = $path->getClientOriginalName();
+            $path->move('assignments',$name);
+        }else{
+            $name=$ass->assessment_file;
+
+        }
+
+        $ass->title=$req->title;
+        $ass->description=$req->description;
+        $ass->term=$req->term;
+        $ass->week=$req->week;
+        $ass->day=$req->day;
+        $ass->extra_week=$req->extraweek;
+        $ass->due_date=$req->due_date;
+        $ass->allocated_marks=$req->a_marks;
+        $ass->assessment_type=$req->type;
+        $ass->assessment_file=$name;
+        $classid=$ass->class_id;
+        $subjectid=$ass->subject_id;
+
+        $ass->save();
+        //dd($classid);
+        //return dd($req->assignments->getClientOriginalName());
+
+        return redirect()->route('ass.index',[$classid,$subjectid])->with('message','Assignment Updated successfully');
+
+
+    }
+
+    public function changeStatus(Request $request ,$id)
+    {
+        $ass=Assesment::find($id);
+        if($ass->assessment_type=='mcq_quiz'){
+            $n=Assessment_quiz_question::where('assessment_id',$id)->get()->count();
+            if($n>0){
+                Assesment::where('id',$id)->update(['status'=>$request->status]);
+            }else{
+                return back()->with('message','You didnt Add Questions for Assessment');
+            }
+        }
+        Assesment::where('id',$id)->update(['status'=>$request->status]);
+        return back()->with('message','Published Successfull');
+    }
+
+    public function destroy_ass(Request $req){
+        $ass=Assesment::find($req->assid);
+        $ass->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+    public function destroy_assq(Request $req){
+        $ass=Assessment_quiz_question::find($req->assqid);
+        $ass->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+
+
 }

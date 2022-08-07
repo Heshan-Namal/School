@@ -194,8 +194,8 @@
       </div>
        @endif
        @if(Qs::userIsTeamTe())
-
-        @include('Dashboard.teacherdashboard')
+      <a href="{{route('lead.index')}}"></a>
+        {{-- @include('Dashboard.teacherdashboard') --}}
        {{-- <div class="row">
         <div class="col-sm-3">
           <div class="card">
@@ -247,7 +247,7 @@
             </div>
           </div>
         </div>
-      </div> --}} 
+      </div> --}}
 
        @endif
 </div>

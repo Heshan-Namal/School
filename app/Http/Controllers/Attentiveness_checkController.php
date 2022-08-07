@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Attentiveness_check;
+use App\Models\Attentiveness_check_Question;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class Attentiveness_checkController extends Controller
 {
     public function store(Request $req,$classid,$subjectid)
@@ -26,7 +28,6 @@ class Attentiveness_checkController extends Controller
                 'extra_week'=>$extra,
                 'date'=>$req->date,
                 'period'=>$req->period,
-                'no_of_questions'=>$req->questions,
                 'class_id'=>$req->class_id,
                 'subject_id'=>$req->subject_id,
                 'teacher_id'=>Auth::user()->id
@@ -39,21 +40,29 @@ class Attentiveness_checkController extends Controller
 
     public function index(Request $request ,$classid,$subjectid)
     {
+        $search=$request->search;
         $term=$request->term;
         $week=$request->week;
+
       //  $day=$request->day;
-        if($term==NULL){
+        if(($term==NULL)||($term=='allt')){
             $quizes=DB::table('attentiveness_check')
         ->where('attentiveness_check.class_id','=',$classid)
         ->where('attentiveness_check.subject_id','=',$subjectid)
-        ->get();
+        ->where(function($query) use ($search){
+            $query->where('attentiveness_check.title', 'LIKE', '%'.$search.'%')
+                    ->orWhere('attentiveness_check.date', 'LIKE', '%'.$search.'%')
+                    ->orWhere('attentiveness_check.period', 'LIKE', '%'.$search.'%');
+            })
+
+        ->paginate(10);
         }
-        elseif($week==NULL){
+        elseif($week=='allw'){
             $quizes=DB::table('attentiveness_check')
             ->where('attentiveness_check.class_id','=',$classid)
             ->where('attentiveness_check.subject_id','=',$subjectid)
             ->where('attentiveness_check.term','=',$term)
-            ->get();
+            ->paginate(10);
         }else{
             if($week == 'extra'){
                 $quizes=DB::table('attentiveness_check')
@@ -61,140 +70,67 @@ class Attentiveness_checkController extends Controller
                 ->where('attentiveness_check.subject_id','=',$subjectid)
                 ->where('attentiveness_check.term','=',$term)
                 ->whereNotNull('attentiveness_check.extraweek')
-                ->get();
+                ->paginate(10);
             }else{
                 $quizes=DB::table('attentiveness_check')
                 ->where('attentiveness_check.class_id','=',$classid)
                 ->where('attentiveness_check.subject_id','=',$subjectid)
                 ->where('attentiveness_check.term','=',$term)
                 ->where('attentiveness_check.week','=',$week)
-                ->get();
+                ->paginate(10);
             }
         }
-
-       return view('teacher.Attentive_Quiz.index',compact(['quizes','classid','subjectid']));
-
-
-
-    }
-    // public function index($classid,$subjectid)
-    // {
-    //     $detail=DB::table('Subject_class')
-    //         ->where('Subject_class.class_id','=',$classid)
-    //         ->where('Subject_class.subject_id','=',$subjectid)
-    //         ->join('Subject','Subject.id','=','Subject_class.subject_id')
-    //         ->join('Class','Class.id','=','Subject_class.class_id')
-    //         ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
-    //         ->get();
-
-    //     $quizes=DB::table('Quiz')
-    //     ->where('Quiz.class_id','=',$classid)
-    //     ->where('Quiz.subject_id','=',$subjectid)
-    //     ->get();
-
-    //     //$assments=Assignment::get();
-
-    //     //dd($request);
-    // }
-
-    public function edit($classid,$subjectid,$quizid)
-    {
-        $detail=DB::table('Subject_class')
-        ->where('Subject_class.class_id','=',$classid)
-        ->where('Subject_class.subject_id','=',$subjectid)
-        ->join('Subject','Subject.id','=','Subject_class.subject_id')
-        ->join('Class','Class.id','=','Subject_class.class_id')
-        ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
+        $list=DB::table('attentiveness_check')
+        ->where('attentiveness_check.class_id','=',$classid)
+        ->where('attentiveness_check.subject_id','=',$subjectid)
+        ->whereDate('attentiveness_check.date', '=', Carbon::now())
         ->get();
-        $quiz=Quiz::find($quizid);
-        // $assments=Assignment::get();
-        return view('quiz.edit',compact(['classid','subjectid','quiz','detail']));
-        //dd($request);
-    }
-    public function update(Request $req,$id)
-    {
+        $stat=DB::table('attentiveness_check')
+        ->where('attentiveness_check.class_id','=',$classid)
+        ->where('attentiveness_check.subject_id','=',$subjectid)
+        ->where('attentiveness_check.status', '=', 'draft')
+        ->count();
+        $today=DB::table('attentiveness_check')
+        ->where('attentiveness_check.class_id','=',$classid)
+        ->where('attentiveness_check.subject_id','=',$subjectid)
+        ->whereDate('attentiveness_check.date', '=', Carbon::now())
+        ->count();
+        $uplod=DB::table('attentiveness_check')
+        ->where('attentiveness_check.class_id','=',$classid)
+        ->where('attentiveness_check.subject_id','=',$subjectid)
+        ->count();
+       // dd($quizes);
 
-        $req->validate([
-            'title'=>'required',
-            'date'=>'required',
-            // 'period_starttime'=>'required',
-            // 'period_endtime'=>'required',
 
-        ]);
+       return view('teacher.Attentive_Quiz.index',compact(['quizes','classid','subjectid','list','stat','today','uplod']));
 
-        $quiz=Quiz::find($id);
-
-        $quiz->title=$req->title;
-        $quiz->date=$req->date;
-        $quiz->period_starttime=$req->period_starttime;
-        $quiz->period_endtime=$req->period_endtime;
-        $quiz->class_id=$req->class_id;
-        $quiz->subject_id=$req->subject_id;
-        $quiz->teacher_id=$req->teacher_id;
-        $quiz->save();
-        //return dd($req->assignments->getClientOriginalName());
-
-        return redirect()->route('quiz.index')->with('message','Quiz Updated successfully');
 
 
     }
 
     public function changeStatus(Request $request ,$id)
     {
-        //$quiz=Quiz::find($id);
-        $num=DB::table('Question')
-        ->where('Question.quiz_id','=',$id)
+        //dd(Carbon::now());
+        $num=DB::table('attentiveness_check_question')
+        ->where('attentiveness_check_question.a_check_id','=',$id)
         ->count();
         if($num>0){
-            Quiz::where('id',$id)->update(['status'=>$request->status]);
+            $input=attentiveness_check::find($id);
+            $input->uploaded_time=Carbon::now()->format('h:i:s');
+            $input->save();
+            attentiveness_check::where('id',$id)->update(['status'=>$request->status]);
         }else{
-            return back()->with('message','You didnt Add Questions for Quiz');
+            return back()->with('message','You didnt Add Questions for Attentive Quiz');
         }
-        return back();
+        return back()->with('message','Published Successfull');
         //dd($request);
-    }
-
-    public function show($classid,$subjectid,$quizid)
-    {
-
-        $detail=DB::table('Subject_class')
-        ->where('Subject_class.class_id','=',$classid)
-        ->where('Subject_class.subject_id','=',$subjectid)
-        ->join('Subject','Subject.id','=','Subject_class.subject_id')
-        ->join('Class','Class.id','=','Subject_class.class_id')
-        ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
-        ->get();
-        $quiz=Quiz::find($quizid);
-        $questions=Questions::where('quiz_id',$quizid)->get();
-         return view('quiz.list',compact(['quiz','questions','detail','classid','subjectid']));
-    }
-
-    // for chart
-    public function quizatemp($date){
-        $data=DB::table('Quiz')
-        ->where('Quiz.date','=',$date)
-        ->join('Student_quiz','Student_quiz.quiz_id','=','Quiz.id')
-        ->select('Quiz.id as quizid','Student_quiz.student_id as studentid','Student_quiz.marks as marks')
-        ->orderBy('Student_quiz.student_id')
-        ->get();
-        return $data;
-        // return view('front.teacher.subjects',compact('data'));
-        //return view('Ass.index',compact('assments'));
-    }
-    public function pdf($classid,$subjectid){
-        $quizes=DB::table('Quiz')
-        ->where('Quiz.class_id','=',$classid)
-        ->where('Quiz.subject_id','=',$subjectid)
-        ->get();
-        $pdf=PDF::loadView('quiz.index',compact('quizes'));
-        return $pdf->download('quizes.pdf');
+        //return redirect()->route('submit.view',compact('assid'))->with('message','Assesment Marks Updated successfully');
     }
 
     public function qstore(Request $req)
     {
         $id=$req->assid;
-        //return dd($req->assignments->getClientOriginalName());
-        Questions::create(
+        Attentiveness_check_Question::create(
             [
                 'question'=>$req->question,
                 'option_1'=>$req->answer1,
@@ -202,11 +138,57 @@ class Attentiveness_checkController extends Controller
                 'option_3'=>$req->answer3,
                 'option_4'=>$req->answer4,
                 'correct_answer'=>$req->correct_answer,
-                'quiz_id'=>$req->assid,
+                'a_check_id'=>$req->assid,
             ]
             );
+
         return redirect()->route('att.quizshow',compact('id'));
-       // return redirect()->route('quiz.index',[$classid,$subjectid])->with('message','Quiz Question added successfully');
 
     }
+
+    public function attentiveshow($id)
+    {
+        $n=Attentiveness_check_Question::where('a_check_id',$id)->get()->count();
+        $questions=Attentiveness_check_Question::where('a_check_id',$id)->get();
+        $question=Attentiveness_check::find($id);
+        return view('teacher.Attentive_Quiz.Attentive_quetionView',compact(['question','n','questions']));
+    }
+
+
+    public function attupdate(Request $req)
+    {
+        //dd($req->period);
+        $att=Attentiveness_check::find($req->quizid);
+
+
+        $att->title=$req->title;
+        $att->term=$req->term;
+        $att->week=$req->week;
+        $att->date=$req->date;
+        $att->extra_week=$req->extraweek;
+        $att->period=$req->period;
+        $att->quiz_duration=$req->duration;
+
+
+        $att->save();
+        //dd($classid);
+        //return dd($req->assignments->getClientOriginalName());
+
+        return redirect()->route('quiz.index',[$att->class_id,$att->subject_id])->with('message','Attentiveness Check Updated successfully');
+
+
+    }
+
+    public function destroy_att(Request $req){
+        //dd($req->quizid);
+        $att=Attentiveness_check::find($req->quizid);
+        $att->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+    public function destroy_attq(Request $req){
+        $attq=Attentiveness_check_Question::find($req->attqid);
+        $attq->delete();
+        return back()->with('message','Succesfully Deleted the Record');
+    }
+
 }

@@ -88,10 +88,6 @@
                     <option value="period8">Period 8</option>
               </select>
             </div>
-            <div class="form-group mb-4">
-                <label for="name">Num of Questions</label>
-                <input type="text" class="form-control " name="questions">
-                </div>
 
            <div class="form-group mb-4">
                <!-- <label for="name">Class_id</label> -->
