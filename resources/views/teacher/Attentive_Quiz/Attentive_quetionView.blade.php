@@ -13,7 +13,7 @@
         <th scope="col">Period</th>
         <th scope="col">Quiz Duration</th>
         <th scope="col">Status</th>
-        <th scope="col">Num of Questions</th>
+        <th scope="col">No. of Questions</th>
         <th scope="col">Add Question</th>
 
     </tr>
@@ -30,7 +30,7 @@
       @if($question->status=='draft')
       <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$question->id}}">Add Question</td>
         @else
-        <td class="timetable">You Published Already Cant Add Questions</td>
+        <td class="timetable">Questions cannot be added because the attentiveness check is already published</td>
         @endif
     </tr>
   </tbody>
@@ -39,7 +39,7 @@
 
 </div>
 <div class="bg d-flex justify-content-center mb-5">
-    <h2 class="card-text">View Questions on {{$question->title}}</h2>
+    <h2 class="card-text">View Questions of Attentiveness Check {{$question->title}}</h2>
 </div>
 @if($questions->count() > 0)
 <div class="b-card">
@@ -61,7 +61,7 @@
         <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='answer4' ? 'checked' : ''}}  /> {{$q->option_4}}   </li>
 
         </ol>
-        <div class="card-footer correct timetable"><h5>Correct Answer :- {{$q->correct_answer}}</h5>
+        <div class="card-footer correct timetable"><h5>Correct Answer:- {{$q->correct_answer}}</h5>
             <div class="text-end">
                 @if($question->status=='draft')
          <button class="btn btn-primary btn-sm ms-5"  data-bs-toggle="modal"
@@ -81,7 +81,7 @@
 @else
 <div class="d-flex justify-content-center mb-5">
     <div class="search-card">
-        <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+        <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
         <div class="row d-flex justify-content-center">
             <div class="col-md-4 mt-3 ">
                 <img
@@ -112,7 +112,7 @@
         <div class="modal-body table">
             <form action="{{route('attque.delete')}}" method="post"> @method('delete')
                 @csrf
-                <h5>Are you Shure You want to delete this record</h5>
+                <h5>Are you sure you want to delete this record?</h5>
                 <div class="row d-flex justify-content-end">
                     <div class="col-4 ">
                         <img
@@ -162,7 +162,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                       <label for="name">Answer 1 :</label>
+                       <label for="name">Answer 1:</label>
                        <input type="text" class="form-control @error('answer1') is-invalid @enderror" name="answer1" id="answer1">
 
                        @error('answer1')
@@ -172,7 +172,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                    <label for="name">Answer 2 :</label>
+                    <label for="name">Answer 2:</label>
                     <input type="text" class="form-control @error('answer2') is-invalid @enderror" name="answer2" id="answer2">
 
                        @error('answer2')
@@ -182,7 +182,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                        <label for="name">Answer 3 :</label>
+                        <label for="name">Answer 3:</label>
                        <input type="text" class="form-control @error('answer3') is-invalid @enderror" name="answer3" id="answer3">
 
                        @error('title')
@@ -192,7 +192,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                        <label for="name">Answer 4 :</label>
+                        <label for="name">Answer 4:</label>
                        <input type="text" class="form-control @error('answer4') is-invalid @enderror" name="answer4" id="answer4">
 
                        @error('title')
@@ -249,7 +249,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                       <label for="name">Answer 1 :</label>
+                       <label for="name">Answer 1:</label>
                        <input type="text" class="form-control @error('answer1') is-invalid @enderror" name="answer1" id="answer1">
 
                        @error('answer1')
@@ -259,7 +259,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                    <label for="name">Answer 2 :</label>
+                    <label for="name">Answer 2:</label>
                     <input type="text" class="form-control @error('answer2') is-invalid @enderror" name="answer2" id="answer2">
 
                        @error('answer2')
@@ -269,7 +269,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                        <label for="name">Answer 3 :</label>
+                        <label for="name">Answer 3:</label>
                        <input type="text" class="form-control @error('answer3') is-invalid @enderror" name="answer3" id="answer3">
 
                        @error('title')
@@ -279,7 +279,7 @@
                         @enderror
                    </div>
                    <div class="form-group mb-2">
-                        <label for="name">Answer 4 :</label>
+                        <label for="name">Answer 4:</label>
                        <input type="text" class="form-control @error('answer4') is-invalid @enderror" name="answer4" id="answer4">
 
                        @error('title')

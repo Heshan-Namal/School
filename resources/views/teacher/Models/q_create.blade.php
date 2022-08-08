@@ -9,7 +9,7 @@
          @enderror
     </div>
     <div class="form-group mb-2">
-        <label for="name">Answer 1 :</label>
+        <label for="name">Answer 1:</label>
         <input type="text" class="form-control @error('answer1') is-invalid @enderror" name="answer1" id="answer1">
 
         @error('answer1')
@@ -19,7 +19,7 @@
          @enderror
     </div>
     <div class="form-group mb-2">
-     <label for="name">Answer 2 :</label>
+     <label for="name">Answer 2:</label>
      <input type="text" class="form-control @error('answer2') is-invalid @enderror" name="answer2" id="answer2">
 
         @error('answer2')
@@ -29,7 +29,7 @@
          @enderror
     </div>
     <div class="form-group mb-2">
-         <label for="name">Answer 3 :</label>
+         <label for="name">Answer 3:</label>
         <input type="text" class="form-control @error('answer3') is-invalid @enderror" name="answer3" id="answer3">
 
         @error('title')
@@ -39,7 +39,7 @@
          @enderror
     </div>
     <div class="form-group mb-2">
-         <label for="name">Answer 4 :</label>
+         <label for="name">Answer 4:</label>
         <input type="text" class="form-control @error('answer4') is-invalid @enderror" name="answer4" id="answer4">
 
         @error('title')

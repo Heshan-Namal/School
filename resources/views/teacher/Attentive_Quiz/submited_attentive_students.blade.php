@@ -17,7 +17,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <p class="card-text">
-                        Participate Students
+                        Total No. of Students in the Class
                         <p>{{$nums}}</p>
                     </p>
                   </div>
@@ -39,11 +39,11 @@
                     <div class="col-md-8">
                       <div class="card-body">
                         <p class="card-text">
-                            Participation precentage for lesson
+                            Percentage of Responses
                             @if ($std!=0)
                             <p>{{ number_format($p->count / $std * 100, 2) }}%</p>
                             @else
-                            <p> No checks </p>
+                            <p>No Attentiveness Checks</p>
                             @endif
                         </p>
                       </div>
@@ -65,7 +65,7 @@
                         <div class="col-md-8">
                           <div class="card-body">
                             <p class="card-text">
-                                Absent minded Students
+                                Absent Students - No Response
                                 <p>{{$abs}}</p>
                             </p>
                           </div>
@@ -87,11 +87,11 @@
                             <div class="col-md-8">
                               <div class="card-body">
                                 <p class="card-text">
-                                    Knowledge prrecentage for lesson
+                                    Attentiveness Percentage of the Class
                                     @if ($std!=0)
                                     <p>{{ number_format($sum->sum /$nums, 2) }}%</p>
                                     @else
-                                    <p> No checks </p>
+                                    <p>No Attentiveness Checks</p>
                                     @endif
                                 </p>
                               </div>
@@ -103,14 +103,13 @@
     </div>
     <div class="row mt-3">
         <div class="head mt-1">
-            <p><u>Submitted Students Attentiveness Checks Details</u> :-</p>
+            <p><u>Attentiveness Check Response Details</u> :-</p>
         </div>
         <div class="text-end">
             <form action="?" class="col-sm-2 me-auto" >
                 <div class="input-group">
-                    <button type="submit" class="btn btn-primary"> Go!</button>
                     <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-
+                    <button type="submit" class="btn btn-primary">Go!</button>
                  </div>
             </form>
         </div>
@@ -130,10 +129,10 @@
 
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Admision Num</th>
+              <th scope="col">Admission No.</th>
               <th scope="col">Student Name</th>
-              <th scope="col">Submited Time</th>
-              <th scope="col">marks(less than 50=red)</th>
+              <th scope="col">Responded Time</th>
+              <th scope="col">Marks(less than 50=red)</th>
             </tr>
             </thead>
             <tbody>
@@ -164,7 +163,7 @@
             @else
             <div class="d-flex justify-content-center mb-5">
                 <div class="search-card">
-                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-4 mt-3 ">
                             <img
@@ -187,10 +186,10 @@
 </div>
         <div class="col-4 at">
             <div class="d-card overflow-auto mt-3">
-                <div class="card-header colo card-text">Highest Ten Marks In the Attentive Check</div>
+                <div class="card-header colo card-text">Top 10 Marks in the Class:-</div>
                 <div class="card-body">
 
-                   <table class="table "><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th><th scope="col">Submited Time</th></tr>
+                   <table class="table "><tr><th scope="col">Admission No.</th><th scope="col">Name</th><th scope="col">Marks</th><th scope="col">Responded Time</th></tr>
                  @foreach($hm as $key=> $h)
                    <tr>
                    <td><p class="mx-4">{{$h->admission_no}}</p></td>

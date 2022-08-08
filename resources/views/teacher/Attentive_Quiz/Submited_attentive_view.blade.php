@@ -16,7 +16,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <p class="card-text">
-                        ToDay Submited Attentiveness Checks
+                        Attentiveness Checks scheduled for today
                         <p>{{$count}}</p>
                     </p>
                   </div>
@@ -38,11 +38,11 @@
                     <div class="col-md-8">
                       <div class="card-body">
                         <p class="card-text">
-                            Overall Today Paricipation
+                            Percentage of total Responses for Attentiveness Checks today
                             @if (($std!=0) && ($count!=0))
                                 <p>{{ number_format($at * 100 / ($std * $count) , 2) }}%</p>
                             @else
-                                <p> No checks </p>
+                                <p>No Attentiveness Checks</p>
                             @endif
                         </p>
                       </div>
@@ -63,11 +63,11 @@
                         <div class="col-md-8">
                           <div class="card-body">
                             <p class="card-text">
-                                Overall Today Result precentage
+                                Percentage of total Results for Attentiveness Checks today
                                 @if (($std!=0) && ($count!=0))
                                 <p>{{ number_format($r / ($std * $count) , 2) }}%</p>
                                 @else
-                                <p> No checks </p>
+                                <p>No Attentiveness Checks</p>
                                 @endif
                             </p>
                           </div>
@@ -87,7 +87,7 @@
                 @endif
     <div class="row mt-5">
         <div class="head mt-4">
-            <p><u>Today Submitted Attentiveness Checks</u> :-</p>
+            <p><u>Attentiveness Checks published today</u> :-</p>
         </div>
     </div>
 
@@ -99,10 +99,10 @@
               <th scope="col">#</th>
               <th scope="col">Title</th>
               <th scope="col">Date</th>
-              <th scope="col">Uploaded Time</th>
+              <th scope="col">Published Time</th>
               <th scope="col">Duration</th>
-              <th scope="col">Num of Submits</th>
-              <th scope="col">precentage of Participation</th>
+              <th scope="col">Responses</th>
+              <th scope="col">Percentage of total Responses</th>
               <th scope="col"></th>
 
 
@@ -125,7 +125,7 @@
               @else
               <td>None</td>
               @endif
-              <td><a href="{{route('attentive-submit',[$q->id])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
+              <td><a href="{{route('attentive-submit',[$q->id])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View</button></a></div>
               </td>
             </tr>
 
@@ -136,7 +136,7 @@
             @else
             <div class="d-flex justify-content-center mb-5">
                 <div class="search-card">
-                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-4 mt-3 ">
                             <img
@@ -158,9 +158,9 @@
 </div>
 <div class="col-4 mx-5">
     <div class="d-card overflow-auto mt-5">
-        <div class="card-header colo card-text">Highest Marks for an Assignmrnt</div>
+        <div class="card-header colo card-text">Highest Marks for each Attentiveness Check published today</div>
         <div class="card-body">
-            <table class="table "><tr><th scope="col">Title</th><th scope="col">Marks</th><th scope="col">uploaded Time</th></tr>
+            <table class="table "><tr><th scope="col">Title</th><th scope="col">Marks</th><th scope="col">Published Time</th></tr>
          @foreach($hmark as $key=> $h)
            <tr>
            <td><p class="mx-4">{{$h->title}}</p></td>

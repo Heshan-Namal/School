@@ -9,14 +9,14 @@
         <div class="card">
             <form action="#" method="GET" class="form-inline">@csrf
             <div class="form-group row">
-                <h4 class="timetable mb-2 mt-3">Uploded Attentive Quizes</h4>
+                <h4 class="timetable mb-2 mt-3">View All Attentiveness Checks</h4>
                     <div class="col-sm-3" >
                         <select name="term" id="term" onchange="getselector(this.value);" class="form-control">
                             <option value="" value="" disabled selected>Select Term</option>
-                            <option value="allt" selected>All terms</option>
-                                <option value="term1">term 1</option>
-                                <option value="term2">term 2</option>
-                                <option value="term3">term 3</option>
+                            <option value="allt" selected>All Terms</option>
+                                <option value="term1">Term 1</option>
+                                <option value="term2">Term 2</option>
+                                <option value="term3">Term 3</option>
 
                         </select>
                     </div>
@@ -24,19 +24,19 @@
                     <select name="week" id="week" onchange="getselector(this.value);" class="form-control ">
                         <option value="" value="" disabled selected>Select Week</option>
                             <option value="allw" selected >All Weeks</option>
-                            <option value="week1">week 1</option>
-                            <option value="week2">week 2</option>
-                            <option value="week3">week 3</option>
-                            <option value="week4">week 4</option>
-                            <option value="week5">week 5</option>
-                            <option value="week6">week 6</option>
-                            <option value="week7">week 7</option>
-                            <option value="week8">week 8</option>
-                            <option value="week9">week 9</option>
-                            <option value="week10">week 10</option>
-                            <option value="week11">week 11</option>
-                            <option value="week12">week 12</option>
-                            <option value="extra">extra weeks</option>
+                            <option value="week1">Week 1</option>
+                            <option value="week2">Week 2</option>
+                            <option value="week3">Week 3</option>
+                            <option value="week4">Week 4</option>
+                            <option value="week5">Week 5</option>
+                            <option value="week6">Week 6</option>
+                            <option value="week7">Week 7</option>
+                            <option value="week8">Week 8</option>
+                            <option value="week9">Week 9</option>
+                            <option value="week10">Week 10</option>
+                            <option value="week11">Week 11</option>
+                            <option value="week12">Week 12</option>
+                            <option value="extra">Extra Weeks</option>
 
                     </select>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="col-md-8">
                           <div class="card-body">
                             <p class="card-text">
-                                Num of All Attentive Quizes
+                                All Attentiveness Checks
                                 <p class="text-end" >{{$uplod}}</p>
                             </p>
                           </div>
@@ -91,7 +91,7 @@
                         <div class="col-md-8">
                           <div class="card-body">
                             <p class="card-text">
-                                Not Published Attentive Quizes
+                                Unublished Attentiveness Checks
                                 <p class="text-end" >{{$stat}}</p>
                             </p>
                           </div>
@@ -114,7 +114,7 @@
                         <div class="col-md-8">
                           <div class="card-body">
                             <p class="card-text">
-                                <p class="timetable" >Today Quizes</p>
+                                <p class="timetable">Attentiveness Checks Today</p>
                                 <p class="text-end" >{{$today}}</p>
                             </p>
                           </div>
@@ -127,16 +127,16 @@
         </div>
         <div class="row">
             <div class="head mt-4">
-                <p><u>All Uploaded Attentive Quizes</u> :-</p>
+                <p><u>Attentiveness Checks</u>:-</p>
             </div>
         </div>
         </div>
         <div class="col-4">
         <div class="d-card overflow-auto mt-3">
-            <div class="card-header colo card-text">Submited Attentive Quizes
+            <div class="card-header colo card-text">View Attentiveness Checks published today
                 <a href="{{route('attentive.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
             <div class="card-body">
-               <p class="card-header card-text">To Day Sheduled Quizes</p>
+               <p class="card-header card-text">Attentiveness Checks scheduled for today</p>
                <table class="table"><tr><th scope="col" class="mx-2">Title</th><th scope="col">Period</th><th scope="col">Status</th><th scope="col"></th></tr>
         @foreach ($list as $key=>$l )
                <tr>
@@ -169,13 +169,12 @@
             <div class="row">
                 <form action="?" class="col-sm-2 me-auto" >
                     <div class="input-group">
-                        <button type="submit" class="btn btn-primary"> Go!</button>
                         <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-
+                        <button type="submit" class="btn btn-primary"> Go!</button>
                      </div>
                 </form>
             <div class="col-3">
-                <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Quize</button>
+                <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Check</button>
             </div>
 
             </div>
@@ -199,7 +198,7 @@
               <th scope="col">Period</th>
               <th scope="col">Duration</th>
               <th scope="col">Status</th>
-              <th scope="col">AddQuestions</th>
+              <th scope="col">Add Question</th>
               <th scope="col"></th>
 
             </tr>
@@ -268,7 +267,7 @@
             @else
             <div class="d-flex justify-content-center mb-5">
                 <div class="search-card">
-                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-4 mt-3 ">
                             <img
@@ -295,7 +294,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title table" id="example1ModalLabel">Add a Attentiveness Check for the Class</h5>
+          <h5 class="modal-title table" id="example1ModalLabel">Add Attentiveness Check</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body table">
@@ -310,7 +309,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title table" id="exampleModalLabel" >Add a Question</h5>
+          <h5 class="modal-title table" id="exampleModalLabel" >Add Question</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body table">
@@ -326,7 +325,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title table" id="example1ModalLabel">Edit the Record</h5>
+          <h5 class="modal-title table" id="example1ModalLabel">Edit Attentiveness Check</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body table">
@@ -342,13 +341,13 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title table del text-center" id="example1ModalLabel">Delete Record</h3>
+            <h3 class="modal-title table del text-center" id="example1ModalLabel">Delete Attentiveness Check</h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         <div class="modal-body table">
             <form action="{{route('att.delete')}}" method="post"> @method('delete')
                 @csrf
-                <h5>Are you Shure You want to delete this record</h5>
+                <h5>Are you sure you want to delete this Attentiveness Check?</h5>
                 <div class="row d-flex justify-content-end">
                     <div class="col-4 ">
                         <img

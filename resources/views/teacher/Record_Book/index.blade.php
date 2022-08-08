@@ -56,7 +56,7 @@
               @else
               <div class="d-flex justify-content-center mb-5">
                 <div class="search-card">
-                    <div class="row"><h4 class="rec-font">You Dont have any Periods Today</h4></div>
+                    <div class="row"><h4 class="rec-font">You don't have any periods today</h4></div>
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-4 mt-3 ">
@@ -76,9 +76,9 @@
     <div class="row mt-4 mb-3">
         <div class="col-12 d-flex justify-content-center bg">
         <div class="input-group-prepend mx-4 mb-2 mt-2">
-        <button class="btn btn-md btn-primary mx-4 " onclick="changeterm('term1')" >First Term</button>
+        <button class="btn btn-md btn-primary mx-4 " onclick="changeterm('term1')">First Term</button>
         <button class="btn btn-md btn-primary mx-4" onclick="changeterm('term2')">Second Term</button>
-        <button class="btn btn-md btn-primary mx-4" onclick="changeterm('term3')" >Third Term</button>
+        <button class="btn btn-md btn-primary mx-4" onclick="changeterm('term3')">Third Term</button>
         </div>
         </div>
     </div>
@@ -104,7 +104,7 @@
               <th scope="col">Date</th>
               <th scope="col">Period</th>
               <th scope="col">Record</th>
-              <th scope="col">Submited Date and Time</th>
+              <th scope="col">Date & Time</th>
 
             </tr>
             </thead>
@@ -123,7 +123,7 @@
             @else
             <div class="d-flex justify-content-center mb-5">
                 <div class="search-card">
-                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-4 mt-3 ">
                             <img
