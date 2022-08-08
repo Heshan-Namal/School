@@ -125,8 +125,8 @@
               <th scope="col">Name</th>
               <th scope="col">Submisson File</th>
               <th scope="col">Due Date</th>
-              <th scope="col">Submitted Date</th>
-              <th scope="col">Marks(less than 50=red)</th>
+              <th scope="col">uploaded date</th>
+              <th><span data-bs-toggle="tooltip" title="red(<50)">Marks</span></th>
 
             </tr>
             </thead>
@@ -226,9 +226,6 @@
 
 </div>
 </div>
-
-
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
-
 @endsection

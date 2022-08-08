@@ -19,6 +19,7 @@ class CreateTeacherGradeTable extends Migration
             $table->unsignedBigInteger('grade_id');
             $table->foreign('teacher_id')->references('id')->on('teacher')->onDelete('cascade');
             $table->foreign('grade_id')->references('id')->on('grade')->onDelete('cascade');
+            $table->unique(['teacher_id','grade_id']);
             $table->timestamps();
         });
     }

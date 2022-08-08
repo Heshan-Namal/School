@@ -28,7 +28,7 @@
         </select>
         </div>
 
-        <div class="col-3">
+        {{-- <div class="col-3">
         <select name="day" id="day" class="form-control">
               <option value="monday" selected>Monday</option>
               <option value="tuesday">Tuesday</option>
@@ -38,7 +38,7 @@
 
 
         </select>
-        </div>
+        </div> --}}
         <div hidden class="row my-2" id="extra">
             <div class="col-4">
                 <p id="p">Add Extra week </p>

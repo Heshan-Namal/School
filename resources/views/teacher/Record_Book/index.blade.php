@@ -76,9 +76,9 @@
     <div class="row mt-4 mb-3">
         <div class="col-12 d-flex justify-content-center bg">
         <div class="input-group-prepend mx-4 mb-2 mt-2">
-        <button class="btn btn-md btn-primary mx-4 " onclick="changeterm('term1')">First Term</button>
-        <button class="btn btn-md btn-primary mx-4" onclick="changeterm('term2')">Second Term</button>
-        <button class="btn btn-md btn-primary mx-4" onclick="changeterm('term3')">Third Term</button>
+        <button class="btn btn-md btn-primary mx-4 " id="t1" onclick="changeterm('term1')" >First Term</button>
+        <button class="btn btn-md btn-primary mx-4" id="t2" onclick="changeterm('term2')">Second Term</button>
+        <button class="btn btn-md btn-primary mx-4" id="t3" onclick="changeterm('term3')" >Third Term</button>
         </div>
         </div>
     </div>
@@ -138,9 +138,9 @@
 
             @endif
         </table>
-        {{-- <div class="pagination justify-content-end mt-3">
+        <div class="pagination justify-content-end mt-3">
             {!! $term1->links() !!}
-        </div> --}}
+        </div>
     </div>
     <div class="row" id="term2" hidden>
         <h2 class="head">Second Term Record Book</h2>
@@ -196,7 +196,7 @@
         </table>
         <div class="pagination justify-content-end mt-3">
             {!! $term2->links() !!}
-            </div>
+        </div>
     </div>
     <div class="row" id="term3" hidden>
         <h2 class="head">Third Term Record Book</h2>
@@ -254,9 +254,9 @@
 
             @endif
         </table>
-        {{-- <div class="pagination justify-content-end mt-3">
+        <div class="pagination justify-content-end mt-3">
             {!! $term3->links() !!}
-            </div> --}}
+            </div>
     </div>
 
 </div>
@@ -275,7 +275,24 @@
     </div>
   </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    if ({!! json_encode($term) !!} == 'term1') {
+        document.getElementById('term1').hidden = false;
+       document.getElementById('term2').hidden = true;
+       document.getElementById('term3').hidden = true;
+    }if({!! json_encode($term) !!}=='term2'){
+        document.getElementById('term1').hidden = true;
+       document.getElementById('term2').hidden = false;
+       document.getElementById('term3').hidden = true;
+   }else if({!! json_encode($term) !!}=='term3') {
+        document.getElementById('term1').hidden = true;
+       document.getElementById('term2').hidden = true;
+       document.getElementById('term3').hidden = false;
+   }
+  });
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('assets/front/js/rec.js')}}"></script>
 @endsection

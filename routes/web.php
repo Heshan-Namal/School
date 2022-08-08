@@ -32,8 +32,12 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/addstd', function () {
-    return view('Admin.addStudent');
+
+Route::get('/edit', function () {
+    return view('Profile.editprofile');
+});
+Route::get('/time', function () {
+    return view('Timetable.viewtimetable');
 });
 
 
@@ -41,7 +45,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();   //Auth route
+ Auth::routes();   //Auth route
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -71,6 +75,22 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/checkquiz/{quiz_id}','checkquiz')->name('Student.student.checkquiz');
         Route::get('/resultquiz/{quiz_id}','checkquiz')->name('Student.student.quizresult');
     });
+
+         //admin routes
+        Route::group(['prefix' => 'grade'], function(){
+            Route::get('/add',[AdminController::class,'CreatNewGrade'])->name('admin.grade');
+            Route::post('/AddGrade',[AdminController::class,'AddGrade']);
+            Route::post('/AddClass/{id}',[AdminController::class,'AddClass']);
+            Route::post('/DeleteGrade/{id}',[AdminController::class,'DeleteGrade'])->name('admin.Delete');
+        });
+
+        Route::group(['prefix' => 'teacher'], function(){
+            Route::post('/AddTeacher',[AdminController::class,'AddTeacher']);
+           
+        });
+
+        Route::get('/addteacher',[AdminController::class,'AddNewTeacher'])->name('admin.teacher');
+        Route::get('/addstudent',[AdminController::class,'AddNewStudent'])->name('admin.student');
 
 });
 
@@ -127,4 +147,5 @@ Route::get('student-detail/{id}',[ClassTeacherController::class,'student_view'])
 //     Route::get('exams/active', 'ExamController@indexActive');
 //     Route::get('school/sections','SectionController@index');
 //   });
+
 

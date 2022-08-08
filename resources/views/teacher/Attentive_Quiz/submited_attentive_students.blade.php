@@ -131,8 +131,8 @@
               <th scope="col">#</th>
               <th scope="col">Admission No.</th>
               <th scope="col">Student Name</th>
-              <th scope="col">Responded Time</th>
-              <th scope="col">Marks(less than 50=red)</th>
+              <th scope="col">Submited Time</th>
+              <th><span data-bs-toggle="tooltip" title="red(<50)">Marks</span></th>
             </tr>
             </thead>
             <tbody>
@@ -215,5 +215,4 @@
         </div>
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
-
 @endsection
