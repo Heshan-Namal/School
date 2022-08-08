@@ -85,6 +85,7 @@ class Attentiveness_checkController extends Controller
         ->where('attentiveness_check.subject_id','=',$subjectid)
         ->whereDate('attentiveness_check.date', '=', Carbon::now())
         ->get();
+        //dd($list);
         $stat=DB::table('attentiveness_check')
         ->where('attentiveness_check.class_id','=',$classid)
         ->where('attentiveness_check.subject_id','=',$subjectid)

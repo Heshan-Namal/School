@@ -87,7 +87,7 @@
                             <div class="col-md-8">
                               <div class="card-body">
                                 <p class="card-text">
-                                    Knowledge prrecentage for lesson
+                                    Knowledge precentage for lesson
                                     @if ($std!=0)
                                     <p>{{ number_format($sum->sum /$nums, 2) }}%</p>
                                     @else

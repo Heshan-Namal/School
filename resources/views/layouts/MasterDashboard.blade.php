@@ -126,7 +126,8 @@
                 </nav>
                 <div class="container-fluid d-flex bd-highlight ">
 
-                
+
+                    
                     <div class="p-2 flex-grow-1 bd-highlight">
                     <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary btn-sm">Go back</button></a>
                     <div class="alert " role="alert">
@@ -191,7 +192,7 @@
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 
-    
+
     <script src="{{asset('assets/front/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/front/js/chart.min.js')}}"></script>
     <script src="{{asset('assets/front/js/bs-init.js')}}"></script>

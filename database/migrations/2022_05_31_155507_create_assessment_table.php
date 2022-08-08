@@ -24,7 +24,6 @@ class CreateAssessmentTable extends Migration
             $table->date('due_date')->nullable(false);
             $table->enum('status',['published', 'draft', 'disabled'])->default('draft')->nullable(false);
             $table->enum('assessment_type',['mcq_quiz', 'upload_file'])->nullable(false);
-            $table->integer('allocated_marks')->nullable(false);
             $table->string('assessment_file')->nullable(true);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('class_id');
