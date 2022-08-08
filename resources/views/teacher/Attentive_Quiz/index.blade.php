@@ -143,7 +143,13 @@
                <td><p class="mx-2">{{$l->title}}</p></td>
                <td><p class="mx-2">{{$l->period}}</p></td>
                <td><p class="mx-2">{{$l->status}}</p></td>
-               <td><p class="btn btn-warning btn-sm mx-4"><i class="bi bi-bell"></i></p></td>
+               @if ($l->status== 'draft')
+               <form action="{{route('attentive.status',$l->id)}}" method="POST">@csrf
+                <td><button class="btn btn-success btn-sm mx-1" type="submit" name="status" value="published" ><i class="bi bi-upload"></i></button></td>
+               </form>
+                @else
+               <td><button class="btn btn-success btn-sm mx-1" disabled type="submit" name="status" value="published" ><i class="bi bi-upload"></i></button></td>
+               @endif
                </tr>
                {{-- <div class="row">
                 <div class="col-2">
@@ -227,7 +233,7 @@
                 <button class="btn btn-success btn-sm" disabled data-bs-toggle="modal" data-bs-target="#qModal" data-bs-id="{{$quiz->id}}" >Add Question</td>
                 @endif
                 <td class="btn-toolbar">
-                @if($quiz->status=='draft')
+                @if(($quiz->status=='draft') && ($quiz->date ==  \Carbon\Carbon::now() ))
                 <button class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#editattModal" data-bs-id="{{$quiz->id}}" data-bs-title="{{$quiz->title}}"
                     data-bs-term="{{$quiz->term}}" data-bs-week="{{$quiz->week}}" data-bs-extra_week="{{$quiz->extra_week}}" data-bs-day="{{$quiz->date}}" data-bs-period="{{$quiz->period}}"
                     data-bs-duration="{{$quiz->quiz_duration}}"><i class="bi bi-pencil-square "></i> </button>
