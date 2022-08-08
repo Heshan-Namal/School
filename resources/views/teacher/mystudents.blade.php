@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
     <div class="row mt-3 mb-3">
-        <h1 class="timetable cd-head text-center mb-2">Class Students Records</h1>
+        <h1 class="timetable cd-head text-center mb-2">Student Records</h1>
     </div>
     <div class="row  d-flex justify-content-end ">
         <div class="col-4">
@@ -21,7 +21,7 @@
                     <div class="col-md-8">
                       <div class="card-body">
                         <p class="card-text">
-                            Num of Students
+                            No. of Students
                             <p class="text-end" >{{$std->count()}}</p>
                         </p>
                       </div>
@@ -34,7 +34,7 @@
 
     </div>
     <div class="row">
-        <h2 class="card-text">Students Details :-</h2>
+        <h2 class="card-text">Student Details:-</h2>
     </div>
     <div class="row">
         <div class="text-end">
@@ -42,9 +42,9 @@
 
             <form action="?" class="col-sm-2 me-auto" >
                 <div class="input-group">
-                    <button type="submit" class="btn btn-primary"> Go!</button>
                     <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-                 </div>
+                    <button type="submit" class="btn btn-primary"> Go!</button>
+                </div>
             </form>
             <div class="col-3">
                 <a href="{{route('std.export',[$classid,$subjectid])}}"><button type="button">Excel</button></a>

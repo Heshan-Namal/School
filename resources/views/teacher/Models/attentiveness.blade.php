@@ -2,26 +2,26 @@
     <div class="form-group row">
         <div class="col-3">
         <select name="term" id="term" class="form-control">
-              <option value="term1" selected>term 1</option>
-              <option value="term2">term 2</option>
-              <option value="term3">term 3</option>
+              <option value="term1" selected>Term 1</option>
+              <option value="term2">Term 2</option>
+              <option value="term3">Term 3</option>
         </select>
         </div>
         <div class="col-3">
         <select name="week" id="week" class="form-control" onchange="getweekselector(this.value);">
-              <option value="week1" selected>week 1</option>
-              <option value="week2">week 2</option>
-              <option value="week3">week 3</option>
-              <option value="week4">week 4</option>
-              <option value="week5">week 5</option>
-              <option value="week6">week 6</option>
-              <option value="week7">week 7</option>
-              <option value="week8">week 8</option>
-              <option value="week9">week 9</option>
-              <option value="week10">week 10</option>
-              <option value="week11">week 11</option>
-              <option value="week12">week 12</option>
-              <option  value="extra" >Add Extra week</option>
+              <option value="week1" selected>Week 1</option>
+              <option value="week2">Week 2</option>
+              <option value="week3">Week 3</option>
+              <option value="week4">Week 4</option>
+              <option value="week5">Week 5</option>
+              <option value="week6">Week 6</option>
+              <option value="week7">Week 7</option>
+              <option value="week8">Week 8</option>
+              <option value="week9">Week 9</option>
+              <option value="week10">Week 10</option>
+              <option value="week11">Week 11</option>
+              <option value="week12">Week 12</option>
+              <option  value="extra" >Add Extra Week</option>
 
 
               {{-- <div class="col-3"></div> --}}
@@ -41,11 +41,11 @@
         </div> --}}
         <div hidden class="row my-2" id="extra">
             <div class="col-4">
-                <p id="p">Add Extra week </p>
+                <p id="p">Add Extra Week </p>
             </div>
             <div class="col-4 text-center ">
             <div class="form-group mb-2">
-                <label for="name">Extra week Name</label>
+                <label for="name">Extra Week Name</label>
 
                 {{-- @error('title')
                          <span class="invalid-feedback" role="alert">
@@ -101,7 +101,7 @@
            </div>
 
         <div class="form-group mb-2">
-            <label for="name">quiz_duration</label>
+            <label for="name">Quiz Duration</label>
             <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" placeholder="00:00:00">
             @error('a_marks')
                      <span class="invalid-feedback" role="alert">

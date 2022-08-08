@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 use Illuminate\Pagination\Paginator;
-use ConsoleTVs\Charts\Registrar as Charts;
 use Illuminate\Support\ServiceProvider;
+use ConsoleTVs\Charts\Registrar as Charts;
 
 class AppServiceProvider extends ServiceProvider
 {

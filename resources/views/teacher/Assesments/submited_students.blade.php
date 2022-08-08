@@ -16,7 +16,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <p class="card-text">
-                        Numer of Students submit Assesment
+                        Submissions
                         <p>{{$nums}}</p>
 
                     </p>
@@ -39,7 +39,7 @@
                     <div class="col-md-8">
                       <div class="card-body">
                         <p class="card-text">
-                          Num Students Late Submissions
+                            Late Submissions
                             <p>{{$late}}</p>
 
                         </p>
@@ -61,7 +61,7 @@
                         <div class="col-md-8">
                           <div class="card-body">
                             <p class="card-text">
-                               Not add marks for Submission
+                               Unmarked Submissions
                                 <p>{{$mar}}</p>
 
                             </p>
@@ -84,7 +84,7 @@
                             <div class="col-md-8">
                               <div class="card-body">
                                 <p class="card-text">
-                                    Num Students not submited Assesment
+                                    Number of Students who didn't submit
                                    <span class="value rounded-circle ms-5">
                                     {{$notsub}}
                                 </span>
@@ -106,14 +106,13 @@
                     </div>
                 @endif
             <div class="head mb-4">
-                <p><u>Submitted Student Details</u> :-</p>
+                <p><u>Submission Details</u> :-</p>
             </div>
             <div class="text-end">
                 <form action="?" class="col-sm-2 me-auto" >
                     <div class="input-group">
-                        <button type="submit" class="btn btn-primary"> Go!</button>
                         <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-
+                        <button type="submit" class="btn btn-primary"> Go!</button>
                      </div>
                 </form>
             </div>
@@ -123,8 +122,8 @@
 
             <tr>
               <th scope="col">#</th>
-              <th scope="col">name</th>
-              <th scope="col">submisson file</th>
+              <th scope="col">Name</th>
+              <th scope="col">Submisson File</th>
               <th scope="col">Due Date</th>
               <th scope="col">uploaded date</th>
               <th><span data-bs-toggle="tooltip" title="red(<50)">Marks</span></th>
@@ -141,7 +140,7 @@
               @if($s->type == 'upload_file')
                 <td>{{$s->file}}</td>
                 @else
-                <td>Type is MCQ</td>
+                <td>No File - MCQ </td>
               @endif
               <td>{{$s->due_date}}</td>
               <td>{{$s->date}}</td>
@@ -178,7 +177,7 @@
             @else
             <div class="d-flex justify-content-center mb-5">
                 <div class="search-card">
-                    <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+                    <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-4 mt-3 ">
                             <img
@@ -202,7 +201,7 @@
 </div>
 <div class="col-4">
     <div class="d-card overflow-auto mt-3">
-        <div class="card-header colo card-text">Highest Ten Marks In the Class :-</div>
+        <div class="card-header colo card-text">Top 10 Marks in the Class:-</div>
         <div class="card-body">
            <table class="table p-2"><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th></tr>
          @foreach($hm as $key=> $h)
