@@ -59,10 +59,10 @@
     <div class="q-card">
     <div class="card-header bg table"><h5>{{$key+1}}.{{$q->question}}</h5></div>
     <ol   class="ul-list"  style="list-style-type: lower-alpha;" >
-        <li class="mb-3">&nbsp;<input type="radio" {{$q->correct_answer=='answer1' ? 'checked' : ''}}  /> {{$q->option_1}}   </li>
-        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='answer2' ? 'checked' : ''}}  /> {{$q->option_2}}   </li>
-        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='answer3' ? 'checked' : ''}}  /> {{$q->option_3}}   </li>
-        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='answer4' ? 'checked' : ''}}  /> {{$q->option_4}}   </li>
+        <li class="mb-3">&nbsp;<input type="radio" {{$q->correct_answer=='option_1' ? 'checked' : ''}}  /> {{$q->option_1}}   </li>
+        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='option_2' ? 'checked' : ''}}  /> {{$q->option_2}}   </li>
+        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='option_3' ? 'checked' : ''}}  /> {{$q->option_3}}   </li>
+        <li class="mb-3">&nbsp;<input type="radio"  {{$q->correct_answer=='option_4' ? 'checked' : ''}}  /> {{$q->option_4}}   </li>
         </ol>
         <div class="card-footer correct timetable"><h5>Correct Answer:- {{$q->correct_answer}}</h5>
         <div class="text-end">

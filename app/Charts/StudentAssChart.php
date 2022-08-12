@@ -19,8 +19,8 @@ class StudentAssChart extends BaseChart
                 $count=[];
 
                 $data = DB::table('student')
-                ->where('student.admission_no', '=','s1' )
-                ->join('class', 'Class.id', '=', 'student.class_id')
+                ->where('student.admission_no', '=',$request->id )
+                ->join('class', 'class.id', '=', 'student.class_id')
                 ->join('subject_class', 'subject_class.class_id', '=', 'class.id')
                 ->join('subject', 'subject.id', '=', 'subject_class.subject_id')
                 ->select('subject.id as subjectid','subject.subject_name','class.id as classid')
@@ -40,8 +40,8 @@ class StudentAssChart extends BaseChart
                         ->groupBy('student_assessment.admission_no')
                         ->first();
                         $v=DB::table('assessment')
-                        ->where('assessment.class_id','=',7)
-                        ->where('assessment.subject_id','=',5)
+                        ->where('assessment.class_id','=',$d->classid)
+                        ->where('assessment.subject_id','=',$d->subjectid)
                         ->where('assessment.status','=','published')
                         ->count();
 

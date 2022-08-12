@@ -3,14 +3,23 @@
         @csrf
 
     <div class="form-group row">
-        <div class="col-3">
-        <select name="term" id="term" class="form-control">
-              <option value="term1" selected>Term 1</option>
-              <option value="term2">Term 2</option>
-              <option value="term3">Term 3</option>
-        </select>
+        <div class="col-md-3">
+            <label for="inputEmail4" class="form-label">Week</label>
+            <select name="term" id="term" class="form-control">
+                <option value="term1" selected>First Term</option>
+                <option value="term2">Second Term</option>
+                <option value="term3">Third term</option>
+            </select>
         </div>
-        <div class="col-3">
+        <div class="col-md-3">
+            <label for="inputEmail4" class="form-label">Week</label>
+            <input type="text" disabled class="form-control" name="week" id="week">
+        </div>
+        <div class="col-md-3">
+            <label for="inputEmail4" class="form-label">Day</label>
+            <input type="text" disabled class="form-control" name="day" id="day">
+        </div>
+        {{-- <div class="col-3">
         <select name="week" id="week" class="form-control" onchange="getweekselector(this.value);">
               <option value="week1" selected>week 1</option>
               <option value="week2">Week 2</option>
@@ -26,8 +35,6 @@
               <option value="week12">Week 12</option>
               <option  value="extra" >Add Extra Week</option>
 
-
-              {{-- <div class="col-3"></div> --}}
         </select>
         </div>
 
@@ -41,28 +48,7 @@
 
 
         </select>
-        </div>
-        <div hidden class="row my-2" id="extra">
-            <div class="col-4">
-                <p id="p">Add Extra Week</p>
-            </div>
-            <div class="col-4 text-center ">
-            <div class="form-group mb-2">
-                <label for="name">Extra week Name</label>
-
-                {{-- @error('title')
-                         <span class="invalid-feedback" role="alert">
-                             <strong>{{ $message }}</strong>
-                         </span>
-                 @enderror --}}
-            </div>
-        </div>
-            <div class="col-4">
-                <input type="text" class="form-control " name="extraweek" id="extra_week">
-            </div>
-
-
-        </div>
+        </div> --}}
     </div>
            <div class="form-group mb-2">
                <label for="name">Title</label>
@@ -100,15 +86,6 @@
                 <option value="mcq_quiz">MCQ Quiz</option>
           </select>
 
-        </div>
-        <div class="form-group mb-2">
-            <label for="name">Allocated Markes</label>
-            <input type="number" class="form-control @error('a_marks') is-invalid @enderror" name="a_marks" id="allocated_marks" required>
-            @error('a_marks')
-                     <span class="invalid-feedback" role="alert">
-                         <strong>{{ $message }}</strong>
-                     </span>
-             @enderror
         </div>
 
            <div class="form-group mb-4" id="file">

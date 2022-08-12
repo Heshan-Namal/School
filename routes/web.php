@@ -20,6 +20,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\Teacher_RecordBookController;
 use App\Http\Controllers\ClassTeacherController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TermController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -86,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'teacher'], function(){
             Route::post('/AddTeacher',[AdminController::class,'AddTeacher']);
-           
+
         });
 
         Route::get('/addteacher',[AdminController::class,'AddNewTeacher'])->name('admin.teacher');
@@ -128,7 +130,7 @@ Route::delete('destroy_assquestion',[AssesmentController::class,'destroy_assq'])
 Route::put('/res_update',[ResourcesController::class,'resupdate'])->name('res.update');
 Route::delete('destroy_res',[ResourcesController::class,'destroy_res'])->name('res.delete');
 Route::delete('destroy_attquestion',[Attentiveness_checkController::class,'destroy_attq'])->name('attque.delete');
-
+//reports
 Route::get('std/export/{classid}/{subjectid}', [TeacherController::class, 'export'])->name('std.export');
 Route::get('std/exportpdf/{classid}/{subjectid}', [TeacherController::class, 'exportpdf'])->name('std.exportpdf');
 Route::get('rec/export/{classid}/{subjectid}/{term}', [Teacher_RecordBookController::class, 'export'])->name('rec.export');
@@ -137,6 +139,14 @@ Route::get('rec/exportpdf/{classid}/{subjectid}/{term}', [Teacher_RecordBookCont
 //classteacher
 Route::get('/myclass-students',[ClassTeacherController::class,'mystudents'])->name('myclass.students');
 Route::get('student-detail/{id}',[ClassTeacherController::class,'student_view'])->name('myclass.studentview');
+Route::get('/myclass-termtest',[TermController::class,'termtest'])->name('myclass.termtest');
+Route::get('/termtest/{classid}',[TermController::class,'addtermtest'])->name('addresult');
+Route::get('/stdres/{term}/{studentid}',[TermController::class,'addstd_result'])->name('stdresult');
+Route::post('/result/{term}/{subjectid}/{classid}/store',[TermController::class,'store'])->name('enter.testmarks');
+Route::put('/result-update/{term}/{subjectid}/{classid}',[TermController::class,'testupdate'])->name('update.testmarks');
+
+//report
+Route::get('result/exportpdf/{term}/{studentid}/{classid}', [TermController::class, 'exportpdf'])->name('resultpdf');
 
 
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');

@@ -40,4 +40,5 @@ class ClassTeacherController extends Controller
         // dd($std);
         return view('class_teacher.student_view',compact(['std','id']));
     }
+    
 }

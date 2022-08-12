@@ -25,7 +25,7 @@
 
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow topbar static-top">
                     <div class="container-fluid">
                         <!-- droup down nav items-->
                         <img class="rounded-circle" src="{{asset('assets/front/images/avatars/avatar4.jpeg')}}">
@@ -125,9 +125,6 @@
                     </div>
                 </nav>
                 <div class="container-fluid d-flex bd-highlight ">
-
-
-                    
                     <div class="p-2 flex-grow-1 bd-highlight">
                     <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary btn-sm">Go back</button></a>
                     <div class="alert " role="alert">

@@ -92,5 +92,6 @@
         {!! $std->links() !!}
         </div>
     </div>
-</div>
+    </div>
+
 @endsection
