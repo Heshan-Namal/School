@@ -11,13 +11,9 @@ class Attentiveness_checkController extends Controller
 {
     public function store(Request $req,$classid,$subjectid)
     {
-        // if(isset($req->extraweek)){
-        //     $extra=$req->extraweek;
-        //     $week=null;
-        // }else{
-        //     $extra=null;
-        //     $week=$req->week;
-        // }
+        $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
+        $datearr=explode("/",$date);
+        $week="week".$datearr[4]%17;
         //return dd($req->assignments->getClientOriginalName());
         Attentiveness_check::create(
             [
@@ -41,7 +37,7 @@ class Attentiveness_checkController extends Controller
     {
         $search=$request->search;
         $term=$request->term;
-        $week=$request->week;
+        // $week=$request->week;
 
       //  $day=$request->day;
         if(($term==NULL)||($term=='allt')){
@@ -51,33 +47,18 @@ class Attentiveness_checkController extends Controller
         ->where(function($query) use ($search){
             $query->where('attentiveness_check.title', 'LIKE', '%'.$search.'%')
                     ->orWhere('attentiveness_check.date', 'LIKE', '%'.$search.'%')
-                    ->orWhere('attentiveness_check.period', 'LIKE', '%'.$search.'%');
+                    ->orWhere('attentiveness_check.period', 'LIKE', '%'.$search.'%')
+                    ->orWhere('attentiveness_check.week', 'LIKE', '%'.$search.'%');
             })
 
         ->paginate(10);
         }
-        elseif($week=='allw'){
+        else{
             $quizes=DB::table('attentiveness_check')
             ->where('attentiveness_check.class_id','=',$classid)
             ->where('attentiveness_check.subject_id','=',$subjectid)
             ->where('attentiveness_check.term','=',$term)
             ->paginate(10);
-        }else{
-            if($week == 'extra'){
-                $quizes=DB::table('attentiveness_check')
-                ->where('attentiveness_check.class_id','=',$classid)
-                ->where('attentiveness_check.subject_id','=',$subjectid)
-                ->where('attentiveness_check.term','=',$term)
-                ->whereNotNull('attentiveness_check.extraweek')
-                ->paginate(10);
-            }else{
-                $quizes=DB::table('attentiveness_check')
-                ->where('attentiveness_check.class_id','=',$classid)
-                ->where('attentiveness_check.subject_id','=',$subjectid)
-                ->where('attentiveness_check.term','=',$term)
-                ->where('attentiveness_check.week','=',$week)
-                ->paginate(10);
-            }
         }
         $list=DB::table('attentiveness_check')
         ->where('attentiveness_check.class_id','=',$classid)
@@ -120,7 +101,7 @@ class Attentiveness_checkController extends Controller
             $input->save();
             attentiveness_check::where('id',$id)->update(['status'=>$request->status]);
         }else{
-            return back()->with('message','You didnt Add Questions for Attentive Quiz');
+            return back()->with('error','You didnt Add Questions for Attentive Quiz');
         }
         return back()->with('message','Published Successfull');
         //dd($request);
@@ -163,12 +144,15 @@ class Attentiveness_checkController extends Controller
     public function attupdate(Request $req)
     {
         //dd($req->period);
+        $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
+        $datearr=explode("/",$date);
+        $week="week".$datearr[4]%17;
         $att=Attentiveness_check::find($req->quizid);
 
 
         $att->title=$req->title;
         $att->term=$req->term;
-        $att->week=$req->week;
+        $att->week=$week;
         $att->date=$req->date;
         $att->extra_week=$req->extraweek;
         $att->period=$req->period;

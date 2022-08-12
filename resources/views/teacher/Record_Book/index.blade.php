@@ -1,8 +1,11 @@
 @extends('layouts.MasterDashboard')
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
+@endsection
 
 @section('content')
-<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
-<div class="content">
+<div class="container_AssStudent">
 
 
 
@@ -83,7 +86,7 @@
         </div>
     </div>
     <div class="row" id="term1">
-        <h2 class="head">First Term Record Book</h2>
+        <header>First Term Record Book</header>
 
         @if($term1->count()>0)
 
@@ -96,7 +99,7 @@
                </div>
                </div>
         </div>
-        <table class="table table-success table-hover m-0">
+        <table class="table table-success table-striped table-hover m-0">
 
             <thead>
             <tr>
@@ -143,7 +146,7 @@
         </div>
     </div>
     <div class="row" id="term2" hidden>
-        <h2 class="head">Second Term Record Book</h2>
+        <header>Second Term Record Book</header>
         @if($term2->count()>0)
             <div class="row">
              <div class="text-end mb-3">
@@ -153,7 +156,7 @@
             </div>
             </div>
 
-        <table class="table table-success table-hover m-0">
+        <table class="table table-success table-striped table-hover m-0">
 
             <thead>
             <tr>
@@ -199,7 +202,7 @@
         </div>
     </div>
     <div class="row" id="term3" hidden>
-        <h2 class="head">Third Term Record Book</h2>
+        <header>Third Term Record Book</header>
         @if($term3->count()>0)
 
         <div class="text-end">
@@ -213,7 +216,7 @@
         </div>
 
 
-        <table class="table table-success table-hover m-0">
+        <table class="table table-success table-striped table-hover m-0">
             <thead>
             <tr>
               <th scope="col">#</th>

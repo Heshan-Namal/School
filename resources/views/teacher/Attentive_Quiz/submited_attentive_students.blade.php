@@ -1,8 +1,11 @@
-
 @extends('layouts.MasterDashboard')
-@section('content')
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
-<div class="content">
+@endsection
+@section('content')
+
+<div class="container_AssStudent">
     <div class="row mb-5">
         <div class="col-3">
         <div class="sub-card">
@@ -101,44 +104,44 @@
                     </div>
                     </div>
     </div>
-    <div class="row mt-3">
-        <div class="head mt-1">
-            <p><u>Attentiveness Check Response Details</u> :-</p>
-        </div>
-        <div class="text-end">
-            <form action="?" class="col-sm-2 me-auto" >
-                <div class="input-group">
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-                    <button type="submit" class="btn btn-primary">Go!</button>
-                 </div>
-            </form>
-        </div>
-    </div>
-    <div class="row ">
-        <div class="col-7">
 
-                @if (session('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
+    <header>Attentiveness Check Response Details</header>
+
+    @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
+    @elseif (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+    <form action="?" class="col-sm-2 me-auto" >
+    <div class="col-12">
+        <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+    </div>
+    </form>
+
+    <div class="row ">
+        <div class="col-8">
+@if($sub->count()>0)
 
 <div class="table-card mt-2">
-    <table class="table table-success table-hover m-0">
-            <thead>
+    <table class="table table-bordered table-striped">
 
+            <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Admission No.</th>
-              <th scope="col">Student Name</th>
-              <th scope="col">Submited Time</th>
+              <th >#</th>
+              <th>Admission No.</th>
+              <th>Student Name</th>
+              <th>Submited Time</th>
               <th><span data-bs-toggle="tooltip" title="red(<50)">Marks</span></th>
             </tr>
             </thead>
             <tbody>
-                @if($sub->count()>0)
 
-                @foreach($sub as $key=> $s)
+
+        @foreach($sub as $key=> $s)
             <tr>
               <th scope="row">{{$key+1}}</th>
               <td>{{$s->admision_no}}</td>
@@ -149,11 +152,6 @@
               @else
               <td style="color: #2c0379;text-align:center">{{$s->marks}}</td>
               @endif
-
-
-
-
-
             </tr>
 
             @endforeach
@@ -184,35 +182,31 @@
 </div>
 </div>
 </div>
-        <div class="col-4 at">
-            <div class="d-card overflow-auto mt-3">
-                <div class="card-header colo card-text">Top 10 Marks in the Class:-</div>
-                <div class="card-body">
 
-                   <table class="table "><tr><th scope="col">Admission No.</th><th scope="col">Name</th><th scope="col">Marks</th><th scope="col">Responded Time</th></tr>
-                 @foreach($hm as $key=> $h)
-                   <tr>
-                   <td><p class="mx-4">{{$h->admission_no}}</p></td>
-                   <td><p class="mx-4">{{$h->full_name}}</p></td>
-                   <td><p class="mx-4">{{$h->total_points}}</p></td>
-                   <td><p class="mx-4">{{ \Carbon\Carbon::parse($h->uploaded_time)->format('h:m:s') }}</p></td>
-                   </tr>
-                   {{-- <div class="row">
-                    <div class="col-2">
-                        <p>{{$n->title}}</p>
-                    </div>
-                    <div class="col-2">
-                        <p>{{$n->due_date}}</p>
-                    </div>
-                   </div> --}}
-                @endforeach
-                   </table>
 
-                </div>
-
-            </div>
-
-        </div>
+<div class="col-4">
+    <header class ="mb-3">Top 10 Marks in the Class:-</header>
+    <table class="table table-success table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Admission No.</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Responded Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($hm as $key=> $h)
+                <tr>
+                    <td>{{$h->admission_no}}</td>
+                    <td>{{$h->full_name}}</td>
+                    <td>{{$h->total_points}}</td>
+                    <td>{{ \Carbon\Carbon::parse($h->uploaded_time)->format('h:m:s') }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
 @endsection
