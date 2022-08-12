@@ -11,13 +11,13 @@ class Attentiveness_checkController extends Controller
 {
     public function store(Request $req,$classid,$subjectid)
     {
-        if(isset($req->extraweek)){
-            $extra=$req->extraweek;
-            $week=null;
-        }else{
-            $extra=null;
-            $week=$req->week;
-        }
+        // if(isset($req->extraweek)){
+        //     $extra=$req->extraweek;
+        //     $week=null;
+        // }else{
+        //     $extra=null;
+        //     $week=$req->week;
+        // }
         //return dd($req->assignments->getClientOriginalName());
         Attentiveness_check::create(
             [
@@ -25,7 +25,6 @@ class Attentiveness_checkController extends Controller
                 'quiz_duration'=>$req->duration,
                 'term'=>$req->term,
                 'week'=>$week,
-                'extra_week'=>$extra,
                 'date'=>$req->date,
                 'period'=>$req->period,
                 'class_id'=>$req->class_id,
@@ -149,6 +148,11 @@ class Attentiveness_checkController extends Controller
 
     public function attentiveshow($id)
     {
+
+        // $questions = Attentiveness_check_Question::with(['answers' => function($q) {
+        //     $q->inRandomOrder();
+        // }])->inRandomOrder()->get();
+
         $n=Attentiveness_check_Question::where('a_check_id',$id)->get()->count();
         $questions=Attentiveness_check_Question::where('a_check_id',$id)->get();
         $question=Attentiveness_check::find($id);

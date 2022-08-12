@@ -71,8 +71,8 @@
                 @enderror --}}
            </div>
            <div class="form-group mb-4">
-            <label for="name">Assign Date</label>
-            <input type="Date" class="form-control " name="date">
+            <label for="name">Publish Date</label>
+            <input type="Date" placeholder="enter the publish date " class="form-control " name="date">
             </div>
 
             <div class="form-group mb-4">

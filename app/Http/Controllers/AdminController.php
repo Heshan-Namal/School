@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    
+
     public function CreatNewGrade(){
         $data = array(
             'list'=>DB::table('grade')->get()
@@ -23,7 +23,7 @@ class AdminController extends Controller
             'list2'=>DB::table('class')->get()
         );
         $teacher = Teacher::all();
-        
+
         return view('Admin.addGrade',$data,$data2)->with(compact('teacher'));
     }
     public function AddGrade(Request $request){
@@ -74,12 +74,13 @@ class AdminController extends Controller
         $user->user_type = "teacher";
         $user->password = Hash::make('viduhalapwd');
         $user->save();
-        
+
         $user_id = DB::table('user')
         ->where('email', '=', $request->Email)
         ->get('id');
 
         $teacher = new Teacher;
+        //need to add user_id=teacher-id;
         $teacher->full_name=$request->Full_name;
         $teacher->contact_no=$request->Contact_Number;
         $teacher->address=$request->Address;

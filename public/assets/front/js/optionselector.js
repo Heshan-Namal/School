@@ -1,14 +1,13 @@
 function getselector(select1){
     if(select1=='allt'){
-       document.getElementById('week').hidden = true;
-       document.getElementById('day').hidden = true;
-   }else if(select1=='allw'){
-    document.getElementById('day').hidden = true;
-    document.getElementById('week').hidden = false;
+       document.getElementById('day1').hidden = true;
+//    }else if(select1=='allw'){
+//     document.getElementById('day').hidden = true;
+//     document.getElementById('week').hidden = false;
    }else {
-    document.getElementById('day').hidden = false;
-    document.getElementById('week').hidden = false;
-       document.getElementById('term').hidden = false;
+    document.getElementById('day1').hidden = false;
+    // document.getElementById('week').hidden = false;
+
    }
 }
 
@@ -24,8 +23,8 @@ function gettypeselector(select1){
    }
 }
     var exampleModal = document.getElementById('qModal')
-
-            exampleModal.addEventListener('show.bs.modal', function (event) {
+    if(qModal){
+        exampleModal.addEventListener('show.bs.modal', function (event) {
             //    console.log("plzz");
             // Button that triggered the modal
             var button = event.relatedTarget
@@ -33,9 +32,9 @@ function gettypeselector(select1){
             var id = button.getAttribute('data-bs-id')
             var modalBodyInput = exampleModal.querySelector('.modal-body #assid')
             modalBodyInput.value = id
-
-
             })
+    }
+
 function getweekselector(value){
 
     if(value=='extra'){
@@ -93,22 +92,18 @@ if(assedit){
          var description = button.getAttribute('data-bs-description')
          var term = button.getAttribute('data-bs-term')
          var week = button.getAttribute('data-bs-week')
-         var extra_week = button.getAttribute('data-bs-extra_week')
          var day = button.getAttribute('data-bs-day')
          var due_date = button.getAttribute('data-bs-due_date')
          var assessment_type = button.getAttribute('data-bs-assessment_type')
-         var allocated_marks = button.getAttribute('data-bs-allocated_marks')
          var assessment_file = button.getAttribute('data-bs-assessment_file')
          var i = assedit.querySelector('.modal-body #assid')
          var t = assedit.querySelector('.modal-body #title')
          var d = assedit.querySelector('.modal-body #description')
          var te = assedit.querySelector('.modal-body #term')
          var we = assedit.querySelector('.modal-body #week')
-         var ex = assedit.querySelector('.modal-body #extra_week')
          var da = assedit.querySelector('.modal-body #day')
          var du = assedit.querySelector('.modal-body #due_date')
          var a_t = assedit.querySelector('.modal-body #assessment_type')
-         var m= assedit.querySelector('.modal-body #allocated_marks')
          var f = assedit.querySelector('.modal-body #assessment_file')
 
          i.value = id
@@ -116,11 +111,9 @@ if(assedit){
          d.value = description
          te.value = term
          we.value = week
-         ex.value = extra_week
          da.value = day
          du.value = due_date
          a_t.value = assessment_type
-         m.value = allocated_marks
          f.value = assessment_file
 
 
