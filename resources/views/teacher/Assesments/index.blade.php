@@ -110,7 +110,7 @@
         </div>
         <div class="col-4">
             <header class ="mb-3">List of Due Assessments</header>
-            <table class="table table-striped table-hover">
+            <table class="table table-success table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Assessment</th>
@@ -144,9 +144,11 @@
             <header>View All Resources</header>
         </div>
         <div class="col-8 g-2 input-group justify-content-end">
+              {{-- <form action="?" class="col-sm-2 me-auto" > --}}
             <div class="col-2 mx-2">
                 <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
             </div>
+            </form>
                 <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add New Assessment</button>
         </div>
     </div>

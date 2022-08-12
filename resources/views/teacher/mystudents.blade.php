@@ -1,9 +1,10 @@
-@foreach($detail as $key=> $d)
 @extends('layouts.MasterDashboard')
-@endforeach
-@section('content')
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
-<div class="content">
+@endsection
+@section('content')
+<div class="container_AssStudent">
     <div class="row mt-3 mb-3">
         <h1 class="timetable cd-head text-center mb-2">Student Records</h1>
     </div>
@@ -33,37 +34,30 @@
     </div>
 
     </div>
-    <div class="row">
-        <h2 class="card-text">Student Details:-</h2>
-    </div>
-    <div class="row">
-        <div class="text-end">
-            <div class="row">
 
-            <form action="?" class="col-sm-2 me-auto" >
-                <div class="input-group">
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-                    <button type="submit" class="btn btn-primary"> Go!</button>
-                </div>
-            </form>
-            <div class="col-3">
-                <a href="{{route('std.export',[$classid,$subjectid])}}"><button type="button">Excel</button></a>
-                <a href="{{route('std.exportpdf',[$classid,$subjectid])}}"><button type="button">PDF</button></a>
-            </div>
-            </div>
 
-            {{-- <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit" value="Create Assesment"> --}}
+    <header>Student Details:-</header>
+
+<div class="row d-flex justify-content-end mt-3">
+        <form action="?" class="col-sm-4 me-auto" >
+        <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+        </form>
+        <div class="col-2">
+            <a href="{{route('std.export',[$classid,$subjectid])}}"><button type="button">Excel</button></a>
+            <a href="{{route('std.exportpdf',[$classid,$subjectid])}}"><button type="button">PDF</button></a>
         </div>
+</div>
 
-    <table class="table table-success table-hover mt-2">
+    <div class="row">
+    <table class="table table-success table-striped table-hover mt-3">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Admission Number</th>
-                <th scope="col">Student Name</th>
-                <th scope="col">Guardian Email</th>
-                <th scope="col">Submited Assesment Precentage(red<40)</th>
-                <th scope="col">Assesment Marks Average(red<40)</th>
+                <th>#</th>
+                <th>Admission Number</th>
+                <th>Student Name</th>
+                <th>Guardian Email</th>
+                <th><span data-bs-toggle="tooltip" title="red(<40)">Submited Assesment Precentage</span></th>
+                <th><span data-bs-toggle="tooltip" title="red(<40)">Assesment Marks Average</span></th>
             </tr>
         </thead>
             <tbody>

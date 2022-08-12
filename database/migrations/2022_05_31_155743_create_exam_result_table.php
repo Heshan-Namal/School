@@ -18,7 +18,6 @@ class CreateExamResultTable extends Migration
             $table->string('term')->nullable(false);
             $table->integer('marks')->nullable(false);
             $table->integer('year')->nullable(false);
-            $table->float('average')->nullable(true);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('teacher_id');

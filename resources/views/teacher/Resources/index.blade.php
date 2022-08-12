@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <header class ="mb-3">Most Recent Class Links</header>
 
-            <table class="table table-striped table-hover">
+            <table class="table table-success table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Chapter</th>
@@ -34,7 +34,7 @@
         <div class="col-1"></div>
         <div class="col-md-5">
             <header class ="mb-3">Most Recent Notes</header>
-            <table class="table table-striped table-hover">
+            <table class="table table-success table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Chapter</th>

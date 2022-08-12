@@ -166,7 +166,6 @@ if(attedit){
          var title = button.getAttribute('data-bs-title')
          var term = button.getAttribute('data-bs-term')
          var week = button.getAttribute('data-bs-week')
-         var extra_week = button.getAttribute('data-bs-extra_week')
          var day = button.getAttribute('data-bs-day')
          var period = button.getAttribute('data-bs-period')
          var duration = button.getAttribute('data-bs-duration')
@@ -174,7 +173,6 @@ if(attedit){
          var t = attedit.querySelector('.modal-body #title')
          var te = attedit.querySelector('.modal-body #term')
          var we = attedit.querySelector('.modal-body #week')
-         var ex = attedit.querySelector('.modal-body #extra_week')
          var da = attedit.querySelector('.modal-body #date')
          var pe = attedit.querySelector('.modal-body #period')
          var du = attedit.querySelector('.modal-body #duration')
@@ -184,7 +182,6 @@ if(attedit){
          t.value = title
          te.value = term
          we.value = week
-         ex.value = extra_week
          da.value = day
          pe.value = period
          du.value = duration

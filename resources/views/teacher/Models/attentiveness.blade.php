@@ -1,13 +1,14 @@
 <form action="{{route('quiz.store',[$classid,$subjectid])}}" method="POST" enctype="multipart/form-data">@csrf
     <div class="form-group row">
-        <div class="col-3">
-        <select name="term" id="term" class="form-control">
-              <option value="term1" selected>Term 1</option>
-              <option value="term2">Term 2</option>
-              <option value="term3">Term 3</option>
-        </select>
+        <div class="col-md-4">
+            <label for="inputState" class="form-label">Select Term</label>
+            <select name="term" id="term" class="form-control">
+                  <option value="term1" selected>First Term </option>
+                  <option value="term2">Second Term</option>
+                  <option value="term3">Third Term</option>
+            </select>
         </div>
-        <div class="col-3">
+        {{-- <div class="col-3">
         <select name="week" id="week" class="form-control" onchange="getweekselector(this.value);">
               <option value="week1" selected>Week 1</option>
               <option value="week2">Week 2</option>
@@ -24,9 +25,8 @@
               <option  value="extra" >Add Extra Week</option>
 
 
-              {{-- <div class="col-3"></div> --}}
         </select>
-        </div>
+        </div> --}}
 
         {{-- <div class="col-3">
         <select name="day" id="day" class="form-control">
@@ -39,27 +39,7 @@
 
         </select>
         </div> --}}
-        <div hidden class="row my-2" id="extra">
-            <div class="col-4">
-                <p id="p">Add Extra Week </p>
-            </div>
-            <div class="col-4 text-center ">
-            <div class="form-group mb-2">
-                <label for="name">Extra Week Name</label>
 
-                {{-- @error('title')
-                         <span class="invalid-feedback" role="alert">
-                             <strong>{{ $message }}</strong>
-                         </span>
-                 @enderror --}}
-            </div>
-        </div>
-            <div class="col-4">
-                <input type="text" class="form-control " name="extraweek">
-            </div>
-
-
-        </div>
     </div>
            <div class="form-group mb-2">
                <label for="name">Title</label>
