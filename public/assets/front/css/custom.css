@@ -467,7 +467,7 @@ height: 42px;
 /* quiz-card */
 
 .wide-card {
-    max-width: 100%;
+    max-width: 75%;
     text-align: left;
 }
 
@@ -514,6 +514,93 @@ height: 42px;
 .hidden-div:hover div p {
     display: none;
 }
+/* subject details card with buttons displayed on hover */
+
+.hidden-button {
+    position: absolute;
+    /* top: 0; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255, 0.75);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.hidden-button a {
+    position: relative;
+    transform: translateY(350%);
+    width: 25%;
+}
+
+.hidden-div:hover .hidden-button {
+    height: 100%;
+}
+
+
+/* .hidden-div:hover{
+  opacity: 50%;
+} */
+
+.hidden-div:hover div p {
+    display: none;
+}
+
+
+.hidden-button a {
+    position: relative;
+    transform: translateY(350%);
+}
+/* subject details card with buttons displayed on hover */
+
+.hidden-button {
+    position: absolute;
+    /* top: 0; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255, 0.75);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.hidden-button a {
+    position: relative;
+    transform: translateY(350%);
+    width: 25%;
+}
+
+.hidden-div:hover .hidden-button {
+    height: 100%;
+}
+
+
+/* .hidden-div:hover{
+  opacity: 50%;
+} */
+
+.hidden-div:hover div p {
+    display: none;
+}
+
+
+.hidden-div:hover .hidden-button {
+    height: 100%;
+}
+
+
+/* .hidden-div:hover{
+  opacity: 50%;
+} */
+
+.hidden-div:hover div p {
+    display: none;
+}
+
 
 
 /*teacher */

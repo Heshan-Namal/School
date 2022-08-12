@@ -48,12 +48,24 @@ class HomeController extends Controller
             // select classes for today from class timetable
             $d['users'] = $this->user->getAll();
 
-            $student_id = Auth::user()->id;
-            $admission_no =Student::where('user_id',$student_id)->pluck('admission_no')->first();
-            $grade_id =Student::where('user_id',$student_id)->pluck('grade_id')->first();
-            $subject_id = Student_subject::where('admission_no',$admission_no)->pluck('subject_id');
-            $subjects=Subject::all()->whereIn('id',$subject_id)->where('grade_id',$grade_id);
-            return view('Dashboard.dashboard',compact(['d','subjects']));
+            $admission_no =getAdmissionNo();
+            $class_id=getClassId();
+            $day = strtolower(getTermWeekDay()[2]);
+
+            $today_classes=DB::table('class_timetable')
+                            ->join('class','class_timetable.class_id','=','class.id')
+                            ->join('subject','class_timetable.subject_id','=','subject.id')
+                            ->where([['class_timetable.class_id',$class_id]])
+                            ->orderBy('period')
+                            ->select('*')
+                            ->get();
+            
+            $monday=$today_classes->where('day','monday');
+            $tuesday=$today_classes->where('day','tuesday');
+            $wednesday=$today_classes->where('day','wednesday');
+            $thursday=$today_classes->where('day','thursday');
+            $friday=$today_classes->where('day','friday');
+            return view('Dashboard.dashboard',compact(['d','monday','tuesday','wednesday','thursday','friday']));
             
         }
 
@@ -115,7 +127,7 @@ class HomeController extends Controller
 
 
 
-        return view('Dashboard.dashboard', $d);
+        return view('Dashboard.dashboard');
     }
     public function back()
     {

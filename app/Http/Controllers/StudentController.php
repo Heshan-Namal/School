@@ -12,7 +12,7 @@ use App\Models\Attentiveness_check_Question;
 use App\Models\Subject;
 use App\Models\Student_assesment;
 use App\Models\Student_Attentiveness_check;
-use App\Models\relink;
+use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -136,7 +136,7 @@ class StudentController extends Controller
 
     // student_quiz 
 
-    public function getquizList($class_id, $subject_id, $term, $week, $date)
+    public function getAttentiveQuizList($class_id, $subject_id, $term, $week, $date)
     {
         $term='term'.$term;
         $week='week'.$week;
@@ -149,7 +149,6 @@ class StudentController extends Controller
             ->where('subject_id', $subject_id)
             ->where('term', $term)
             ->where('week', $week)
-            ->where(DB::raw("LCASE(DAYNAME(attentiveness_check.date))"), "=", $date)
             ->orderBy('attentiveness_check.id', 'desc')
             ->get();
 
@@ -187,7 +186,7 @@ class StudentController extends Controller
     }
 
 
-    public function showquiz($a_check_id) //class_id,subject_id
+    public function showAttentiveQuiz($a_check_id) //class_id,subject_id
     {
         $quiz = Attentiveness_check::find($a_check_id);
         $questions = Attentiveness_check_Question::where('a_check_id', $a_check_id)->get();
@@ -196,7 +195,7 @@ class StudentController extends Controller
 
 
 
-    public function checkquiz(Request $request, $a_check_id)
+    public function checkAttentiveQuiz(Request $request, $a_check_id)
     {
         $total_points = 0;
         $points_per_q = 5;
@@ -353,5 +352,14 @@ class StudentController extends Controller
     {
         //$recordings = relink::where([['class_id', $class_id], ['subject_id', $subject_id]])->orderByDesc('date')->get();
         return view('Student.student_relink.relinklist', compact(['recordings', 'class_id', 'subject_id']));
+    }
+
+    public function getResourceList($class_id, $subject_id)
+    {
+        $notes = Resource::where([['subject_id',$subject_id],['class_id',$class_id],['resource_type','note']])->get();
+        $links = Resource::where([['subject_id',$subject_id],['class_id',$class_id],['resource_type','reference_link']])->get();
+
+
+        return view('Student.student_resource.resourcelist', compact(['notes','links', 'class_id', 'subject_id']));
     }
 }

@@ -77,11 +77,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/editHomework/{class_id}/{subject_id}/{assignment_id}','editHomework')->name('Student.student.editHomework');
         Route::post('/storeHomework/{class_id}/{subject_id}/{assignment_id}','storeHomework')->name('Student.student.storeHomework');
 
-        //student_quiz routes
-        Route::get('/myquizzes/{class_id}/{subject_id}/{term}/{week}/{day}','getquizList')->name('Student.student.quizlist');
-        Route::get('/quiz/{quiz_id}','showquiz')->name('Student.student.showquiz');
-        Route::post('/checkquiz/{quiz_id}','checkquiz')->name('Student.student.checkquiz');
-        Route::get('/resultquiz/{quiz_id}','checkquiz')->name('Student.student.quizresult');
+        //student_attentive_quiz routes
+        Route::get('/attentiveQuizzes/{class_id}/{subject_id}/{term}/{week}/{day}','getAttentiveQuizList')->name('Student.student.AttentiveQuizList');
+        Route::get('/attentiveQuiz/{quiz_id}','showAttentiveQuiz')->name('Student.student.showAttentiveQuiz');
+        Route::post('/checkQuiz/{quiz_id}','checkAttentiveQuiz')->name('Student.student.checkAttentiveQuiz');
+        Route::get('/resultQuiz/{quiz_id}','checkAttentiveQuiz')->name('Student.student.attentiveQuizResult');
+
+        //student_resources routes
+        Route::get('/resource/{class_id}/{subject_id}','getresourceList')->name('Student.student.resourcelist');
+
     });
 
          //admin routes

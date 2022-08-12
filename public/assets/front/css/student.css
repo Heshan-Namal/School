@@ -1,0 +1,56 @@
+.carousel-control{
+    width:5%;
+}
+
+.carousel-caption{
+    position: absolute;
+    align-items: center;
+    transform: translateY(150%);
+    
+}
+.carousel-inner{
+    overflow:visible;
+}
+
+.carousel-caption span{
+    color: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    align-self:center;
+    margin-left:auto;
+    margin-right:auto;
+    transform: translateY(-80%);
+    font-size:200%;
+}
+
+.carousel-indicators{
+    position: absolute;
+    transform: translateY(275%);
+}
+
+.carousel-control-next{
+    height: 0;
+}
+
+.carousel-control-prev{
+    height: 0;
+}
+
+.carousel-control-next-icon {
+    width: 100%;/*put your desired width*/
+    margin-top:58rem;
+    margin-right:20px;
+    height: 50px;
+}
+
+.carousel-control-prev-icon {
+    width: 100%;/*put your desired width*/
+    margin-top:58rem;/*put your desired top margin*/
+    margin-left:20px;/*put your desired top margin*/
+    height: 50px;
+}
+
+.period-text{
+    background-color:#1CA7EC;
+}

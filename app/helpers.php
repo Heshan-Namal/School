@@ -3,6 +3,8 @@ use Carbon\Carbon;
 use App\Models\Student;
 use App\Models\Resource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 // student helper functions
 function getAdmissionNo()
 {

@@ -45,13 +45,17 @@
                                 @endif
 
                                 @if(Qs::userIsTeamAd())
-                                    <a href="#"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                <div class="navOption ">
+                                    <a href='{{ url("/dashboard") }}'><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
                                     <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
                                     <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
                                     <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
                                     <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
                                     <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
                                     <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+
+                                </div>
+
                                 @endif
 
                                 
@@ -93,10 +97,6 @@
                             <p class="classname">:{{$d->subject}}</p>
                         </div>
                         </div>
-                        @else
-                            <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                            </form>
                         @endif
 
 
