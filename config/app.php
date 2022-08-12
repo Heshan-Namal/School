@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'Carbon' => 'Carbon\Carbon',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -232,6 +232,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Qs' => App\Helpers\Qs::class,
         'Excel'=>\Maatwebsite\Excel\Facades\Excel::class,
+        'Carbon' => Illuminate\Support\Carbon::class,
     ],
 
 ];
