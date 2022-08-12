@@ -4,26 +4,24 @@
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
     <div class="row">
-        <h1 class="card-text">Welcome Teacher</h1>
+        <h1 class="card-text">Welcome (Teacher)!</h1>
     </div>
 
     <div class="row">
         <div class="col-3 mx-3">
             <div class="d-card  mt-3 ">
-                <h4 class="card-header card-text colo d-flex justify-content-center">Assesment Board</h4>
+                <h4 class="card-header card-text colo d-flex justify-content-center">Completed Assesments</h4><br>
                 <div class="row mx-2">
-                    <form action="{{route('dashboard')}}" method="GET" class="form-inline">@csrf
-                        <label for="min" class="card-text ">From :</label>
-                        <input type="Date" class="form-control d-in" name="mindata" required>
-                        <label for="max" class="card-text">To :</label>
-                        <input type="Date" class="form-control d-in" name="maxdata" required>
-                        <button class="btn btn-primary mx-4" type="submit">Save</button>
+                    <form action="{{route('dashboard')}}" method="GET" class="form-inline">@csrf<br>
+                        <label for="min" class="card-text">From:<input type="Date" class="form-control d-in" name="mindata" required></label><br>
+                        <label for="max" class="card-text">To:<input type="Date" class="form-control d-in" name="maxdata" required></label><br>
+                        <button class="btn btn-primary mx-4" type="submit">Check</button>
                     </form>
                 </div>
                 <div class="row">
                     <div class="t-card overflow-auto">
                     <div class="card-body ">
-                        <table class="table p-2 "><tr><th scope="col">Class Name</th><th scope="col">Assesment Name</th><th scope="col">Highest Marks</th></tr>
+                        <table class="table p-2 "><tr><th scope="col">Class</th><th scope="col">Assesment</th><th scope="col">Highest Marks Obtained</th></tr>
                       @foreach($leaders as $key=> $l)
                         <tr>
                         <td><p class="mx-2">{{$l->class_name}}</p></td>
@@ -89,19 +87,19 @@
             </div>
             <div class="row">
                 <div class="week-card mt-3 ">
-                    <h4 class="card-header colo card-text d-flex justify-content-center">Activity</h4>
+                    <h4 class="card-header colo card-text d-flex justify-content-center">Status Tracker</h4>
                     <div class="row my-4">
-                        <div class="timetable">You have</div>
+                        <div class="timetable">Never lose track of the work you do...</div>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <p class="timetable"><b>{{$cc}}</b> Classes</p>
+                            <p class="timetable">No. of Classes You Teach<br><b>{{$cc}}</b></p>
                         </div>
                         <div class="col-4">
-                            <p class="timetable"><b>{{$nc}}</b> Assesments are gonig to Expired</p>
+                            <p class="timetable">Attentive Checks in Drafts<br><b>{{$ac}}</b></p>
                         </div>
                         <div class="col-4">
-                            <p class="timetable"><b>{{$ac}}</b> Attentive checks need to published</p>
+                            <p class="timetable">No. of Due Assessments<br><b>{{$nc}}</b></p>
                         </div>
                     </div>
                 </div>
@@ -111,12 +109,12 @@
 
 </div>
 <div class="row">
-    <h3 class="card-text">Teaching</h3>
+    <h3 class="card-text"><br>Teaching</h3>
 </div>
 <div class="row hh mb-5">
     <div class="col-3">
     <div class="sub-card">
-        <div class="card-header cd-head">Assign Attentive Checks</div>
+        <div class="card-header cd-head">Attentiveness Check</div>
         <div class="row g-0">
             <div class="col-md-4 mt-3">
               <img
@@ -127,11 +125,7 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <p class="card-text">
-                    Numer of Students submit Assesment
-
-
-                </p>
+                <p class="card-text">Create Attentiveness Checks for each period you teach.</p>
               </div>
             </div>
           </div>
@@ -140,7 +134,7 @@
     </div>
     <div class="col-3">
         <div class="sub-card">
-            <div class="card-header cd-head">Assign Resources</div>
+            <div class="card-header cd-head">Subject Resources</div>
             <div class="row g-0">
                 <div class="col-md-4 mt-3">
                   <img
@@ -151,11 +145,7 @@
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <p class="card-text">
-                      Num Students Late Submissions
-
-
-                    </p>
+                    <p class="card-text">Provide students with class notes, reference links, and online meeting links for virtual lessons.</p>
                   </div>
                 </div>
               </div>
@@ -163,7 +153,7 @@
         </div>
         <div class="col-3">
             <div class="sub-card">
-                <div class="card-header cd-head">Assign Assesments</div>
+                <div class="card-header cd-head">Student Assessment</div>
                 <div class="row g-0">
                     <div class="col-md-4 mt-3">
                       <img
@@ -174,11 +164,7 @@
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
-                        <p class="card-text">
-                           Not add marks for Submission
-
-
-                        </p>
+                        <p class="card-text">Assign your students written assessments or MCQ quiz-type assessments with strict deadlines.</p>
                       </div>
                     </div>
                   </div>
@@ -187,7 +173,7 @@
             </div>
             <div class="col-3">
                 <div class="sub-card">
-                    <div class="card-header cd-head">Student performance</div>
+                    <div class="card-header cd-head">Record Book</div>
                     <div class="row g-0">
                         <div class="col-md-4 mt-3">
                           <img
@@ -198,12 +184,7 @@
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
-                            <p class="card-text">
-                                Num Students not submited Assesment
-                               <span class="value rounded-circle ms-5">
-
-                            </span>
-                            </p>
+                            <p class="card-text">Update the Subject Record Book after every period.<span class="value rounded-circle ms-5"></span></p>
                           </div>
                         </div>
                       </div>
@@ -213,9 +194,7 @@
 </div>
 <div class="row mb-4">
     <div class="col-5 text-center mb-5">
-        <h4 class="table mt-5">
-            Assesment precentage paricipation of your Subject on Your classes
-        </h4>
+        <h4 class="table mt-5">Classwise percentage of participation of students for assessment submissions.</h4>
         </div>
     <div class="col-7">
         <div id="chart3" style="height: 400px;"></div>
@@ -230,9 +209,7 @@
             />
     </div>
     <div class="col-5 text-center mb-5">
-        <h4 class="table mt-5">
-            You must Update the Record Book After finish your Period. It will helps to manage your Teaching
-        </h4>
+        <h3 class="table mt-5">'Teaching is the highest form of understanding' <br> - Aristotle -</h3>
         </div>
 
 </div>

@@ -8,14 +8,14 @@
         <div class="card">
             <form action="#" method="GET" class="form-inline">@csrf
             <div class="form-group row">
-                <h4 class="timetable mb-2 mt-3">Submited Assesments</h4>
+                <h4 class="timetable mb-2 mt-3">View Overdue Assessments</h4>
                     <div class="col-sm-3" >
                         <select name="term" id="term" onchange="getselector(this.value);" class="form-control">
                             <option value="" value="" disabled selected>Select Term</option>
-                            <option value="allt" selected>All terms</option>
-                                <option value="term1">term 1</option>
-                                <option value="term2">term 2</option>
-                                <option value="term3">term 3</option>
+                            <option value="allt" selected>All Terms</option>
+                                <option value="term1">Term 1</option>
+                                <option value="term2">Term 2</option>
+                                <option value="term3">Term 3</option>
 
                         </select>
                     </div>
@@ -23,19 +23,19 @@
                     <select name="week" id="week" onchange="getselector(this.value);" class="form-control ">
                         <option value="" value="" disabled selected>Select Week</option>
                             <option value="allw" selected >All Weeks</option>
-                            <option value="week1">week 1</option>
-                            <option value="week2">week 2</option>
-                            <option value="week3">week 3</option>
-                            <option value="week4">week 4</option>
-                            <option value="week5">week 5</option>
-                            <option value="week6">week 6</option>
-                            <option value="week7">week 7</option>
-                            <option value="week8">week 8</option>
-                            <option value="week9">week 9</option>
-                            <option value="week10">week 10</option>
-                            <option value="week11">week 11</option>
-                            <option value="week12">week 12</option>
-                            <option value="extra">extra weeks</option>
+                            <option value="week1">Week 1</option>
+                            <option value="week2">Week 2</option>
+                            <option value="week3">Week 3</option>
+                            <option value="week4">Week 4</option>
+                            <option value="week5">Week 5</option>
+                            <option value="week6">Week 6</option>
+                            <option value="week7">Week 7</option>
+                            <option value="week8">Week 8</option>
+                            <option value="week9">Week 9</option>
+                            <option value="week10">Week 10</option>
+                            <option value="week11">Week 11</option>
+                            <option value="week12">Week 12</option>
+                            <option value="extra">Extra Weeks</option>
 
                     </select>
                     </div>
@@ -45,8 +45,8 @@
                     <option value="" value="" disabled selected>Select Day</option>
                         <option value="monday">Monday</option>
                         <option value="tuesday">Tuesday</option>
-                        <option value="wensday">Wendsday</option>
-                        <option value="thursday">Tursday</option>
+                        <option value="wensday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
                         <option value="friday">Friday</option>
 
 
@@ -139,14 +139,13 @@
         </div> --}}
         <div class="row">
             <div class="head mt-4">
-                <p><u>Student Submitted Assesments</u> :-</p>
+                <p><u>Submissions for Overdue Assessments</u> :-</p>
             </div>
             <div class="text-end">
                 <form action="?" class="col-sm-2 me-auto" >
                     <div class="input-group">
-                        <button type="submit" class="btn btn-primary"> Go!</button>
                         <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-
+                        <button type="submit" class="btn btn-primary"> Go!</button>
                      </div>
                 </form>
             </div>
@@ -168,7 +167,7 @@
       <th scope="col">Week</th>
       <th scope="col">Day</th>
       <th scope="col">Type</th>
-      <th scope="col">Count</th>
+      <th scope="col">Submissions</th>
       <th scope="col">View</th>
 
     </tr>
@@ -199,7 +198,7 @@
     @else
     <div class="d-flex justify-content-center mb-5">
         <div class="search-card">
-            <div class="row"><h4 class="search-font ">Can't Find Any Records </h4></div>
+            <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-4 mt-3 ">
                     <img
@@ -226,10 +225,10 @@
         </div>
         <div class="col-4">
             <div class="d-card overflow-auto mt-3">
-                <div class="card-header colo "><h5 class="timetable text-center">View nearly expired Assesments submits:-</h5></div>
+                <div class="card-header colo "><h5 class="timetable text-center">Submissions for Assessments with due date yet to arrive:-</h5></div>
                 <div class="jj">
                 <div class="card-body">
-                    <table class="table "><tr><th scope="col" class="mx-2">Title</th><th scope="col">Due Date</th><th scope="col">Num of Submits</th></tr>
+                    <table class="table "><tr><th scope="col" class="mx-2">Title</th><th scope="col">Due Date</th><th scope="col">Submissions</th></tr>
                     @foreach($nearas as $key=> $n)
                    <tr>
                    <td><p class="mx-3">{{$n->title}}</p></td>

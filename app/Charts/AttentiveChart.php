@@ -53,9 +53,9 @@ class AttentiveChart extends BaseChart
             }
             if ($v != 0) {
                 $tval=($t1/$v)*100;
-                array_push($count,$tval);
+                array_push($count,round($tval,2));
             }else {
-                array_push($count,$tval);
+                array_push($count,round($tval,2));
             }
         }
 

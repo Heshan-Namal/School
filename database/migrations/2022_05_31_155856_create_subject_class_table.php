@@ -19,6 +19,7 @@ class CreateSubjectClassTable extends Migration
             $table->unsignedBigInteger('class_id');
             $table->foreign('class_id')->references('id')->on('class')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subject')->onDelete('cascade');
+            $table->unique(['class_id','subject_id']);
             $table->timestamps();
         });
     }

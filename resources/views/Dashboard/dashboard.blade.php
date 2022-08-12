@@ -3,6 +3,12 @@
 
 @section('content')
 <div class="content">
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"> {{ Breadcrumbs::render('Dashboard') }} </li>
+</ol>
+
+
 @if(Qs::userIsTeamAd())
 <div class="row">
   <div class="col-sm-3">
@@ -81,6 +87,18 @@
         <img src="{{asset('assets/front/images/avatars/addStudent.png')}}" class="rounded mx-auto d-block" alt="...">
         <div>
           <p class="card-text">Add Grade</p>
+        </div>
+      </div>
+    </div>
+    </a>
+  </div>
+  <div class="col-sm-3">
+    <a href="{{route('admin.class')}}">
+    <div class="card">
+      <div class="card-body">
+        <img src="{{asset('assets/front/images/avatars/addStudent.png')}}" class="rounded mx-auto d-block" alt="...">
+        <div>
+          <p class="card-text">Add Class</p>
         </div>
       </div>
     </div>
