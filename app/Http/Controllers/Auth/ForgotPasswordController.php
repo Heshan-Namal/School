@@ -57,12 +57,12 @@ class ForgotPasswordController extends Controller
     }
     public function Change_password(Request $request){
         
-
-        // $request->validate([
-        //     'email'=>'required|email|exists:user,email',
-        //     'password'=>'required|min:5|confirmed',
-        //     'Confirm_password'=>'required',
-        // ]);
+        // dd($request);
+        $request->validate([
+            'email'=>'required|email|exists:user,email',
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required',
+        ]);
         // dd($request);
         $check_token = \DB::table('password_resets')->where([
             'email'=>$request->email,
