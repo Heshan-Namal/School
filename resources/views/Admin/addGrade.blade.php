@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="content">
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"> {{ Breadcrumbs::render('Grades') }} </li>
+</ol>
+
 <!-- <span style="color:red">@error('grade_name'){{$message}}@enderror</span> -->
 <div class="row">
   @foreach($list as $item)
@@ -11,7 +16,7 @@
       <h2 class="card-title fw-bold text-capitalize">{{$item->grade_name}}</h2>
         <img src="{{asset('assets/front/images/avatars/student.png')}}" class="rounded mx-auto d-block" alt="...">
         <div>
-        <span class="card-title fw-bold pe-5 card-span"  data-bs-toggle="modal"><button  class="edit_btn btn btn-link text-decoration-none ">Edit</button></span>
+        <span class="card-title fw-bold pe-5 card-span"  data-bs-toggle="modal"><button  class="edit_btn btn btn-link text-decoration-none " >Edit</button></span>
         <span class="card-title fw-bold card-span-rm" data-bs-toggle="modal" data-bs-target="#removeModal" id="{{$item->id}}">Remove</span>
         </div>
       </div>
@@ -146,7 +151,7 @@
 </div>
 @endsection
 @section('script')
-<script>
+<!-- <script>
   $(document).ready(function (){
     $(document).on('click','.edit_btn',function(){
       var grade_id = $(this).val();
@@ -160,5 +165,5 @@
       })
     });
   });
-</script>
+</script> -->
 @endsection

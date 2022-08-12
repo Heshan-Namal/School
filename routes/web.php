@@ -20,10 +20,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\Teacher_RecordBookController;
 use App\Http\Controllers\ClassTeacherController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TermController;
 use Illuminate\Support\Facades\Auth;
-
+//use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\CustomAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,11 +49,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+ Route::get('/password/reset/link', [ForgotPasswordController::class,'password_reset_link'])->name('passwords.reset.link');
+ Route::post('/password/reset2', [ForgotPasswordController::class,'password_reset'])->name('password_reset');
+ Route::get('/password/resets/{remember_token}', [ForgotPasswordController::class,'Show_reset_form'])->name('passwords.reset.form');
+ Route::post('/password/change', [ForgotPasswordController::class,'Change_password'])->name('change.password');
+
  Auth::routes();   //Auth route
 
 
 Route::group(['middleware' => 'auth'], function () {
 
+    // Route::post('/userlogout', [CustomAuthController::class,'signOut'])->name('user.logout');
 
     Route::get('/dashboard', [HomeController::class,'dashboard'])->name('dashboard');
     Route::get('/', [HomeController::class,'back'])->name('back');
@@ -82,7 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'grade'], function(){
             Route::get('/add',[AdminController::class,'CreatNewGrade'])->name('admin.grade');
             Route::post('/AddGrade',[AdminController::class,'AddGrade']);
-            Route::post('/AddClass/{id}',[AdminController::class,'AddClass']);
+            Route::post('/AddClass',[AdminController::class,'AddClass']);
             Route::post('/DeleteGrade/{id}',[AdminController::class,'DeleteGrade'])->name('admin.Delete');
         });
 
@@ -90,12 +98,15 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/AddTeacher',[AdminController::class,'AddTeacher']);
 
         });
+        Route::group(['prefix' => 'student'], function(){
 
+            Route::post('/AddStudent',[AdminController::class,'AddStudent']);
+
+        });
+        Route::get('grade/AddNewClass',[AdminController::class,'AddNewClass'])->name('admin.class');
         Route::get('/addteacher',[AdminController::class,'AddNewTeacher'])->name('admin.teacher');
         Route::get('/addstudent',[AdminController::class,'AddNewStudent'])->name('admin.student');
-
-});
-
+        Route::get('/SelectGrade',[AdminController::class,'SelectGrade']);
 
 // teacher routes
 Route::get('/subjects',[TeacherController::class,'mySubjects'])->name('teacher.subjects');
@@ -147,6 +158,11 @@ Route::put('/result-update/{term}/{subjectid}/{classid}',[TermController::class,
 
 //report
 Route::get('result/exportpdf/{term}/{studentid}/{classid}', [TermController::class, 'exportpdf'])->name('resultpdf');
+
+
+});
+
+
 
 
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');

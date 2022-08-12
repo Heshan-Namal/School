@@ -12,7 +12,7 @@ class Classroom extends Model
     protected $guarded=[];
 
     public $timestamps=false;
-    public $teacher_id=false;
+
 
     public function getsubjects()
     {

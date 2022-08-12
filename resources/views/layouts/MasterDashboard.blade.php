@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Viduhala</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   
     <link rel="stylesheet" href="{{asset('assets/front/bootstrap/css/bootstrap.min.css')}}">
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome-all.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/fonts/font-awesome.min.css')}}">
@@ -16,6 +18,7 @@
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
     @yield('style')
 </head>
@@ -40,6 +43,15 @@
                                 <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
                                 <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
                                 <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+                                <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Profile</div></a>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                >
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                </form>
+                                <div><ion-icon name="alert-circle-outline"></ion-icon>Logout</div></a>
                             </div>
                         </div>
                         @if (isset($d))
@@ -126,10 +138,11 @@
                 </nav>
                 <div class="container-fluid d-flex bd-highlight ">
                     <div class="p-2 flex-grow-1 bd-highlight">
-                    <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary btn-sm">Go back</button></a>
-                    <div class="alert " role="alert">
+                    <!-- <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary btn-sm">Go back</button></a> -->
+                    <!-- <div class="alert " role="alert">
                         <span style="color:red">@error('grade_name'){{$message}}@enderror</span>
-                    </div>
+                    </div> -->
+                    
                         @yield('content')
 
                     </div>
@@ -201,6 +214,34 @@
     <script src="{{asset('assets/front/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/front/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/front/js/carousel.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        @if(Session::has('message'))
+            var type="{{Session::get('alert-type','info')}}"
+
+            switch(type){
+                case 'info':
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+                case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+                default:
+                    toastr.error("{{ Session::get('message') }}");
+
+            }
+            
+        @endif
+    </script>
 
 
     <!-- Your application script -->
