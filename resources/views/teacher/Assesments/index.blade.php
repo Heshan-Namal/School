@@ -94,7 +94,7 @@
                     <div class="col-md-5" id="day1" hidden>
                         <label for="inputState" class="form-label">Select Date</label>
                         <select name="day" id="day" class="form-control mt-0" aria-label="Default select example">
-                            <option selected>Choose...</option>
+                            <option selected value="">Choose...</option>
                             <option value="monday">Monday</option>
                             <option value="tuesday">Tuesday</option>
                             <option value="wensday">Wednesday</option>
@@ -138,34 +138,16 @@
         </div>
     </div>
 
+    <header>View All Assessments</header>
 
-    <div class="row">
-        <div class="col-4 justify-content-start">
-            <header>View All Resources</header>
-        </div>
-        <div class="col-8 g-2 input-group justify-content-end">
-              {{-- <form action="?" class="col-sm-2 me-auto" > --}}
-            <div class="col-2 mx-2">
-                <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-            </div>
-            </form>
-                <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add New Assessment</button>
-        </div>
+    <div class="text-end">
+    <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add New Assessment</button>
     </div>
-    {{-- <header class ="mb-2">View All Resources</header>
-    <div class="row g-3 mt-2">
-        <form action="?" >
-            <div class="input-group">
-                <div class="form-outline row">
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-
-                </div>
-            </div>
-        </form>
-        <div class="text-end">
-            <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add New Assessment</button>
+    <form action="?" class="col-sm-2 me-auto" >
+        <div class="col-12">
+            <input type="text"  name="search" placeholder="Search......."  value="{{request()->search}}" class="form-control">
         </div>
-    </div> --}}
+    </form>
 
 
     @if (session('message'))

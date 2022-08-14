@@ -26,7 +26,8 @@ class Submit_assesmentController extends Controller
             ->where(function($query) use ($search){
                 $query->where('assessment.title', 'LIKE', '%'.$search.'%')
                         ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
-                        ->orWhere('assessment.day', 'LIKE', '%'.$search.'%');
+                        ->orWhere('assessment.day', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.week', 'LIKE', '%'.$search.'%');
             })
             ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
             ->paginate(10);
@@ -78,6 +79,7 @@ class Submit_assesmentController extends Controller
     }
     public function subassview(Request $request,$id)
     {
+
         $search=$request->search;
         $sub=DB::table('student_assessment')
                 ->join('assessment','student_assessment.assessment_id','=','assessment.id')
@@ -128,13 +130,21 @@ class Submit_assesmentController extends Controller
                 ->where('student_assessment.assessment_id',$id)
                 ->orderBy('student_assessment.assessment_marks','desc')
                 ->limit(10)
-                ->get();
+                ->paginate(5);
+
+
 
                 $notsub=((int)$std-(int)$nums);
               //  dd($notsub);
 
+              $title= DB::table('student_assessment')
+              ->join('assessment','student_assessment.assessment_id','=','assessment.id')
+              ->where('student_assessment.assessment_id',$id)
+              ->select('assessment.title')
+              ->first();
 
-        return view('teacher.Assesments.submited_students',compact('sub','nums','late','mar','hm','notsub'));
+
+        return view('teacher.Assesments.submited_students',compact('sub','nums','late','mar','hm','notsub','title'));
     }
 
     public function updatemarks(Request $req,$id)

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="container_AssStudent">
-        <form action="{{route('addresult',[$dd->id])}}" method="GET" class="row g-3">@csrf
+        <form action="{{route('view.result',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Class</label>
             <input type="text" disabled class="form-control" value="{{$dd->class_name}}">
@@ -24,7 +24,7 @@
         </form>
 
     <div class="row">
-        <header class ="mb-3">Add Result {{$term}} </header>
+        <header class ="mb-3">View Result {{$term}} </header>
 
         <table class="table table-bordered table-striped">
                                 <thead>
@@ -32,18 +32,25 @@
                                         <th>#</th>
                                         <th>Admission Number</th>
                                         <th>Student Name</th>
-                                        <th>Add/Edit</th>
+                                        <th>Average</th>
+                                        <th>Position</th>
+                                        <th>View</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($std as $key=> $s)
+                                    @foreach ($order as $key=> $o)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td>{{$s->admission_no}}</td>
-                                        <td>{{$s->full_name }}</td>
+                                        <td>{{$o->admission_no}}</td>
+                                        <td>{{$o->full_name }}</td>
+                                        <td>{{round(($o->sum / $count),2)}}</td>
+                                        <td>{{$key+1}}</td>
                                         <td>
-                                            <a href="{{route('stdresult',[$term,$s->admission_no])}}" class="btn btn-primary btn-sm">Add/Edit</a>
+                                            <a href="{{route('resultpdf',[$term,$o->admission_no,$dd->id])}}" class="btn btn-primary btn-sm">View</a>
                                         </td>
+                                        {{-- <td>
+                                        <a href="{{route('resultpdf',[$term,$s->admission_no,$dd->id])}}" class="btn btn-secondry btn-sm">Report</a>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

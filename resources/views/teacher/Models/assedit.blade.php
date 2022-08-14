@@ -81,7 +81,7 @@
         </div>
         <div class="form-group mb-2">
             <label for="name" >Assessment Type</label>
-            <select name="type" id="assessment_type" onchange="gettypeselector(this.value);" class="form-control">
+            <select name="type" id="type" onchange="gettypeselector(this.value);" class="form-control">
                 <option value="upload_file">Upload Assignment</option>
                 <option value="mcq_quiz">MCQ Quiz</option>
           </select>
@@ -90,11 +90,11 @@
 
            <div class="form-group mb-4" id="file">
                <label for="assignments">Upload Assignment</label>
-               <input type="file" class="form-control" name="assignments" >
+               <input type="file" class="form-control" @error('assignments') is-invalid @enderror name="assignments" >
                <input type="text" disabled class="form-control"  id="assessment_file">
                @error('assignments')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>only pdf and doc can upload</strong>
                         </span>
                 @enderror
            </div>

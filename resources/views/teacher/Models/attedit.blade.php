@@ -52,9 +52,9 @@
         <div class="form-group mb-2">
             <label for="name">Quiz Duration</label>
             <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" placeholder="00:00:00" id="duration">
-            @error('a_marks')
+            @error('duration')
                      <span class="invalid-feedback" role="alert">
-                         <strong>{{ $message }}</strong>
+                        <strong>example: 00:05:00(five minutes)</strong>
                      </span>
              @enderror
         </div>

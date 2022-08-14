@@ -67,6 +67,7 @@
         </form>
     </div>
     @endforeach
+
 </div>
     </div>
 <script src="{{asset('assets/front/js/termtest.js')}}"></script>

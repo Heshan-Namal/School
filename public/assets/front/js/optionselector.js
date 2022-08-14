@@ -35,16 +35,16 @@ function gettypeselector(select1){
             })
     }
 
-function getweekselector(value){
+// function getweekselector(value){
 
-    if(value=='extra'){
-        document.getElementById('extra').hidden = false;
-        document.getElementById('extra').disabled = false;
-    }else{
-     document.getElementById('extra').hidden = true;
-     document.getElementById('extra').disabled = true;
-    }
-}
+//     if(value=='extra'){
+//         document.getElementById('extra').hidden = false;
+//         document.getElementById('extra').disabled = false;
+//     }else{
+//      document.getElementById('extra').hidden = true;
+//      document.getElementById('extra').disabled = true;
+//     }
+// }
 
 var editModal = document.getElementById('editModal')
 if(editModal){
@@ -103,7 +103,7 @@ if(assedit){
          var we = assedit.querySelector('.modal-body #week')
          var da = assedit.querySelector('.modal-body #day')
          var du = assedit.querySelector('.modal-body #due_date')
-         var a_t = assedit.querySelector('.modal-body #assessment_type')
+         var a_t = assedit.querySelector('.modal-body #type')
          var f = assedit.querySelector('.modal-body #assessment_file')
 
          i.value = id

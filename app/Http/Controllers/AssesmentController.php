@@ -12,7 +12,7 @@ class AssesmentController extends Controller
 {
     public function index(Request $request ,$classid,$subjectid)
     {
-
+        //dd($request);
         $search=$request->search;
         $term=$request->term;
         $week=$request->week;
@@ -25,7 +25,8 @@ class AssesmentController extends Controller
                 ->where(function($query) use ($search){
                 $query->where('assessment.title', 'LIKE', '%'.$search.'%')
                         ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
-                        ->orWhere('assessment.assessment_file', 'LIKE', '%'.$search.'%');
+                        ->orWhere('assessment.assessment_file', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.week', 'LIKE', '%'.$search.'%');
                 })
                 ->paginate(10);
 
@@ -80,6 +81,9 @@ class AssesmentController extends Controller
     }
     public function store(Request $req,$classid,$subjectid)
     {
+        $req->validate([
+            'assignments'=>'mimes:pdf,doc'
+        ]);
 
         $date=Carbon::now()->format('y/m/d/l/W');
         $datearr=explode("/",$date);
@@ -183,6 +187,10 @@ class AssesmentController extends Controller
     }
     public function assessmentupdate(Request $req)
     {
+
+        $req->validate([
+            'assignments'=>'mimes:pdf,doc'
+        ]);
 
         $date=Carbon::now()->format('y/m/d/l/W');
         $datearr=explode("/",$date);

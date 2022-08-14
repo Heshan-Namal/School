@@ -103,10 +103,10 @@
 
     <div class="row mt-4">
         <div class="col-8">
-        <header>Submission Details</header>
+        <header>Submission {{$title->title}} Details</header>
         <form action="?" >
         <div class="d-flex justify-content-end">
-            <div class="col-4 mx-2">
+            <div class="col-4 mb-3">
                 <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
             </div>
         </div>
@@ -214,6 +214,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="pagination justify-content-end mt-3">
+            {!! $hm->links() !!}
+        </div>
 </div>
 </div>
 

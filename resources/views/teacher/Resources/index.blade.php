@@ -23,13 +23,16 @@
                         <tr>
                         <td>{{$c->chapter}}</td>
                         <td>{{$c->period}}</td>
-                        <td>{{ \Carbon\Carbon::parse($c->created_at)->format('d/m/Y') }}</td>
+                        <td>{{$c->date}}</td>
+                        {{-- <td>{{ \Carbon\Carbon::parse($c->created_at)->format('d/m/Y') }}</td> --}}
                         <td><a href="{{$c->resource_file}}"><button type="button" class="btn btn-primary btn-sm">Link</button></a></td>
                     </tr>
                         @endforeach
                 </tbody>
             </table>
-
+            <div class="pagination justify-content-end mt-3">
+                {!! $clink->links() !!}
+            </div>
         </div>
         <div class="col-1"></div>
         <div class="col-md-5">
@@ -47,11 +50,15 @@
                         <tr>
                         <td>{{$n->chapter}}</td>
                         <td><a href="http://127.0.0.1:8000/notes/{{$n->resource_file}}">{{$n->resource_file}}</a></td>
-                        <td>{{ \Carbon\Carbon::parse($n->created_at)->format('d/m/Y') }}</td>
+                        <td>{{$n->date}}</td>
+                        {{-- <td>{{ \Carbon\Carbon::parse($n->created_at)->format('d/m/Y') }}</td> --}}
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="pagination justify-content-end mt-3">
+                {!! $note->links() !!}
+            </div>
         </div>
     </div>
     <div class="row g-3 ">
@@ -60,7 +67,7 @@
             <div class="col-md-3">
                 <label for="inputState" class="form-label">Select Term</label>
                 <select name="term" id="term" onchange="getselector(this.value);" class="form-control mt-0">
-                    <option selected>Choose...</option>
+                    <option selected value="">Choose...</option>
                     <option value="allt" >All Terms</option>
                     <option value="term1">First Term </option>
                     <option value="term2">Second Term </option>
@@ -70,7 +77,7 @@
             <div class="col-md-3" id="day1" hidden>
                 <label for="inputState" class="form-label">Select Date</label>
                 <select name="day" id="day" class="form-control mt-0" aria-label="Default select example">
-                    <option selected>Choose...</option>
+                    <option selected value="">Choose...</option>
                     <option value="monday">Monday</option>
                     <option value="tuesday">Tuesday</option>
                     <option value="wensday">Wednesday</option>
@@ -85,23 +92,18 @@
     </div>
 
 
-
     <div class="row g-3 mt-2">
-        <form action="?" >
-            <div class="input-group">
-                <div class="form-outline row">
-                    <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-                    {{-- <button type="button" class="btn btn-primary">
-                        <i class="fas fa-search"></i>
-                    </button> --}}
-                </div>
-            </div>
-        </form>
         <div class="text-end">
             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Resource</button>
         </div>
     </div>
 
+
+    <form action="?" class="col-sm-2 me-auto" >
+        <div class="col-12">
+            <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
+        </div>
+    </form>
 
 
     @if (session('message'))
@@ -124,7 +126,7 @@
                 <th>Term</th>
                 <th>Week</th>
                 <th>Day</th>
-                <th>Date</th>
+                <th>Published Date</th>
                 <th>Type</th>
                 <th>Resource</th>
                 <th>Edit/Delete</th>

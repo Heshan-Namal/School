@@ -2,7 +2,7 @@
     @csrf
            <div class="form-group mb-2">
             <label for="name">Enter Record</label>
-            <textarea class="form-control " name="record" id="record"></textarea>
+            <textarea class="form-control " name="record" id="record" required></textarea>
             @error('record')
                      <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>

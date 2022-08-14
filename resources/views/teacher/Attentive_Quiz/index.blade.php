@@ -82,7 +82,7 @@
                     <div class="col-md-5">
                         <label for="inputState" class="form-label">Select Term</label>
                         <select name="term" id="term" onchange="getselector(this.value);" class="form-control mt-0">
-                            <option selected>Choose...</option>
+                            <option selected value="">Choose...</option>
                             <option value="allt" >All Terms</option>
                             <option value="term1">First Term </option>
                             <option value="term2">Second Term </option>
@@ -132,23 +132,17 @@
                 </div>
         </div>
     </div>
+    <header>Attentiveness Checks</header>
 
-
-    <div class="row">
-        <div class="col-4 justify-content-start">
-            <header>View All Resources</header>
-        </div>
-
-        <div class="col-8 g-2 input-group justify-content-end">
-            {{-- <form action="?" class="col-sm-2 me-auto" > --}}
-            <div class="col-4 mx-2">
-                <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-            </div>
-        </form>
-            <button type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Check</button>
-        </div>
-
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Check</button>
     </div>
+    <form action="?" class="col-sm-2 me-auto" >
+        <div class="col-12">
+            <input type="text"  name="search" placeholder="Search......."  value="{{request()->search}}" class="form-control mb-2">
+        </div>
+    </form>
+
 
 
     @if (session('message'))
@@ -204,7 +198,7 @@
                 @if($quiz->status=='draft')
 
                 <button class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#editattModal" data-bs-id="{{$quiz->id}}" data-bs-title="{{$quiz->title}}"
-                    data-bs-term="{{$quiz->term}}" data-bs-week="{{$quiz->week}}" data-bs-extra_week="{{$quiz->extra_week}}" data-bs-day="{{$quiz->date}}" data-bs-period="{{$quiz->period}}"
+                    data-bs-term="{{$quiz->term}}" data-bs-week="{{$quiz->week}}" data-bs-day="{{$quiz->date}}" data-bs-period="{{$quiz->period}}"
                     data-bs-duration="{{$quiz->quiz_duration}}"><i class="bi bi-pencil-square "></i> </button>
 
                 @else
