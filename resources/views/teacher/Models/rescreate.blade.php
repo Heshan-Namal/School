@@ -42,12 +42,12 @@
             </div>
             <div class="form-group">
                 <label for="name">Publish Date</label>
-                <input type="Date" placeholder="enter the publish date" class="form-control " name="date">
+                <input type="Date" placeholder="enter the publish date" class="form-control " name="date" required>
             </div>
 
             <div class="form-group">
                 <label for="name">Chapter</label>
-                <input type="text" class="form-control " name="title">
+                <input type="text" class="form-control " name="title" required>
                 {{-- @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
 
             <div class="form-group">
                 <label for="name">Topic</label>
-                <textarea class="form-control " name="description"></textarea>
+                <textarea class="form-control " name="description" required></textarea>
                 {{-- @error('description')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -103,9 +103,9 @@
             <div class="form-group" id="file">
                 <label for="name" id="file">Upload the Note</label>
                 <input type="file" class="form-control" name="file">
-                @error('assignments')
+                @error('file')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>only pdf and doc can upload</strong>
                         </span>
                 @enderror
             </div>

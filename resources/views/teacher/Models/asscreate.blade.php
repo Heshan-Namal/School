@@ -88,10 +88,10 @@
 
            <div class="form-group mb-4" id="file">
                <label for="name" id="file">Upload the Assignment</label>
-               <input type="file" class="form-control" name="assignments">
+               <input type="file" class="form-control" @error('assignments') is-invalid @enderror name="assignments">
                @error('assignments')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>only pdf and doc can upload</strong>
                         </span>
                 @enderror
            </div>

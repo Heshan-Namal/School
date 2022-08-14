@@ -11,6 +11,10 @@ class Attentiveness_checkController extends Controller
 {
     public function store(Request $req,$classid,$subjectid)
     {
+        $req->validate([
+            'duration'=>'required|date_format:H:s:i'
+        ]);
+
         $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
         $datearr=explode("/",$date);
         $week="week".$datearr[4]%17;
@@ -35,6 +39,7 @@ class Attentiveness_checkController extends Controller
 
     public function index(Request $request ,$classid,$subjectid)
     {
+
         $search=$request->search;
         $term=$request->term;
         // $week=$request->week;
@@ -143,6 +148,9 @@ class Attentiveness_checkController extends Controller
 
     public function attupdate(Request $req)
     {
+        $req->validate([
+            'duration'=>'required|date_format:H:s:i'
+        ]);
         //dd($req->period);
         $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
         $datearr=explode("/",$date);
@@ -154,7 +162,6 @@ class Attentiveness_checkController extends Controller
         $att->term=$req->term;
         $att->week=$week;
         $att->date=$req->date;
-        $att->extra_week=$req->extraweek;
         $att->period=$req->period;
         $att->quiz_duration=$req->duration;
 
@@ -180,4 +187,36 @@ class Attentiveness_checkController extends Controller
         return back()->with('message','Succesfully Deleted the Record');
     }
 
+    public function attquestion_update(Request $req)
+    {
+        //  dd($req->id);
+
+        $req->validate([
+
+            'id'=>'required',
+            'question'=>'required',
+            'answer1'=>'required',
+            'answer2'=>'required',
+            'answer3'=>'required',
+            'answer4'=>'required',
+            'correct_answer'=>'required',
+
+
+        ]);
+
+        $question=Attentiveness_check_Question::find($req->id);
+        $id=$question->a_check_id ;
+        $question->question=$req->question;
+        $question->option_1=$req->answer1;
+        $question->option_2=$req->answer2;
+        $question->option_3=$req->answer3;
+        $question->option_4=$req->answer4;
+        $question->correct_answer=$req->correct_answer;
+        $question->save();
+        //return dd($req->assignments->getClientOriginalName());
+
+        return redirect()->route('att.quizshow',compact('id'))->with('message','Question Updated successfully');
+
+
+    }
 }

@@ -92,7 +92,7 @@
         </div>
     @endif
 
-<header>Attentiveness Checks published today :-</header>
+<header>Attentiveness Check Submissions on today :-</header>
     <div class="row">
         <div class="col-8">
 @if($quizes->count()>0)
@@ -159,7 +159,7 @@
 
 </div>
 <div class="col-4">
-    <header class ="mb-3">Highest Marks for each Attentiveness Check published today</header>
+    <header class ="mb-3">Highest Marks for each Attentiveness Check Submissions on today</header>
     <table class="table table-success table-striped table-hover">
         <thead>
             <tr>
@@ -178,6 +178,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination justify-content-end mt-3">
+        {!! $hmark->links() !!}
+    </div>
 </div>
 <div class="row"></div>
 <div class="row mt-3 mb-4">

@@ -115,6 +115,7 @@ class TermController extends Controller
     public function exportpdf($term,$studentid,$classid)
     {
         $pos=0;
+        $avg=0.0;
         $lables = DB::table('exam_result')
                 ->where('exam_result.admission_no', '=',$studentid )
                 ->where('exam_result.class_id', '=',$classid )
@@ -122,7 +123,7 @@ class TermController extends Controller
                 ->join('student','exam_result.admission_no','=','student.admission_no')
                 ->join('class', 'class.id', '=', 'exam_result.class_id')
                 ->first();
-   // dd($lables);
+   //dd($lables);
 
         $data = DB::table('exam_result')
                 ->where('exam_result.admission_no', '=',$studentid )
@@ -153,10 +154,11 @@ class TermController extends Controller
         ->join('student','exam_result.admission_no','=','student.admission_no')
         ->join('class', 'class.id', '=', 'exam_result.class_id')
         ->join('subject', 'subject.id', '=', 'exam_result.subject_id')
-        ->select(DB::raw('sum(exam_result.marks) as sum'))
-        ->groupBy('exam_result.admission_no')
+        ->select(DB::raw('sum(exam_result.marks) as sum'),'exam_result.admission_no','student.full_name')
+        ->groupBy('exam_result.admission_no','student.full_name')
         ->orderBy('sum','desc')
         ->get();
+
 
         foreach ($order as $key => $o) {
             if($o->sum == $sum->sum){
@@ -164,36 +166,65 @@ class TermController extends Controller
             }
         }
 
-        //dd($pos);
-
-        $sum = DB::table('exam_result')
-        ->where('exam_result.admission_no', '=',$studentid )
-        ->where('exam_result.class_id', '=',$classid )
-        ->where('exam_result.term', '=',$term )
-        ->join('student','exam_result.admission_no','=','student.admission_no')
-        ->join('class', 'class.id', '=', 'exam_result.class_id')
-        ->join('subject', 'subject.id', '=', 'exam_result.subject_id')
-        ->select(DB::raw('sum(exam_result.marks) as sum'))
-        ->groupBy('exam_result.admission_no')
-        ->first();
-
-        //dd($sum);
         $count = DB::table('student')
             ->where('student.admission_no', '=',$studentid )
             ->join('class', 'class.id', '=', 'student.class_id')
             ->join('subject_class', 'subject_class.class_id', '=', 'class.id')
             ->join('subject', 'subject.id', '=', 'subject_class.subject_id')
             ->count();
-        if ($count==0) {
-            $avg=0.0;
-        }else{
-            $avg=round($sum->sum/$count,2);
+            if (isset($sum)) {
+                if ($count==0) {
+                    $avg=0.0;
+                }else{
+                    $avg=round($sum->sum/$count,2);
 
-        }
+                }
+            }
+
         //dd($avg);
 
         // $pdf=PDF::loadView('exports.resultExport',compact(['lables','avg','data','count','pos']));
         //        return $pdf->download('result.pdf');
         return view('exports.resultExport',compact(['lables','avg','data','count','pos']));
+    }
+
+    public function view(Request $req,$classid)
+    {
+
+        $term=$req->term;
+
+        $order = DB::table('exam_result')
+        ->where('exam_result.class_id', '=',$classid )
+        ->where('exam_result.term', '=',$term )
+        ->join('student','exam_result.admission_no','=','student.admission_no')
+        ->join('class', 'class.id', '=', 'exam_result.class_id')
+        ->join('subject', 'subject.id', '=', 'exam_result.subject_id')
+        ->select(DB::raw('sum(exam_result.marks) as sum'),'exam_result.admission_no','student.full_name')
+        ->groupBy('exam_result.admission_no','student.full_name')
+        ->orderBy('sum','desc')
+        ->get();
+
+        //dd($order);
+        $count = DB::table('subject_class')
+            ->join('class', 'class.id' , '=', 'subject_class.class_id')
+            ->join('subject', 'subject.id', '=', 'subject_class.subject_id')
+            ->where('subject_class.class_id','=',$classid)
+            ->count();
+
+        $dd=DB::table('class')
+        ->where('class.id',$classid)
+        ->select('class.class_name','class.id')
+        ->first();
+//dd($count);
+        return view('class_teacher.termtest_view',compact(['order','count','classid','dd','term']));
+    }
+    public function termtestview()
+    {
+        $dd=DB::table('class')
+        ->where('class.teacher_id',Auth::user()->id)
+        ->select('class.class_name','class.id')
+        ->first();
+        //dd($dd);
+        return view('class_teacher.viewterm-result',compact('dd'));
     }
 }

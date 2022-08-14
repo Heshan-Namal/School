@@ -69,12 +69,12 @@
     </div>
             <div class="form-group">
                 <label for="name">Publish Date</label>
-                <input type="date" placeholder="enter the publish date" class="form-control " id="date" name="date">
+                <input type="date" placeholder="enter the publish date" class="form-control " id="date" name="date" required>
             </div>
 
            <div class="form-group mb-2">
                <label for="name">Chapter</label>
-               <input type="text" class="form-control " name="chapter" id="chapter">
+               <input type="text" class="form-control " name="chapter" id="chapter" required>
                @error('chapter')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -83,7 +83,7 @@
            </div>
            <div class="form-group mb-2">
             <label for="name">Topic</label>
-            <textarea class="form-control " name="topic" id="topic"></textarea>
+            <textarea class="form-control " name="topic" id="topic" required></textarea>
             @error('topic')
                      <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>
@@ -120,7 +120,7 @@
             <input type="text" disabled class="form-control" id="resource_file">
             @error('file')
                      <span class="invalid-feedback" role="alert">
-                         <strong>{{ $message }}</strong>
+                         <strong>only pdf and doc can upload</strong>
                      </span>
              @enderror
         </div>

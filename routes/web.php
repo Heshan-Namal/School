@@ -23,6 +23,7 @@ use App\Http\Controllers\ClassTeacherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TermController;
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 //use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\CustomAuthController;
@@ -124,6 +125,7 @@ Route::post('/res/{classid}/{subjectid}/store',[ResourcesController::class,'stor
 Route::get('/Attentiveness_check/{classid}/{subjectid}',[Attentiveness_checkController::class,'index'])->name('quiz.index');
 Route::post('/attentive-store/{classid}/{subjectid}',[Attentiveness_checkController::class,'store'])->name('quiz.store');
 Route::post('/attentive-questionstore',[Attentiveness_checkController::class,'qstore'])->name('question.store');
+Route::put('/update',[Attentiveness_checkController::class,'attquestion_update'])->name('attquestion.update');
 Route::post('/change/{id}',[Attentiveness_checkController::class,'changeStatus'])->name('attentive.status');
 Route::get('/attentiveshow/{id}',[Attentiveness_checkController::class,'attentiveshow'])->name('att.quizshow');
 Route::get('/attentive-submited/{classid}/{subjectid}',[Submit_attentiveness_checkController::class,'index'])->name('attentive.sumitindex');
@@ -155,7 +157,12 @@ Route::get('/termtest/{classid}',[TermController::class,'addtermtest'])->name('a
 Route::get('/stdres/{term}/{studentid}',[TermController::class,'addstd_result'])->name('stdresult');
 Route::post('/result/{term}/{subjectid}/{classid}/store',[TermController::class,'store'])->name('enter.testmarks');
 Route::put('/result-update/{term}/{subjectid}/{classid}',[TermController::class,'testupdate'])->name('update.testmarks');
-
+Route::get('/myclass-attendance',[AttendanceController::class,'attendance'])->name('myclass.attendance');
+Route::get('/attendance/{classid}',[AttendanceController::class,'addattendance'])->name('addattendance');
+Route::post('/attendance-store',[AttendanceController::class,'store'])->name('attendance.store');
+Route::put('/attendance-update',[AttendanceController::class,'attendanceupdate'])->name('update.attendance');
+Route::get('/view-result/{classid}',[TermController::class,'view'])->name('view.result');
+Route::get('/termtestview',[TermController::class,'termtestview'])->name('view.termtest');
 //report
 Route::get('result/exportpdf/{term}/{studentid}/{classid}', [TermController::class, 'exportpdf'])->name('resultpdf');
 

@@ -23,7 +23,8 @@ class ResourcesController extends Controller
                     ->where(function($query) use ($search){
                     $query->where('resource.chapter', 'LIKE', '%'.$search.'%')
                             ->orWhere('resource.resource_type', 'LIKE', '%'.$search.'%')
-                            ->orWhere('resource.topic', 'LIKE', '%'.$search.'%');
+                            ->orWhere('resource.topic', 'LIKE', '%'.$search.'%')
+                            ->orWhere('resource.week', 'LIKE', '%'.$search.'%');
                     })
                     ->paginate(10);
         }elseif ($day==NULL) {
@@ -46,16 +47,16 @@ class ResourcesController extends Controller
         ->where('resource.subject_id','=',$subjectid)
         ->where('resource.resource_type','=','note')
         ->orderBy('resource.created_at','desc')
-        ->limit(4)
-        ->get();
+        ->limit(10)
+        ->paginate(5);
 
         $clink=DB::table('resource')
         ->where('resource.class_id','=',$classid)
         ->where('resource.subject_id','=',$subjectid)
         ->where('resource.resource_type','=','class_link')
         ->orderBy('resource.created_at','desc')
-        ->limit(4)
-        ->get();
+        ->limit(10)
+        ->paginate(5);
 
         // $detail=DB::table('Subject_class')
         // ->where('Subject_class.class_id','=',$classid)
@@ -75,6 +76,10 @@ class ResourcesController extends Controller
 
     public function store(Request $req,$classid,$subjectid)
     {
+        $req->validate([
+            'file'=>'mimes:pdf,doc'
+        ]);
+
         $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
         $datearr=explode("/",$date);
         $day=$datearr[3];
@@ -122,6 +127,9 @@ class ResourcesController extends Controller
 
     public function resupdate(Request $req)
     {
+        $req->validate([
+            'file'=>'mimes:pdf,doc'
+        ]);
        $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
        $datearr=explode("/",$date);
        $day=$datearr[3];

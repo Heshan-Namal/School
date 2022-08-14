@@ -30,6 +30,7 @@ class Teacher_RecordBookController extends Controller
         $date=Carbon::now()->format('y/m/d/l/W');
         $datearr=explode("/",$date);
         $week=$datearr[4]%17;
+        //dd($week);
         if ($datearr[1]>=1 && $datearr[1]<5) {
             $term='term1';
         }elseif ($datearr[1]>=5 && $datearr[1]<9) {

@@ -6,11 +6,11 @@
 @section('content')
 <div class="content">
     <div class="row mb-3">
-        <h1 class="timetable cd-head text-center mb-2"> Add Term Test Marks</h1>
+        <h1 class="timetable cd-head text-center mb-2">Attendance Marking</h1>
     </div>
 <div class="container_AssStudent">
     <div class="row">
-        <form action="{{route('addresult',[$dd->id])}}" method="GET" class="row g-3">@csrf
+        <form action="{{route('addattendance',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Class</label>
             <input type="text" disabled class="form-control" value="{{$dd->class_name}}">

@@ -105,7 +105,7 @@
                     </div>
     </div>
 
-    <header>Attentiveness Check Response Details</header>
+    <header>Attentiveness Check {{$title->title}} Response Details</header>
 
     @if (session('message'))
         <div class="alert alert-success" role="alert">
@@ -125,8 +125,6 @@
     <div class="row ">
         <div class="col-8">
 @if($sub->count()>0)
-
-<div class="table-card mt-2">
     <table class="table table-bordered table-striped">
 
             <thead>
@@ -181,7 +179,6 @@
     {!! $sub->links() !!}
 </div>
 </div>
-</div>
 
 
 <div class="col-4">
@@ -206,6 +203,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination justify-content-end mt-3">
+        {!! $hm->links() !!}
+    </div>
 </div>
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
