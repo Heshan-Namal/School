@@ -23,6 +23,7 @@ use App\Http\Controllers\ClassTeacherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TermController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 //use App\Http\Controllers\AdminController;
@@ -38,13 +39,15 @@ use App\Http\Controllers\Auth\CustomAuthController;
 |
 */
 
-Route::get('/edit', function () {
-    return view('Profile.editprofile');
-});
 Route::get('/time', function () {
     return view('Timetable.viewtimetable');
 });
-
+Route::get('/egrade', function () {
+    return view('Admin.EditGrade');
+});
+Route::get('/eclass', function () {
+    return view('Admin.editClass');
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -93,6 +96,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/AddGrade',[AdminController::class,'AddGrade']);
             Route::post('/AddClass',[AdminController::class,'AddClass']);
             Route::post('/DeleteGrade/{id}',[AdminController::class,'DeleteGrade'])->name('admin.Delete');
+        });
+
+         //User edit routes
+         Route::group(['prefix' => 'user'], function(){
+            Route::get('/edit/{userid}',[UserController::class,'Edit_Profile'])->name('user.edit');
         });
 
         Route::group(['prefix' => 'teacher'], function(){

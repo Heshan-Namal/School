@@ -12,7 +12,7 @@ class Qs
 {
     public static function getDefaultUserImage()
     {
-        return asset('public\assets\front\images\defualt.jpg');
+        return asset('public/assets/front/images/profile.jpg');
     }
 
     //***Define Team groups****
