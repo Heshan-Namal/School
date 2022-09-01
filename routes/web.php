@@ -152,24 +152,32 @@ Route::get('rec/exportpdf/{classid}/{subjectid}/{term}', [Teacher_RecordBookCont
 //classteacher
 Route::get('/myclass-students',[ClassTeacherController::class,'mystudents'])->name('myclass.students');
 Route::get('student-detail/{id}',[ClassTeacherController::class,'student_view'])->name('myclass.studentview');
-Route::get('/myclass-termtest',[TermController::class,'termtest'])->name('myclass.termtest');
+
+Route::get('/myclass-termtest',[TermController::class,'termtest'])->name('myclass.termtest');//mulinma
 Route::get('/termtest/{classid}',[TermController::class,'addtermtest'])->name('addresult');
 Route::get('/stdres/{term}/{studentid}',[TermController::class,'addstd_result'])->name('stdresult');
 Route::post('/result/{term}/{subjectid}/{classid}/store',[TermController::class,'store'])->name('enter.testmarks');
 Route::put('/result-update/{term}/{subjectid}/{classid}',[TermController::class,'testupdate'])->name('update.testmarks');
-Route::get('/myclass-attendance',[AttendanceController::class,'attendance'])->name('myclass.attendance');
+Route::get('/termtestview',[TermController::class,'termtestview'])->name('view.termtest');//mulinma
+Route::get('/view-result/{classid}',[TermController::class,'view'])->name('view.result');
+Route::get('result/{term}/{studentid}/{classid}',[TermController::class,'view_test'])->name('view.result_student');
+
+Route::get('/myclass-attendance',[AttendanceController::class,'attendance'])->name('myclass.attendance');//mulinma
 Route::get('/attendance/{classid}',[AttendanceController::class,'addattendance'])->name('addattendance');
 Route::post('/attendance-store',[AttendanceController::class,'store'])->name('attendance.store');
 Route::put('/attendance-update',[AttendanceController::class,'attendanceupdate'])->name('update.attendance');
-Route::get('/view-result/{classid}',[TermController::class,'view'])->name('view.result');
-Route::get('/termtestview',[TermController::class,'termtestview'])->name('view.termtest');
-//report
+
+//class_teacher-report
 Route::get('result/exportpdf/{term}/{studentid}/{classid}', [TermController::class, 'exportpdf'])->name('resultpdf');
 
 
 });
 
 
+//admin
+Route::get('/addfees',[AdminController::class,'Addfees'])->name('view.fees');
+Route::post('/storefee',[AdminController::class,'Storefees'])->name('store.fee');
+Route::get('/stdpay',[AdminController::class,'studentfees'])->name('submit_std.view');
 
 
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');

@@ -7,6 +7,8 @@ use App\Models\Grade;
 use App\Models\Classroom;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Facility_Fees;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +40,7 @@ class AdminController extends Controller
 
         // <<<<------ Notification--------->>>>
         $notification = array(
-            'message' => 'Successfully add teacher record!', 
+            'message' => 'Successfully add teacher record!',
             'alert-type' => 'success'
         );
 
@@ -50,7 +52,7 @@ class AdminController extends Controller
         // $request->validate([
             //     'class_name'=>'required|unique:class'
             // ]);
-            
+
             // dd($request->teacher_id);
             $class = new Classroom;
             $class->class_name=$request->class_name;
@@ -154,6 +156,69 @@ class AdminController extends Controller
     public function AddNewTeacher(){
         $teacher = Teacher::all();
         return view('Admin.addTeacher' , compact('teacher'));
+
+    }
+
+
+    public function Storefees(Request $request){
+        $fee = new Facility_Fees;
+        $fee->year = Carbon::now()->format('Y');
+        $fee->grade_id = $request->grade_id;
+        $fee->note = $request->note;
+        $fee->amount = $request->amount;
+        $fee->save();
+
+        return redirect()->back();
+
+    }
+
+
+    public function Addfees(){
+        // $grade=DB::table('grade')
+        // ->where('grade.year','=',Carbon::now()->format('Y'))
+        // ->get();
+
+        $fees=DB::table('facility_fees')
+        ->join('grade','grade.id','=','facility_fees.grade_id')
+        ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+        ->get();
+        //dd($fees);
+        $grade = Grade::all();
+        return view('Admin.Addfees' , compact(['grade','fees']));
+
+    }
+
+    public function studentfees(Request $request){
+        if ($request = null) {
+            $nostd=DB::table('student')
+            ->join('student','student.admission_no','=','facility_fees.id')
+            ->join('grade','grade.id','=','facility_fees.grade_id')
+            ->join('class','class.grade_id','=','grade.id')
+            ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+            ->get();
+        }else{
+            $nostd=DB::table('student_fees')
+            ->join('facility_fees','student_fees.fee_id','=','facility_fees.id')
+            ->join('grade','grade.id','=','facility_fees.grade_id')
+            ->join('class','class.grade_id','=','grade.id')
+            ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+            ->get();
+        }
+        // $grade=DB::table('grade')
+        // ->where('grade.year','=',Carbon::now()->format('Y'))
+        // ->get();
+
+        $stdfees=DB::table('student_fees')
+        ->join('facility_fees','student_fees.fee_id','=','facility_fees.id')
+        ->join('student','student.admission_no','=','student_fees.admission_no')
+        ->join('grade','grade.id','=','facility_fees.grade_id')
+        ->join('class','class.grade_id','=','grade.id')
+        ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+        ->get();
+
+        //dd($stdfees);
+        $grade = Grade::all();
+        return view('Admin.Addfees' , compact(['grade','fees']));
 
     }
 }

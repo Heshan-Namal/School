@@ -58,15 +58,14 @@ class ResourcesController extends Controller
         ->limit(10)
         ->paginate(5);
 
-        // $detail=DB::table('Subject_class')
-        // ->where('Subject_class.class_id','=',$classid)
-        // ->where('Subject_class.subject_id','=',$subjectid)
-        // ->join('Subject','Subject.id','=','Subject_class.subject_id')
-        // ->join('Class','Class.id','=','Subject_class.class_id')
-        // ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
-        // ->get();
-
-       return view('teacher.Resources.index',compact(['res','classid','subjectid','note','clink']));
+        $d=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->first();
+       return view('teacher.Resources.index',compact(['res','classid','subjectid','note','clink','d']));
 
 
 
