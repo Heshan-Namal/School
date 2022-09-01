@@ -27,15 +27,6 @@
             <label for="inputEmail4" class="form-label">Student Name:</label>
             <input type="text" disabled class="form-control" value="{{$std->full_name}}">
         </div>
-        <div class="col-3">
-            <label for="inputEmail4" class="form-label">Average:</label>
-            <input type="text" disabled class="form-control">
-        </div>
-        <div class="col-3">
-            <label for="inputEmail4" class="form-label">Place:</label>
-            <input type="text" disabled class="form-control">
-        </div>
-        </form>
     </div>
     @foreach ($data as $key=> $dt)
     <div class="row g-3 mt-3">

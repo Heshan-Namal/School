@@ -62,8 +62,15 @@ class Submit_attentiveness_checkController extends Controller
             $at=$at+$a->count;
         }
       //dd($at);
+        $d=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->first();
 
-        return view('teacher.Attentive_Quiz.Submited_attentive_view',compact(['quizes','classid','subjectid','hmark','std','count','at','r']));
+        return view('teacher.Attentive_Quiz.Submited_attentive_view',compact(['quizes','classid','subjectid','hmark','std','count','at','r','d']));
 
 
 

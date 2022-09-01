@@ -69,8 +69,15 @@ class Submit_assesmentController extends Controller
             ->limit(5)
             ->get();
 
+        $d=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->first();
 
-        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid','nearas']));
+        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid','nearas','d']));
 
 
 
@@ -133,7 +140,6 @@ class Submit_assesmentController extends Controller
                 ->paginate(5);
 
 
-
                 $notsub=((int)$std-(int)$nums);
               //  dd($notsub);
 
@@ -142,7 +148,6 @@ class Submit_assesmentController extends Controller
               ->where('student_assessment.assessment_id',$id)
               ->select('assessment.title')
               ->first();
-
 
         return view('teacher.Assesments.submited_students',compact('sub','nums','late','mar','hm','notsub','title'));
     }

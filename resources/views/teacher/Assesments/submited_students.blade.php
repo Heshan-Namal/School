@@ -143,7 +143,7 @@
             <td>{{$key+1}}</td>
             <td>{{$s->name}}</td>
               @if($s->type == 'upload_file')
-                <td>{{$s->file}}</td>
+                <td><a class="Link" href="http://127.0.0.1:8000/assignments/{{$s->file}}">{{$s->file}}</a></td>
                 @else
                 <td>No File - MCQ </td>
               @endif
@@ -221,4 +221,5 @@
 </div>
 
 </div>
+<script src="{{asset('assets/front/js/subass.js')}}"></script>
 @endsection
