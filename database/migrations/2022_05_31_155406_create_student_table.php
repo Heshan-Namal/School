@@ -33,6 +33,7 @@ class CreateStudentTable extends Migration
             $table->foreign('grade_id')->references('id')->on('grade')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
             $table->foreign('class_id')->references('id')->on('class')->onDelete('cascade');
+            $table->unique(['grade_id','admission_no','class_id']);
         });
     }
 

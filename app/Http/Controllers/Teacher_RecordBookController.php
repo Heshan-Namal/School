@@ -30,6 +30,7 @@ class Teacher_RecordBookController extends Controller
         $date=Carbon::now()->format('y/m/d/l/W');
         $datearr=explode("/",$date);
         $week=$datearr[4]%17;
+        //dd($week);
         if ($datearr[1]>=1 && $datearr[1]<5) {
             $term='term1';
         }elseif ($datearr[1]>=5 && $datearr[1]<9) {
@@ -76,7 +77,15 @@ class Teacher_RecordBookController extends Controller
             ->where('class_record.term','=','term3')
             ->paginate(10);
 
-        return view('teacher.Record_Book.index',compact(['week','record','day','classid','subjectid','term','book','term1','term2','term3']));
+        $d=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->first();
+
+        return view('teacher.Record_Book.index',compact(['week','record','day','classid','subjectid','term','book','term1','term2','term3','d']));
     }
     public function store(Request $req,$classid,$subjectid)
     {

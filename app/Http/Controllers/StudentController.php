@@ -12,6 +12,7 @@ use App\Models\Attentiveness_check_Question;
 use App\Models\Subject;
 use App\Models\Student_assesment;
 use App\Models\Student_Attentiveness_check;
+use App\Models\Assessment_quiz_question;
 use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -362,4 +363,117 @@ class StudentController extends Controller
 
         return view('Student.student_resource.resourcelist', compact(['notes','links', 'class_id', 'subject_id']));
     }
+
+
+        // student_assessment quiz 
+
+        public function getQuizList($class_id, $subject_id, $term, $week, $date)
+        {
+            $term='term'.$term;
+            $week='week'.$week;
+    
+            $quizList = DB::table('assessment')
+                ->select(['assessment.*', 'Subject.subject_name'])
+                ->join('class', 'class.id', '=', 'assessment.class_id')
+                ->join('Subject', 'Subject.id', '=', 'assessment.subject_id')
+                ->where('assessment_type','mcq_quiz')
+                ->where('class_id', $class_id)
+                ->where('subject_id', $subject_id)
+                ->where('term', $term)
+                ->where('week', $week)
+                ->orderBy('assessment.id', 'desc')
+                ->get();
+
+    
+            $admission_no = getAdmissionNo();
+            
+    
+            $completed_quizes = DB::table('student_assessment')
+                ->join('assessment', 'assessment.id', '=', 'student_assessment.assessment_id')
+                ->where('admission_no', $admission_no)
+                ->select('assessment.id as id', 'assessment_marks', 'admission_no')
+                ->get();
+            $quizListarr = json_decode(json_encode($quizList), true);
+            $completed_quizesarr = json_decode(json_encode($completed_quizes), true);
+    
+            if (empty($completed_quizesarr)) $completed_quizesarr = Null;
+    
+            $attemptedquizarr = array();
+    
+            if (isset($completed_quizesarr)) {
+                foreach ($quizListarr as $key1 => $value1) {
+                    foreach ($completed_quizesarr as $key2 => $value2) {
+                        if ($quizListarr[$key1]['id'] == $completed_quizesarr[$key2]['id']) {
+                            $attemptedquizarr[] = array_merge($quizListarr[$key1], $completed_quizesarr[$key2]);
+                            unset($quizListarr[$key1]);
+                            break;
+                        }
+                    }
+                }
+            }
+    
+            if (empty($attemptedquizarr)) $attemptedquizarr = Null;
+            if (empty($quizListarr)) $quizListarr = Null;
+    
+            return view('Student.student_assignment.quizList', compact(['quizList', 'class_id', 'subject_id', 'quizListarr', 'attemptedquizarr']));
+        }
+    
+    
+        public function showQuiz($assessment_id) //class_id,subject_id
+        {
+            $quiz = Assesment::find($assessment_id)->where('assessment_type','mcq_quiz');
+            $questions = Assessment_quiz_question::where('assessment_id', $assessment_id)->get();
+            return view('Student.student_assignment.mcq_quiz', compact(['quiz', 'questions', 'assessment_id']));
+        }
+    
+    
+    
+        public function checkQuiz(Request $request, $assessment_id)
+        {
+            $total_points = 0;
+            $points_per_q = 5;
+            $quiz =Assesment::find($assessment_id)->where('assessment_type','mcq_quiz');
+            $questions =  Assessment_quiz_question::where('assessment_id', $assessment_id)->get();
+    
+            $admission_no = getAdmissionNo();
+    
+    
+            $data = $request->all();
+            $answers_array = [];
+            $correct_answers_array = $questions->pluck('correct_answer')->toArray();
+            $question_count = 0;
+    
+            
+            foreach ($data as $key => $datum) {
+                if ($key != '_token' && $key != 'invisible') {
+                    $answers_array[$key] = $datum;
+                    $question_count++;
+                }
+            }
+            
+            $total_points = count(array_intersect_assoc($correct_answers_array, $answers_array)) * $points_per_q;
+            $question_count *= $points_per_q;
+    
+            $quizrecord = Student_assesment::where(['admission_no', $admission_no], ['assessment_id', $assessment_id]);
+            // dd($quizrecord);
+            // if () {
+            //     # code...
+            // }
+    
+            Student_assesment::create(
+                [
+                    'admission_no' => $admission_no,
+                    'assessment_id' => $assessment_id,
+                    'assessment_file' => NULL,
+                    'assessment_marks' => $total_points
+                ]
+            );
+    
+            $completed_quiz = Student_assesment::where([['admission_no', $admission_no],['assessment_file',NULL]])->get();
+    
+            
+    
+    
+            return view('Student.student_assignment.quizResult', compact(['quiz', 'questions', 'total_points', 'data', 'answers_array', 'correct_answers_array', 'question_count']));
+        }
 }

@@ -76,9 +76,7 @@
                                                         <p class="card-text fs-3"></p>
                                                         <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                     </div>
-                                                    <div class="">
-
-                                                    </div>
+                                                    
                                                     <div class="hidden-button">
                                                         <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
                                                     </div>

@@ -11,6 +11,7 @@ class Submit_assesmentController extends Controller
 {
     public function index(Request $request,$classid,$subjectid)
     {
+       // dd($request);
         $search=$request->search;
         $term=$request->term;
         $week=$request->week;
@@ -19,40 +20,19 @@ class Submit_assesmentController extends Controller
             $assignments=DB::table('student_assessment')
             ->join('assessment','student_assessment.assessment_id','=','assessment.id')
             ->join('student','student.admission_no','=','student_assessment.admission_no')
-            ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.extra_week','assessment.day',DB::raw('count(*) as count'))
+            ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day',DB::raw('count(*) as count'))
             ->where('assessment.class_id',$classid)
             ->where('assessment.subject_id',$subjectid)
             ->where(function($query) use ($search){
                 $query->where('assessment.title', 'LIKE', '%'.$search.'%')
                         ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
-                        ->orWhere('assessment.day', 'LIKE', '%'.$search.'%');
+                        ->orWhere('assessment.day', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.week', 'LIKE', '%'.$search.'%');
             })
-            ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day')
+            ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
             ->paginate(10);
-        }
-        elseif($week=='allw'){
-            $assignments=DB::table('student_assessment')
-            ->join('assessment','student_assessment.assessment_id','=','assessment.id')
-            ->join('student','student.admission_no','=','student_assessment.admission_no')
-            ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.extra_week','assessment.day',DB::raw('count(*) as count'))
-            ->where('assessment.class_id',$classid)
-            ->where('assessment.subject_id',$subjectid)
-            ->where('assessment.term','=',$term)
-            ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day')
-            ->get();
-        }elseif($day==NULL){
+        }elseif ($day==NULL) {
             if($week == 'extra'){
-                $assignments=DB::table('student_assessment')
-                    ->join('assessment','student_assessment.assessment_id','=','assessment.id')
-                    ->join('student','student.admission_no','=','student_assessment.admission_no')
-                    ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day',DB::raw('count(*) as count'))
-                    ->where('assessment.class_id',$classid)
-                    ->where('assessment.subject_id',$subjectid)
-                    ->where('assessment.term','=',$term)
-                    ->whereNotNull('assessment.extraweek')
-                    ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day')
-                    ->get();
-            }else{
                 $assignments=DB::table('student_assessment')
                     ->join('assessment','student_assessment.assessment_id','=','assessment.id')
                     ->join('student','student.admission_no','=','student_assessment.admission_no')
@@ -60,40 +40,21 @@ class Submit_assesmentController extends Controller
                     ->where('assessment.class_id',$classid)
                     ->where('assessment.subject_id',$subjectid)
                     ->where('assessment.term','=',$term)
-                    ->where('assessment.week','=',$week)
                     ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
                     ->get();
-
-            }
-
-        }else{
-            if($week == 'extra'){
-                $assignments=DB::table('student_assessment')
-                ->join('assessment','student_assessment.assessment_id','=','assessment.id')
-                ->join('student','student.admission_no','=','student_assessment.admission_no')
-                ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day',DB::raw('count(*) as count'))
-                ->where('assessment.class_id',$classid)
-                ->where('assessment.subject_id',$subjectid)
-                ->where('assessment.term','=',$term)
-                ->whereNotNull('assessment.extra_week')
-                ->where('assessment.day','=',$day)
-                ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.extra_week','assessment.term','assessment.day')
-                ->get();
-
-            }else{
-                $assignments=DB::table('student_assessment')
-                ->join('assessment','student_assessment.assessment_id','=','assessment.id')
-                ->join('student','student.admission_no','=','student_assessment.admission_no')
-                ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day',DB::raw('count(*) as count'))
-                ->where('assessment.class_id',$classid)
-                ->where('assessment.subject_id',$subjectid)
-                ->where('assessment.term','=',$term)
-                ->where('assessment.week','=',$week)
-                ->where('assessment.day','=',$day)
-                ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
-                ->get();
-            }
+        }else {
+            $assignments=DB::table('student_assessment')
+                    ->join('assessment','student_assessment.assessment_id','=','assessment.id')
+                    ->join('student','student.admission_no','=','student_assessment.admission_no')
+                    ->select('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day',DB::raw('count(*) as count'))
+                    ->where('assessment.class_id',$classid)
+                    ->where('assessment.subject_id',$subjectid)
+                    ->where('assessment.term','=',$term)
+                    ->where('assessment.day','=',$day)
+                    ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
+                    ->get();
         }
+    }
         // ->whereDate('due_date', '>', Carbon::now())
         // ->orderBy('due_date','asc')
 
@@ -108,8 +69,15 @@ class Submit_assesmentController extends Controller
             ->limit(5)
             ->get();
 
+        $d=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->first();
 
-        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid','nearas']));
+        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid','nearas','d']));
 
 
 
@@ -118,6 +86,7 @@ class Submit_assesmentController extends Controller
     }
     public function subassview(Request $request,$id)
     {
+
         $search=$request->search;
         $sub=DB::table('student_assessment')
                 ->join('assessment','student_assessment.assessment_id','=','assessment.id')
@@ -168,13 +137,19 @@ class Submit_assesmentController extends Controller
                 ->where('student_assessment.assessment_id',$id)
                 ->orderBy('student_assessment.assessment_marks','desc')
                 ->limit(10)
-                ->get();
+                ->paginate(5);
+
 
                 $notsub=((int)$std-(int)$nums);
               //  dd($notsub);
 
+              $title= DB::table('student_assessment')
+              ->join('assessment','student_assessment.assessment_id','=','assessment.id')
+              ->where('student_assessment.assessment_id',$id)
+              ->select('assessment.title')
+              ->first();
 
-        return view('teacher.Assesments.submited_students',compact('sub','nums','late','mar','hm','notsub'));
+        return view('teacher.Assesments.submited_students',compact('sub','nums','late','mar','hm','notsub','title'));
     }
 
     public function updatemarks(Request $req,$id)

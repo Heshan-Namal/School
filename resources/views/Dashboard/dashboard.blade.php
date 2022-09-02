@@ -1,5 +1,7 @@
 @extends('layouts.MasterDashboard')
-
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/front/css/card.css')}}">
+@endsection
 
 @section('content')
 <div class="content">

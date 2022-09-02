@@ -66,7 +66,7 @@
             <div class="col-md-12">
                 <label for="inputEmail4" class="form-label">Grade Name</label>
                 <input type="text" class="form-control" name="grade_name" required>
-                
+
             </div>
       </div>
       <div class="modal-footer">
@@ -75,7 +75,7 @@
       </div>
       </form>
     </div>
-  </div>
+</div>
 </div>
 
 <!-- Edit Grade model -->
@@ -93,7 +93,7 @@
         </div>
         <!-- add classes -->
         <form class="row g-3" method = "POST" action = "AddClass">
-        
+
         @csrf
           <div class="col-md-8">
                   <label for="inputEmail4" class="form-label">Add new Class</label>
@@ -110,7 +110,7 @@
                 </select>
             </div>
           <div class="col-md-4 mt-5">
-          
+
               <button type="submit" class="btn btn-primary">Add</button>
           </div>
           </form>
@@ -139,13 +139,13 @@
 					   </tbody>
             </table>
             </div>
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Update</button>
       </div>
-      
+
     </div>
   </div>
 </div>

@@ -1,13 +1,14 @@
 <form action="{{route('quiz.store',[$classid,$subjectid])}}" method="POST" enctype="multipart/form-data">@csrf
     <div class="form-group row">
-        <div class="col-3">
-        <select name="term" id="term" class="form-control">
-              <option value="term1" selected>Term 1</option>
-              <option value="term2">Term 2</option>
-              <option value="term3">Term 3</option>
-        </select>
+        <div class="col-md-4">
+            <label for="inputState" class="form-label">Select Term</label>
+            <select name="term" id="term" class="form-control" required>
+                  <option value="term1" selected>First Term </option>
+                  <option value="term2">Second Term</option>
+                  <option value="term3">Third Term</option>
+            </select>
         </div>
-        <div class="col-3">
+        {{-- <div class="col-3">
         <select name="week" id="week" class="form-control" onchange="getweekselector(this.value);">
               <option value="week1" selected>Week 1</option>
               <option value="week2">Week 2</option>
@@ -24,9 +25,8 @@
               <option  value="extra" >Add Extra Week</option>
 
 
-              {{-- <div class="col-3"></div> --}}
         </select>
-        </div>
+        </div> --}}
 
         {{-- <div class="col-3">
         <select name="day" id="day" class="form-control">
@@ -39,31 +39,11 @@
 
         </select>
         </div> --}}
-        <div hidden class="row my-2" id="extra">
-            <div class="col-4">
-                <p id="p">Add Extra Week </p>
-            </div>
-            <div class="col-4 text-center ">
-            <div class="form-group mb-2">
-                <label for="name">Extra Week Name</label>
 
-                {{-- @error('title')
-                         <span class="invalid-feedback" role="alert">
-                             <strong>{{ $message }}</strong>
-                         </span>
-                 @enderror --}}
-            </div>
-        </div>
-            <div class="col-4">
-                <input type="text" class="form-control " name="extraweek">
-            </div>
-
-
-        </div>
     </div>
            <div class="form-group mb-2">
                <label for="name">Title</label>
-               <input type="text" class="form-control " name="title">
+               <input type="text" class="form-control " name="title" required>
                {{-- @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -71,14 +51,14 @@
                 @enderror --}}
            </div>
            <div class="form-group mb-4">
-            <label for="name">Assign Date</label>
-            <input type="Date" class="form-control " name="date">
+            <label for="name">Publish Date</label>
+            <input type="Date" placeholder="enter the publish date " class="form-control " name="date" required>
             </div>
 
             <div class="form-group mb-4">
                 <label for="name">Period</label>
-                <select name="period" id="period" class="form-control">
-                    <option value="period1" selected>Period 1</option>
+                <select name="period" id="period" class="form-control" required>
+                    <option value="period1">Period 1</option>
                     <option value="period2">Period 2</option>
                     <option value="period3">Period 3</option>
                     <option value="period4">Period 4</option>
@@ -103,9 +83,9 @@
         <div class="form-group mb-2">
             <label for="name">Quiz Duration</label>
             <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" placeholder="00:00:00">
-            @error('a_marks')
+            @error('duration')
                      <span class="invalid-feedback" role="alert">
-                         <strong>{{ $message }}</strong>
+                         <strong>example: 00:05:00(five minutes)</strong>
                      </span>
              @enderror
         </div>

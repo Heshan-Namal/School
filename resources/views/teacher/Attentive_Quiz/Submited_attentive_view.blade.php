@@ -1,8 +1,12 @@
 @extends('layouts.MasterDashboard')
-@section('content')
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
-<div class="content">
-    <div class="row d-flex justify-content-evenly">
+@endsection
+@section('content')
+
+<div class="container_AssStudent">
+    <div class="row d-flex justify-content-evenly mb-5">
         <div class="col-3 ">
         <div class="sub-card">
             <div class="row g-0">
@@ -77,41 +81,42 @@
                 </div>
                 </div>
     </div>
-    <div class="row">
-        <div class="col-7">
 
-                @if (session('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
-    <div class="row mt-5">
-        <div class="head mt-4">
-            <p><u>Attentiveness Checks published today</u> :-</p>
+    @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
         </div>
-    </div>
+    @elseif (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
 
+<header>Attentiveness Check Submissions on today :-</header>
+    <div class="row">
+        <div class="col-8">
+@if($quizes->count()>0)
 <div class="table-card mt-5">
-    <table class="table table-success table-hover m-0">
+    <table class="table table-bordered table-striped">
             <thead>
 
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Date</th>
-              <th scope="col">Published Time</th>
-              <th scope="col">Duration</th>
-              <th scope="col">Responses</th>
-              <th scope="col">Percentage of total Responses</th>
-              <th scope="col"></th>
+              <th>#</th>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Published Time</th>
+              <th>Duration</th>
+              <th>Responses</th>
+              <th>Percentage of total Responses</th>
+              <th></th>
 
 
             </tr>
             </thead>
             <tbody>
-                @if($quizes->count()>0)
 
-                @foreach($quizes as $key=> $q)
+
+            @foreach($quizes as $key=> $q)
             <tr>
               <th scope="row">{{$key+1}}</th>
               <td>{{$q->title}}</td>
@@ -130,9 +135,6 @@
             </tr>
 
             @endforeach
-
-
-
             @else
             <div class="d-flex justify-content-center mb-5">
                 <div class="search-card">
@@ -156,32 +158,29 @@
 
 
 </div>
-<div class="col-4 mx-5">
-    <div class="d-card overflow-auto mt-5">
-        <div class="card-header colo card-text">Highest Marks for each Attentiveness Check published today</div>
-        <div class="card-body">
-            <table class="table "><tr><th scope="col">Title</th><th scope="col">Marks</th><th scope="col">Published Time</th></tr>
-         @foreach($hmark as $key=> $h)
-           <tr>
-           <td><p class="mx-4">{{$h->title}}</p></td>
-           <td><p class="mx-4">{{$h->max}}</p></td>
-           <td><p class="mx-4">{{$h->uploaded_time}}</p></td>
-           </tr>
-           {{-- <div class="row">
-            <div class="col-2">
-                <p>{{$n->title}}</p>
-            </div>
-            <div class="col-2">
-                <p>{{$n->due_date}}</p>
-            </div>
-           </div> --}}
-@endforeach
-           </table>
-        </div>
-
+<div class="col-4">
+    <header class ="mb-3">Highest Marks for each Attentiveness Check Submissions on today</header>
+    <table class="table table-success table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Marks</th>
+                <th>Published Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($hmark as $key=> $h)
+                <tr>
+                    <td>{{$h->title}}</p></td>
+                    <td>{{$h->max}}</p></td>
+                    <td>{{$h->uploaded_time}}</p></td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="pagination justify-content-end mt-3">
+        {!! $hmark->links() !!}
     </div>
-
-
 </div>
 <div class="row"></div>
 <div class="row mt-3 mb-4">

@@ -15,7 +15,7 @@ class CreateAttendanceTable extends Migration
     {
         Schema::create('attendance', function (Blueprint $table) {
             $table->id();
-            $table->integer('term')->nullable(false);
+            $table->string('term')->nullable(false);
             $table->string('attendance_file')->nullable(false);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('class_id');

@@ -15,10 +15,11 @@ class CreateResourceTable extends Migration
     {
         Schema::create('resource', function (Blueprint $table) {
             $table->id();
+            $table->Date('date')->nullable(false);
             $table->string('term')->nullable(false);
             $table->string('week')->nullable(true);
-            $table->string('extra_week')->nullable(true);
             $table->string('day')->nullable(false);
+            $table->string('period')->nullable(true);
             $table->string('chapter')->nullable(true);
             $table->string('topic')->nullable(true);
             $table->enum('resource_type',['note', 'reference_link ', 'class_link'])->nullable(false);

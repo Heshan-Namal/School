@@ -52,7 +52,7 @@ class Submit_attentiveness_checkController extends Controller
         ->whereDate('attentiveness_check.date', '=', Carbon::now())
         ->select(DB::raw('max(student_attentiveness_check.total_points) as max'),'attentiveness_check.title','attentiveness_check.uploaded_time')
         ->groupBy('attentiveness_check.title','attentiveness_check.uploaded_time')
-        ->get();
+        ->paginate(5);
 
         $std=DB::table('student')
         ->where('student.class_id',$classid)
@@ -62,8 +62,15 @@ class Submit_attentiveness_checkController extends Controller
             $at=$at+$a->count;
         }
       //dd($at);
+        $d=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->first();
 
-        return view('teacher.Attentive_Quiz.Submited_attentive_view',compact(['quizes','classid','subjectid','hmark','std','count','at','r']));
+        return view('teacher.Attentive_Quiz.Submited_attentive_view',compact(['quizes','classid','subjectid','hmark','std','count','at','r','d']));
 
 
 
@@ -93,7 +100,7 @@ class Submit_attentiveness_checkController extends Controller
         ->where('student_attentiveness_check.A_check_id',$id)
         ->orderBy('student_attentiveness_check.total_points','desc')
         ->limit(10)
-        ->get();
+        ->paginate(5);
 
         $nums=DB::table('student_attentiveness_check')
         ->where('student_attentiveness_check.A_check_id',$id)
@@ -131,7 +138,13 @@ class Submit_attentiveness_checkController extends Controller
         ->first();
         //dd($hmark);
 
+        $title= DB::table('student_attentiveness_check')
+        ->join('attentiveness_check','student_attentiveness_check.A_check_id','=','attentiveness_check.id')
+        ->where('student_attentiveness_check.A_check_id',$id)
+        ->select('attentiveness_check.title')
+        ->first();
+        // dd($title);
 
-        return view('teacher.Attentive_Quiz.submited_attentive_students',compact(['sub','hm','nums','p','std','abs','sum']));
+        return view('teacher.Attentive_Quiz.submited_attentive_students',compact(['sub','hm','nums','p','std','abs','sum','title']));
     }
 }

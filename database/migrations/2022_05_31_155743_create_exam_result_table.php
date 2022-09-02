@@ -15,8 +15,9 @@ class CreateExamResultTable extends Migration
     {
         Schema::create('exam_result', function (Blueprint $table) {
             $table->id();
-            $table->integer('term')->nullable(false);
+            $table->string('term')->nullable(false);
             $table->integer('marks')->nullable(false);
+            $table->integer('year')->nullable(false);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('teacher_id');

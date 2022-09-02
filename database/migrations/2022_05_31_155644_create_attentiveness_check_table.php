@@ -18,7 +18,6 @@ class CreateAttentivenessCheckTable extends Migration
             $table->string('title');
             $table->string('term')->nullable(false);
             $table->string('week')->nullable(true);
-            $table->string('extra_week')->nullable(true);
             $table->Date('date')->nullable(false);
             $table->Time('uploaded_time')->nullable(true);
             $table->string('period')->nullable(false);

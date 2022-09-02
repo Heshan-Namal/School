@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
-
 use Carbon\Carbon;
 class AssesmentController extends Controller
 {
     public function index(Request $request ,$classid,$subjectid)
     {
-
+        //dd($request);
         $search=$request->search;
         $term=$request->term;
         $week=$request->week;
@@ -26,62 +25,31 @@ class AssesmentController extends Controller
                 ->where(function($query) use ($search){
                 $query->where('assessment.title', 'LIKE', '%'.$search.'%')
                         ->orWhere('assessment.assessment_type', 'LIKE', '%'.$search.'%')
-                        ->orWhere('assessment.assessment_file', 'LIKE', '%'.$search.'%');
+                        ->orWhere('assessment.assessment_file', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assessment.week', 'LIKE', '%'.$search.'%');
                 })
                 ->paginate(10);
 
-
-
-        // ->paginate(3);
-
-        }
-        elseif($week=='allw'){
+        }elseif ($day==NULL) {
             $assments=DB::table('assessment')
-            ->where('assessment.class_id','=',$classid)
-            ->where('assessment.subject_id','=',$subjectid)
-            ->where('assessment.term','=',$term)
-            ->paginate(10);
-        }elseif($day==NULL){
-            if($week == 'extra'){
-                $assments=DB::table('assessment')
                 ->where('assessment.class_id','=',$classid)
                 ->where('assessment.subject_id','=',$subjectid)
                 ->where('assessment.term','=',$term)
-                ->whereNotNull('assessment.extra_week')
                 ->paginate(10);
-            }else{
-                $assments=DB::table('assessment')
-                ->where('assessment.class_id','=',$classid)
-                ->where('assessment.subject_id','=',$subjectid)
-                ->where('assessment.term','=',$term)
-                ->where('assessment.week','=',$week)
-                ->paginate(10);
-            }
-
-        }else{
-            if($week == 'extra'){
-                $assments=DB::table('assessment')
+        }else {
+            $assments=DB::table('assessment')
                 ->where('assessment.class_id','=',$classid)
                 ->where('assessment.subject_id','=',$subjectid)
                 ->where('assessment.term','=',$term)
                 ->where('assessment.day','=',$day)
-                ->whereNotNull('assessment.extra_week')
                 ->paginate(10);
-            }else{
-                $assments=DB::table('assessment')
-                ->where('assessment.class_id','=',$classid)
-                ->where('assessment.subject_id','=',$subjectid)
-                ->where('assessment.term','=',$term)
-                ->where('assessment.week','=',$week)
-                ->where('assessment.day','=',$day)
-                ->paginate(10);
-            }
         }
-        $exnum = DB::table('assessment')
+
+            $exnum = DB::table('assessment')
             ->where('assessment.class_id',$classid)
             ->where('assessment.subject_id',$subjectid)
-           ->whereDate('due_date', '<', Carbon::now())
-           ->count();
+            ->whereDate('due_date', '<', Carbon::now())
+            ->count();
            $pubnum = DB::table('assessment')
            ->where('assessment.class_id',$classid)
            ->where('assessment.subject_id',$subjectid)
@@ -96,24 +64,31 @@ class AssesmentController extends Controller
            ->where('assessment.subject_id',$subjectid)
            ->whereDate('due_date', '>', Carbon::now())
            ->orderBy('due_date','asc')
-           ->get();
+           ->paginate(4);
 
-        $detail=DB::table('subject_class')
+        $d=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
         ->join('class','class.id','=','subject_class.class_id')
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
-        ->get();
+        ->first();
 
-       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid','detail']));
+       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid','d']));
 
 
 
     }
     public function store(Request $req,$classid,$subjectid)
     {
+        $req->validate([
+            'assignments'=>'mimes:pdf,doc'
+        ]);
 
+        $date=Carbon::now()->format('y/m/d/l/W');
+        $datearr=explode("/",$date);
+        $day=$datearr[3];
+        $week="week".$datearr[4]%17;
 
         if(isset($req->assignments)){
             $path=$req->assignments;
@@ -122,13 +97,13 @@ class AssesmentController extends Controller
         }else{
             $name=NULL;
         }
-        if(isset($req->extraweek)){
-            $extra=$req->extraweek;
-            $week=NULL;
-        }else{
-            $extra=NULL;
-            $week=$req->week;
-        }
+        // if(isset($req->extraweek)){
+        //     $extra=$req->extraweek;
+        //     $week=NULL;
+        // }else{
+        //     $extra=NULL;
+        //     $week=$req->week;
+        // }
 
         Assesment::create(
             [
@@ -137,11 +112,9 @@ class AssesmentController extends Controller
                 'assessment_file'=>$name,
                 'term'=>$req->term,
                 'week'=>$week,
-                'extra_week'=>$extra,
-                'day'=>$req->day,
+                'day'=>$day,
                 'due_date'=>$req->due_date,
                 'assessment_type'=>$req->type,
-                'allocated_marks'=>$req->a_marks,
                 'class_id'=>$classid,
                 'subject_id'=>$req->subjectid,
                 'teacher_id'=>Auth::user()->id
@@ -155,6 +128,7 @@ class AssesmentController extends Controller
     }
     public function assquiz(Request $req)
     {
+
         $id=$req->assid;
         Assessment_quiz_question::create(
             [
@@ -213,6 +187,16 @@ class AssesmentController extends Controller
     }
     public function assessmentupdate(Request $req)
     {
+
+        $req->validate([
+            'assignments'=>'mimes:pdf,doc'
+        ]);
+
+        $date=Carbon::now()->format('y/m/d/l/W');
+        $datearr=explode("/",$date);
+        $day=$datearr[3];
+        $week="week".$datearr[4]%17;
+
         //dd($req);
         $ass=Assesment::find($req->assid);
         if($req->has('assignments')){
@@ -227,16 +211,13 @@ class AssesmentController extends Controller
         $ass->title=$req->title;
         $ass->description=$req->description;
         $ass->term=$req->term;
-        $ass->week=$req->week;
-        $ass->day=$req->day;
-        $ass->extra_week=$req->extraweek;
+        $ass->week=$week;
+        $ass->day=$day;
         $ass->due_date=$req->due_date;
-        $ass->allocated_marks=$req->a_marks;
         $ass->assessment_type=$req->type;
         $ass->assessment_file=$name;
         $classid=$ass->class_id;
         $subjectid=$ass->subject_id;
-
         $ass->save();
         //dd($classid);
         //return dd($req->assignments->getClientOriginalName());

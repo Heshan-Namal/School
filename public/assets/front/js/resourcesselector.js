@@ -1,14 +1,9 @@
 function getselector(select1){
+     //alert(select1)
     if(select1=='allt'){
-       document.getElementById('week').hidden = true;
-       document.getElementById('day').hidden = true;
-   }else if(select1=='allw'){
-    document.getElementById('day').hidden = true;
-    document.getElementById('week').hidden = false;
-   }else {
-    document.getElementById('day').hidden = false;
-    document.getElementById('week').hidden = false;
-       document.getElementById('term').hidden = false;
+       document.getElementById('day1').hidden = true;
+   }else{
+    document.getElementById('day1').hidden = false;
    }
 }
 function gettypeselector(select1){
@@ -16,10 +11,12 @@ function gettypeselector(select1){
     if((select1=='reference_link') ||(select1=='class_link')){
        document.getElementById('file').hidden = true;
        document.getElementById('link').hidden = false;
+       document.getElementById('period').hidden = false;
 
    }else{
     document.getElementById('file').hidden = false;
     document.getElementById('link').hidden = true;
+    document.getElementById('period').hidden = true;
    }
 }
 
@@ -45,7 +42,8 @@ if(resedit){
          var topic = button.getAttribute('data-bs-topic')
          var term = button.getAttribute('data-bs-term')
          var week = button.getAttribute('data-bs-week')
-         var extra_week = button.getAttribute('data-bs-extra_week')
+         var period = button.getAttribute('data-bs-period')
+         var date = button.getAttribute('data-bs-date')
          var day = button.getAttribute('data-bs-day')
          var resource_type = button.getAttribute('data-bs-resource_type')
 
@@ -55,7 +53,8 @@ if(resedit){
          var d = resedit.querySelector('.modal-body #topic')
          var te = resedit.querySelector('.modal-body #term')
          var we = resedit.querySelector('.modal-body #week')
-         var ex = resedit.querySelector('.modal-body #extra_week')
+         var pe = resedit.querySelector('.modal-body #period')
+         var dat = resedit.querySelector('.modal-body #date')
          var da = resedit.querySelector('.modal-body #day')
          var a_t = resedit.querySelector('.modal-body #resource_type')
          var f = resedit.querySelector('.modal-body #resource_file')
@@ -65,7 +64,8 @@ if(resedit){
          d.value = topic
          te.value = term
          we.value = week
-         ex.value = extra_week
+         pe.value=period
+         dat.value=date
          da.value = day
          a_t.value = resource_type
          f.value=''

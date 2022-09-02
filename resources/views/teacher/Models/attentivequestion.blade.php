@@ -1,7 +1,7 @@
 <form action="{{route('question.store')}}" method="POST" >@csrf
     <div class="form-group mb-2">
         <label for="name">Enter Question</label>
-        <textarea class="form-control @error('question') is-invalid @enderror" name="question" id="question"></textarea>
+        <textarea class="form-control @error('question') is-invalid @enderror" name="question" id="question" required></textarea>
         @error('question')
                  <span class="invalid-feedback" role="alert">
                      <strong>{{ $message }}</strong>
@@ -10,7 +10,7 @@
     </div>
     <div class="form-group mb-2">
         <label for="name">Answer 1:</label>
-        <input type="text" class="form-control @error('answer1') is-invalid @enderror" name="answer1" id="answer1">
+        <input type="text" class="form-control @error('answer1') is-invalid @enderror" name="answer1" id="answer1" required>
 
         @error('answer1')
                  <span class="invalid-feedback" role="alert">
@@ -20,7 +20,7 @@
     </div>
     <div class="form-group mb-2">
      <label for="name">Answer 2:</label>
-     <input type="text" class="form-control @error('answer2') is-invalid @enderror" name="answer2" id="answer2">
+     <input type="text" class="form-control @error('answer2') is-invalid @enderror" name="answer2" id="answer2" required>
 
         @error('answer2')
                  <span class="invalid-feedback" role="alert">
@@ -30,7 +30,7 @@
     </div>
     <div class="form-group mb-2">
          <label for="name">Answer 3:</label>
-        <input type="text" class="form-control @error('answer3') is-invalid @enderror" name="answer3" id="answer3">
+        <input type="text" class="form-control @error('answer3') is-invalid @enderror" name="answer3" id="answer3" required>
 
         @error('title')
                  <span class="invalid-feedback" role="alert">
@@ -40,7 +40,7 @@
     </div>
     <div class="form-group mb-2">
          <label for="name">Answer 4:</label>
-        <input type="text" class="form-control @error('answer4') is-invalid @enderror" name="answer4" id="answer4">
+        <input type="text" class="form-control @error('answer4') is-invalid @enderror" name="answer4" id="answer4" required>
 
         @error('title')
                  <span class="invalid-feedback" role="alert">

@@ -25,9 +25,9 @@
            @csrf
                     <h2 class="visually-hidden">Login Form</h2>
                     <input type="hidden" name="token2"  placeholder="{{$token}}" value="{{$token}}">
-                    <div class="mb-3"><input class="form-control" type="email" name="email"  placeholder="{{$email}}" value="{{$email}}"></div>
-                    <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="New Password"></div>
-                    <div class="mb-3"><input class="form-control" type="password" name="Confirm_password" placeholder="Confirm Password"></div>
+                    <div class="mb-3"><input class="form-control" type="email" name="email"  placeholder="{{$email}}" value="{{$email}}"><span class="text-danger">@error('email'){{ $message }} @enderror</span></div>
+                    <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="New Password"><span class="text-danger">@error('password'){{ $message }} @enderror</span></div>
+                    <div class="mb-3"><input class="form-control" type="password" name="password_confirmation" placeholder="Confirm Password"><span class="text-danger">@error('password_confirmation'){{ $message }} @enderror</span></div>
                     <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Reset password</button></div><a class="forgot" href="{{ route('login') }}">Need to login ? click here</a>
                 </form>
             </section>

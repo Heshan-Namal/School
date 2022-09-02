@@ -1,8 +1,12 @@
 @extends('layouts.MasterDashboard')
-@section('content')
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
-<div class="content">
-    <div class="row hh mb-5">
+@endsection
+@section('content')
+
+<div class="container_AssStudent">
+    <div class="row col-12">
         <div class="col-3">
         <div class="sub-card">
             <div class="row g-0">
@@ -97,48 +101,49 @@
                     </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-8">
-
-                @if (session('message'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
-            <div class="head mb-4">
-                <p><u>Submission Details</u> :-</p>
+        <header>Submission {{$title->title}} Details</header>
+        <form action="?" >
+        <div class="d-flex justify-content-end">
+            <div class="col-4 mb-3">
+                <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
             </div>
-            <div class="text-end">
-                <form action="?" class="col-sm-2 me-auto" >
-                    <div class="input-group">
-                        <input type="text"  name="search" placeholder="Search"  value="{{request()->search}}" class="form-control">
-                        <button type="submit" class="btn btn-primary"> Go!</button>
-                     </div>
-                </form>
-            </div>
-<div class="table-card mt-2">
-    <table class="table table-success table-hover m-0" style="border-spacing:0px;">
-            <thead>
+        </div>
+        </form>
+        </div>
+    </div>
 
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Submisson File</th>
-              <th scope="col">Due Date</th>
-              <th scope="col">uploaded date</th>
-              <th><span data-bs-toggle="tooltip" title="red(<50)">Marks</span></th>
-
-            </tr>
-            </thead>
-            <tbody>
-                @if($sub->count()>0)
-
-                @foreach($sub as $key=> $s)
-            <tr>
-              <th scope="row">{{$key+1}}</th>
-              <td>{{$s->name}}</td>
+    @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
+    @elseif (session('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+    @endif
+<div class="row">
+    <div class="col-8">
+@if($sub->count()>0)
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Submisson File</th>
+            <th>Due Date</th>
+            <th>Uploaded date</th>
+            <th><span data-bs-toggle="tooltip" title="red(<50)">Marks</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($sub as $key=> $s)
+        <tr>
+            <td>{{$key+1}}</td>
+            <td>{{$s->name}}</td>
               @if($s->type == 'upload_file')
-                <td>{{$s->file}}</td>
+                <td><a class="Link" href="http://127.0.0.1:8000/assignments/{{$s->file}}">{{$s->file}}</a></td>
                 @else
                 <td>No File - MCQ </td>
               @endif
@@ -165,67 +170,56 @@
                 @endif
 
               @endif
-
-
-
-            </tr>
-
-            @endforeach
-
-
-
-            @else
-            <div class="d-flex justify-content-center mb-5">
-                <div class="search-card">
-                    <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-4 mt-3 ">
-                            <img
-                              src="{{asset('assets/front/images/ass/rec.png')}}"
-                              alt="Trendy Pants and Shoes"
-                              class="img-fluid rounded-start d-flex "
-                            />
-                          </div>
-                    </div>
-                    </div>
-              </div>
-            @endif
-
+        </tr>
+        @endforeach
     </tbody>
 </table>
-
-</div>
 <div class="pagination justify-content-end mt-3">
     {!! $sub->links() !!}
-    </div>
+</div>
+@else
+<div class="d-flex justify-content-center mt-5">
+  <div class="search-card">
+      <div class="row"><h4 class="search-font ">Can't find any Records </h4></div>
+      <div class="row d-flex justify-content-center">
+          <div class="col-md-4 mt-3 ">
+              <img
+                src="{{asset('assets/front/images/ass/rec.png')}}"
+                alt="Trendy Pants and Shoes"
+                class="img-fluid rounded-start d-flex "
+              />
+            </div>
+      </div>
+      </div>
+</div>
+@endif
 </div>
 <div class="col-4">
-    <div class="d-card overflow-auto mt-3">
-        <div class="card-header colo card-text">Top 10 Marks in the Class:-</div>
-        <div class="card-body">
-           <table class="table p-2"><tr><th scope="col">Admision_No</th><th scope="col">Name</th><th scope="col">Marks</th></tr>
-         @foreach($hm as $key=> $h)
-           <tr>
-           <td><p class="mx-4">{{$h->admission_no}}</p></td>
-           <td><p class="mx-4">{{$h->full_name}}</p></td>
-           <td><p class="mx-4">{{$h->assessment_marks}}</p></td>
-           </tr>
-           {{-- <div class="row">
-            <div class="col-2">
-                <p>{{$n->title}}</p>
-            </div>
-            <div class="col-2">
-                <p>{{$n->due_date}}</p>
-            </div>
-           </div> --}}
-@endforeach
-           </table>
+    <header class ="mb-3">Top 10 Marks in the Class:-</header>
+        <table class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Admision_No</th>
+                    <th>Name</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($hm as $key=> $h)
+                <tr>
+                <td>{{$h->admission_no}}</p></td>
+                <td>{{$h->full_name}}</p></td>
+                <td>{{$h->assessment_marks}}</p></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="pagination justify-content-end mt-3">
+            {!! $hm->links() !!}
         </div>
-
-    </div>
-
 </div>
 </div>
+
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
 @endsection

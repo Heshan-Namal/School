@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content">
-            <form  method="POST" enctype="multipart/form-data" id="" action="{{ route('Student.student.checkquiz',[$a_check_id]) }}" class="form-check"> @csrf
+            <form  method="POST" enctype="multipart/form-data" id="" action="{{ route('Student.student.checkquiz',[$assessment_id]) }}" class="form-check"> @csrf
                 <div class="card wide-card ps-0 ms-0 text-start">
                     <div class="card-header">
                         <div class="row">

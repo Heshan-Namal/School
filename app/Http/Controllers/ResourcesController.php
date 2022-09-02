@@ -5,7 +5,7 @@ use App\Models\Resource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class ResourcesController extends Controller
 {
     public function index(Request $request ,$classid,$subjectid)
@@ -13,60 +13,33 @@ class ResourcesController extends Controller
         //dd($res);
         $search=$request->search;
         $term=$request->term;
-        $week=$request->week;
+        // $week=$request->week;
         $day=$request->day;
+
         if(($term==NULL)||($term=='allt')){
             $res=DB::table('resource')
-        ->where('resource.class_id','=',$classid)
-        ->where('resource.subject_id','=',$subjectid)
-        ->where(function($query) use ($search){
-            $query->where('resource.chapter', 'LIKE', '%'.$search.'%')
-                    ->orWhere('resource.resource_type', 'LIKE', '%'.$search.'%')
-                    ->orWhere('resource.topic', 'LIKE', '%'.$search.'%');
-            })
-            ->paginate(10);
-        }
-        elseif($week=='allw'){
+                    ->where('resource.class_id','=',$classid)
+                    ->where('resource.subject_id','=',$subjectid)
+                    ->where(function($query) use ($search){
+                    $query->where('resource.chapter', 'LIKE', '%'.$search.'%')
+                            ->orWhere('resource.resource_type', 'LIKE', '%'.$search.'%')
+                            ->orWhere('resource.topic', 'LIKE', '%'.$search.'%')
+                            ->orWhere('resource.week', 'LIKE', '%'.$search.'%');
+                    })
+                    ->paginate(10);
+        }elseif ($day==NULL) {
             $res=DB::table('resource')
-            ->where('resource.class_id','=',$classid)
-            ->where('resource.subject_id','=',$subjectid)
-            ->where('resource.term','=',$term)
-            ->paginate(10);
-        }elseif($day==NULL){
-            if($week == 'extra'){
-                $res=DB::table('resource')
                 ->where('resource.class_id','=',$classid)
                 ->where('resource.subject_id','=',$subjectid)
                 ->where('resource.term','=',$term)
-                ->whereNotNull('resource.extra_week')
                 ->paginate(10);
-            }else{
-                $res=DB::table('resource')
-                ->where('resource.class_id','=',$classid)
-                ->where('resource.subject_id','=',$subjectid)
-                ->where('resource.term','=',$term)
-                ->where('resource.week','=',$week)
-                ->paginate(10);
-            }
-
-        }else{
-            if($week == 'extra'){
-                $res=DB::table('resource')
+        }else {
+            $res=DB::table('resource')
                 ->where('resource.class_id','=',$classid)
                 ->where('resource.subject_id','=',$subjectid)
                 ->where('resource.term','=',$term)
                 ->where('resource.day','=',$day)
-                ->whereNotNull('resource.extra_week')
                 ->paginate(10);
-            }else{
-                $res=DB::table('resource')
-                ->where('resource.class_id','=',$classid)
-                ->where('resource.subject_id','=',$subjectid)
-                ->where('resource.term','=',$term)
-                ->where('resource.week','=',$week)
-                ->where('resource.day','=',$day)
-                ->paginate(10);
-            }
         }
 
         $note=DB::table('resource')
@@ -74,26 +47,25 @@ class ResourcesController extends Controller
         ->where('resource.subject_id','=',$subjectid)
         ->where('resource.resource_type','=','note')
         ->orderBy('resource.created_at','desc')
-        ->limit(4)
-        ->get();
+        ->limit(10)
+        ->paginate(5);
 
         $clink=DB::table('resource')
         ->where('resource.class_id','=',$classid)
         ->where('resource.subject_id','=',$subjectid)
         ->where('resource.resource_type','=','class_link')
         ->orderBy('resource.created_at','desc')
-        ->limit(4)
-        ->get();
+        ->limit(10)
+        ->paginate(5);
 
-        // $detail=DB::table('Subject_class')
-        // ->where('Subject_class.class_id','=',$classid)
-        // ->where('Subject_class.subject_id','=',$subjectid)
-        // ->join('Subject','Subject.id','=','Subject_class.subject_id')
-        // ->join('Class','Class.id','=','Subject_class.class_id')
-        // ->select('Subject.name as subject','Class.name as class','Class.id as classid','Subject.id as subjectid')
-        // ->get();
-
-       return view('teacher.Resources.index',compact(['res','classid','subjectid','note','clink']));
+        $d=DB::table('subject_class')
+        ->where('subject_class.class_id','=',$classid)
+        ->where('subject_class.subject_id','=',$subjectid)
+        ->join('subject','subject.id','=','subject_class.subject_id')
+        ->join('class','class.id','=','subject_class.class_id')
+        ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
+        ->first();
+       return view('teacher.Resources.index',compact(['res','classid','subjectid','note','clink','d']));
 
 
 
@@ -103,9 +75,16 @@ class ResourcesController extends Controller
 
     public function store(Request $req,$classid,$subjectid)
     {
+        $req->validate([
+            'file'=>'mimes:pdf,doc'
+        ]);
 
-        //return dd($req->assignments->getClientOriginalName());
-        //dd($req);
+        $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
+        $datearr=explode("/",$date);
+        $day=$datearr[3];
+        $week="week".$datearr[4]%17;
+
+
         if(isset($req->file)){
             $path=$req->file;
             $name = $path->getClientOriginalName();
@@ -113,23 +92,24 @@ class ResourcesController extends Controller
         }else{
             $name=$req->link;
         }
-        if(isset($req->extraweek)){
-            $extra=$req->extraweek;
-            $week=null;
-        }else{
-            $extra=null;
-            $week=$req->week;
-        }
+        // if(isset($req->extraweek)){
+        //     $extra=$req->extraweek;
+        //     $week=null;
+        // }else{
+        //     $extra=null;
+        //     $week=$req->week;
+        // }
 
         Resource::create(
             [
+                'date'=>$req->date,
                 'chapter'=>$req->title,
                 'topic'=>$req->description,
                 'resource_file'=>$name,
                 'term'=>$req->term,
                 'week'=>$week,
-                'extra_week'=>$extra,
-                'day'=>$req->day,
+                'day'=>$day,
+                'period'=>$req->period,
                 'resource_type'=>$req->type,
                 'class_id'=>$classid,
                 'subject_id'=>$req->subjectid,
@@ -146,7 +126,14 @@ class ResourcesController extends Controller
 
     public function resupdate(Request $req)
     {
-       // dd($req);
+        $req->validate([
+            'file'=>'mimes:pdf,doc'
+        ]);
+       $date=Carbon::createFromFormat('Y-m-d', $req->date)->format('y/m/d/l/W');
+       $datearr=explode("/",$date);
+       $day=$datearr[3];
+       $week="week".$datearr[4]%17;
+
         $res=Resource::find($req->resid);
         if(isset($req->file)){
             $path=$req->file;
@@ -155,13 +142,13 @@ class ResourcesController extends Controller
         }else{
             $name=$req->link;
         }
-
+        $res->date=$req->date;
         $res->chapter=$req->chapter;
         $res->topic=$res->topic;
         $res->term=$req->term;
-        $res->week=$req->week;
-        $res->day=$req->day;
-        $res->extra_week=$req->extraweek;
+        $res->week=$week;
+        $res->day=$day;
+        $res->period=$req->period;
         $res->resource_type=$req->type;
         $res->resource_file=$name;
         $classid=$res->class_id;
