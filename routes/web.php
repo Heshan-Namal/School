@@ -186,6 +186,12 @@ Route::get('result/exportpdf/{term}/{studentid}/{classid}', [TermController::cla
 Route::get('/addfees',[AdminController::class,'Addfees'])->name('view.fees');
 Route::post('/storefee',[AdminController::class,'Storefees'])->name('store.fee');
 Route::get('/stdpay',[AdminController::class,'studentfees'])->name('submit_std.view');
+Route::post('/stdpayments',[AdminController::class,'studentfees'])->name('view.payments');
+
+//student
+Route::get('/add-std-fees',[AdminController::class,'getstd_fees'])->name('std.fees');
+Route::post('/storestd-fee',[AdminController::class,'Storestdfees'])->name('store.std.fee');
+
 
 
 //Route::get('/attentive-show/{classid}/{subjectid}/{quizid}',[Attentiveness_checkController::class,'show'])->name('quiz.show');
