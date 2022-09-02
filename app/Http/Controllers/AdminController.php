@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Grade;
 use App\Models\Classroom;
 use App\Models\Teacher;
+use App\Models\Student;
 use App\Models\User;
 use App\Models\Facility_Fees;
+use App\Models\Student_Fees;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -189,36 +191,88 @@ class AdminController extends Controller
     }
 
     public function studentfees(Request $request){
-        if ($request = null) {
-            $nostd=DB::table('student')
-            ->join('student','student.admission_no','=','facility_fees.id')
+        if ($request->id == null) {
+            $stdnum=Student::count();
+            $sub=DB::table('student_fees')
+            ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+            ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+            ->count();
+            //dd($sub);
+            $stdfees=DB::table('student_fees')
+            ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+            ->join('student','student.admission_no','=','student_fees.admission_no')
             ->join('grade','grade.id','=','facility_fees.grade_id')
             ->join('class','class.grade_id','=','grade.id')
             ->where('facility_fees.year','=',Carbon::now()->format('Y'))
             ->get();
+
         }else{
-            $nostd=DB::table('student_fees')
-            ->join('facility_fees','student_fees.fee_id','=','facility_fees.id')
+            $stdnum=DB::table('student')
+            ->where('student.grade_id','=',$request->id)
+            ->count();
+            $sub=DB::table('student_fees')
+            ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+            ->where('facility_fees.grade_id','=',$request->id)
+            ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+            ->count();
+            $stdfees=DB::table('student_fees')
+            ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+            ->join('student','student.admission_no','=','student_fees.admission_no')
             ->join('grade','grade.id','=','facility_fees.grade_id')
             ->join('class','class.grade_id','=','grade.id')
+            ->where('facility_fees.grade_id','=',$request->id)
             ->where('facility_fees.year','=',Carbon::now()->format('Y'))
             ->get();
         }
         // $grade=DB::table('grade')
         // ->where('grade.year','=',Carbon::now()->format('Y'))
         // ->get();
-
-        $stdfees=DB::table('student_fees')
-        ->join('facility_fees','student_fees.fee_id','=','facility_fees.id')
-        ->join('student','student.admission_no','=','student_fees.admission_no')
-        ->join('grade','grade.id','=','facility_fees.grade_id')
-        ->join('class','class.grade_id','=','grade.id')
-        ->where('facility_fees.year','=',Carbon::now()->format('Y'))
-        ->get();
-
-        //dd($stdfees);
         $grade = Grade::all();
-        return view('Admin.Addfees' , compact(['grade','fees']));
+        return view('Admin.student_fees' , compact(['grade','stdnum','sub','stdfees']));
+
+    }
+
+
+    public function getstd_fees(){
+
+        $std=DB::table('facility_fees')
+            ->join('student','student.grade_id','=','facility_fees.grade_id')
+            //->where('student','student.grade_id','=','facility_fees.grade_id')
+            //->where('student.admission_no','=',Auth::user()->id)
+            ->first();
+            $stdsub=DB::table('student_fees')
+            ->join('student','student.admission_no','=','student_fees.admission_no')
+            ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+            ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+            ->get();
+
+        //dd($std1);
+        return view('Student.student_fees' , compact(['std','stdsub']));
+
+    }
+
+    public function Storestdfees(Request $request){
+
+        $request->validate([
+            'proof'=>'mimes:jpg,png,jpeg'
+        ]);
+
+        if(isset($request->proof)){
+            $path=$request->proof;
+            $name = $path->getClientOriginalName();
+            $path->move('fee-proof',$name);
+        }else{
+            $name=NULL;
+        }
+
+        $stdfee = new Student_Fees;
+        $stdfee->admission_no='s1';
+        $stdfee->fee_id = $request->id;
+        $stdfee->proof = $name;
+        $stdfee->save();
+
+        return redirect()->back();
+
 
     }
 }
