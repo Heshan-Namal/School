@@ -24,6 +24,7 @@ class CreateAssessmentTable extends Migration
             $table->enum('status',['published', 'draft', 'disabled'])->default('draft')->nullable(false);
             $table->enum('assessment_type',['mcq_quiz', 'upload_file'])->nullable(false);
             $table->string('assessment_file')->nullable(true);
+            $table->string('quiz_duration')->nullable(true);
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('teacher_id');

@@ -4,22 +4,22 @@
     <!--container-->
     <div class="content">
           
-      <div class="card float-left">
+      <div class="card wide-card float-left">
 
         <div class="card-header">
-          <span class="h4">{{$assignment->title}}</span>
+          <span class="h4">{{$assessment->title}}</span>
         </div>
 
         <div class="card-body">
             <div class="row">
-              <span class="col-md-10">{{$assignment->description}}</span>
-              @if(isset($assignment->assignments))
-                <a href="{{ asset($assignment->assignments) }}" target="_blank" class="col-md-2  text-end"><button class="btn btn-outline-primary">View</button></a>
+              <span class="col-md-10">{{$assessment->description}}</span>
+              @if(isset($assessment->assessments))
+                <a href="{{ asset($assessment->assessments) }}" target="_blank" class="col-md-2  text-end"><button class="btn btn-outline-primary">View</button></a>
               @endif
             </div>
             <hr>
 
-            <form class="form form-group" method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('student.storeHomework',[$class_id,$subject_id,$assignment_id]) }}" >
+            <form class="form form-group" method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('Student.student.storeHomework',[$class_id,$subject_id,$assessment_id]) }}" >
              @csrf 
 
                 <div class="row row-cols-2">

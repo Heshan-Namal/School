@@ -1,23 +1,21 @@
 :root {
-  --maincolor: #1CA7EC;
+    --maincolor: #1CA7EC;
 }
 
 .content {
-  min-height: 600px;
+    min-height: 600px;
 }
-.side__navbar{
-    width: 300px;
 
+.side__navbar {
+    width: 300px;
     background: var(--maincolor);
 }
 
 .navbar-nav {
     padding: 6px 0px;
-
 }
 
 .navbar-nav .nav__item .nav__link {
-
     height: 100%;
     width: 100%;
     border-radius: 12px;
@@ -25,34 +23,36 @@
     text-decoration: none;
     transition: all 0.4s ease;
     background: var(--maincolor);
-  }
+}
+
 .navbar-nav .nav__item .nav__link:hover {
-  background: #fff;
+    background: #fff;
 }
 
 .navbar-nav .nav__item .nav__link:hover .nav__items,
 .navbar-nav .nav__item .nav__link:hover i {
-  transition: all 0.5s ease;
-  color: #11101d;
+    transition: all 0.5s ease;
+    color: #11101d;
 }
 
 .main__color {
-  background: #5f56c6;
-  color: #5f56c6;
+    background: #5f56c6;
+    color: #5f56c6;
 }
 
 .navDroupdown .navOption a {
-  text-decoration: none;
-  color: #000;
+    text-decoration: none;
+    color: #000;
 }
 
 .navDroupdown {
-  position: relative;
-  width: 300px;
-  height: 30px;
-  background-color: #fff;
-  color: black;
+    position: relative;
+    width: 300px;
+    height: 30px;
+    background-color: #fff;
+    color: black;
 }
+
 
 /* .navDroupdown::before{
   content: '';
@@ -70,87 +70,122 @@
   pointer-events: none;
 
 } */
-.navDroupdown.DropdownActive::before {
-  top: 10px;
-  transform: rotate(-225deg);
 
+.navDroupdown.DropdownActive::before {
+    top: 10px;
+    transform: rotate(-225deg);
 }
 
 .navDroupdown input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #fff;
-  padding: 12px 20px;
-
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    padding: 12px 20px;
 }
 
 .navDroupdown .navOption {
-  position: absolute;
-  top: 70px;
-  width: 100%;
-  min-width: 200px;
-  background-color: #fff;
-  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  overflow: hidden;
-  z-index: 1;
-  display: none;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    min-width: 200px;
+    background-color: #fff;
+    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
 }
 
 .navDroupdown.DropdownActive .navOption {
-  display: block;
+    display: block;
 }
 
 .navDroupdown .navOption div {
-  padding: 12px 20px;
-  width: 100%;
-  cursor: pointer;
-
-
+    padding: 12px 20px;
+    width: 100%;
+    cursor: pointer;
 }
 
-.navDroupdown  .navOption div:hover {
-  background-color: var(--maincolor);
-  color: #fff;
-
+.navDroupdown .navOption div:hover {
+    background-color: var(--maincolor);
+    color: #fff;
 }
 
 .navDroupdown .navOption div ion-icon {
-  position: relative;
-  top: 4px;
-  font-size: 1.2em;
-  padding-right: 10px;
+    position: relative;
+    top: 4px;
+    font-size: 1.2em;
+    padding-right: 10px;
 }
 
 
+/*card css*/
+
+.card {
+    text-align: center;
+    max-width: 350px;
+    min-height: 200px;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    border: 0.5px solid #dcdbdb;
+}
+
+.card:hover {
+    border: 1px solid #1CA7EC;
+}
+
+.card-body img {
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.card-text {
+    color: #000;
+    padding-bottom: 20px;
+    cursor: context-menu;
+}
+
+.card-body div {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.card-title {
+    cursor: context-menu;
+}
 
 .NoticeBoard {
-  margin-top: 10px;
-  border: 0.5px solid #1CA7EC;
-  background-color: #fff;
+    margin-top: 10px;
+    border: 0.5px solid #1CA7EC;
+    background-color: #fff;
 }
 
 .container-fluid {
-  float: left;
+    float: left;
 }
 
 .notification_dd li {
-  border-bottom: 1px solid #f1f2f4;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+    border-bottom: 1px solid #f1f2f4;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 
 .notification_dd li .notify_icon {
-  display: flex;
+    display: flex;
 }
+
 
 /* .notification_dd li .notify_icon .icon{
 display: inline-block;
@@ -160,172 +195,414 @@ height: 42px;
 } */
 
 .notification_dd li.baskin_robbins .notify_icon .icon {
-  background-position: 0 -43px;
+    background-position: 0 -43px;
 }
 
 .notification_dd li.mcd .notify_icon .icon {
-  background-position: 0 -86px;
+    background-position: 0 -86px;
 }
 
 .notification_dd li.pizzahut .notify_icon .icon {
-  background-position: 0 -129px;
+    background-position: 0 -129px;
 }
 
 .notification_dd li.kfc .notify_icon .icon {
-  background-position: 0 -178px;
+    background-position: 0 -178px;
 }
 
 .notification_dd li .notify_data {
-  margin: 0 15px;
-  width: 185px;
+    margin: 0 15px;
+    width: 185px;
 }
 
 .notification_dd li .notify_data .title {
-  color: #000;
-  font-weight: 600;
+    color: #000;
+    font-weight: 600;
 }
 
 .notification_dd li .notify_data .sub_title {
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 5px;
 }
 
 .notification_dd li .notify_status p {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .notification_dd li.success .notify_status p {
-  color: #47da89;
+    color: #47da89;
 }
 
 .notification_dd li.failed .notify_status p {
-  color: #fb0001;
+    color: #fb0001;
 }
 
 .notification_dd li.show_all {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .notification_dd li.show_all p {
-  font-weight: 700;
-  color: #3b80f9;
-  cursor: pointer;
+    font-weight: 700;
+    color: #3b80f9;
+    cursor: pointer;
 }
 
 .notification_dd li.show_all p:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .dropdown-item:hover {
-  background-color: var(--maincolor);
-  color: #fff;
-
+    background-color: var(--maincolor);
+    color: #fff;
 }
+
+
 
 /* term drop down  */
+
 .term-dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 3px 10px 3px 10px;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
+    background-color: #3498DB;
+    color: white;
+    padding: 3px 10px 3px 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
 }
+
+
+/*teacher */
+
+.hh .card {
+    max-width: 700px;
+    min-height: 0px;
+    height: 115px;
+    margin: 10px 10px 10px 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: #90d0fafd;
+    box-shadow: none;
+    margin-bottom: unset;
+    border: none;
+}
+
+.item .card,
+.table.card {
+    background-color: #f7f1f1;
+}
+
+.owl-nav button.owl-next,
+.owl-nav button.owl-prev {
+    color: #fff;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    height: 28px;
+    width: 38px;
+}
+
+.timetable {
+    color: #000;
+    font-weight: bold;
+    /* //margin-top: 15px; */
+    /* margin-bottom: 20px; */
+    text-align: left;
+}
+
+.kk .card {
+    max-width: none;
+    width: 300px;
+    max-height: none;
+    height: 50px;
+    margin: 10px 10px 10px 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: #fff;
+    text-align: unset;
+    box-shadow: none;
+    margin-bottom: unset;
+    border: none;
+}
+
+.table-card {
+    text-align: unset;
+    max-width: none;
+    min-height: none;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.d-card {
+    text-align: unset;
+    max-width: none;
+    min-height: fit-content;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border: rgb(212, 216, 231) 0.5px solid;
+}
+
+.table {
+    font-weight: 500;
+    color: #000;
+}
+
+.b-card {
+    margin-left: 250px;
+    background-color: #fff;
+    margin-top: 15px;
+    text-align: unset;
+    max-width: 800px;
+    min-height: none;
+    box-shadow: none;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.box-card {
+    margin-top: 25px;
+    text-align: unset;
+    max-width: none;
+    width: 250px;
+    height: 100px;
+    min-height: 0;
+    box-shadow: none;
+    border: rgb(212, 216, 231) 0.5px solid;
+}
+
+.sub-card {
+    margin-top: 25px;
+    text-align: unset;
+    max-width: none;
+    width: 300px;
+    height: 150px;
+    min-height: 0;
+    box-shadow: none;
+    border: rgb(212, 216, 231) 0.5px solid;
+}
+
+
+/* .btn {
+    width: 100px;
+  } */
 
 .term-dropbtn:hover,
 .term-dropbtn:focus {
-  background-color: #2980B9;
+    background-color: #2980B9;
 }
 
 .termDropdown {
-  position: absolute;
-  display: inline-block;
-  /* transform: translateY(-4vh); */
-  z-index: 1;
+    position: absolute;
+    display: inline-block;
+    /* transform: translateY(-4vh); */
+    z-index: 1;
 }
 
 .term-dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  cursor: pointer;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    cursor: pointer;
 }
 
 .term-dropdown-content div {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
 .term-dropdown div:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .term-show {
-  display: block;
+    display: block;
 }
+
 
 /* day card */
 
 .day-card {
-  text-align: center;
-  max-width: 350px;
-  min-height: 40vh;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
-  border-radius: 5px;
-  background-color: rgba(75, 75, 75, 0.05);
+    text-align: center;
+    max-width: 350px;
+    min-height: 40vh;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
+    border-radius: 5px;
+    background-color: rgba(75, 75, 75, 0.05);
 }
 
 .day-card-body a {
-  text-decoration: none;
-
+    text-decoration: none;
 }
 
 .day-card-header {
-  background-image: linear-gradient(#39C0ED, #1174b6);
-  color: white;
-  font-size: 20px;
+    background-image: linear-gradient(#39C0ED, #1174b6);
+    color: white;
+    font-size: 20px;
 }
 
 .option-icon ion-icon {
-  position: relative;
-  font-size: 40px;
+    position: relative;
+    font-size: 40px;
 }
 
 .option-icon:hover {
-  position: relative;
-  transform: scale(1.2);
-  color: rgb(6, 76, 156);
+    position: relative;
+    transform: scale(1.2);
+    color: rgb(6, 76, 156);
 }
+
 
 /* quiz-card */
 
 .wide-card {
-  max-width: 100%;
+    max-width: 75%;
+    text-align: left;
 }
 
 .wide-card div {
-  position: relative;
-  max-width: 100%;
+    position: relative;
+    max-width: 100%;
 }
 
 .wide-card:hover {
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
-
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
 }
+
+
+/* subject details card with buttons displayed on hover */
+
+.hidden-button {
+    position: absolute;
+    /* top: 0; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(hsl(0 0% 10% / 0.1), hsl(0 0% 10% / 0.1) 20%, hsl(0 0% 10% / 0.1));
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.hidden-button a {
+    position: relative;
+    transform: translateY(350%);
+}
+
+.hidden-div:hover .hidden-button {
+    height: 100%;
+}
+
+
+/* .hidden-div:hover{
+  opacity: 50%;
+} */
+
+.hidden-div:hover div p {
+    display: none;
+}
+/* subject details card with buttons displayed on hover */
+
+.hidden-button {
+    position: absolute;
+    /* top: 0; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255, 0.75);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.hidden-button a {
+    position: relative;
+    transform: translateY(350%);
+    width: 25%;
+}
+
+.hidden-div:hover .hidden-button {
+    height: 100%;
+}
+
+
+/* .hidden-div:hover{
+  opacity: 50%;
+} */
+
+.hidden-div:hover div p {
+    display: none;
+}
+
+
+.hidden-button a {
+    position: relative;
+    transform: translateY(350%);
+}
+/* subject details card with buttons displayed on hover */
+
+.hidden-button {
+    position: absolute;
+    /* top: 0; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255, 0.75);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.hidden-button a {
+    position: relative;
+    transform: translateY(350%);
+    width: 25%;
+}
+
+.hidden-div:hover .hidden-button {
+    height: 100%;
+}
+
+
+/* .hidden-div:hover{
+  opacity: 50%;
+} */
+
+.hidden-div:hover div p {
+    display: none;
+}
+
+
+.hidden-div:hover .hidden-button {
+    height: 100%;
+}
+
+
+/* .hidden-div:hover{
+  opacity: 50%;
+} */
+
+.hidden-div:hover div p {
+    display: none;
+}
+
+
 
 /*teacher */
 /* .hh .card{
@@ -408,18 +685,18 @@ height: 42px;
   } */
 
 .kk .card {
-  max-width: none;
-  width: 300px;
-  max-height: none;
-  height: 50px;
-  margin: 10px 10px 10px 10px;
-  padding-right: 15px;
-  padding-left: 15px;
-  background-color: #fff;
-  text-align: unset;
-  box-shadow: none;
-  margin-bottom: unset;
-  border: none;
+    max-width: none;
+    width: 300px;
+    max-height: none;
+    height: 50px;
+    margin: 10px 10px 10px 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: #fff;
+    text-align: unset;
+    box-shadow: none;
+    margin-bottom: unset;
+    border: none;
 }
 
 /* .table-card {

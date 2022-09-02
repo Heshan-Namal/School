@@ -38,6 +38,39 @@
                         <div class="navDroupdown form-control border-0 small">
                             <input  type="text" class="navtext" placeholder="Home" readonly>
                             <div class="navOption ">
+                                @if(Qs::userIsTeamLe())
+                                    <a href="{{route('dashboard')}}"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                    <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Class</div></a>
+                                    <a href="{{route('Student.student_subject.mysubjects',[getAdmissionNo()])}}"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                    <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+                                @endif
+
+                                @if(Qs::userIsTeamAd())
+                                <div class="navOption ">
+                                    <a href='{{ url("/dashboard") }}'><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                    <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
+                                    <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
+                                    <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
+                                    <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                    <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+
+                                </div>
+
+                                @endif
+
+                                
+                                @if(Qs::userIsTeamTe())
+                                    <a href="#"><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
+                                    <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
+                                    <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
+                                    <a href="#"><div><ion-icon name="bookmark-outline"></ion-icon>Classes</div></a>
+                                    <a href="#"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                    <a href="#"><div><ion-icon name="alert-circle-outline"></ion-icon>Notices</div></a>
+                                @endif
+                            <div class="navOption ">
                                 <a href='{{ url("/dashboard") }}'><div><ion-icon name="home-outline"></ion-icon><span>Home</span></div></a>
                                 <a href="#"><div><ion-icon name="person-outline"></ion-icon>Students</div></a>
                                 <a href="#"><div><ion-icon name="woman-outline"></ion-icon>Teachers</div></a>
@@ -56,7 +89,7 @@
                                 <div><ion-icon name="alert-circle-outline"></ion-icon>Logout</div></a>
                             </div>
                         </div>
-                        @if (isset($d))
+                        {{-- @if (isset($d))
                         <div class="col-4">
                         <div class="d-flex justify-content-center">
                             <div class="box mx-3 rounded">
@@ -66,11 +99,7 @@
                             <p class="classname">:{{$d->subject}}</p>
                         </div>
                         </div>
-                        @else
-                            <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                            </form>
-                        @endif
+                        @endif --}}
 
                         <!-- notification -->
                         <div class="wrapper">
