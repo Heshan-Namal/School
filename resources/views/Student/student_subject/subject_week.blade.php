@@ -1,80 +1,67 @@
 @extends('layouts.MasterDashboard')
 @section('content')
 <div class="content">
-    <div class="row">
-        <div class="termDropdown">
-            <button onclick="dropdownFunction()" class="term-dropbtn">Term</button>
-            <div id="termDropdown" class="term-dropdown-content">
-                <div id="term1" onclick="changeTerm(id)">Term 1</div>
-                <div id="term2" onclick="changeTerm(id)">Term 2</div>
-                <div id="term3" onclick="changeTerm(id)">Term 3</div>
-            </div>
-        </div>
 
-        <div id="term-display" class="col-sm-12 text-center h4 mb-4">Term 1</div>
+    <div>
 
     </div>
-
-    <div id="term-1" class="row">
-        @for($i=1; $i<= 12; $i++) <div class="col-sm-3">
-            <a style="text-decoration: none" href="{{route('Student.student.subject_week_day',[$class_id,$subject_id,1,$i])}}">
-
+   
+    <div class="row">
+        <div class="col-sm-3">
+            <a style="text-decoration: none" href="{{route('Student.student.homeworklist',[$class_id,$subject_id])}}">
                 <div class="card">
                     <div class="card-body">
-                        <img src="{{asset('assets/front/images/avatars/week.png')}}" class="rounded mx-auto d-block" alt="...">
-                        <div>
-                            <p class="card-text">Week {{$i}}</p>
-                        </div>
+                        <img src="{{asset('assets/front/images/student_img/assessment.png')}}" class="rounded mx-auto d-block mb-3" alt="...">
+                        <span class="h3 text-dark">Assessments</span>
                     </div>
                 </div>
-
             </a>
+        </div>
+
+        <div class="col-sm-3">
+            <a style="text-decoration: none" href="{{route('Student.student.resourcelist',[$class_id,$subject_id])}}">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{{asset('assets/front/images/student_img/resource.png')}}" class="rounded mx-auto d-block mb-3" alt="...">
+                        <span class="h3 text-dark">Resources</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-sm-3">
+            <a style="text-decoration: none" href="#">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{{asset('assets/front/images/student_img/quiz.png')}}" class="rounded mx-auto d-block mb-3" alt="...">
+                        <span class="h3 text-dark">Attentive Quizzes</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </div>
-    @endfor
-</div>
 
-<div id="term-2" class="row">
-    <div id="term-display" class="col-sm-12"></div>
-    @for($i=1; $i<= 12; $i++) <div class="col-sm-3">
-        <a style="text-decoration: none" href="{{route('Student.student.subject_week_day',[$class_id,$subject_id,2,$i])}}">
-
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/week.png')}}" class="rounded mx-auto d-block" alt="...">
-                    <div>
-                        <p class="card-text">Week {{$i}}</p>
-                    </div>
-                </div>
-            </div>
-
-        </a>
-</div>
-@endfor
-</div>
-
-<div id="term-3" class="row">
-    <div id="term-display" class="col-sm-12"></div>
-    @for($i=1; $i<= 12; $i++) <div class="col-sm-3">
-        <a style="text-decoration: none" href="{{route('Student.student.subject_week_day',[$class_id,$subject_id,3,$i])}}">
-
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/week.png')}}" class="rounded mx-auto d-block" alt="...">
-                    <div>
-                        <p class="card-text">Week {{$i}}</p>
-                    </div>
-                </div>
-            </div>
-
-        </a>
-</div>
-@endfor
-</div>
+    <div id="chart"></div>
 
 </div>
 
 @endsection
 
 @section('script')
-<script src="{{asset('assets/front/js/student/termSelection.js')}}"></script>
+<script src="https://unpkg.com/chart.js@^2.9.3/dist/Chart.min.js"></script>
+<script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
+
+<script>
+    const chart = new Chartisan({
+      el: '#chart',
+      url: "@chart('participate_chart')"+ "?classid={{$class_id}}" +"&subjectid={{$subject_id}}",
+        hooks: new ChartisanHooks()
+        .colors(['#4299E1','#FE0045','#C07EF1','#67C560','#ECC94B'])
+                .datasets([{ type: 'line', fill: false,
+            borderColor: "rgba(75,192,192,1)",}]),
+        });
+
+  </script>
+
 @endsection

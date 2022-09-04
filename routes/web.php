@@ -70,9 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
     //Student routes
     Route::controller(StudentController::class)->group(function () {
         Route::get('/mysubjects/{student_id}','getSubjectsList')->name('Student.student_subject.mysubjects');
+        Route::get('/subject/{subject_id}','getSubjectData')->name('Student.student.subject_details');
         Route::get('/subject/{class_id}/{subject_id}','getSubjectWeekList')->name('Student.student.subject_week');
         Route::get('/subject/{class_id}/{subject_id}/{term_id}/{week_id}','getSubjectWeekDayList')->name('Student.student.subject_week_day');
-        //Route::get('/subject/{class_id}/{subject_id}','getSubjectData')->name('Student.student.subject');
 
 
         //student_assignment routes
@@ -81,11 +81,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/editHomework/{class_id}/{subject_id}/{assignment_id}','editHomework')->name('Student.student.editHomework');
         Route::post('/storeHomework/{class_id}/{subject_id}/{assignment_id}','storeHomework')->name('Student.student.storeHomework');
 
-        //student_quiz routes
-        Route::get('/myquizzes/{class_id}/{subject_id}/{term}/{week}/{day}','getquizList')->name('Student.student.quizlist');
-        Route::get('/quiz/{quiz_id}','showquiz')->name('Student.student.showquiz');
-        Route::post('/checkquiz/{quiz_id}','checkquiz')->name('Student.student.checkquiz');
-        Route::get('/resultquiz/{quiz_id}','checkquiz')->name('Student.student.quizresult');
+        //student_assessment_quiz routes
+        Route::get('/Quizzes/{class_id}/{subject_id}/{term}/{week}/{day}','getQuizList')->name('Student.student.AttentiveQuizList');
+        Route::get('/Quiz/{quiz_id}','showQuiz')->name('Student.student.showQuiz');
+        Route::post('/checkQuiz/{quiz_id}','checkQuiz')->name('Student.student.checkQuiz');
+        Route::get('/resultQuiz/{quiz_id}','checkQuiz')->name('Student.student.QuizResult');
+
+        //student_attentive_quiz routes
+        Route::get('/attentiveQuizzes/{class_id}/{subject_id}/{term}/{week}/{day}','getAttentiveQuizList')->name('Student.student.AttentiveQuizList');
+        Route::get('/attentiveQuiz/{quiz_id}','showAttentiveQuiz')->name('Student.student.showAttentiveQuiz');
+        Route::post('/checkAttentiveQuiz/{quiz_id}','checkAttentiveQuiz')->name('Student.student.checkAttentiveQuiz');
+        Route::get('/resultAttentiveQuiz/{quiz_id}','checkAttentiveQuiz')->name('Student.student.attentiveQuizResult');
+
+        //student_resources routes
+        Route::get('/resource/{class_id}/{subject_id}','getresourceList')->name('Student.student.resourcelist');
+
     });
 
          //admin routes
@@ -142,7 +152,7 @@ Route::get('/materials/{classid}/{subjectid}',[TeacherController::class,'teacher
 Route::get('/assesments/{classid}/{subjectid}',[AssesmentController::class,'index'])->name('ass.index');
 Route::post('/store/{classid}/{subjectid}',[AssesmentController::class,'store'])->name('ass.store');
 Route::get('/assesmentquiz',[AssesmentController::class,'assquiz'])->name('ass.quiz');
-Route::put('/update',[AssesmentController::class,'assquestion_update'])->name('assquestion.update');
+Route::put('/assupdate',[AssesmentController::class,'assquestion_update'])->name('assquestion.update');
 Route::get('/assesmentshow/{id}',[AssesmentController::class,'assquizshow'])->name('ass.quizshow');
 Route::get('/submited/{classid}/{subjectid}',[Submit_assesmentController::class,'index'])->name('ass.sumitindex');
 Route::get('/submitedview/{assid}',[Submit_assesmentController::class,'subassview'])->name('submit.view');
@@ -179,23 +189,37 @@ Route::get('rec/exportpdf/{classid}/{subjectid}/{term}', [Teacher_RecordBookCont
 //classteacher
 Route::get('/myclass-students',[ClassTeacherController::class,'mystudents'])->name('myclass.students');
 Route::get('student-detail/{id}',[ClassTeacherController::class,'student_view'])->name('myclass.studentview');
-Route::get('/myclass-termtest',[TermController::class,'termtest'])->name('myclass.termtest');
+
+Route::get('/myclass-termtest',[TermController::class,'termtest'])->name('myclass.termtest');//mulinma
 Route::get('/termtest/{classid}',[TermController::class,'addtermtest'])->name('addresult');
 Route::get('/stdres/{term}/{studentid}',[TermController::class,'addstd_result'])->name('stdresult');
 Route::post('/result/{term}/{subjectid}/{classid}/store',[TermController::class,'store'])->name('enter.testmarks');
 Route::put('/result-update/{term}/{subjectid}/{classid}',[TermController::class,'testupdate'])->name('update.testmarks');
-Route::get('/myclass-attendance',[AttendanceController::class,'attendance'])->name('myclass.attendance');
+Route::get('/termtestview',[TermController::class,'termtestview'])->name('view.termtest');//mulinma
+Route::get('/view-result/{classid}',[TermController::class,'view'])->name('view.result');
+Route::get('result/{term}/{studentid}/{classid}',[TermController::class,'view_test'])->name('view.result_student');
+
+Route::get('/myclass-attendance',[AttendanceController::class,'attendance'])->name('myclass.attendance');//mulinma
 Route::get('/attendance/{classid}',[AttendanceController::class,'addattendance'])->name('addattendance');
 Route::post('/attendance-store',[AttendanceController::class,'store'])->name('attendance.store');
 Route::put('/attendance-update',[AttendanceController::class,'attendanceupdate'])->name('update.attendance');
-Route::get('/view-result/{classid}',[TermController::class,'view'])->name('view.result');
-Route::get('/termtestview',[TermController::class,'termtestview'])->name('view.termtest');
-//report
+
+//class_teacher-report
 Route::get('result/exportpdf/{term}/{studentid}/{classid}', [TermController::class, 'exportpdf'])->name('resultpdf');
 
 
 });
 
+
+//admin
+Route::get('/addfees',[AdminController::class,'Addfees'])->name('view.fees');
+Route::post('/storefee',[AdminController::class,'Storefees'])->name('store.fee');
+Route::get('/stdpay',[AdminController::class,'studentfees'])->name('submit_std.view');
+Route::post('/stdpayments',[AdminController::class,'studentfees'])->name('view.payments');
+
+//student
+Route::get('/add-std-fees',[AdminController::class,'getstd_fees'])->name('std.fees');
+Route::post('/storestd-fee',[AdminController::class,'Storestdfees'])->name('store.std.fee');
 
 
 

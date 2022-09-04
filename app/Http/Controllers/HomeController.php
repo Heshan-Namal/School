@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Helpers\Qs;
+use App\Models\Student_subject;
+use App\Models\Subject;
 use App\Repositories\UserRepo;
 
 use App\Models\User;
@@ -45,6 +47,32 @@ class HomeController extends Controller
         if(Qs::userIsTeamAll()){
             $d['users'] = $this->user->getAll();
         }
+        if(Qs::userIsTeamLe()){
+            // select classes for today from class timetable
+            $d['users'] = $this->user->getAll();
+
+            $admission_no =getAdmissionNo();
+            $class_id=getClassId();
+            $day = strtolower(getTermWeekDay()[2]);
+
+            $today_classes=DB::table('class_timetable')
+                            ->join('class','class_timetable.class_id','=','class.id')
+                            ->join('subject','class_timetable.subject_id','=','subject.id')
+                            ->where([['class_timetable.class_id',$class_id]])
+                            ->orderBy('period')
+                            ->select('*')
+                            ->get();
+            
+            $monday=$today_classes->where('day','monday');
+            $tuesday=$today_classes->where('day','tuesday');
+            $wednesday=$today_classes->where('day','wednesday');
+            $thursday=$today_classes->where('day','thursday');
+            $friday=$today_classes->where('day','friday');
+            return view('Dashboard.dashboard',compact(['d','monday','tuesday','wednesday','thursday','friday']));
+            
+        }
+
+
         if(Qs::userIsTeamTe()){
             if (($req->mindata == null) && ($req->maxdata == null)) {
                 $mindata= Carbon::now()->subDays(7);

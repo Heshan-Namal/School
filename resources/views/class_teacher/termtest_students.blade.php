@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 <div class="container_AssStudent">
+    <header >Term Test Activities</header>
         <form action="{{route('addresult',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Class</label>
@@ -44,6 +45,9 @@
                                         <td>
                                             <a href="{{route('stdresult',[$term,$s->admission_no])}}" class="btn btn-primary btn-sm">Add/Edit</a>
                                         </td>
+                                        {{-- <td>
+                                            <a href="{{route('resultpdf',[$term,$s->admission_no,$dd->id])}}" class="btn btn-secondry btn-sm">Report</a>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -5,11 +5,12 @@
 @endsection
 @section('content')
 <div class="content">
-    <div class="row mb-3">
-        <h1 class="timetable cd-head text-center mb-2"> Add Term Test Marks</h1>
+    <div class="container_AssStudent">
+        <h2 class="timetable text-center" >TERM TEST ACTIVITIES</h2>
     </div>
-<div class="container_AssStudent">
-    <div class="row">
+<div class="container_AssStudent test">
+    <header> Add Term Test Marks</header>
+    <div class="row ">
         <form action="{{route('addresult',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Class</label>

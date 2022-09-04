@@ -15,9 +15,11 @@ function gettypeselector(select1){
     //alert(select1);
     if(select1=='mcq_quiz'){
        document.getElementById('file').hidden = true;
+       document.getElementById('duration').hidden = false;
        document.getElementById('file').required=false;
    }else{
     document.getElementById('file').hidden = false;
+    document.getElementById('duration').hidden = true;
     document.getElementById('file').required=true;
 
    }

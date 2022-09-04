@@ -9,7 +9,7 @@
                 <div class="card-header">
                 	<div class="row row-col-2">	
                 		<span class="h3 col-sm-8 my-auto">{{$quiz->title}}</span>
-                        <span class="rounded-pill h4 text-center text-white bg-success m-auto py-3 col-sm-4">You Scored {{$marks}} out of {{$question_count}}</span>
+                        <span class="rounded-pill h4 text-center text-white bg-success m-auto py-3 col-sm-4">You Scored {{$total_points}} out of {{$question_count}}</span>
                 	</div>
                 </div>
 
@@ -33,41 +33,41 @@
                 @endif
 
                     <div class="card-header">
-                        <h3>{{$key+1}}.{{$q->question}}</h3>
+                        <h3>{{$key+1}}&nbsp.&nbsp{{$q->question}}</h3>
                     </div>
 
               
                         <div class="card-body">
                             <ol   class="ul-list"  style="list-style-type: lower-alpha;list-style: none" >
-                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer1" name="{{$key}}" value="answer1"{{ $answers_array[$key] == 'answer1' ? 'checked' : '' }}  /> 
-                                @if($correct_answers_array[$key] == 'answer1')
-                                	<span class="text-white" style="background-color: Lightgreen">{{$q->answer1}}</span>
+                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer1" name="{{$key}}" value="option_1" {{ $answers_array[$key] == 'option_1' ? 'checked' : '' }}  /> 
+                                @if($correct_answers_array[$key] == 'option_1')
+                                	<span class="text-white" style="background-color: Lightgreen">{{$q->option_1}}</span>
                                 @else
-                                	<span class="">{{$q->answer1}}</span>
+                                	<span class="">{{$q->option_1}}</span>
                                 @endif 
                                 </li>
 
-                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer2" name="{{$key}}" value="answer2" {{ $answers_array[$key] == 'answer2' ? 'checked' : '' }}  /> 
-                                @if($correct_answers_array[$key] == 'answer2')
-                                	<span class="text-white" style="background-color: Lightgreen">{{$q->answer2}}</span>
+                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer2" name="{{$key}}" value="option_2" {{ $answers_array[$key] == 'option_2' ? 'checked' : '' }}  /> 
+                                @if($correct_answers_array[$key] == 'option_2')
+                                	<span class="text-white" style="background-color: Lightgreen">{{$q->option_2}}</span>
                                 @else
-                                	<span class="">{{$q->answer2}}</span>
+                                	<span class="">{{$q->option_2}}</span>
                                 @endif 
                                 </li>
 
-                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer3" name="{{$key}}" value="answer3" {{$answers_array[$key] == 'answer3' ? 'checked' : '' }}  /> 
-                                	@if($correct_answers_array[$key] == 'answer3')
-                                	<span class="text-white" style="background-color: Lightgreen">{{$q->answer3}}</span>
+                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer3" name="{{$key}}" value="option_3" {{$answers_array[$key] == 'option_3' ? 'checked' : '' }}  /> 
+                                	@if($correct_answers_array[$key] == 'option_3')
+                                	<span class="text-white" style="background-color: Lightgreen">{{$q->option_3}}</span>
                                 @else
-                                	<span class="">{{$q->answer3}}</span>
+                                	<span class="">{{$q->option_3}}</span>
                                 @endif 
                                 </li>
 
-                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer4" name="answer{{$key}}" value="answer4" {{$answers_array[$key] == 'answer4' ? 'checked' : '' }}  /> 
-                                @if($correct_answers_array[$key] == 'answer4')
-                                	<span class="text-white" style="background-color: Lightgreen">{{$q->answer4}}</span>
+                                <li>&nbsp;<input class="form-check-input" disabled type="radio" id="answer4" name="answer{{$key}}" value="option_4" {{$answers_array[$key] == 'option_4' ? 'checked' : '' }}  /> 
+                                @if($correct_answers_array[$key] == 'option_4')
+                                	<span class="text-white" style="background-color: Lightgreen">{{$q->option_4}}</span>
                                 @else
-                                	<span class="">{{$q->answer4}}</span>
+                                	<span class="">{{$q->option_4}}</span>
                                 @endif 
                                 </li>
 

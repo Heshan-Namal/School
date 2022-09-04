@@ -33,7 +33,8 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\AttentiveChart::class,
             \App\Charts\TodayAttentiveChart::class,
             \App\Charts\StudentAttentiveChart::class,
-            \App\Charts\StudentAssChart::class
+            \App\Charts\StudentAssChart::class,
+            \App\Charts\StdAttMarkChart::class
         ]);
     }
 }

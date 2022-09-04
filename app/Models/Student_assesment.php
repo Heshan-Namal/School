@@ -9,4 +9,5 @@ class Student_assesment extends Model
 {
     use HasFactory;
     protected $table = 'student_assessment';
+    protected $guarded =[];
 }

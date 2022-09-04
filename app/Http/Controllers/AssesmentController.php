@@ -82,7 +82,8 @@ class AssesmentController extends Controller
     public function store(Request $req,$classid,$subjectid)
     {
         $req->validate([
-            'assignments'=>'mimes:pdf,doc'
+            'assignments'=>'mimes:pdf,doc',
+            'duration'=>'date_format:H:s:i'
         ]);
 
         $date=Carbon::now()->format('y/m/d/l/W');
@@ -110,6 +111,7 @@ class AssesmentController extends Controller
                 'title'=>$req->title,
                 'description'=>$req->description,
                 'assessment_file'=>$name,
+                'quiz_duration'=>$req->duration,
                 'term'=>$req->term,
                 'week'=>$week,
                 'day'=>$day,
@@ -229,6 +231,7 @@ class AssesmentController extends Controller
 
     public function changeStatus(Request $request ,$id)
     {
+
         $date=Carbon::now()->format('y/m/d/l/W');
         $datearr=explode("/",$date);
         $ass=Assesment::find($id);
@@ -240,9 +243,12 @@ class AssesmentController extends Controller
                 $input->week="week".$datearr[4]%17;
                 $input->save();
                 Assesment::where('id',$id)->update(['status'=>$request->status]);
+                return back()->with('message','Published Successfull');
             }else{
-                return back()->with('message','You didnt Add Questions for Assessment');
+
+                return back()->with('error','You didnt Add Questions for Assessment');
             }
+
         }else {
                 $input=Assesment::find($id);
                 $input->day=$datearr[3];

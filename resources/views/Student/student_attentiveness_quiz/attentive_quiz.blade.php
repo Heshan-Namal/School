@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content">
-            <form  method="POST" enctype="multipart/form-data" id="" action="{{ route('Student.student.checkquiz',[$a_check_id]) }}" class="form-check"> @csrf
+            <form  method="POST" enctype="multipart/form-data" id="" action="{{ route('Student.student.checkAttentiveQuiz',[$a_check_id]) }}" class="form-check"> @csrf
                 <div class="card wide-card ps-0 ms-0 text-start">
                     <div class="card-header">
                         <div class="row">
@@ -14,26 +14,25 @@
                             </div>
                         </div>
                     </div>
-
                 @foreach($questions as $key=>$q)
                 <div class="card wide-card m-3 text-start">
                     <div class="card-header">
-                        <h5>{{$key+1}}.{{$q->question}}</h5>
+                        <h5>{{$key+1}}&nbsp.&nbsp{{$q->question}}</h5>
                     </div>
                         
                         <div class="card-body wide-card">
                             <ol   class="ul-list"  style="list-style-type: lower-alpha;list-style: none" >
-                                <li>&nbsp;<input class="form-check-input" type="radio" id="answer1" name="{{$key}}" value="answer1" required /> 
-                                    <label class="form-check-label" for="answer1">{{$q->answer1}}</label>
+                                <li>&nbsp;<input class="form-check-input" type="radio" id="option_1" name="{{$key}}" value="option_1" required /> 
+                                    <label class="form-check-label" for="option_1">{{$q->option_1}}</label>
                                 </li>
 
-                                <li>&nbsp;<input class="form-check-input" type="radio" id="answer2" name="{{$key}}" value="answer2" /> {{$q->answer2}}
+                                <li>&nbsp;<input class="form-check-input" type="radio" id="option_2" name="{{$key}}" value="option_2" /> {{$q->option_2}}
                                 </li>
 
-                                <li>&nbsp;<input class="form-check-input" type="radio" id="answer3" name="{{$key}}" value="answer3" /> {{$q->answer3}}
+                                <li>&nbsp;<input class="form-check-input" type="radio" id="option_3" name="{{$key}}" value="option_3" /> {{$q->option_3}}
                                 </li>
 
-                                <li>&nbsp;<input class="form-check-input" type="radio" id="answer4" name="{{$key}}" value="answer4"/> {{$q->answer4}}
+                                <li>&nbsp;<input class="form-check-input" type="radio" id="option_4" name="{{$key}}" value="option_4"/> {{$q->option_4}}
                                 </li>
 
                             </ol>
@@ -68,7 +67,7 @@
         setTimeout(chckfunction(),time)
 
         {$.ajax({
-                    url: "{{route('Student.student.showquiz',[$quiz->id])}}",
+                    url: "{{route('Student.student.showAttentiveQuiz',[$quiz->id])}}",
                     cache:false,
                     type: "GET",
                     data:timeobj,

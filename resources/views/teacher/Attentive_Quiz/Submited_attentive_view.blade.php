@@ -182,11 +182,20 @@
         {!! $hmark->links() !!}
     </div>
 </div>
-<div class="row"></div>
+<div class="row">
+
+</div>
 <div class="row mt-3 mb-4">
     <div class="col-6 "><h4 class="timetable mt-4 text-center">Current Month Attentive checks that you include Summery as Precentage </h4></div>
     <div class="col-6"><div id="chart4" style="height: 400px;"></div></div>
 </div>
+
+<div class="row mt-3 mb-4">
+    <div class="col-6 "><h4 class="timetable mt-4 text-center">Current Month Attentive checks Student</h4></div>
+    <div class="col-6"><div id="chart3" style="height: 400px;"></div></div>
+</div>
+
+
 </div>
 <script src="{{asset('assets/front/js/subass.js')}}"></script>
 <script src="https://unpkg.com/chart.js@^2.9.3/dist/Chart.min.js"></script>
@@ -194,6 +203,17 @@
 
 <script>
 
+const chart3 = new Chartisan({
+      el: '#chart3',
+      url: "@chart('std_att_mark_chart')"+ "?classid={{$classid}}" +"&subjectid={{$subjectid}}",
+      hooks: new ChartisanHooks()
+        .colors(['rgba(10,114,724,5)','#FE0045','#C07EF1','#67C560','#ECC94B'])
+        // .datasets('doughnut')
+        // .pieColors(),
+        .datasets([{ type: 'bar', fill: false,
+        borderColor: "['#4299E1','#FE0045','#C07EF1','#67C560','#ECC94B']",}]),
+
+        });
 
 const chart4 = new Chartisan({
       el: '#chart4',

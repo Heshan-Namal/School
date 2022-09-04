@@ -10,6 +10,8 @@ class Student extends Model
     use HasFactory;
     public $timestamps=false;
     protected $table = "student";
+    protected $guarded=[];
+
     public function getass()
     {
         // need to declare relation and object tables

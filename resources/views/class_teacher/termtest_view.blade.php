@@ -4,7 +4,8 @@
 @endsection
 @section('content')
 <div class="container_AssStudent">
-        <form action="{{route('view.result',[$dd->id])}}" method="GET" class="row g-3">@csrf
+    <header >Manage Term Test Result</header>
+    <form action="{{route('view.result',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Class</label>
             <input type="text" disabled class="form-control" value="{{$dd->class_name}}">
@@ -27,33 +28,33 @@
         <header class ="mb-3">View Result {{$term}} </header>
 
         <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Admission Number</th>
-                                        <th>Student Name</th>
-                                        <th>Average</th>
-                                        <th>Position</th>
-                                        <th>View</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($order as $key=> $o)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$o->admission_no}}</td>
-                                        <td>{{$o->full_name }}</td>
-                                        <td>{{round(($o->sum / $count),2)}}</td>
-                                        <td>{{$key+1}}</td>
-                                        <td>
-                                            <a href="{{route('resultpdf',[$term,$o->admission_no,$dd->id])}}" class="btn btn-primary btn-sm">View</a>
-                                        </td>
-                                        {{-- <td>
-                                        <a href="{{route('resultpdf',[$term,$s->admission_no,$dd->id])}}" class="btn btn-secondry btn-sm">Report</a>
-                                        </td> --}}
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Admission Number</th>
+                    <th>Student Name</th>
+                    <th>Average</th>
+                    <th>Position</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($order as $key=> $o)
+                <tr>
+                    <td>{{$key+1}}</td>
+                    <td>{{$o->admission_no}}</td>
+                    <td>{{$o->full_name }}</td>
+                    <td>{{round(($o->sum / $count),2)}}</td>
+                    <td>{{$key+1}}</td>
+                    <td>
+                        <a href="{{route('view.result_student',[$term,$o->admission_no,$dd->id])}}" class="btn btn-primary btn-sm">View</a>
+                    </td>
+                    {{-- <td>
+                    <a href="{{route('resultpdf',[$term,$s->admission_no,$dd->id])}}" class="btn btn-secondry btn-sm">Report</a>
+                    </td> --}}
+                </tr>
+                @endforeach
+            </tbody>
                             </table>
                             </div>
 </div>

@@ -25,11 +25,11 @@
     border-radius: 8px;
     background-color: #4070f4;
   }
-  .container_AssStudent form{
+ .container_AssStudent form{
     position: relative;
     margin-top: 16px;
     /* min-height: 490px; */
-    background-color: #fff;
+   background-color: #fff;
     overflow: hidden;
   }
   .container_AssStudent form .form{
@@ -154,3 +154,11 @@
         width: 100%;
     }
   }
+.test
+{
+    justify-content: center;
+    width:90%;
+    height: 100%;
+    margin-top: 125px;
+    margin-left: 50px;
+}

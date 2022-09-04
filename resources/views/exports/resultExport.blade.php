@@ -1,16 +1,31 @@
 <html>
 <head>
-<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
-<link rel="stylesheet" href="{{asset('assets/front/bootstrap/css/bootstrap.min.css')}}">
-
+    <style>
+    #main {
+        display: flex;
+        justify-content: center;
+      }
+      .form-label{
+        margin:0 0 3px 0;
+        padding:0px;
+        display:block;
+        font-weight: bold;
+    }
+    .form-control{
+        padding: 0;
+        display: block;
+        list-style: none;
+        margin: 10px 0 0 0;
+    }
+      </style>
 </head>
 <body>
-    <div class="row mb-3 col-6 ">
+    <div style="text-align: center">
         <h1 class="timetable cd-head text-center mb-2">Term Test Marks</h1>
     </div>
-<div class="container_AssStudent col-6">
+<div id="main" style="justify-content: center">
     <div>
-    <div class="row g-3 ">
+    <div style="display: inline">
         <div class="col-md-3">
             <label for="inputEmail4" class="form-label">Year</label>
             <input type="text" disabled class="form-control" value="{{$lables->year}}">
@@ -55,13 +70,14 @@
         </div>
     </div>
     @endforeach
-    </div>
-    <div class="row mt-5">
+    <div class="text-end">
         <h4 class="timetable mb-2">Absent subjects {{$count-$data->count()}}</h4>
         <h4 class="timetable mb-2">Cetified By</h4>
     </div>
+    </div>
+
+
 </div>
 
-<script src="{{asset('assets/front/js/termtest.js')}}"></script>
 </body>
 </html>
