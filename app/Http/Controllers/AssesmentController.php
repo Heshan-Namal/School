@@ -82,7 +82,8 @@ class AssesmentController extends Controller
     public function store(Request $req,$classid,$subjectid)
     {
         $req->validate([
-            'assignments'=>'mimes:pdf,doc'
+            'assignments'=>'mimes:pdf,doc',
+            'duration'=>'date_format:H:s:i'
         ]);
 
         $date=Carbon::now()->format('y/m/d/l/W');
@@ -110,6 +111,7 @@ class AssesmentController extends Controller
                 'title'=>$req->title,
                 'description'=>$req->description,
                 'assessment_file'=>$name,
+                'quiz_duration'=>$req->duration,
                 'term'=>$req->term,
                 'week'=>$week,
                 'day'=>$day,

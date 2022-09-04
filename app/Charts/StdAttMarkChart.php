@@ -25,13 +25,13 @@ class StdAttMarkChart extends BaseChart
         // $std=DB::table('student')
         //     ->where('student.class_id',$request->classid)
         //     ->count();
-        $period = CarbonPeriod::create(Carbon::now()->firstOfMonth()->startOfDay(), Carbon::now()->lastOfMonth()->endOfDay());
+        $period = CarbonPeriod::create(Carbon::now()->firstOfMonth()->startOfDay(), Carbon::now()->lastOfMonth()->endOfDay()->format('Y-m-d'));
         $c=0;
 
         foreach($period as $date)
         {
             $tval=0;
-            array_push($labels,$date->format('d-m-Y'));
+            array_push($labels,$date->format('Y-m-d'));
             $quizes=DB::table('attentiveness_check')
             ->where('attentiveness_check.class_id','=',$request->classid)
             ->where('attentiveness_check.subject_id','=',$request->subjectid)
@@ -47,13 +47,13 @@ class StdAttMarkChart extends BaseChart
             foreach ($quizes as $key => $q) {
                 $mark=DB::table('student_attentiveness_check')
                 ->where('student_attentiveness_check.A_check_id',$q->id)
-                ->where('student_attentiveness_check.admission_no','s2')
+                ->where('student_attentiveness_check.admission_no','s1')
                 ->select('student_attentiveness_check.total_points as mark')
                 ->first();
                 if ($mark!=null) {
                     $t1=$t1+$mark->mark;
                 }else{
-                    $t1=0;
+                    $t1=$t1+0;
                 }
 
             }

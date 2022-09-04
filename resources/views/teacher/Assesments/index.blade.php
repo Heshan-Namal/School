@@ -233,8 +233,6 @@
                     </form>
                     @endif
         </td>
-
-
             </tr>
             @endforeach
             <div class="pagination justify-content-end mt-3">
