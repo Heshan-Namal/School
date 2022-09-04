@@ -5,13 +5,13 @@ use App\Models\Attentiveness_check;
 use App\Models\Attentiveness_check_Question;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class Submit_attentiveness_checkController extends Controller
 {
     public function index(Request $request,$classid,$subjectid)
     {
-
 
         $count=DB::table('student_attentiveness_check')
         ->join('attentiveness_check','student_attentiveness_check.A_check_id','=','attentiveness_check.id')

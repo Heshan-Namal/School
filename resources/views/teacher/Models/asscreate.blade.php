@@ -96,6 +96,15 @@
                 @enderror
            </div>
 
+           <div class="form-group mb-2" id="duration" hidden>
+            <label for="name">Quiz Duration</label>
+            <input type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" placeholder="00:00:00">
+            @error('duration')
+                     <span class="invalid-feedback" role="alert">
+                         <strong>example: 00:05:00(five minutes)</strong>
+                     </span>
+             @enderror
+        </div>
 
         <div class="form-group">
            <div class="modal-footer">

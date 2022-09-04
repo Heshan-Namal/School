@@ -4,10 +4,10 @@
 @endsection
 @section('content')
 <div class="content">
-    <div class="row mb-3">
-        <h1 class="timetable cd-head text-center mb-2"> View Term Test Result</h1>
+    <div class="container_AssStudent">
+        <h2 class="timetable text-center" >MANAGE TERM TEST RESULTS</h2>
     </div>
-<div class="container_AssStudent">
+<div class="container_AssStudent test">
     <div class="row">
         <form action="{{route('view.result',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">

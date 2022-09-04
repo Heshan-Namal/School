@@ -244,9 +244,10 @@ class AdminController extends Controller
             ->join('student','student.admission_no','=','student_fees.admission_no')
             ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
             ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+            ->where('student.admission_no','=','s3')
             ->get();
 
-        //dd($std1);
+       // dd($stdsub);
         return view('Student.student_fees' , compact(['std','stdsub']));
 
     }
@@ -266,7 +267,7 @@ class AdminController extends Controller
         }
 
         $stdfee = new Student_Fees;
-        $stdfee->admission_no='s1';
+        $stdfee->admission_no='s2';
         $stdfee->fee_id = $request->id;
         $stdfee->proof = $name;
         $stdfee->save();

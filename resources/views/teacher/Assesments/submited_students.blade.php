@@ -1,6 +1,6 @@
 @extends('layouts.MasterDashboard')
 @section('style')
-<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/teacher.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 @endsection
 @section('content')

@@ -1,0 +1,27 @@
+/*Add student css*/
+.container_AssStudent{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    background-color: #fff;
+
+  }
+
+  .container_AssStudent header{
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+  .container_AssStudent header::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #4070f4;
+  }

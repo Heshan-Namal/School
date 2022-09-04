@@ -88,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/Quiz/{quiz_id}','showQuiz')->name('Student.student.showQuiz');
         Route::post('/checkQuiz/{quiz_id}','checkQuiz')->name('Student.student.checkQuiz');
         Route::get('/resultQuiz/{quiz_id}','checkQuiz')->name('Student.student.QuizResult');
-        
+
         //student_attentive_quiz routes
         Route::get('/attentiveQuizzes/{class_id}/{subject_id}/{term}/{week}/{day}','getAttentiveQuizList')->name('Student.student.AttentiveQuizList');
         Route::get('/attentiveQuiz/{quiz_id}','showAttentiveQuiz')->name('Student.student.showAttentiveQuiz');
@@ -133,7 +133,7 @@ Route::get('/materials/{classid}/{subjectid}',[TeacherController::class,'teacher
 Route::get('/assesments/{classid}/{subjectid}',[AssesmentController::class,'index'])->name('ass.index');
 Route::post('/store/{classid}/{subjectid}',[AssesmentController::class,'store'])->name('ass.store');
 Route::get('/assesmentquiz',[AssesmentController::class,'assquiz'])->name('ass.quiz');
-Route::put('/update',[AssesmentController::class,'assquestion_update'])->name('assquestion.update');
+Route::put('/assupdate',[AssesmentController::class,'assquestion_update'])->name('assquestion.update');
 Route::get('/assesmentshow/{id}',[AssesmentController::class,'assquizshow'])->name('ass.quizshow');
 Route::get('/submited/{classid}/{subjectid}',[Submit_assesmentController::class,'index'])->name('ass.sumitindex');
 Route::get('/submitedview/{assid}',[Submit_assesmentController::class,'subassview'])->name('submit.view');

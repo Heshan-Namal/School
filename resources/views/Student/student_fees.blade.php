@@ -21,7 +21,7 @@
             <label>Uploaded Image of Payment Slip</label>
             <input type="file" class="form-control" name="proof" required>
             </div>
-            <input type="text" class="form-control" name="id" value="{{$std->id}}">
+            <input type="hidden" class="form-control" name="id" value="{{$std->id}}">
             <div class="col">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

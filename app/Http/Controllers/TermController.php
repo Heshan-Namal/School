@@ -100,7 +100,7 @@ class TermController extends Controller
         return redirect()->back();
     }
 
-    public function testupdate($term,$subjectid,$classid)
+    public function testupdate(Request $req,$term,$subjectid,$classid)
     {
         $exam = DB::table('exam_result')
         ->where('exam_result.admission_no', '=',$req->studentid )

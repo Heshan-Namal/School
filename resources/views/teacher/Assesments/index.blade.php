@@ -1,6 +1,6 @@
 @extends('layouts.MasterDashboard')
 @section('style')
-<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/teacher.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 @endsection
 @section('content')
@@ -213,7 +213,7 @@
 
                 <td>{{$ass->status}}</td>
 
-          <td>
+          <td class="btn-toolbar">
 
                     @if($ass->status=='published')
 
@@ -228,14 +228,11 @@
                         data-bs-assessment_file="{{$ass->assessment_file}}" ><i class="bi bi-pencil-square "></i> </button>
 
                     <button  class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{$ass->id}}"><i class="bi bi-trash"></i></button>
-                    {{-- <form  action="{{route('ass.status',[$ass->id])}}" method="POST">@csrf --}}
-                        <button id="published" class="btn btn-success btn-sm" type="submit" id="pub" name="status" value="published"><i class="bi bi-upload"></i></button>
+                    <form  action="{{route('ass.status',[$ass->id])}}" method="POST">@csrf
+                        <button class="btn btn-success btn-sm" type="submit" name="status" value="published" ><i class="bi bi-upload"></i></button>
                     </form>
-
                     @endif
         </td>
-
-
             </tr>
             @endforeach
             <div class="pagination justify-content-end mt-3">

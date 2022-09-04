@@ -25,7 +25,7 @@
                     <div class="row g-0">
                         <div class="col-md-4 mt-3">
                           <img
-                            src="{{asset('assets/front/images/ass/s_a2.png')}}"
+                            src="{{asset('assets/front/images/ass/std.png')}}"
                             alt="Trendy Pants and Shoes"
                             class="img-fluid rounded-start d-flex mx-2"
                           />
