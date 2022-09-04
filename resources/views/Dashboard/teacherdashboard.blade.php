@@ -1,9 +1,10 @@
 @extends('layouts.MasterDashboard')
 @section('style')
-<link rel="stylesheet" href="{{asset('assets/front/css/card.css')}}">
+
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 @endsection
 @section('content')
-<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
+
 <div class="content">
     <div class="row">
         <h1 class="card-text">Welcome (Teacher)!</h1>
@@ -91,17 +92,20 @@
                 <div class="week-card mt-3 ">
                     <h4 class="card-header colo card-text d-flex justify-content-center">Status Tracker</h4>
                     <div class="row my-4">
-                        <div class="timetable">Never lose track of the work you do...</div>
+                        <div class="timetable" style="font-size: 20px">Never lose track of the work you do...</div>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <p class="timetable">No. of Classes You Teach<br><b>{{$cc}}</b></p>
+                                <p style="color: black">No. of Classes You Teach</p>
+                                <p class="num">{{$cc}}</p>
                         </div>
                         <div class="col-4">
-                            <p class="timetable">Attentive Checks in Drafts<br><b>{{$ac}}</b></p>
+                            <p style="color: black">Attentive Checks in Drafts</p>
+                            <p class="num">{{$ac}}</p>
                         </div>
                         <div class="col-4">
-                            <p class="timetable">No. of Due Assessments<br><b>{{$nc}}</b></p>
+                            <p style="color: black">No. of Due Assessments</p>
+                            <p class="num">{{$nc}}</p>
                         </div>
                     </div>
                 </div>
@@ -115,7 +119,7 @@
 </div>
 <div class="row hh mb-5">
     <div class="col-3">
-    <div class="sub-card">
+    <div class="front-card">
         <div class="card-header cd-head">Attentiveness Check</div>
         <div class="row g-0">
             <div class="col-md-4 mt-3">
@@ -135,7 +139,7 @@
     </div>
     </div>
     <div class="col-3">
-        <div class="sub-card">
+        <div class="front-card">
             <div class="card-header cd-head">Subject Resources</div>
             <div class="row g-0">
                 <div class="col-md-4 mt-3">
@@ -154,7 +158,7 @@
         </div>
         </div>
         <div class="col-3">
-            <div class="sub-card">
+            <div class="front-card">
                 <div class="card-header cd-head">Student Assessment</div>
                 <div class="row g-0">
                     <div class="col-md-4 mt-3">
@@ -174,7 +178,7 @@
             </div>
             </div>
             <div class="col-3">
-                <div class="sub-card">
+                <div class="front-card">
                     <div class="card-header cd-head">Record Book</div>
                     <div class="row g-0">
                         <div class="col-md-4 mt-3">
@@ -195,8 +199,8 @@
                 </div>
 </div>
 <div class="row mb-4">
-    <div class="col-5 text-center mb-5">
-        <h4 class="table mt-5">Classwise percentage of participation of students for assessment submissions.</h4>
+    <div class="col-5 comment-card">
+        <h4 class="table mt-5" style="color: rgb(12, 22, 110)">Classwise percentage of participation of students for assessment submissions.</h4>
         </div>
     <div class="col-7">
         <div id="chart3" style="height: 400px;"></div>
@@ -210,8 +214,8 @@
             class="img-fluid rounded-start d-flex imgk "
             />
     </div>
-    <div class="col-5 text-center mb-5">
-        <h3 class="table mt-5">'Teaching is the highest form of understanding' <br> - Aristotle -</h3>
+    <div class="col-5 comment-card">
+        <h3 class="table mt-5" style="color: rgb(12, 22, 110)">'Teaching is the highest form of understanding' <br> - Aristotle -</h3>
         </div>
 
 </div>

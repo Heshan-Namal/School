@@ -1,6 +1,6 @@
 @extends('layouts.MasterDashboard')
 @section('style')
-<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/teacher.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 @endsection
 @section('content')
@@ -22,8 +22,8 @@
                                     <div class="card-body">
                                       <p class="card-text">
                                           All Attentiveness Checks
-                                          <p class="text-end" >{{$uplod}}</p>
                                       </p>
+                                      <p class="text-end num" >{{$uplod}}</p>
                                     </div>
                                   </div>
                               </div>
@@ -44,7 +44,7 @@
                                 <div class="card-body">
                                   <p class="card-text">
                                       Unublished Attentiveness Checks
-                                      <p class="text-end" >{{$stat}}</p>
+                                      <p class="text-end num" >{{$stat}}</p>
                                   </p>
                                 </div>
                               </div>
@@ -66,7 +66,7 @@
                                     <div class="card-body">
                                       <p class="card-text">
                                           <p class="timetable">Attentiveness Checks Today</p>
-                                          <p class="text-end" >{{$today}}</p>
+                                          <p class="text-end num" >{{$today}}</p>
                                       </p>
                                     </div>
                                   </div>
@@ -193,14 +193,13 @@
                         Add Question</button>
                 </td>
                     @endif
-                <td>
+                <td class="btn-toolbar">
 
                 @if($quiz->status=='draft')
 
                 <button class="btn btn-primary btn-sm " data-bs-toggle="modal"  data-bs-target="#editattModal" data-bs-id="{{$quiz->id}}" data-bs-title="{{$quiz->title}}"
                     data-bs-term="{{$quiz->term}}" data-bs-week="{{$quiz->week}}" data-bs-day="{{$quiz->date}}" data-bs-period="{{$quiz->period}}"
-                    data-bs-duration="{{$quiz->quiz_duration}}"><i class="bi bi-pencil-square "></i> </button>
-
+                    data-bs-duration="{{$quiz->quiz_duration}}"><i class="bi bi-pencil-square "></i></button>
                 @else
                     <button class="btn btn-primary btn-sm mx-1"  disabled><i class="bi bi-pencil-square "></i> </button>
 
@@ -208,7 +207,7 @@
 
                 <button  class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#deleteattModal" data-bs-id="{{$quiz->id}}"><i class="bi bi-trash"></i></button>
 
-                {{-- <form action="{{route('attentive.status',$quiz->id)}}" method="POST">@csrf --}}
+                <form action="{{route('attentive.status',$quiz->id)}}" method="POST">@csrf
                     @if(($quiz->status=='draft') && ($quiz->date ==  \Carbon\Carbon::now()->format('Y-m-d') ))
                       <button class="btn btn-success btn-sm mx-1" type="submit" name="status" value="published" ><i class="bi bi-upload"></i></button>
                         {{-- <input type="submit" name="status" value="{{}}" class="btn btn-success btn-sm "> --}}

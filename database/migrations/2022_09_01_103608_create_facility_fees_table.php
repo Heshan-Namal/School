@@ -17,9 +17,11 @@ class CreateFacilityFeesTable extends Migration
             $table->id();
             $table->string('year')->nullable(false);
             $table->unsignedBigInteger('grade_id');
+            $table->unsignedBigInteger('admin_id');
             $table->decimal('amount', 8, 2)->nullable()->default(00.00);
             $table->string('note')->nullable(true);
             $table->foreign('grade_id')->references('id')->on('grade')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
             $table->timestamps();
         });
     }
