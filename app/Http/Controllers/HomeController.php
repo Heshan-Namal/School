@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use App\Helpers\Qs;
 use App\Repositories\UserRepo;
 
+use App\Models\User;
+use App\Models\Grade;
+
 class HomeController extends Controller
 {
     /**
@@ -31,7 +34,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
+        
         return redirect('dashboard');
     }
 
@@ -96,9 +100,12 @@ class HomeController extends Controller
             return view('Dashboard.Teacherdashboard',compact(['leaders','data','cc','ac','nc']));
         }
 
-
-
-        return view('Dashboard.dashboard', $d);
+        $student = User:: where('user_type', 'student')->count();
+        $teacher = User:: where('user_type', 'teacher')->count();
+        $class_teacher = User:: where('user_type', 'class_teacher')->count();
+        $grades = Grade:: count();
+        
+        return view('Dashboard.dashboard', $d,compact('student','teacher','class_teacher','grades'));
     }
     public function back()
     {

@@ -27,6 +27,27 @@ class ForgotPasswordController extends Controller
     public function password_reset_link(){
         return view('auth.passwords.email');
     }
+    public function newadd_password(Request $request){
+ 
+        $request->validate([
+            'Old_Password'=>'required',
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required',
+        ]);
+        
+        
+        $user = User::find(auth()->user()->id);
+        if (!Hash::check($request->Old_Password, $user->password)) {
+            return back()->with('fail', 'The specified password does not match the database password');
+        } else{
+        
+
+            User::where('email', $request->email)->update([
+                'password'=>\Hash::make($request->password)
+            ]);
+            return back()->with('success', 'Your password has been updated successfully.');
+        }
+    }
 
     public function password_reset(Request $request){
 
