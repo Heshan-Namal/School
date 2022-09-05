@@ -44,53 +44,53 @@
                                         <ion-icon name="home-outline"></ion-icon><span>Home</span>
                                     </div>
                                 </a>
-                                @if(Qs::userIsTeamAd())
-                                <a href="#">
-                                    <div>
-                                        <ion-icon name="person-outline"></ion-icon>Students
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div>
-                                        <ion-icon name="woman-outline"></ion-icon>Teachers
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div>
-                                        <ion-icon name="bookmark-outline"></ion-icon>Classes
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div>
-                                        <ion-icon name="time-outline"></ion-icon>Time Table
-                                    </div>
-                                </a>
-                                @endif
-                                @if(Qs::userIsTeamTe())
-                                @endif
-                                @if(Qs::userIsTeamLe())
-                                @endif
+                                <a href="{{route('view.student')}}">
+                                    @if(Qs::userIsTeamAd())
+                                    <a href="{{route('admin.student')}}">
+                                        <div>
+                                            <ion-icon name="person-outline"></ion-icon>Students
+                                        </div>
+                                    </a>
+
+                                    <a href="{{route('admin.teacher')}}">
+                                        <div>
+                                            <ion-icon name="woman-outline"></ion-icon>Teachers
+                                        </div>
+                                    </a>
+
+                                    <a href="#">
+                                        <div>
+                                            <ion-icon name="time-outline"></ion-icon>Time Table
+                                        </div>
+                                    </a>
+
+                                    @endif
+                                    @if(Qs::userIsTeamTe())
+                                    @endif
+                                    @if(Qs::userIsTeamLe())
+                                    @endif
 
 
-<a href="#">
-                                    <div>
-                                        <ion-icon name="alert-circle-outline"></ion-icon>Notices
-                                    </div>
-                                </a>
-                                <a href="{{route('user.edit',[auth()->user()->id])}}">
-                                    <div>
-                                        <ion-icon name="alert-circle-outline"></ion-icon>Profile
-                                    </div>
-                                </a>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a href="#">
+                                        <div>
+                                            <ion-icon name="alert-circle-outline"></ion-icon>Notices
+                                        </div>
+                                    </a>
+                                    <a href="{{route('user.edit',[auth()->user()->id])}}">
+                                        <div>
+                                            <ion-icon name="alert-circle-outline"></ion-icon>Profile
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                    <div>
-                                        <ion-icon name="alert-circle-outline"></ion-icon>Logout
-                                    </div>
-                                </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                        <div>
+                                            <ion-icon name="alert-circle-outline"></ion-icon>Logout
+                                        </div>
+                                    </a>
                             </div>
                         </div>
                         @if (isset($both_class))
@@ -109,8 +109,7 @@
                         </form>
                         @endif
 
-
-<!-- notification -->
+                        <!-- notification -->
                         <!-- <div class="wrapper"> -->
                         <div class="navbar_right">
                             <div class="notifications">
@@ -169,8 +168,7 @@
                                             </div>
                                         </li>
                                         <li class="pizzahut failed">
-
-<div class="notify_icon">
+                                            <div class="notify_icon">
                                                 <span class="icon"><img class="rounded-circle"
                                                         src="{{asset('assets/front/images/avatars/avatar4.jpeg')}}"></span>
                                             </div>
@@ -216,7 +214,7 @@
                         <span class="text-danger">({{Auth::user()->user_type}})</span>
                     </div>
 
-<div class="popup">
+                    <div class="popup">
                         <div class="shadow"></div>
                         <div class="inner_popup">
                             <div class="notification_dd">
@@ -283,8 +281,7 @@
                                             </div>
                                             <div class="sub_title">
                                                 Lorem ipsum dolor sit amet consectetur.
-
-</div>
+                                            </div>
                                         </div>
                                         <div class="notify_status">
                                             <p>Failed</p>
@@ -362,7 +359,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script>

@@ -6,7 +6,7 @@
 <div class="container_AssStudent">
     <header> Facility Fees</header>
     @if ($stdsub->count()>0)
-       <h2> You Already Pay your Fees</h2>
+    <h2> You Already Pay your Fees</h2>
     @else
 
     <div class="row">
@@ -18,8 +18,8 @@
                 {{$std->note}}
             </h5>
             <div class="col">
-            <label>Uploaded Image of Payment Slip</label>
-            <input type="file" class="form-control" name="proof" required>
+                <label>Uploaded Image of Payment Slip</label>
+                <input type="file" class="form-control" name="proof" required>
             </div>
             <input type="hidden" class="form-control" name="id" value="{{$std->id}}">
             <div class="col">
