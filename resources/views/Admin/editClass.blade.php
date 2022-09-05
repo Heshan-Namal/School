@@ -48,7 +48,7 @@
                     <!-- Add Subjects  -->
                     <div class="row mb-3">
                         <div class="col-sm-12 text-secondary my-1">
-                            <p class="fs-3 text-info">Add subjects </p>
+                            <p class="fs-3 text-info">Add subjects for class </p>
                         </div>
                         <form method="POST" action="{{route('edit.class_sub')}}">
                             @csrf

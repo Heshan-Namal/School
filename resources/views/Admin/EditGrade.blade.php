@@ -51,7 +51,7 @@
                         @csrf
                         <div class="row mb-3">
                             <div class="col-sm-12 text-secondary my-1">
-                                <p class="fs-3 text-info">Add subjects </p>
+                                <p class="fs-3 text-info">Add subjects for grade </p>
                             </div>
                             <div class="col-sm-3 my-1">
                                 <h6 class="mb-0">Subject name</h6>
@@ -123,14 +123,15 @@
                     @csrf
                     <div class="row mb-3">
                         <div class="col-sm-12 text-secondary my-1">
-                            <p class="fs-3 text-info">Add classes </p>
+                            <p class="fs-3 text-info">Add classes for grade </p>
                         </div>
                         <div class="col-sm-3 my-1">
                             <h6 class="mb-0">Class name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary my-1">
                             <span class="text-danger">@error('class_name'){{ $message }} @enderror</span>
-                            <input type="text" class="form-control" name="class_name">
+                            <input type="text" class="form-control" name="class_name"
+                                placeholder="One letter like 'A-Z'">
                             <input type="hidden" class="form-control" value="{{$item->id}}" name="grade_id">
                             <input type="hidden" class="form-control" value="{{$item->grade_name}}" name="grade_name">
                         </div>

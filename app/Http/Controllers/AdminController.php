@@ -43,7 +43,7 @@ class AdminController extends Controller
 
         // <<<<------ Notification--------->>>>
         $notification = array(
-            'message' => 'Successfully add teacher record!',
+            'message' => 'Successfully add grade record!',
             'alert-type' => 'success'
         );
 
@@ -87,6 +87,7 @@ class AdminController extends Controller
 
         $teacher = new Teacher;
         //need to add user_id=teacher-id;
+        $teacher->id=$user_id[0]->id;
         $teacher->full_name=$request->Full_name;
         $teacher->contact_no=$request->Contact_Number;
         $teacher->address=$request->Address;
