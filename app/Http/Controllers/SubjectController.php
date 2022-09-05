@@ -13,7 +13,8 @@ class SubjectController extends Controller
     {
         //
         $request->validate([
-            'subject_name'=>'required'
+            'subject_name'=>'required',
+            'teacher_id'=>'required',
         ]);
         $subject = new Subject;
         $subject->subject_name=$request->subject_name;

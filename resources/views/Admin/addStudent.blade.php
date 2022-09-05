@@ -101,7 +101,7 @@
                     <td>{{ $item->class_id }}</td>
 
                     <td>
-                        <a href="{{route('view.student')}}" class="btn btn-primary btn-sm">View</a>
+                        <a href="{{route('user.edit',[$item->user_id])}}" class="btn btn-primary btn-sm">View</a>
                     </td>
                     <td>
                         <a href="" class="btn btn-danger btn-sm">Delete</a>

@@ -46,55 +46,51 @@
                                 </a>
                                 <a href="{{route('view.student')}}">
                                     @if(Qs::userIsTeamAd())
-                                    <a href="#">
+                                    <a href="{{route('admin.student')}}">
                                         <div>
                                             <ion-icon name="person-outline"></ion-icon>Students
                                         </div>
                                     </a>
-                                    <a href="{{route('view.teacher')}}">
-                                        <a href="#">
-                                            <div>
-                                                <ion-icon name="woman-outline"></ion-icon>Teachers
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div>
-                                                <ion-icon name="bookmark-outline"></ion-icon>Classes
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div>
-                                                <ion-icon name="time-outline"></ion-icon>Time Table
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            @endif
-                                            @if(Qs::userIsTeamTe())
-                                            @endif
-                                            @if(Qs::userIsTeamLe())
-                                            @endif
+
+                                    <a href="{{route('admin.teacher')}}">
+                                        <div>
+                                            <ion-icon name="woman-outline"></ion-icon>Teachers
+                                        </div>
+                                    </a>
+
+                                    <a href="#">
+                                        <div>
+                                            <ion-icon name="time-outline"></ion-icon>Time Table
+                                        </div>
+                                    </a>
+
+                                    @endif
+                                    @if(Qs::userIsTeamTe())
+                                    @endif
+                                    @if(Qs::userIsTeamLe())
+                                    @endif
 
 
-                                            <a href="#">
-                                                <div>
-                                                    <ion-icon name="alert-circle-outline"></ion-icon>Notices
-                                                </div>
-                                            </a>
-                                            <a href="{{route('user.edit',[auth()->user()->id])}}">
-                                                <div>
-                                                    <ion-icon name="alert-circle-outline"></ion-icon>Profile
-                                                </div>
-                                            </a>
-                                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a href="#">
+                                        <div>
+                                            <ion-icon name="alert-circle-outline"></ion-icon>Notices
+                                        </div>
+                                    </a>
+                                    <a href="{{route('user.edit',[auth()->user()->id])}}">
+                                        <div>
+                                            <ion-icon name="alert-circle-outline"></ion-icon>Profile
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                    class="d-none">
-                                                    @csrf
-                                                </form>
-                                                <div>
-                                                    <ion-icon name="alert-circle-outline"></ion-icon>Logout
-                                                </div>
-                                            </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                        <div>
+                                            <ion-icon name="alert-circle-outline"></ion-icon>Logout
+                                        </div>
+                                    </a>
                             </div>
                         </div>
                         @if (isset($d))

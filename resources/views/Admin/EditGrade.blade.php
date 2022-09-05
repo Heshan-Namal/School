@@ -84,33 +84,22 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Subject name</th>
                                     <th scope="col">Teacher</th>
-                                    <th scope="col">Edit</th>
+
                                     <th scope="col">Delete</th>
 
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($Classroom as $item5)
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Maths</td>
-                                    <td>Nimali RAthnayake</td>
-                                    <td><a href="" class="btn btn-primary btn-sm">Edit</a></td>
+                                    <td>{{$item5->sub}}</td>
+                                    <td>{{$item5->name}}</td>
+
                                     <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Science</td>
-                                    <td>Nimali RAthnayake</td>
-                                    <td><a href="" class="btn btn-primary btn-sm">Edit</a></td>
-                                    <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Maths</td>
-                                    <td>Muditha Chinthaka</td>
-                                    <td><a href="" class="btn btn-primary btn-sm">Edit</a></td>
-                                    <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
-                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                         <nav aria-label="Page navigation example">
@@ -130,84 +119,80 @@
                 </div>
                 <!-- End of add Subjects  -->
                 <!-- Add Classes  -->
-                <div class="row mb-3">
-                    <div class="col-sm-12 text-secondary my-1">
-                        <p class="fs-3 text-info">Add classes </p>
-                    </div>
-                    <div class="col-sm-3 my-1">
-                        <h6 class="mb-0">Class name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary my-1">
-                        <input type="text" class="form-control" value="Science">
-                    </div>
-                    <div class="col-sm-3 my-1">
-                        <h6 class="mb-0">Class teacher name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary my-1">
-                        <select id="inputGrade" class="form-select mt-0" aria-label="Default select example"
-                            name="teacher_id">
-                            <option selected>Choose...</option>
+                <form method="POST" action="{{route('add.class')}}">
+                    @csrf
+                    <div class="row mb-3">
+                        <div class="col-sm-12 text-secondary my-1">
+                            <p class="fs-3 text-info">Add classes </p>
+                        </div>
+                        <div class="col-sm-3 my-1">
+                            <h6 class="mb-0">Class name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary my-1">
+                            <span class="text-danger">@error('class_name'){{ $message }} @enderror</span>
+                            <input type="text" class="form-control" name="class_name">
+                            <input type="hidden" class="form-control" value="{{$item->id}}" name="grade_id">
+                            <input type="hidden" class="form-control" value="{{$item->grade_name}}" name="grade_name">
+                        </div>
+                        <div class="col-sm-3 my-1">
+                            <h6 class="mb-0">Class teacher name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary my-1">
+                            <span class="text-danger">@error('teacher_id'){{ $message }} @enderror</span>
+                            <select id="inputGrade" class="form-select mt-0" aria-label="Default select example"
+                                name="teacher_id">
+                                <option selected>Choose...</option>
+                                @foreach ($teacher as $item2)
+                                <option value="{{$item2->id}}">{{$item2->id}}-{{$item2->full_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6 text-secondary my-1">
+                            <input type="submit" class="btn btn-primary px-4" value="Add ">
+                        </div>
+                        <div class="col-sm-12 text-secondary text-center mt-4">
 
-                            <option value="1">1-Nimali RAthnayake</option>
-                            <option value="2">2-Nimali RAthnayake</option>
-                            <option value="3">3-Muditha Chinthaka</option>
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Class name</th>
+                                        <th scope="col">Class Teacher</th>
+                                        <th scope="col">View</th>
+                                        <th scope="col">Delete</th>
 
-                        </select>
-                    </div>
-                    <div class="col-sm-6 text-secondary my-1">
-                        <input type="button" class="btn btn-primary px-4" value="Add ">
-                    </div>
-                    <div class="col-sm-12 text-secondary text-center mt-4">
-                        <table class="table table-striped table-hover ">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Class name</th>
-                                    <th scope="col">Teacher</th>
-                                    <th scope="col">View</th>
-                                    <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($class as $item3)
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>{{$item3->class_name}}</td>
+                                        <td>{{$item3->teacher_id}}</td>
+                                        <td><a href="{{route('edit.class',[$item->id,$item3->id])}}"
+                                                class="btn btn-primary btn-sm">View</a></td>
+                                        <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Class A</td>
-                                    <td>Nimali RAthnayake</td>
-                                    <td><a href="" class="btn btn-primary btn-sm">View</a></td>
-                                    <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Class B</td>
-                                    <td>Nimali RAthnayake</td>
-                                    <td><a href="" class="btn btn-primary btn-sm">View</a></td>
-                                    <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Class C</td>
-                                    <td>Muditha Chinthaka</td>
-                                    <td><a href="" class="btn btn-primary btn-sm">View</a></td>
-                                    <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                </div>
+                </form>
                 <!-- End of add Class  -->
             </div>
         </div>

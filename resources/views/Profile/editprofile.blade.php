@@ -4,6 +4,7 @@
 <div class="container">
 
     <div class="main-body">
+
         @foreach ($result2 as $item2)
         @foreach($result as $item)
         <div class="row">
@@ -17,9 +18,9 @@
                                 class="rounded-circle p-1 bg-primary" width="110">
                             <div class="mt-3">
                                 <h4{>{{$item->full_name}}</h4>
-                                    @if(Qs::userIsTeamLe())
+                                    @if($st==1)
 
-                                    <p class="text-secondary mb-1">Grade 1 Class A</p>
+                                    <p class="text-secondary mb-1">Grade {{$item->cname}}</p>
                                     @endif<br>
                                     <button class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#changepic">Change Picture</button>
@@ -96,7 +97,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('Update.Profile') }}">
                             @csrf
-                            @if(Qs::userIsTeamAd())
+                            @if($ad==1)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Full Name</h6>
@@ -131,7 +132,7 @@
                             </div>
 
                             @endif
-                            @if(Qs::userIsTeamTe())
+                            @if($te==1)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Full Name</h6>
@@ -165,7 +166,7 @@
                                 </div>
                             </div>
                             @endif
-                            @if(Qs::userIsTeamLe())
+                            @if($st==1)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Full Name</h6>
@@ -238,6 +239,7 @@
 
                 </div>
                 <!-- Password changechange -->
+                @if(Auth::user()->id == $item->user_id )
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" action="{{ route('newadd.password') }}">
@@ -249,7 +251,7 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <span class="text-danger">@error('Old_Password'){{ $message }} @enderror</span>
-                                    <input type="text" class="form-control" placeholder="Old Password"
+                                    <input type="password" class="form-control" placeholder="Old Password"
                                         name="Old_Password">
                                 </div>
                             </div>
@@ -259,7 +261,8 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <span class="text-danger">@error('password'){{ $message }} @enderror</span>
-                                    <input type="text" class="form-control" placeholder="New Password" name="password">
+                                    <input type="password" class="form-control" placeholder="New Password"
+                                        name="password">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -269,7 +272,7 @@
                                 <div class="col-sm-9 text-secondary">
                                     <span class="text-danger">@error('password_confirmation'){{ $message }}
                                         @enderror</span>
-                                    <input type="text" class="form-control" placeholder="Comfirm Password"
+                                    <input type="password" class="form-control" placeholder="Comfirm Password"
                                         name="password_confirmation">
                                 </div>
                             </div>
@@ -282,6 +285,7 @@
                         </form>
                     </div>
                 </div>
+                @endif
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">

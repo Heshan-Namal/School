@@ -43,9 +43,6 @@ Route::get('/time', function () {
     return view('Timetable.viewtimetable');
 });
 
-Route::get('/eclass', function () {
-    return view('Admin.editClass');
-});
 
 Route::get('/', function () {
     return view('welcome');
@@ -106,11 +103,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/DeleteGrade/{id}',[AdminController::class,'DeleteGrade'])->name('admin.Delete');
             Route::get('/edit/{id}',[AdminController::class,'EditGrade'])->name('grade.edit');
             Route::post('/subject/add',[SubjectController::class,'Addgrade_subject'])->name('add.Subject');
+            Route::post('/class/add',[ClassroomController::class,'Addgrade_class'])->name('add.class');
         });
         // Route::get('gradeEdit/{gradeid}', ClassroomController::class,'index')->name('grade.edit');
-
-
-
+        Route::group(['prefix' => 'grade'], function(){
+            Route::GET('/class/edit/{grade_id}/{class_id}',[ClassroomController::class,'editgrade_class'])->name('edit.class');
+            Route::POST('/class/subject/add',[ClassroomController::class,'addclass_subject'])->name('edit.class_sub');
+        });
 
          //User edit routes
          Route::group(['prefix' => 'user'], function(){

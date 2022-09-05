@@ -15,20 +15,44 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function Edit_Profile($userid){
-        if(Auth::user()->user_type == 'teacher'){
-            $table = 'teacher';
+
+        $user_type=DB::table('user')
+        ->where('id','=',$userid)
+        ->select('user_type')
+        ->get();
+        $ad=0;
+        $st=0;
+        $te=0;
+        if($user_type[0]->user_type == 'teacher'||$user_type == 'class_teacher'){
+            $result=DB::table('teacher')
+            ->where('user_id','=',$userid)
+            ->select('teacher.*')
+            ->get();
+            $te=1;
+            
         }
-        else if(Auth::user()->user_type == 'student'){
-            $table = 'student';
+        else if($user_type[0]->user_type == 'student'){
+            $result=DB::table('student')
+            ->join('grade','grade.id','=','student.grade_id')
+            ->join('class','student.class_id','=','class.id')
+            ->where('student.user_id','=',$userid)
+            ->select('student.*','grade.grade_name as gname','class.class_name as cname')
+            
+            ->get();
+            $st=1;
+            
         }
-        else
-            $table='admin';
+        else{ $result=DB::table('admin')
+            ->where('user_id','=',$userid)
+            ->select('*')
+            ->get();
+            $ad=1;
+        }
+            
         
             
-        $result=DB::table($table)
-        ->where('id','=',$userid)
-        ->select('*')
-        ->get();
+        
+        
         $result2=DB::table('user')
         ->where('id','=',$userid)
         ->select('email')
@@ -39,7 +63,7 @@ class UserController extends Controller
             ->select( 'comment.*', 'teacher.full_name as name')
             ->get();
         
-        return view('Profile.editprofile',compact(['result','result2','result3']));
+        return view('Profile.editprofile',compact(['result','result2','result3','ad','st','te']));
     }
     public function Update_Profile(Request $request){
         
@@ -75,21 +99,21 @@ class UserController extends Controller
     public function Update_Profilepic(Request $request){
         // return back()->with('success', 'Your Profile Picture has been updated successfully.');
     }
-    public function View_student($userid){
+    // public function View_student($userid){
 
-        $result=DB::table('student')
-        ->where('id','=',$userid)
-        ->select('*')
-        ->get();
-        $result2=DB::table('user')
-        ->where('id','=',$userid)
-        ->select('email')
-        ->get();
+    //     $result=DB::table('student')
+    //     ->where('id','=',$userid)
+    //     ->select('*')
+    //     ->get();
+    //     $result2=DB::table('user')
+    //     ->where('id','=',$userid)
+    //     ->select('email')
+    //     ->get();
         
         
-        return view('Student.student_view',);
-    }
-    public function View_teacher(){
-        // return back()->with('success', 'Your Profile Picture has been updated successfully.');
-    }
+    //     return view('Student.student_view');
+    // }
+    // public function View_teacher(){
+    //     // return back()->with('success', 'Your Profile Picture has been updated successfully.');
+    // }
 }
