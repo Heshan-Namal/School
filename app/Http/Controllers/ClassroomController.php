@@ -68,9 +68,12 @@ class ClassroomController extends Controller
             ->where('id','=',$request->teacher_id)
             ->select('user_id')
             ->get();
-            // DB::table('user')
-            //     ->where('id',$user_id)
-            //     ->update(['user_type' => 'class_teacher']);
+
+
+            DB::table('user')
+                ->where('id',$user_id[0]->user_id)
+                ->update(['user_type' => 'class_teacher']);
+
             return back()->with('success', 'Class data  added');
            }
         }

@@ -72,7 +72,7 @@
                     @csrf
                     <div class="col-md-12">
                         <label for="inputEmail4" class="form-label">Grade Name</label>
-                        <input type="text" class="form-control" name="grade_name" required>
+                        <input type="number" class="form-control" name="grade_name" required>
 
                     </div>
             </div>

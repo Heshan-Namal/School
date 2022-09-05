@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('assets/front/fonts/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome5-overrides.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/front/css/student.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
@@ -44,62 +45,65 @@
                                         <ion-icon name="home-outline"></ion-icon><span>Home</span>
                                     </div>
                                 </a>
-                                <a href="{{route('view.student')}}">
-                                    @if(Qs::userIsTeamAd())
-                                    <a href="{{route('admin.student')}}">
-                                        <div>
-                                            <ion-icon name="person-outline"></ion-icon>Students
-                                        </div>
-                                    </a>
+                                @if(Qs::userIsTeamAd())
+                                <a href="#">
+                                    <div>
+                                        <ion-icon name="person-outline"></ion-icon>Students
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div>
+                                        <ion-icon name="woman-outline"></ion-icon>Teachers
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div>
+                                        <ion-icon name="bookmark-outline"></ion-icon>Classes
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div>
+                                        <ion-icon name="time-outline"></ion-icon>Time Table
+                                    </div>
+                                </a>
+                                @endif
+                                @if(Qs::userIsTeamTe())
+                                @endif
+                                @if(Qs::userIsTeamLe())
+                                    <a href="{{route('Student.student_subject.mysubjects',[getAdmissionNo()])}}"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
+                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
+                                @endif
 
-                                    <a href="{{route('admin.teacher')}}">
-                                        <div>
-                                            <ion-icon name="woman-outline"></ion-icon>Teachers
-                                        </div>
-                                    </a>
 
-                                    <a href="#">
-                                        <div>
-                                            <ion-icon name="time-outline"></ion-icon>Time Table
-                                        </div>
-                                    </a>
-
-                                    @endif
-                                    @if(Qs::userIsTeamTe())
-                                    @endif
-                                    @if(Qs::userIsTeamLe())
-                                    @endif
-
-
-                                    <a href="#">
-                                        <div>
-                                            <ion-icon name="alert-circle-outline"></ion-icon>Notices
-                                        </div>
-                                    </a>
-                                    <a href="{{route('user.edit',[auth()->user()->id])}}">
-                                        <div>
-                                            <ion-icon name="alert-circle-outline"></ion-icon>Profile
-                                        </div>
-                                    </a>
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a href="#">
+                                    <div>
+                                        <ion-icon name="alert-circle-outline"></ion-icon>Notices
+                                    </div>
+                                </a>
+                                <a href="{{route('user.edit',[auth()->user()->id])}}">
+                                    <div>
+                                        <ion-icon name="alert-circle-outline"></ion-icon>Profile
+                                    </div>
+                                </a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                        <div>
-                                            <ion-icon name="alert-circle-outline"></ion-icon>Logout
-                                        </div>
-                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                    <div>
+                                        <ion-icon name="alert-circle-outline"></ion-icon>Logout
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                        @if (isset($both_class))
+                       {{-- @if (isset($d))
                         <div class="col-4">
-                            <div class="d-flex justify-content-center ">
+                            <div class="d-flex justify-content-center">
                                 <div class="box mx-3 rounded">
-                                    <p class="classnum">{{$both_class->class}}</p>
+                                    <p class="classnum">{{$d->class}}</p>
                                 </div>
-                                <p class="classname">:{{$both_class->subject}}</p>
+
+                                <p class="classname">:{{$d->subject}}</p>
                             </div>
                         </div>
                         @else
@@ -107,7 +111,7 @@
                             <div class="input-group"><input class="bg-light form-control border-0 small" type="hidden"
                                     placeholder="Search for ..."></div>
                         </form>
-                        @endif
+                        @endif --}}
 
                         <!-- notification -->
                         <!-- <div class="wrapper"> -->

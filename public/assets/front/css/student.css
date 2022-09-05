@@ -54,3 +54,32 @@
 .period-text{
     background-color:#1CA7EC;
 }
+
+
+.table-card {
+    max-width: 95%;
+    text-align: left;
+}
+
+.table-card div {
+    position: relative;
+    max-width: 100%;
+}
+
+.chart{
+    max-width:50%;
+    height:50vh;
+}
+
+.due-body{
+    height: 100vh;
+    max-height: 140vh;
+
+}
+.upload-body{
+    max-height: 70vh;
+}
+
+.overdue-body{
+    max-height: 70vh;
+}

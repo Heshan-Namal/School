@@ -54,6 +54,9 @@ class HomeController extends Controller
             $admission_no =getAdmissionNo();
             $class_id=getClassId();
             $day = strtolower(getTermWeekDay()[2]);
+            $today=Carbon::now()->format('Y-m-d');
+            $mindate= Carbon::now()->subDays(7);
+            $maxdate=Carbon::now()->addDays(7);
 
             $today_classes=DB::table('class_timetable')
                             ->join('class','class_timetable.class_id','=','class.id')
@@ -68,8 +71,42 @@ class HomeController extends Controller
             $wednesday=$today_classes->where('day','wednesday');
             $thursday=$today_classes->where('day','thursday');
             $friday=$today_classes->where('day','friday');
-            return view('Dashboard.dashboard',compact(['d','monday','tuesday','wednesday','thursday','friday']));
 
+            $upcoming_quizzeslist=DB::table('assessment')
+                            ->join('class','assessment.class_id','=','class.id')
+                            ->join('subject','assessment.subject_id','=','subject.id')
+                            ->where('assessment.status','published')
+                            ->where('class_id', $class_id)
+                            ->where([['assessment.assessment_type','mcq_quiz'],['assessment.due_date','>',$today],['assessment.due_date','<',$maxdate]])
+                            ->select('assessment.*')
+                            ->get();
+
+            $completed_quizzes=DB::table('student_assessment')
+                                ->where('admission_no',$admission_no)
+                                ->where('answer_file',NULL)
+                                ->pluck('assessment_id');
+                                
+            $upcoming_quizzes=$upcoming_quizzeslist->wherenotin('id',$completed_quizzes);
+                                
+            $upcoming_assignmentslist=DB::table('assessment')
+                            ->join('class','assessment.class_id','=','class.id')
+                            ->join('subject','assessment.subject_id','=','subject.id')
+                            ->where('assessment.status','published')
+                            ->where('class_id', $class_id)
+                            ->where([['assessment.assessment_type','upload_file'],['assessment.due_date','>',$today],['assessment.due_date','<',$maxdate]])
+                            ->select('assessment.*')
+                            ->get();
+
+                            
+            $completed_assessments=DB::table('student_assessment')
+                            ->where('admission_no',$admission_no)
+                            ->whereNotNull('answer_file')
+                            ->pluck('assessment_id');
+                            
+            $upcoming_assignments=$upcoming_assignmentslist->wherenotin('id',$completed_assessments);
+
+            return view('Dashboard.dashboard',compact(['d','monday','tuesday','wednesday','thursday','friday','upcoming_quizzes','upcoming_assignments']));
+            
         }
 
 
@@ -98,11 +135,8 @@ class HomeController extends Controller
                 ->groupBy('assessment.id','class.class_name','assessment.title')
                 ->get();
             }
-            $name=DB::table('teacher')
-            ->where('teacher.id','=',Auth::user()->id)
-            ->first();
-            //dd($name);
-
+$name=DB::table('teacher')
+->where('teacher.id','=',Auth::user()->id)->first();
             // $now = Carbon::now();
             // dd($now->weekOfYear);
             $data=DB::table('teacher_subject')

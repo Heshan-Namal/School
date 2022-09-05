@@ -43,7 +43,7 @@ class AdminController extends Controller
 
         // <<<<------ Notification--------->>>>
         $notification = array(
-            'message' => 'Successfully add teacher record!',
+            'message' => 'Successfully add grade record!',
             'alert-type' => 'success'
         );
 
