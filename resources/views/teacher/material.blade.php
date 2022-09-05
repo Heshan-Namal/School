@@ -1,11 +1,10 @@
 @extends('layouts.MasterDashboard')
-@section('content')
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/front/css/card.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
+@endsection
+@section('content')
 <div class="content">
-
-
-
-
 <div class="row">
   <div class="col-sm-3">
     <div class="card">

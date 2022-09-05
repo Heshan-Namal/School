@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Assesment;
+use App\Models\Notification;
 use App\Models\Assessment_quiz_question;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -83,8 +84,12 @@ class AssesmentController extends Controller
     {
         $req->validate([
             'assignments'=>'mimes:pdf,doc',
-            'duration'=>'date_format:H:s:i'
         ]);
+        if (isset($req->duration)) {
+            $req->validate([
+                'duration'=>'date_format:H:s:i'
+            ]);
+        }
 
         $date=Carbon::now()->format('y/m/d/l/W');
         $datearr=explode("/",$date);
@@ -270,6 +275,18 @@ class AssesmentController extends Controller
         $ass->delete();
         return back()->with('message','Succesfully Deleted the Record');
     }
-
+    public function notify($classid,$subjectid,$id){
+        $s_name=DB::table('subject')
+        ->where('subject.id','=',$subjectid)
+        ->first();
+        $ass=Assesment::find($id);
+        $notify = new Notification;
+        $notify->subject=$s_name->subject_name;
+        $notify->header=$ass->title;
+        $notify->class_id=$classid;
+        $notify->sender_id=Auth::user()->id;
+        $notify->save();
+        return back()->with('message','Succesfully send the Notification');
+    }
 
 }
