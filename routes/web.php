@@ -127,7 +127,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-        
+
 
         Route::group(['prefix' => 'teacher'], function(){
             Route::post('/AddTeacher',[AdminController::class,'AddTeacher']);
@@ -143,7 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addteacher',[AdminController::class,'AddNewTeacher'])->name('admin.teacher');
         Route::get('/addstudent',[AdminController::class,'AddNewStudent'])->name('admin.student');
         Route::get('/SelectGrade',[AdminController::class,'SelectGrade']);
-        
+
 
 // teacher routes
 Route::get('/subjects',[TeacherController::class,'mySubjects'])->name('teacher.subjects');
@@ -184,6 +184,11 @@ Route::get('std/export/{classid}/{subjectid}', [TeacherController::class, 'expor
 Route::get('std/exportpdf/{classid}/{subjectid}', [TeacherController::class, 'exportpdf'])->name('std.exportpdf');
 Route::get('rec/export/{classid}/{subjectid}/{term}', [Teacher_RecordBookController::class, 'export'])->name('rec.export');
 Route::get('rec/exportpdf/{classid}/{subjectid}/{term}', [Teacher_RecordBookController::class, 'exportpdf'])->name('rec.exportpdf');
+
+//notify
+Route::post('/recordstore/{classid}/{subjectid}/{id}',[AssesmentController::class,'notify'])->name('ass.notify');
+
+
 
 //classteacher
 Route::get('/myclass-students',[ClassTeacherController::class,'mystudents'])->name('myclass.students');

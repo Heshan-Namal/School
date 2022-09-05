@@ -87,6 +87,7 @@ class AdminController extends Controller
 
         $teacher = new Teacher;
         //need to add user_id=teacher-id;
+        $teacher->id=$user_id[0]->id;
         $teacher->full_name=$request->Full_name;
         $teacher->contact_no=$request->Contact_Number;
         $teacher->address=$request->Address;
@@ -127,12 +128,12 @@ class AdminController extends Controller
             'guardian_contact_no'=>'required|max:10',
 
         ]);
-        
+
         $grade_id = DB::table('class')
         ->where('id', '=', $request->class_id)
         ->select('grade_id as id')
         ->get();
-        
+
         $user = new User;
         $user->email = $request->Email;
         $user->user_type = "student";
@@ -142,7 +143,7 @@ class AdminController extends Controller
         $user_id = DB::table('user')
         ->where('email', '=', $request->Email)
         ->get('id');
-       
+
         $student = new Student;
         $student->full_name=$request->Full_name;
         $student->dob=$request->dob;
@@ -170,7 +171,7 @@ class AdminController extends Controller
     //     foreach($classes as $class)
     //         $html.='<option value="' .$class->id + '">'  .$class->class_name . '</option>';
     //     return response()->json($html);
-  
+
 
     // }
 
@@ -418,7 +419,7 @@ class AdminController extends Controller
         ->get();
         //
         $Classroom = DB::table('teacher_subject')
-            
+
             ->join('teacher', 'teacher_subject.teacher_id', '=', 'teacher.id')
             ->join('subject', 'teacher_subject.subject_id', '=', 'subject.id')
             ->where('subject.grade_id','=',$grade_id)
@@ -428,16 +429,16 @@ class AdminController extends Controller
             ->join('teacher', 'teacher_class.teacher_id', '=', 'teacher.id')
             ->join('class', 'teacher_class.class_id', '=', 'class.id')
             ->select( 'teacher_class.*','class.class_name as cls', 'teacher.full_name as name')
-            ->get();    
+            ->get();
        // $teacher_class = teacher_class::orderBy('id','desc')->get();
         $teacher = Teacher::orderBy('id','desc')->get();
         $subject = Subject::orderBy('id','desc')->get();
-        
+
         $class = DB::table('class')
         ->where('grade_id','=',$grade_id)
         ->select( '*')
         ->get();
-        
+
 
         return view('Admin.EditGrade',compact('Classroom','teacher_class','teacher','subject','class','gradeName'));
     }

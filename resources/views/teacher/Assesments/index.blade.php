@@ -118,7 +118,12 @@
                             <tr>
                                 <td>{{ $n->title }}</td>
                                 <td>{{ $n->due_date }}</td>
-                                <td><button class="btn btn-warning btn-sm mx-4"><i class="bi bi-bell"></i></button></td>
+                                <td>
+                                    <form action="{{ route('ass.notify', [$both_class->classid,$both_class->subjectid,$n->id]) }}" method="POST" class="row g-3">@csrf
+                                    <button class="btn btn-warning btn-sm col-6"><i class="bi bi-bell"></i></button></a>
+                                    </form>
+                                </td>
+
                             </tr>
                         @endforeach
                     </tbody>
@@ -243,11 +248,12 @@
                             </td>
                         </tr>
                     @endforeach
-                    <div class="pagination justify-content-end mt-3">
-                        {!! $assments->links() !!}
-                    </div>
+
                 </tbody>
             </table>
+            <div class="pagination justify-content-end mt-3">
+                {!! $assments->links() !!}
+            </div>
         @else
             <div class="d-flex justify-content-center mt-5">
                 <div class="search-card">
