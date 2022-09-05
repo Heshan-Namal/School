@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\TodayAttentiveChart::class,
             \App\Charts\StudentAttentiveChart::class,
             \App\Charts\StudentAssChart::class,
-            \App\Charts\StdAttMarkChart::class
+            \App\Charts\TermtestMarks::class
         ]);
     }
 }

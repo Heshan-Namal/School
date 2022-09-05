@@ -1,6 +1,7 @@
 <?php
 use Carbon\Carbon;
 use App\Models\Student;
+use App\Models\Classroom;
 use App\Models\Resource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +13,25 @@ function getAdmissionNo()
     return Student::where('user_id',$student_id)->pluck('admission_no')->first();
     
 }
+
+function getName()
+{
+    $student_id = Auth::user()->id;
+    return Student::where('user_id',$student_id)->pluck('full_name')->first();
+    
+}
 function getClassId()
 {
     $student_id = Auth::user()->id;
     $class_id = Student::where('user_id',$student_id)->pluck('class_id')->first();
     return $class_id;
+}
+function getClassName()
+{
+    $student_id = Auth::user()->id;
+    $class_id = Student::where('user_id',$student_id)->pluck('class_id')->first();
+    $class_name = Classroom::where('id',$class_id)->pluck('class_name')->first();
+    return $class_name;
 }
 
 function getTermWeekDay()
