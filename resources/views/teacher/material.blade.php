@@ -1,6 +1,4 @@
-@foreach($detail as $key=> $d)
 @extends('layouts.MasterDashboard')
-@endforeach
 @section('content')
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">

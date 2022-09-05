@@ -62,14 +62,14 @@ class HomeController extends Controller
                             ->orderBy('period')
                             ->select('*')
                             ->get();
-            
+
             $monday=$today_classes->where('day','monday');
             $tuesday=$today_classes->where('day','tuesday');
             $wednesday=$today_classes->where('day','wednesday');
             $thursday=$today_classes->where('day','thursday');
             $friday=$today_classes->where('day','friday');
             return view('Dashboard.dashboard',compact(['d','monday','tuesday','wednesday','thursday','friday']));
-            
+
         }
 
 
@@ -98,6 +98,10 @@ class HomeController extends Controller
                 ->groupBy('assessment.id','class.class_name','assessment.title')
                 ->get();
             }
+            $name=DB::table('teacher')
+            ->where('teacher.id','=',Auth::user()->id)
+            ->first();
+            //dd($name);
 
             // $now = Carbon::now();
             // dd($now->weekOfYear);
@@ -125,7 +129,7 @@ class HomeController extends Controller
            ->whereDate('due_date', '>', Carbon::now())
            ->count();
 
-            return view('Dashboard.Teacherdashboard',compact(['leaders','data','cc','ac','nc']));
+            return view('Dashboard.Teacherdashboard',compact(['leaders','data','cc','ac','nc','name']));
         }
 
         $student = User:: where('user_type', 'student')->count();
