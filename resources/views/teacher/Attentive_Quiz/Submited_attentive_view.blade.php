@@ -18,12 +18,14 @@
                   />
                 </div>
                 <div class="col-md-8">
-                  <div class="card-body">
-                    <p class="card-text">
-                        Attentiveness Checks scheduled for today
-                        <p>{{$count}}</p>
-                    </p>
-                  </div>
+                    <div class="card-body">
+                        <p class="card-text pb-1">
+                            Attentiveness Checks<br>scheduled for today
+                        </p>
+                        <h2 class="card-title fw-bold d-flex justify-content-end pe-3">
+                            {{$count}}
+                        </h2>
+                    </div>
                 </div>
               </div>
 
@@ -40,16 +42,18 @@
                       />
                     </div>
                     <div class="col-md-8">
-                      <div class="card-body">
-                        <p class="card-text">
-                            Percentage of total Responses for Attentiveness Checks today
-                            @if (($std!=0) && ($count!=0))
-                                <p>{{ number_format($at * 100 / ($std * $count) , 2) }}%</p>
-                            @else
-                                <p>No Attentiveness Checks</p>
-                            @endif
-                        </p>
-                      </div>
+                        <div class="card-body">
+                            <p class="card-text pb-1">
+                                Percentage of total Responses for<br>Attentiveness Checks today
+                            </p>
+                            <h2 class="card-title fw-bold d-flex justify-content-end pe-3">
+                                @if (($std!=0) && ($count!=0))
+                                    {{ number_format($at * 100 / ($std * $count) , 2) }}%
+                                @else
+                                    No Attentiveness Checks
+                                @endif
+                            </h2>
+                        </div>
                     </div>
                   </div>
             </div>
@@ -65,16 +69,18 @@
                           />
                         </div>
                         <div class="col-md-8">
-                          <div class="card-body">
-                            <p class="card-text">
-                                Percentage of total Results for Attentiveness Checks today
-                                @if (($std!=0) && ($count!=0))
-                                <p>{{ number_format($r / ($std * $count) , 2) }}%</p>
-                                @else
-                                <p>No Attentiveness Checks</p>
-                                @endif
-                            </p>
-                          </div>
+                            <div class="card-body">
+                                <p class="card-text pb-1">
+                                    Percentage of total Results for<br>Attentiveness Checks today
+                                </p>
+                                <h2 class="card-title fw-bold d-flex justify-content-end pe-3">
+                                    @if (($std!=0) && ($count!=0))
+                                    {{ number_format($r / ($std * $count) , 2) }}%
+                                    @else
+                                    <p class="card-title">No Attentiveness Checks</p>
+                                    @endif
+                                </h2>
+                            </div>
                         </div>
                       </div>
 

@@ -93,14 +93,13 @@
                                 </a>
                             </div>
                         </div>
-                        @if (isset($d))
+                        @if (isset($both_class))
                         <div class="col-4">
-                            <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center ">
                                 <div class="box mx-3 rounded">
-                                    <p class="classnum">{{$d->class}}</p>
+                                    <p class="classnum">{{$both_class->class}}</p>
                                 </div>
-
-                                <p class="classname">:{{$d->subject}}</p>
+                                <p class="classname">:{{$both_class->subject}}</p>
                             </div>
                         </div>
                         @else

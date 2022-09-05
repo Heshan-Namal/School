@@ -8,34 +8,38 @@
     <div class="row">
         <header class ="mb-3">View Overdue Assessments</header>
     <div class="row col-7">
-    <div class="row g-3 mt-4 mb-4 col-12 ">
-        <form action="#" method="GET" class="row g-3">@csrf
-            <div class="col-md-5">
-                <label for="inputState" class="form-label">Select Term</label>
-                <select name="term" id="term" onchange="getselector(this.value);" class="form-control mt-0">
-                    <option selected>Choose...</option>
-                    <option value="allt" >All Terms</option>
-                    <option value="term1">First Term </option>
-                    <option value="term2">Second Term </option>
-                    <option value="term3">Third Term</option>
-                </select>
-            </div>
-            <div class="col-md-5" id="day1" hidden>
-                <label for="inputState" class="form-label">Select Date</label>
-                <select name="day" id="day" class="form-control mt-0" aria-label="Default select example">
-                    <option selected>Choose...</option>
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wensday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                    <option value="friday">Friday</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <input type="submit" class="btn btn-primary" name="submit" value="View">
-            </div>
-        </form>
-    </div>
+        <div class="row g-3 mt-4 col-12 ">
+
+            <form action="#" method="GET" class="row g-3">@csrf
+                <div class="col-md-5">
+                    <label for="inputState" class="form-label">Select Term</label>
+                    <select name="term" id="term" onchange="getselector(this.value);"
+                        class="form-control mt-3">
+                        <option selected>Choose...</option>
+                        <option value="allt">All Terms</option>
+                        <option value="term1">First Term </option>
+                        <option value="term2">Second Term </option>
+                        <option value="term3">Third Term</option>
+                    </select>
+                </div>
+                <div class="col-md-5" id="day1" hidden>
+                    <label for="inputState" class="form-label">Select Date</label>
+                    <select name="day" id="day" class="form-control mt-3"
+                        aria-label="Default select example">
+                        <option selected value="">Choose...</option>
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wensday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+
+                    <input type="submit" class="btn btn-primary mt-5 " name="submit" value="View">
+                </div>
+            </form>
+        </div>
 
     <div class="row">
             <header>All Submissions for Overdue Assessments</header>

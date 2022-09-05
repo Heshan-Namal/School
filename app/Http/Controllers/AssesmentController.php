@@ -66,7 +66,7 @@ class AssesmentController extends Controller
            ->orderBy('due_date','asc')
            ->paginate(4);
 
-        $d=DB::table('subject_class')
+        $both_class=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
@@ -74,7 +74,7 @@ class AssesmentController extends Controller
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
         ->first();
 
-       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid','d']));
+       return view('teacher.Assesments.index',compact(['assments','exnum','allnum','pubnum','classid','nearex','subjectid','both_class']));
 
 
 

@@ -87,7 +87,7 @@ class Attentiveness_checkController extends Controller
         ->count();
        // dd($quizes);
 
-       $d=DB::table('subject_class')
+       $both_class=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
@@ -95,7 +95,7 @@ class Attentiveness_checkController extends Controller
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
         ->first();
 
-       return view('teacher.Attentive_Quiz.index',compact(['quizes','classid','subjectid','list','stat','today','uplod','d']));
+       return view('teacher.Attentive_Quiz.index',compact(['quizes','classid','subjectid','list','stat','today','uplod','both_class']));
 
 
 

@@ -12,85 +12,80 @@
                         <div class="box-card">
                             <div class="row g-0">
                                 <div class="col-md-4 mt-3">
-                                  <img
-                                    src="{{asset('assets/front/images/ass/ass.png')}}"
-                                    alt="Trendy Pants and Shoes"
-                                    class="img-fluid rounded-start d-flex"
-                                  />
+                                    <img src="{{ asset('assets/front/images/ass/ass.png') }}" alt="Trendy Pants and Shoes"
+                                        class="img-fluid rounded-start d-flex" />
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                      <p class="card-text">
-                                          All Attentiveness Checks
-                                      </p>
-                                      <p class="text-end num" >{{$uplod}}</p>
+                                        <p class="card-text pb-1 mb-1">
+                                            All <br>Attentiveness Checks
+                                        </p>
+                                        <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$uplod}}
+                                        </h2>
                                     </div>
-                                  </div>
-                              </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                     <div class="col-4">
                         <div class="box-card">
                             <div class="row g-0">
-                            <div class="col-md-4 mt-3">
-                              <img
-                                src="{{asset('assets/front/images/ass/no_pub.png')}}"
-                                alt="Trendy Pants and Shoes"
-                                class="img-fluid rounded-start d-flex mx-2"
-                              />
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                  <p class="card-text">
-                                      Unublished Attentiveness Checks
-                                      <p class="text-end num" >{{$stat}}</p>
-                                  </p>
+                                <div class="col-md-4 mt-3">
+                                    <img src="{{ asset('assets/front/images/ass/no_pub.png') }}" alt="Trendy Pants and Shoes"
+                                        class="img-fluid rounded-start d-flex" />
                                 </div>
-                              </div>
-                          </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <p class="card-text pb-1 mb-1">
+                                            Unublished <br>Attentiveness Checks
+                                        </p>
+                                        <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$stat}}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                     <div class="col-4">
-                        <div class="box-card ">
+                        <div class="box-card">
                             <div class="row g-0">
                                 <div class="col-md-4 mt-3">
-                                  <img
-                                    src="{{asset('assets/front/images/ass/expired.png')}}"
-                                    alt="Trendy Pants and Shoes"
-                                    class="img-fluid rounded-start d-flex mx-2"
-                                  />
+                                    <img src="{{ asset('assets/front/images/ass/expired.png') }}" alt="Trendy Pants and Shoes"
+                                        class="img-fluid rounded-start d-flex" />
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                      <p class="card-text">
-                                          <p class="timetable">Attentiveness Checks Today</p>
-                                          <p class="text-end num" >{{$today}}</p>
-                                      </p>
+                                        <p class="card-text pb-1 mb-1">
+                                            Today <br>Attentiveness Checks
+                                        </p>
+                                        <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$today}}
+                                        </h2>
                                     </div>
-                                  </div>
-                              </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
-
-                <div class="row g-3 mt-4 col-12 ">
+            <div class="row g-3 mt-4 col-12 ">
 
                 <form action="#" method="GET" class="row g-3">@csrf
                     <div class="col-md-5">
                         <label for="inputState" class="form-label">Select Term</label>
-                        <select name="term" id="term" onchange="getselector(this.value);" class="form-control mt-0">
-                            <option selected value="">Choose...</option>
-                            <option value="allt" >All Terms</option>
+                        <select name="term" id="term" onchange="getselector(this.value);"
+                            class="form-control mt-3">
+                            <option selected>Choose...</option>
+                            <option value="allt">All Terms</option>
                             <option value="term1">First Term </option>
                             <option value="term2">Second Term </option>
                             <option value="term3">Third Term</option>
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="btn btn-primary" name="submit" value="View">
+
+                        <input type="submit" class="btn btn-primary mt-5 " name="submit" value="View">
                     </div>
                 </form>
             </div>
@@ -126,17 +121,22 @@
                 {{-- <div class="pagination justify-content-end mt-3">
                     {!! $list->links() !!}
                 </div> --}}
-                <div class="row d-flex justify-content-center">
+                {{-- <div class="row d-flex justify-content-center">
                     <div class="input-group"><header>View Attentiveness Checks Submissions today</header>
                         <a href="{{route('attentive.sumitindex',[$classid,$subjectid])}}"><button type="button" class="btn btn-primary rounded-pill mx-3">View </button></a></div>
-                </div>
+                </div> --}}
         </div>
     </div>
     <header>Attentiveness Checks</header>
-
     <div class="text-end">
         <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Check</button>
+        <a href="{{route('attentive.sumitindex',[$classid,$subjectid])}}">
+            <button type="button" class="btn btn-primary mb-3">View Attentiveness Checks <br>Submissions today</button>
+        </a>
     </div>
+    {{-- <div class="text-end">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmodal" name="submit"><i class="bi bi-plus mx-1"></i>Add Attentiveness Check</button>
+    </div> --}}
     <form action="?" class="col-sm-2 me-auto" >
         <div class="col-12">
             <input type="text"  name="search" placeholder="Search......."  value="{{request()->search}}" class="form-control mb-2">
