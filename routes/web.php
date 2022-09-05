@@ -26,6 +26,7 @@ use App\Http\Controllers\TermController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\WelcomeMail;
 //use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\CustomAuthController;
 /*
@@ -39,9 +40,9 @@ use App\Http\Controllers\Auth\CustomAuthController;
 |
 */
 
-Route::get('/time', function () {
-    return view('Timetable.viewtimetable');
-});
+// Route::get('/time', function () {
+//     return view('Timetable.viewtimetable');
+// });
 
 
 Route::get('/', function () {
@@ -129,6 +130,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'user'], function(){
             Route::view('/viewTeacher',[UserController::class,'View_teacher'])->name('view.teacher');
             Route::get('/viewStudent',[UserController::class,'View_student'])->name('view.student');
+        });
+        //emails
+        Route::get('/email',function(){
+            return new WelcomeMail();
         });
 
 

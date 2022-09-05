@@ -135,11 +135,8 @@ class HomeController extends Controller
                 ->groupBy('assessment.id','class.class_name','assessment.title')
                 ->get();
             }
-            $name=DB::table('teacher')
-            ->where('teacher.id','=',Auth::user()->id)
-            ->first();
-            //dd($name);
-
+$name=DB::table('teacher')
+->where('teacher.id','=',Auth::user()->id)->first();
             // $now = Carbon::now();
             // dd($now->weekOfYear);
             $data=DB::table('teacher_subject')
