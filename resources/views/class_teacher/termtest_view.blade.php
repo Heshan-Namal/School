@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 <div class="container_AssStudent">
+    <header >Manage Term Test Result</header>
     <form action="{{route('view.result',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Class</label>

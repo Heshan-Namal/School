@@ -116,6 +116,7 @@
 }
 
 .notification_dd li .notify_data .sub_title{
+  z-index: 100000;
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
@@ -171,7 +172,7 @@
   width: 225px;
 }
 .navbar .profile .profile_dd:before{
-  rigth: 10px;
+  right: 10px;
 }
 
 .navbar .profile .profile_dd ul li {

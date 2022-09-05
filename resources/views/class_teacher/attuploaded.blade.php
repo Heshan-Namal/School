@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 <div class="container_AssStudent">
+    <header >Attendance Marking</header>
         <form action="{{route('addattendance',[$dd->id])}}" method="GET" class="row g-3">@csrf
         <div class="col-md-4">
             <label for="inputEmail4" class="form-label">Class</label>

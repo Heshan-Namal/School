@@ -32,7 +32,6 @@ class Submit_assesmentController extends Controller
             ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
             ->paginate(10);
         }elseif ($day==NULL) {
-            if($week == 'extra'){
                 $assignments=DB::table('student_assessment')
                     ->join('assessment','student_assessment.assessment_id','=','assessment.id')
                     ->join('student','student.admission_no','=','student_assessment.admission_no')
@@ -41,7 +40,7 @@ class Submit_assesmentController extends Controller
                     ->where('assessment.subject_id',$subjectid)
                     ->where('assessment.term','=',$term)
                     ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
-                    ->get();
+                    ->paginate(10);
         }else {
             $assignments=DB::table('student_assessment')
                     ->join('assessment','student_assessment.assessment_id','=','assessment.id')
@@ -52,9 +51,8 @@ class Submit_assesmentController extends Controller
                     ->where('assessment.term','=',$term)
                     ->where('assessment.day','=',$day)
                     ->groupBy('assessment.id','assessment.title','assessment.assessment_type','assessment.week','assessment.term','assessment.day')
-                    ->get();
+                    ->paginate(10);
         }
-    }
         // ->whereDate('due_date', '>', Carbon::now())
         // ->orderBy('due_date','asc')
 
@@ -69,7 +67,7 @@ class Submit_assesmentController extends Controller
             ->limit(5)
             ->get();
 
-        $d=DB::table('subject_class')
+        $both_class=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
@@ -77,7 +75,7 @@ class Submit_assesmentController extends Controller
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
         ->first();
 
-        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid','nearas','d']));
+        return view('teacher.Assesments.Submit_assesment',compact(['assignments','classid','subjectid','nearas','both_class']));
 
 
 
@@ -148,6 +146,7 @@ class Submit_assesmentController extends Controller
               ->where('student_assessment.assessment_id',$id)
               ->select('assessment.title')
               ->first();
+
 
         return view('teacher.Assesments.submited_students',compact('sub','nums','late','mar','hm','notsub','title'));
     }

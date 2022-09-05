@@ -1,6 +1,6 @@
 @extends('layouts.MasterDashboard')
 @section('style')
-<link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/teacher.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 @endsection
 @section('content')
@@ -18,13 +18,13 @@
                   />
                 </div>
                 <div class="col-md-8">
-                  <div class="card-body">
-                    <p class="card-text">
-                        Submissions
-                        <p>{{$nums}}</p>
-
-                    </p>
-                  </div>
+                    <div class="card-body">
+                        <p class="card-text pb-1 mb-1">
+                            Submissions
+                        </p>
+                        <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$nums}}
+                        </h2>
+                    </div>
                 </div>
               </div>
 
@@ -41,13 +41,13 @@
                       />
                     </div>
                     <div class="col-md-8">
-                      <div class="card-body">
-                        <p class="card-text">
-                            Late Submissions
-                            <p>{{$late}}</p>
-
-                        </p>
-                      </div>
+                        <div class="card-body">
+                            <p class="card-text pb-1 mb-1">
+                                Late Submissions
+                            </p>
+                            <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$late}}
+                            </h2>
+                        </div>
                     </div>
                   </div>
             </div>
@@ -63,13 +63,13 @@
                           />
                         </div>
                         <div class="col-md-8">
-                          <div class="card-body">
-                            <p class="card-text">
-                               Unmarked Submissions
-                                <p>{{$mar}}</p>
-
-                            </p>
-                          </div>
+                            <div class="card-body">
+                                <p class="card-text pb-1 mb-1">
+                                    Unmarked <br>Submissions
+                                </p>
+                                <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$mar}}
+                                </h2>
+                            </div>
                         </div>
                       </div>
 
@@ -86,14 +86,13 @@
                               />
                             </div>
                             <div class="col-md-8">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Number of Students who didn't submit
-                                   <span class="value rounded-circle ms-5">
-                                    {{$notsub}}
-                                </span>
-                                </p>
-                              </div>
+                                <div class="card-body">
+                                    <p class="card-text pb-1 mb-1">
+                                        Number of Students <br>who didn't submit
+                                    </p>
+                                    <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$notsub}}
+                                    </h2>
+                                </div>
                             </div>
                           </div>
 

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome5-overrides.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/student.css')}}">
+
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">

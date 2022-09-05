@@ -1,6 +1,6 @@
+@extends('layouts.MasterDashboard')
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/front/css/student.css')}}">
-
 @endsection
 @section('content')
 <div class='content'>
@@ -14,10 +14,10 @@
             </h2>
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                 <div class="accordion-body bg-light">
-                    <div class="row"> 
+                    <div class="row">
 
                         <div id="carouselExampleCaptions" class="carousel carousel-dark slide mb-5" data-bs-ride="carousel">
-                        
+
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row row-cols-4">
@@ -76,7 +76,7 @@
                                                         <p class="card-text fs-3"></p>
                                                         <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                     </div>
-                                                    
+
                                                     <div class="hidden-button">
                                                         <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
                                                     </div>
@@ -161,7 +161,7 @@
                         </div>
 
                         </div>
-                    
+
                     </div>
                 </div>
             </div>
@@ -275,7 +275,7 @@
                     divs[i].children[0].style.backgroundPosition= "50% 10%";
                     divs[i].children[0].style.backgroundRepeat="no-repeat";
                     divs[i].children[0].style.backgroundSize="80% 75%";
-                    break;  
+                    break;
 
                 case "history":
                     divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/history.jpg')}}')";
@@ -329,6 +329,6 @@
 
             }
         }
-            
+
     </script>
     @endsection

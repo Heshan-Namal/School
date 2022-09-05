@@ -14,6 +14,8 @@ use App\Models\Student_subject;
 use App\Models\Subject;
 use App\Repositories\UserRepo;
 
+use App\Models\User;
+use App\Models\Grade;
 
 class HomeController extends Controller
 {
@@ -34,7 +36,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
+        
         return redirect('dashboard');
     }
 
@@ -62,7 +65,7 @@ class HomeController extends Controller
                             ->orderBy('period')
                             ->select('*')
                             ->get();
-            
+
             $monday=$today_classes->where('day','monday');
             $tuesday=$today_classes->where('day','tuesday');
             $wednesday=$today_classes->where('day','wednesday');
@@ -132,6 +135,10 @@ class HomeController extends Controller
                 ->groupBy('assessment.id','class.class_name','assessment.title')
                 ->get();
             }
+            $name=DB::table('teacher')
+            ->where('teacher.id','=',Auth::user()->id)
+            ->first();
+            //dd($name);
 
             // $now = Carbon::now();
             // dd($now->weekOfYear);
@@ -159,12 +166,15 @@ class HomeController extends Controller
            ->whereDate('due_date', '>', Carbon::now())
            ->count();
 
-            return view('Dashboard.Teacherdashboard',compact(['leaders','data','cc','ac','nc']));
+            return view('Dashboard.Teacherdashboard',compact(['leaders','data','cc','ac','nc','name']));
         }
 
-
-
-        return view('Dashboard.dashboard');
+        $student = User:: where('user_type', 'student')->count();
+        $teacher = User:: where('user_type', 'teacher')->count();
+        $class_teacher = User:: where('user_type', 'class_teacher')->count();
+        $grades = Grade:: count();
+        
+        return view('Dashboard.dashboard', $d,compact('student','teacher','class_teacher','grades'));
     }
     public function back()
     {

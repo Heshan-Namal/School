@@ -7,6 +7,7 @@ use App\Models\Grade;
 use App\Models\Classroom;
 use App\Models\Teacher;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\User;
 use App\Models\Facility_Fees;
 use App\Models\Student_Fees;
@@ -45,6 +46,7 @@ class AdminController extends Controller
             'message' => 'Successfully add teacher record!',
             'alert-type' => 'success'
         );
+
 
 
         return redirect('grade/add')->with(compact('teacher'))->with($notification);
@@ -94,14 +96,15 @@ class AdminController extends Controller
         $teacher->save();
 
         $teacher = Teacher::all();
-        return redirect('/addteacher')->with(compact('teacher'));
+        return redirect('/addteacher')->with(compact('teacher'))->with('success', 'Teacher added successfully');
 
     }
 
     public function AddNewStudent(){
         $grade = Grade::all();
         $classroom = Classroom::all();
-        return view('Admin.addStudent', compact('grade','classroom'));
+        $student = Student::all();
+        return view('Admin.addStudent', compact(['grade','classroom','student']));
 
     }
     public function AddNewClass(){
@@ -111,12 +114,25 @@ class AdminController extends Controller
         return view('Admin.AddClass', compact(['grade','classroom','teacher']));
 
     }
-    public function AddStudent(){
+    public function AddStudent(Request $request){
         $request->validate([
             'Email'=>'required|unique:user',
-            'admission_no'=>'required|unique:student'
-        ]);
+            'admission_no'=>'required|unique:student',
+            'Full_name'=>'required',
+            'address'=>'required',
+            'dob'=>'required',
+            'class_id'=>'required',
+            'guardian_name'=>'required',
+            'guardian_email'=>'required|email|unique:student',
+            'guardian_contact_no'=>'required|max:10',
 
+        ]);
+        
+        $grade_id = DB::table('class')
+        ->where('id', '=', $request->class_id)
+        ->select('grade_id as id')
+        ->get();
+        
         $user = new User;
         $user->email = $request->Email;
         $user->user_type = "student";
@@ -126,7 +142,7 @@ class AdminController extends Controller
         $user_id = DB::table('user')
         ->where('email', '=', $request->Email)
         ->get('id');
-
+       
         $student = new Student;
         $student->full_name=$request->Full_name;
         $student->dob=$request->dob;
@@ -138,22 +154,25 @@ class AdminController extends Controller
         $student->photo='public\assets\front\images\defualt.jpg';
         $student->admin_id=auth::user()->id;
         $student->user_id= $user_id[0]->id ;
-        $student->grade_id= $request->grade_id;
+        $student->grade_id= $grade_id[0]->id;
         $student->class_id= $request->class_id;
         $student->save();
 
-        $grade = Grade::all();
+        // $grade = Grade::all();
         $classroom = Classroom::all();
 
-        return redirect('Admin.addStudent', compact('grade','classroom'));
+        return back()->with('success', 'Student has been added successfully.');
 
     }
-    public function SelectGrade(Request $request){
-        $data=Classroom::select('class_name','id')
-        ->where('id',$request->id)->take(100)->get();
-        return response()->json($data);
+    // public function getClass($id){
+    //     $html = '';
+    //     $classes=Classroom::where('grade_id',$id)->get();
+    //     foreach($classes as $class)
+    //         $html.='<option value="' .$class->id + '">'  .$class->class_name . '</option>';
+    //     return response()->json($html);
+  
 
-    }
+    // }
 
     public function AddNewTeacher(){
         $teacher = Teacher::all();
@@ -233,6 +252,122 @@ class AdminController extends Controller
     }
 
 
+    // public function getstd_fees(){
+
+    //     $std=DB::table('facility_fees')
+    //         ->join('student','student.grade_id','=','facility_fees.grade_id')
+    //         //->where('student','student.grade_id','=','facility_fees.grade_id')
+    //         //->where('student.admission_no','=',Auth::user()->id)
+    //         ->first();
+    //         $stdsub=DB::table('student_fees')
+    //         ->join('student','student.admission_no','=','student_fees.admission_no')
+    //         ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+    //         ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+    //         ->where('student.admission_no','=','s3')
+    //         ->get();
+
+    //    // dd($stdsub);
+    //     return view('Student.student_fees' , compact(['std','stdsub']));
+
+    // }
+
+    // public function Storestdfees(Request $request){
+
+    //     $request->validate([
+    //         'proof'=>'mimes:jpg,png,jpeg'
+    //     ]);
+
+    //     if(isset($request->proof)){
+    //         $path=$request->proof;
+    //         $name = $path->getClientOriginalName();
+    //         $path->move('fee-proof',$name);
+    //     }else{
+    //         $name=NULL;
+    //     }
+
+    //     $stdfee = new Student_Fees;
+    //     $stdfee->admission_no='s2';
+    //     $stdfee->fee_id = $request->id;
+    //     $stdfee->proof = $name;
+    //     $stdfee->save();
+
+    //     return redirect()->back();
+
+
+    // }
+
+
+    // public function Storefees(Request $request){
+    //     $fee = new Facility_Fees;
+    //     $fee->year = Carbon::now()->format('Y');
+    //     $fee->grade_id = $request->grade_id;
+    //     $fee->note = $request->note;
+    //     $fee->amount = $request->amount;
+    //     $fee->save();
+
+    //     return redirect()->back();
+
+    // }
+
+
+    // public function Addfees(){
+    //     // $grade=DB::table('grade')
+    //     // ->where('grade.year','=',Carbon::now()->format('Y'))
+    //     // ->get();
+
+    //     $fees=DB::table('facility_fees')
+    //     ->join('grade','grade.id','=','facility_fees.grade_id')
+    //     ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+    //     ->get();
+    //     //dd($fees);
+    //     $grade = Grade::all();
+    //     return view('Admin.Addfees' , compact(['grade','fees']));
+
+    // }
+
+    // public function studentfees(Request $request){
+    //     if ($request->id == null) {
+    //         $stdnum=Student::count();
+    //         $sub=DB::table('student_fees')
+    //         ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+    //         ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+    //         ->count();
+    //         //dd($sub);
+    //         $stdfees=DB::table('student_fees')
+    //         ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+    //         ->join('student','student.admission_no','=','student_fees.admission_no')
+    //         ->join('grade','grade.id','=','facility_fees.grade_id')
+    //         ->join('class','class.grade_id','=','grade.id')
+    //         ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+    //         ->get();
+
+    //     }else{
+    //         $stdnum=DB::table('student')
+    //         ->where('student.grade_id','=',$request->id)
+    //         ->count();
+    //         $sub=DB::table('student_fees')
+    //         ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+    //         ->where('facility_fees.grade_id','=',$request->id)
+    //         ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+    //         ->count();
+    //         $stdfees=DB::table('student_fees')
+    //         ->join('facility_fees','facility_fees.id','=','student_fees.fee_id')
+    //         ->join('student','student.admission_no','=','student_fees.admission_no')
+    //         ->join('grade','grade.id','=','facility_fees.grade_id')
+    //         ->join('class','class.grade_id','=','grade.id')
+    //         ->where('facility_fees.grade_id','=',$request->id)
+    //         ->where('facility_fees.year','=',Carbon::now()->format('Y'))
+    //         ->get();
+    //     }
+    //     // $grade=DB::table('grade')
+    //     // ->where('grade.year','=',Carbon::now()->format('Y'))
+    //     // ->get();
+    //     $grade = Grade::all();
+    //     return view('Admin.student_fees' , compact(['grade','stdnum','sub','stdfees']));
+
+    // }
+
+
     public function getstd_fees(){
 
         $std=DB::table('facility_fees')
@@ -275,4 +410,47 @@ class AdminController extends Controller
 
 
     }
+    public function EditGrade($grade_id)
+    {
+        $gradeName = DB::table('grade')
+        ->where('grade.id','=',$grade_id)
+        ->select( '*')
+        ->get();
+        //
+        $Classroom = DB::table('teacher_subject')
+            
+            ->join('teacher', 'teacher_subject.teacher_id', '=', 'teacher.id')
+            ->join('subject', 'teacher_subject.subject_id', '=', 'subject.id')
+            ->where('subject.grade_id','=',$grade_id)
+            ->select( 'teacher_subject.*','subject.subject_name as sub', 'teacher.full_name as name')
+            ->get();
+        $teacher_class = DB::table('teacher_class')
+            ->join('teacher', 'teacher_class.teacher_id', '=', 'teacher.id')
+            ->join('class', 'teacher_class.class_id', '=', 'class.id')
+            ->select( 'teacher_class.*','class.class_name as cls', 'teacher.full_name as name')
+            ->get();    
+       // $teacher_class = teacher_class::orderBy('id','desc')->get();
+        $teacher = Teacher::orderBy('id','desc')->get();
+        $subject = Subject::orderBy('id','desc')->get();
+        
+        $class = DB::table('class')
+        ->where('grade_id','=',$grade_id)
+        ->select( '*')
+        ->get();
+        
+
+        return view('Admin.EditGrade',compact('Classroom','teacher_class','teacher','subject','class','gradeName'));
+    }
+
+//     public function Storefees(Request $request){
+//         $fee = new Facility_Fees;
+//         $fee->year = Carbon::now()->format('Y');
+//         $fee->grade_id = $request->grade_id;
+//         $fee->note = $request->note;
+//         $fee->amount = $request->amount;
+//         $fee->save();
+
+//         return redirect()->back();
+
+// }
 }

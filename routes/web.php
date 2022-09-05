@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClassController;
-use App\Http\Controllers\GradeController;
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -42,12 +42,7 @@ use App\Http\Controllers\Auth\CustomAuthController;
 Route::get('/time', function () {
     return view('Timetable.viewtimetable');
 });
-Route::get('/egrade', function () {
-    return view('Admin.EditGrade');
-});
-Route::get('/eclass', function () {
-    return view('Admin.editClass');
-});
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -88,7 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/Quiz/{quiz_id}','showQuiz')->name('Student.student.showQuiz');
         Route::post('/checkQuiz/{quiz_id}','checkQuiz')->name('Student.student.checkQuiz');
         Route::get('/resultQuiz/{quiz_id}','checkQuiz')->name('Student.student.QuizResult');
-        
+
         //student_attentive_quiz routes
         Route::get('/attentiveQuizzes/{class_id}/{subject_id}','getAttentiveQuizList')->name('Student.student.AttentiveQuizList');
         Route::get('/attentiveQuiz/{quiz_id}','showAttentiveQuiz')->name('Student.student.showAttentiveQuiz');
@@ -112,12 +107,33 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/AddGrade',[AdminController::class,'AddGrade']);
             Route::post('/AddClass',[AdminController::class,'AddClass']);
             Route::post('/DeleteGrade/{id}',[AdminController::class,'DeleteGrade'])->name('admin.Delete');
+            Route::get('/edit/{id}',[AdminController::class,'EditGrade'])->name('grade.edit');
+            Route::post('/subject/add',[SubjectController::class,'Addgrade_subject'])->name('add.Subject');
+            Route::post('/class/add',[ClassroomController::class,'Addgrade_class'])->name('add.class');
+        });
+        // Route::get('gradeEdit/{gradeid}', ClassroomController::class,'index')->name('grade.edit');
+        Route::group(['prefix' => 'grade'], function(){
+            Route::GET('/class/edit/{grade_id}/{class_id}',[ClassroomController::class,'editgrade_class'])->name('edit.class');
+            Route::POST('/class/subject/add',[ClassroomController::class,'addclass_subject'])->name('edit.class_sub');
         });
 
          //User edit routes
          Route::group(['prefix' => 'user'], function(){
             Route::get('/edit/{userid}',[UserController::class,'Edit_Profile'])->name('user.edit');
+            Route::post('/password', [ForgotPasswordController::class,'newadd_password'])->name('newadd.password');
+            Route::post('/update', [UserController::class,'Update_Profile'])->name('Update.Profile');
+            Route::post('/update/picture', [UserController::class,'Update_Profilepic'])->name('Update.Profilepic');
         });
+
+        // view routs
+        Route::group(['prefix' => 'user'], function(){
+            Route::view('/viewTeacher',[UserController::class,'View_teacher'])->name('view.teacher');
+            Route::get('/viewStudent',[UserController::class,'View_student'])->name('view.student');
+        });
+
+
+
+        
 
         Route::group(['prefix' => 'teacher'], function(){
             Route::post('/AddTeacher',[AdminController::class,'AddTeacher']);
@@ -125,13 +141,15 @@ Route::group(['middleware' => 'auth'], function () {
         });
         Route::group(['prefix' => 'student'], function(){
 
-            Route::post('/AddStudent',[AdminController::class,'AddStudent']);
+            Route::post('/AddStudent',[AdminController::class,'AddStudent'])->name('admin.addstudent');
 
         });
+        Route::post('/getClass/{id}',[AdminController::class,'getClass'])->name('grade.class');
         Route::get('grade/AddNewClass',[AdminController::class,'AddNewClass'])->name('admin.class');
         Route::get('/addteacher',[AdminController::class,'AddNewTeacher'])->name('admin.teacher');
         Route::get('/addstudent',[AdminController::class,'AddNewStudent'])->name('admin.student');
         Route::get('/SelectGrade',[AdminController::class,'SelectGrade']);
+        
 
 // teacher routes
 Route::get('/subjects',[TeacherController::class,'mySubjects'])->name('teacher.subjects');
@@ -139,7 +157,7 @@ Route::get('/materials/{classid}/{subjectid}',[TeacherController::class,'teacher
 Route::get('/assesments/{classid}/{subjectid}',[AssesmentController::class,'index'])->name('ass.index');
 Route::post('/store/{classid}/{subjectid}',[AssesmentController::class,'store'])->name('ass.store');
 Route::get('/assesmentquiz',[AssesmentController::class,'assquiz'])->name('ass.quiz');
-Route::put('/update',[AssesmentController::class,'assquestion_update'])->name('assquestion.update');
+Route::put('/assupdate',[AssesmentController::class,'assquestion_update'])->name('assquestion.update');
 Route::get('/assesmentshow/{id}',[AssesmentController::class,'assquizshow'])->name('ass.quizshow');
 Route::get('/submited/{classid}/{subjectid}',[Submit_assesmentController::class,'index'])->name('ass.sumitindex');
 Route::get('/submitedview/{assid}',[Submit_assesmentController::class,'subassview'])->name('submit.view');
@@ -218,5 +236,3 @@ Route::post('/storestd-fee',[AdminController::class,'Storestdfees'])->name('stor
 //     Route::get('exams/active', 'ExamController@indexActive');
 //     Route::get('school/sections','SectionController@index');
 //   });
-
-

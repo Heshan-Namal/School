@@ -5,13 +5,13 @@ use App\Models\Attentiveness_check;
 use App\Models\Attentiveness_check_Question;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class Submit_attentiveness_checkController extends Controller
 {
     public function index(Request $request,$classid,$subjectid)
     {
-
 
         $count=DB::table('student_attentiveness_check')
         ->join('attentiveness_check','student_attentiveness_check.A_check_id','=','attentiveness_check.id')
@@ -62,7 +62,7 @@ class Submit_attentiveness_checkController extends Controller
             $at=$at+$a->count;
         }
       //dd($at);
-        $d=DB::table('subject_class')
+        $both_class=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
@@ -70,7 +70,7 @@ class Submit_attentiveness_checkController extends Controller
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
         ->first();
 
-        return view('teacher.Attentive_Quiz.Submited_attentive_view',compact(['quizes','classid','subjectid','hmark','std','count','at','r','d']));
+        return view('teacher.Attentive_Quiz.Submited_attentive_view',compact(['quizes','classid','subjectid','hmark','std','count','at','r','both_class']));
 
 
 
