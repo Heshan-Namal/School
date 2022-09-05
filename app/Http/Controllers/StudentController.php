@@ -107,8 +107,10 @@ class StudentController extends Controller
 
     public function getSubjectWeekList($class_id, $subject_id)
     {
-
-        return view('Student.student_subject.subject_week', compact(['class_id', 'subject_id']));
+        $subject=DB::table('subject')
+                        ->where('subject.id', '=', $subject_id)
+                        ->get();
+        return view('Student.student_subject.subject_week', compact(['class_id', 'subject_id','subject']));
     }
 
     public function getSubjectWeekDayList($class_id, $subject_id, $term_id, $week_id)
@@ -137,19 +139,15 @@ class StudentController extends Controller
 
     // student_quiz 
 
-    public function getAttentiveQuizList($class_id, $subject_id, $term, $week, $date)
+    public function getAttentiveQuizList($class_id, $subject_id)
     {
-        $term='term'.$term;
-        $week='week'.$week;
-
+        
         $quizList = DB::table('attentiveness_check')
             ->select(['attentiveness_check.*', 'Subject.subject_name'])
             ->join('class', 'class.id', '=', 'attentiveness_check.class_id')
             ->join('Subject', 'Subject.id', '=', 'attentiveness_check.subject_id')
             ->where('class_id', $class_id)
             ->where('subject_id', $subject_id)
-            ->where('term', $term)
-            ->where('week', $week)
             ->orderBy('attentiveness_check.id', 'desc')
             ->get();
 
@@ -250,6 +248,10 @@ class StudentController extends Controller
 
     public function getAssignmentList($class_id, $subject_id)
     {
+        $today=Carbon::today();
+        $nxt2weeks=Carbon::today()->addDays(14);
+        $admission_no=getAdmissionNo();
+
         $assessmentList = DB::table('assessment')
             ->join('class', 'class.id', '=', 'assessment.class_id')
             ->join('Subject', 'Subject.id', '=', 'assessment.subject_id')
@@ -260,12 +262,25 @@ class StudentController extends Controller
             ->select(['assessment.*', 'Subject.subject_name as subject', 'Class.class_name as class', 'Teacher.full_name as teacher'])
             ->get();
 
-        $admission_no = getAdmissionNo();
+        $completed_assessments=DB::table('student_assessment')
+                        ->where('admission_no',$admission_no)
+                        ->whereNotNull('answer_file')
+                        ->orwhereNotNull('assessment_marks')
+                        ->pluck('assessment_id');
+
+        $due_ass=$assessmentList->whereBetween('due_date',[$today,$nxt2weeks]);
+        $due_assignments=$due_ass->wherenotin('id',$completed_assessments);
+        $due_assignmentsArr=json_decode(json_encode($due_assignments), true);
+
+        $overdue_ass=$assessmentList->where('due_date','<',$today);
+        $overdue_assignments=$overdue_ass->wherenotin('id',$completed_assessments);
+        $overdue_assignmentsArr=json_decode(json_encode($overdue_assignments), true);
+
 
         $uploaded_assessment = DB::table('student_assessment')
             ->join('assessment', 'assessment.id', '=', 'student_assessment.assessment_id')
             ->where('admission_no', $admission_no)
-            ->select('assessment.id as id', 'assessment_marks', 'admission_no')
+            ->select('assessment.id as id', 'assessment_marks', 'admission_no','answer_file')
             ->get();
 
         $assessmentListarr = json_decode(json_encode($assessmentList), true);
@@ -287,10 +302,12 @@ class StudentController extends Controller
                 }
             }
         }
-        
+
+        if (empty($overdue_assignmentsArr)) $due_assignmentsArr = Null;
+        if (empty($due_assignmentsArr)) $due_assignmentsArr = Null;
         if (empty($mergedAssList)) $mergedAssList = Null;
         if (empty($assessmentListarr)) $assessmentListarr = Null;
-        return view('Student.student_assignment.assignments', compact(['assessmentListarr', 'class_id', 'subject_id', 'uploaded_assessmentsarr', 'mergedAssList']));
+        return view('Student.student_assignment.assignments', compact(['assessmentListarr', 'class_id', 'subject_id', 'uploaded_assessmentsarr', 'mergedAssList','due_assignmentsArr','overdue_assignmentsArr']));
     }
 
 
@@ -357,11 +374,17 @@ class StudentController extends Controller
 
     public function getResourceList($class_id, $subject_id)
     {
-        $notes = Resource::where([['subject_id',$subject_id],['class_id',$class_id],['resource_type','note']])->get();
-        $links = Resource::where([['subject_id',$subject_id],['class_id',$class_id],['resource_type','reference_link']])->get();
+        $notes = Resource::where([['subject_id',$subject_id],['class_id',$class_id],['resource_type','note']])->orderby('week')->get();
+        $links = Resource::where([['subject_id',$subject_id],['class_id',$class_id],['resource_type','reference_link']])->orderby('week')->get();
 
 
         return view('Student.student_resource.resourcelist', compact(['notes','links', 'class_id', 'subject_id']));
+    }
+
+    public function getRecordbook($class_id, $subject_id)
+    {
+        $records = DB::table('class_record')->where([['subject_id',$subject_id],['class_id',$class_id]])->orderby('day','desc')->get();
+        return view('Student.student_recordbook.recordBook', compact(['records','class_id', 'subject_id']));
     }
 
 
@@ -421,7 +444,7 @@ class StudentController extends Controller
     
         public function showQuiz($assessment_id) //class_id,subject_id
         {
-            $quiz = Assesment::find($assessment_id)->where('assessment_type','mcq_quiz');
+            $quiz = Assesment::find($assessment_id);
             $questions = Assessment_quiz_question::where('assessment_id', $assessment_id)->get();
             return view('Student.student_assignment.mcq_quiz', compact(['quiz', 'questions', 'assessment_id']));
         }
@@ -432,7 +455,7 @@ class StudentController extends Controller
         {
             $total_points = 0;
             $points_per_q = 5;
-            $quiz =Assesment::find($assessment_id)->where('assessment_type','mcq_quiz');
+            $quiz =Assesment::find($assessment_id);
             $questions =  Assessment_quiz_question::where('assessment_id', $assessment_id)->get();
     
             $admission_no = getAdmissionNo();
@@ -464,16 +487,38 @@ class StudentController extends Controller
                 [
                     'admission_no' => $admission_no,
                     'assessment_id' => $assessment_id,
-                    'assessment_file' => NULL,
+                    'uploaded_date'=> Carbon::now()->format('Y-m-d'),
+                    'answer_file' => NULL,
                     'assessment_marks' => $total_points
                 ]
             );
     
-            $completed_quiz = Student_assesment::where([['admission_no', $admission_no],['assessment_file',NULL]])->get();
+            $completed_quiz = Student_assesment::where([['admission_no', $admission_no],['answer_file',NULL]])->get();
     
             
     
     
             return view('Student.student_assignment.quizResult', compact(['quiz', 'questions', 'total_points', 'data', 'answers_array', 'correct_answers_array', 'question_count']));
+        }
+
+        public function getExamResults()
+        {
+            $admission_no=getAdmissionNo();
+            $results = DB::table('exam_result')
+                    ->join('subject', 'subject.id', '=', 'exam_result.subject_id')
+                    ->join('teacher', 'teacher.id', '=', 'exam_result.teacher_id')
+                    ->where('admission_no',$admission_no)
+                    ->select(['exam_result.*','subject.subject_name','teacher.full_name'])
+                    ->get();
+
+            $term1=$results->where('term','term1');
+            $term2=$results->where('term','term2');
+            $term3=$results->where('term','term3');
+
+            $term1avg=$term1->avg('marks');
+            $term2avg=$term2->avg('marks');
+            $term3avg=$term3->avg('marks');
+
+            return view('Student.student_examResult.examResults', compact(['results','term1','term2','term3','term1avg','term2avg','term3avg']));
         }
 }

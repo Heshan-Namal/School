@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content">
-            <form  method="POST" enctype="multipart/form-data" id="" action="{{ route('Student.student.checkquiz',[$assessment_id]) }}" class="form-check"> @csrf
+            <form  method="POST" enctype="multipart/form-data" id="" action="{{ route('Student.student.checkQuiz',[$assessment_id]) }}" class="form-check"> @csrf
                 <div class="card wide-card ps-0 ms-0 text-start">
                     <div class="card-header">
                         <div class="row">
@@ -52,7 +52,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         console.log("hello")
-        var time = '00:00:30'
+        var time = '{{$quiz->quiz_duration}}'
         var timerstts = setTimeout(timer(time),time)
         console.log(timerstts)
         var timeobj = {};
@@ -67,7 +67,7 @@
         setTimeout(chckfunction(),time)
 
         {$.ajax({
-                    url: "{{route('Student.student.showquiz',[$quiz->id])}}",
+                    url: "{{route('Student.student.showQuiz',[$quiz->id])}}",
                     cache:false,
                     type: "GET",
                     data:timeobj,

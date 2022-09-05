@@ -3,16 +3,18 @@
 @section('content')
 
     <div class="content">
+        <div class="row text-center">
+                <h2>My Subjects</h2>
+        </div>
         <div class="row ">
             @foreach($data as $key=>$item)
             <div class="col-sm-3">
                 <a style="text-decoration: none" href="{{route('Student.student.subject_week',[$item->class_id,$item->subject_id])}}">
                
-                    <div class="card">
+                    <div id="img" class="card">
                         <div class="card-body">
-                            <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block" alt="...">
                             <div>
-                                <p class="card-text">{{$item->subject}}</p>
+                                <p class="card-text h4 py-2" style="background: linear-gradient(90deg, rgba(123,190,255,0.7990546560421043) 0%, rgba(0,212,255,0.5) 50%, rgba(91,210,255,0.8) 100%);" >{{$item->subject}}</p>
                             </div>
                         </div>
                     </div>
@@ -23,74 +25,87 @@
         </div>
     </div>
     <script>
-        const colors=['#DFFF0055','#FFBF0055','#FF7F5055','#9FE2BF55','#6495ED55','#40E0D055','#DE316355','#CCCCFF55'];
         var divs = document.querySelectorAll("#img");
 
+        console.log(divs);
 
         for(var i=0;i<divs.length;i++){
-        var subject = divs[i].children[0].children[0].innerHTML;
+        var subject = divs[i].children[0].children[0].children[0].innerHTML;
+
+        console.log(subject)
         subject.trim();
         var s= subject.toLowerCase();
             switch(s){
                 case "science":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/science.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/science.png')}}')";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundSize="80% 75%";
+                    
                     break;
 
                 case "english":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/english.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/english.jpg')}}')";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundSize="80% 75%";
                     break;
 
                 case "mathematics":
                 case "maths":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/maths.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/maths2.png')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 75%";
                     break;  
 
                 case "history":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/history.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/history.jpg')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 80%";
                     break;
 
                 case "sinhala":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/sinhala.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/sinhala.jpg')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 80%";
                     break;
 
                 case "buddhism":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/buddhism.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/buddhism.jpg')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 80%";
                     break;
 
-                case "art":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/art.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                case "ict":
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/ict.jpg')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 80%";
                     break;
 
-                case "music":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/music.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                case "tamil":
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/tamil.png')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 80%";
                     break;
 
-                case "dancing":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/dancing.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                case "health":
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/health.jpg')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 80%";
                     break;
 
                 case "roman-catholic":
-                    divs[i].children[1].style.backgroundImage="url('{{asset('assets/front/images/student_img/art.jpg')}}')";
-                    divs[i].children[1].style.backgroundRepeat="no-repeat";
-                    divs[i].children[1].style.backgroundSize="100% 100%";
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/art.jpg')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 80%";
                     break;
 
 

@@ -18,7 +18,7 @@ class CreateStudentAssessmentTable extends Migration
             $table->string('admission_no');
             $table->unsignedBigInteger('assessment_id');
             $table->date('uploaded_date')->nullable(false);
-            $table->string('answer_file');
+            $table->string('answer_file')->nullable(true);
             $table->string('assessment_marks')->nullable(true);
             $table->foreign('admission_no')->references('admission_no')->on('student')->onDelete('cascade');
             $table->foreign('assessment_id')->references('id')->on('assessment')->onDelete('cascade');
