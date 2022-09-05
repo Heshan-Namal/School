@@ -430,11 +430,20 @@ height: 42px;
 /* quiz-card */
 
 .wide-card {
-    max-width: 75%;
+    max-width: 80%;
+    text-align: left;
+}
+
+.wider-card {
+    max-width: 100%;
     text-align: left;
 }
 
 .wide-card div {
+    position: relative;
+    max-width: 100%;
+}
+.wider-card div {
     position: relative;
     max-width: 100%;
 }

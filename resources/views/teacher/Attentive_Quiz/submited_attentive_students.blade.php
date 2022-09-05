@@ -18,12 +18,13 @@
                   />
                 </div>
                 <div class="col-md-8">
-                  <div class="card-body">
-                    <p class="card-text">
-                        Total No. of Students in the Class
-                        <p>{{$nums}}</p>
-                    </p>
-                  </div>
+                    <div class="card-body">
+                        <p class="card-text pb-1">
+                            Total No. of <br>Students in the Class
+                        </p>
+                        <h2 class="card-title fw-bold d-flex justify-content-end pe-3">{{$nums}}
+                        </h2>
+                    </div>
                 </div>
               </div>
 
@@ -40,16 +41,18 @@
                       />
                     </div>
                     <div class="col-md-8">
-                      <div class="card-body">
-                        <p class="card-text">
-                            Percentage of Responses
-                            @if ($std!=0)
-                            <p>{{ number_format($p->count / $std * 100, 2) }}%</p>
+                        <div class="card-body">
+                            <p class="card-text pb-1">
+                                Percentage of Responses
+                            </p>
+                            <h2 class="card-title fw-bold d-flex justify-content-end pe-3">
+                                @if ($std!=0)
+                            {{ number_format($p->count / $std * 100, 2) }}%
                             @else
-                            <p>No Attentiveness Checks</p>
+                            No Attentiveness Checks
                             @endif
-                        </p>
-                      </div>
+                            </h2>
+                        </div>
                     </div>
                   </div>
 
@@ -66,12 +69,14 @@
                           />
                         </div>
                         <div class="col-md-8">
-                          <div class="card-body">
-                            <p class="card-text">
-                                Absent Students - No Response
-                                <p>{{$abs}}</p>
-                            </p>
-                          </div>
+                            <div class="card-body">
+                                <p class="card-text pb-1">
+                                    Absent Students - No Response
+                                </p>
+                                <h2 class="card-title fw-bold d-flex justify-content-end pe-3">
+                                    {{$abs}}
+                                </h2>
+                            </div>
                         </div>
                       </div>
 
@@ -88,16 +93,18 @@
                               />
                             </div>
                             <div class="col-md-8">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Attentiveness Percentage of the Class
-                                    @if ($std!=0)
-                                    <p>{{ number_format($sum->sum /$nums, 2) }}%</p>
-                                    @else
-                                    <p>No Attentiveness Checks</p>
-                                    @endif
-                                </p>
-                              </div>
+                                <div class="card-body">
+                                    <p class="card-text pb-1">
+                                        Attentiveness Percentage<br>of the Class
+                                    </p>
+                                    <h2 class="card-title fw-bold d-flex justify-content-end pe-3">
+                                        @if ($std!=0)
+                                        {{ number_format($sum->sum /$nums, 2) }}%
+                                        @else
+                                        No Attentiveness Checks
+                                        @endif
+                                    </h2>
+                                </div>
                             </div>
                           </div>
 

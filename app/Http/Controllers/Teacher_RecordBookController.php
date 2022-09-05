@@ -77,7 +77,7 @@ class Teacher_RecordBookController extends Controller
             ->where('class_record.term','=','term3')
             ->paginate(10);
 
-        $d=DB::table('subject_class')
+        $both_class=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
@@ -85,7 +85,7 @@ class Teacher_RecordBookController extends Controller
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
         ->first();
 
-        return view('teacher.Record_Book.index',compact(['week','record','day','classid','subjectid','term','book','term1','term2','term3','d']));
+        return view('teacher.Record_Book.index',compact(['week','record','day','classid','subjectid','term','book','term1','term2','term3','both_class']));
     }
     public function store(Request $req,$classid,$subjectid)
     {

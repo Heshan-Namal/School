@@ -1,6 +1,6 @@
+@extends('layouts.MasterDashboard')
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/front/css/student.css')}}">
-
 @endsection
 @section('content')
 <div class='content'>
@@ -14,10 +14,10 @@
             </h2>
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                 <div class="accordion-body bg-light">
-                    <div class="row"> 
+                    <div class="row">
 
                         <div id="carouselExampleCaptions" class="carousel carousel-dark slide mb-5" data-bs-ride="carousel">
-                        
+
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row row-cols-4">
@@ -76,7 +76,7 @@
                                                         <p class="card-text fs-3"></p>
                                                         <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                     </div>
-                                                    
+
                                                     <div class="hidden-button">
                                                         <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
                                                     </div>
@@ -161,7 +161,7 @@
                         </div>
 
                         </div>
-                    
+
                     </div>
                 </div>
             </div>
@@ -175,17 +175,71 @@
                 </h2>
                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
+                        <div class="table-card">
+                            <div class="card-body">
+                                <table class="table table-primary table-hover table-striped ">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Due date</th>
+                                        <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($upcoming_quizzes as $key => $item)
+                                        <tr>
+                                            <th scope="row">{{$key+1}}</th>
+                                            <td>{{$item->title}}</td>
+                                            <td>{{$item->description}}</td>
+                                            <td>{{$item->due_date}}</td>
+                                                <td><a href="{{route('Student.student.showQuiz',$item->id)}}" target="_blank"><button type="button" class="btn btn-primary">View</button></a></td>
+                                            </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                        Assessments
+                        Upcoming Assessments
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
+                    <div class="table-card">
+                            <div class="card-body">
+                                <table class="table table-primary table-hover table-striped ">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Due date</th>
+                                        <th scope="col">Assignment File</th>
+                                        <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($upcoming_assignments as $key => $item)
+                                            <tr>
+                                                <th scope="row">{{$key+1}}</th>
+                                                <td>{{$item->title}}</td>
+                                                <td>{{$item->description}}</td>
+                                                <td>{{$item->due_date}}</td>
+                                                <td><a href="http://127.0.0.1:8000/assignments/{{$item->assessment_file}}" target="_blank">{{$item->assessment_file}}</a></td>
+                                                <td><a href="{{route('Student.student.uploadHomework',[$item->class_id,$item->subject_id,$item->id])}}" target="_blank"><button type="button" class="btn btn-primary">View</button></a></td>
+                                            </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -221,13 +275,13 @@
                     divs[i].children[0].style.backgroundPosition= "50% 10%";
                     divs[i].children[0].style.backgroundRepeat="no-repeat";
                     divs[i].children[0].style.backgroundSize="80% 75%";
-                    break;  
+                    break;
 
                 case "history":
                     divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/history.jpg')}}')";
                     divs[i].children[0].style.backgroundPosition= "50% 10%";
                     divs[i].children[0].style.backgroundRepeat="no-repeat";
-                    divs[i].children[0].style.backgroundSize="80% 75%";
+                    divs[i].children[0].style.backgroundSize="80% 100%";
                     break;
 
                 case "sinhala":
@@ -241,7 +295,7 @@
                     divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/buddhism.jpg')}}')";
                     divs[i].children[0].style.backgroundPosition= "50% 10%";
                     divs[i].children[0].style.backgroundRepeat="no-repeat";
-                    divs[i].children[0].style.backgroundSize="80% 75%";
+                    divs[i].children[0].style.backgroundSize="80% 95%";
                     break;
 
                 case "art":
@@ -251,30 +305,30 @@
                     divs[i].children[0].style.backgroundSize="80% 75%";
                     break;
 
-                case "music":
-                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/music.jpg')}}')";
+                case "ict":
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/ict.jpg')}}')";
+                    divs[i].children[0].style.backgroundPosition= "50% 10%";
+                    divs[i].children[0].style.backgroundRepeat="no-repeat";
+                    divs[i].children[0].style.backgroundSize="80% 85%";
+                    break;
+
+                case "tamil":
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/tamil.png')}}')";
                     divs[i].children[0].style.backgroundPosition= "50% 10%";
                     divs[i].children[0].style.backgroundRepeat="no-repeat";
                     divs[i].children[0].style.backgroundSize="80% 75%";
                     break;
 
-                case "dancing":
-                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/dancing.jpg')}}')";
+                case "health":
+                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/health.jpg')}}')";
                     divs[i].children[0].style.backgroundPosition= "50% 10%";
                     divs[i].children[0].style.backgroundRepeat="no-repeat";
-                    divs[i].children[0].style.backgroundSize="80% 75%";
-                    break;
-
-                case "roman-catholic":
-                    divs[i].children[0].style.backgroundImage="url('{{asset('assets/front/images/student_img/art.jpg')}}')";
-                    divs[i].children[0].style.backgroundPosition= "50% 10%";
-                    divs[i].children[0].style.backgroundRepeat="no-repeat";
-                    divs[i].children[0].style.backgroundSize="80% 75%";
+                    divs[i].children[0].style.backgroundSize="80% 85%";
                     break;
 
 
             }
         }
-            
+
     </script>
     @endsection

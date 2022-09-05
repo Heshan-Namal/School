@@ -81,9 +81,6 @@
                         <div class="card wide-card m-3">
                             <div class=" card-header h3 my-auto position-relative">
                                 <span class="text-dark">{{$item['title']}}</span>
-                                <a href="{{route('Student.student.attentiveQuizResult',$item['id']) }}" style="text-decoration: none;" >
-                                    <button class="btn btn-outline-primary mx-1 position-absolute top-50 end-0 translate-middle-y" id="view_results">View Quiz Results</button>
-                                </a>
                             </div>
                             <div class="card-body wide-card ">
                                 <div class="row row-cols-2">

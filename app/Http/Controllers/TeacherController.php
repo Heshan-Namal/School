@@ -27,14 +27,14 @@ class TeacherController extends Controller
     public function teacherMaterials($classid,$subjectid)
     {
 
-        $detail=DB::table('subject_class')
+        $both_class=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
         ->join('class','class.id','=','subject_class.class_id')
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
-        ->get();
-        return view('teacher.material',compact(['classid','subjectid','detail']));
+        ->first();
+        return view('teacher.material',compact(['classid','subjectid','both_class']));
     }
     public function mystudents(Request $request,$classid,$subjectid)
     {
@@ -101,14 +101,14 @@ class TeacherController extends Controller
 
 
 
-        $d=DB::table('subject_class')
+        $both_class=DB::table('subject_class')
         ->where('subject_class.class_id','=',$classid)
         ->where('subject_class.subject_id','=',$subjectid)
         ->join('subject','subject.id','=','subject_class.subject_id')
         ->join('class','class.id','=','subject_class.class_id')
         ->select('subject_name as subject','class_name as class','class.id as classid','subject.id as subjectid')
         ->first();
-        return view('teacher.mystudents',compact(['classid','subjectid','d','mark','sub','std']));
+        return view('teacher.mystudents',compact(['classid','subjectid','both_class','mark','sub','std']));
     }
 
 
