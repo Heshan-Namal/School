@@ -34,4 +34,6 @@ class CreateNotificationTable extends Migration
     {
         Schema::dropIfExists('notification');
     }
+
 }
+

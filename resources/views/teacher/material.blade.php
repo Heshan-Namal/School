@@ -1,28 +1,20 @@
 @extends('layouts.MasterDashboard')
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/front/css/card.css')}}">
+<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 @endsection
 @section('content')
-<link rel="stylesheet" href="{{asset('assets/front/css/Ass.css')}}">
 <div class="content">
 
-
-
-
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card">
-                <a href="{{route('ass.index',[$classid,$subjectid])}}" style="text-decoration:none;">
-                    <div class="card-body">
-                        <img src="{{asset('assets/front/images/ass/assess.png')}}" class="rounded mx-auto d-block"
-                            alt="...">
-                        <h2 class="card-title fw-bold">ADD</h2>
-                        <div>
-                            <p class="card-text">Assesment</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="card">
+        <a href="{{route('ass.index',[$classid,$subjectid])}}" style="text-decoration:none;">
+      <div class="card-body">
+        <img src="{{asset('assets/front/images/ass/assess.png')}}" class="rounded mx-auto d-block" alt="...">
+         <h2 class="card-title fw-bold">ADD</h2>
+        <div>
+          <p class="card-text">Assesment</p>
         </div>
         <div class="col-sm-3">
             <div class="card">

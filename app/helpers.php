@@ -48,11 +48,10 @@ function getTermWeekDay()
     return [$term,$week,$day];
 }
 
-function getTodayClassLink($subject_id)
+function getTodayClassLink($subject_id,$day)
 {
     $term ='term'.getTermWeekDay()[0];
     $week = 'week'.getTermWeekDay()[1];
-    $day = strtolower(getTermWeekDay()[2]);
 
     $class_id = getClassId();
     
@@ -60,7 +59,7 @@ function getTodayClassLink($subject_id)
             ->select('*')
             ->where([['class_id', $class_id],['subject_id', $subject_id],['term', $term],['week', $week],['day', $day]])
             ->get();
-
+            
             $link = $res->where('resource_type','class_link')->pluck('resource_file')->first();    
     return $link;
 }

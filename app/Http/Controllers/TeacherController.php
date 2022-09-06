@@ -114,6 +114,7 @@ class TeacherController extends Controller
 
     public function export($classid,$subjectid)
     {
+
         $std=DB::table('student')
                 ->where('student.class_id',$classid)
                ->get();
@@ -165,9 +166,11 @@ class TeacherController extends Controller
 
     public function exportpdf($classid,$subjectid)
     {
+
         $std=DB::table('student')
                 ->where('student.class_id',$classid)
                ->get();
+
                $ass=DB::table('assessment')
                ->where('assessment.class_id','=',$classid)
                ->where('assessment.subject_id','=',$subjectid)

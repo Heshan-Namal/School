@@ -36,8 +36,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
-        
+    {
+
         return redirect('dashboard');
     }
 
@@ -174,11 +174,13 @@ class HomeController extends Controller
         $teacher = User:: where('user_type', 'teacher')->count();
         $class_teacher = User:: where('user_type', 'class_teacher')->count();
         $grades = Grade:: count();
+
         $notification = DB::table('notification')
             ->select('*')
             ->get();
         
         return view('Dashboard.dashboard', $d,compact('student','teacher','class_teacher','grades','notification'));
+
     }
     public function back()
     {

@@ -1,5 +1,9 @@
 @extends('layouts.MasterDashboard')
 
+@section('style')
+
+@endsection
+
 @section('content')
 
 

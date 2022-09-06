@@ -1,9 +1,12 @@
 @extends('layouts.MasterDashboard')
 @section('style')
+
 <link rel="stylesheet" href="{{asset('assets/front/css/student.css')}}">
 <link rel="stylesheet" href="{{asset('assets/front/css/card.css')}}">
 
+
 @endsection
+
 @section('content')
 <div class='content'>
     <div class="row">
@@ -24,22 +27,20 @@
                             <div id="carouselExampleCaptions" class="carousel carousel-dark slide mb-5"
                                 data-bs-ride="carousel">
 
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div class="row row-cols-4">
-                                            @foreach($monday as $item)
-                                            <div class="col-sm-3">
-                                                <div id="subject_card" class="card">
-                                                    <div class="card-body hidden-div">
-                                                        <div>
-                                                            <p class="card-text fs-3"></p>
-                                                            <p class="card-text fs-3">{{$item->subject_name}}</p>
-                                                        </div>
-                                                        <div class="hidden-button">
-                                                            <a type="button" class="btn btn-primary"
-                                                                href="{{getTodayClassLink($item->id)}}"
-                                                                target="_blank">Join</a>
-                                                        </div>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row row-cols-4">
+                                    @foreach($monday as $item)
+                                    <div class="col-sm-3">
+                                        <div id="subject_card" class="card">
+                                            <div class="card-body hidden-div">
+                                                    <div>
+                                                        <p class="card-text fs-3"></p>
+                                                        <p class="card-text fs-3">{{$item->subject_name}}</p>
+                                                    </div>
+                                                    <div class="hidden-button">
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                                     <div class="text-white period-text">{{$item->period}}</div>
                                                 </div>
@@ -49,22 +50,25 @@
                                         <div class="carousel-caption d-none d-md-block">
                                             <span>Monday</span>
                                         </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="row row-cols-4">
-                                            @foreach($tuesday as $item)
-                                            <div class="col-sm-3">
-                                                <div id="subject_card" class="card">
-                                                    <div class="card-body hidden-div">
-                                                        <div>
-                                                            <p class="card-text fs-3"></p>
-                                                            <p class="card-text fs-3">{{$item->subject_name}}</p>
-                                                        </div>
-                                                        <div class="hidden-button">
-                                                            <a type="button" class="btn btn-primary"
-                                                                href="{{getTodayClassLink($item->id)}}"
-                                                                target="_blank">Join</a>
-                                                        </div>
+
+                                    @endforeach
+                                </div>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <span>Monday</span>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                            <div class="row row-cols-4">
+                                    @foreach($tuesday as $item)
+                                    <div class="col-sm-3">
+                                        <div id="subject_card" class="card">
+                                            <div class="card-body hidden-div">
+                                                    <div>
+                                                        <p class="card-text fs-3"></p>
+                                                        <p class="card-text fs-3">{{$item->subject_name}}</p>
+                                                    </div>
+                                                    <div class="hidden-button">
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                                     <div class="text-white period-text">{{$item->period}}</div>
                                                 </div>
@@ -87,11 +91,9 @@
                                                             <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                         </div>
 
-                                                        <div class="hidden-button">
-                                                            <a type="button" class="btn btn-primary"
-                                                                href="{{getTodayClassLink($item->id)}}"
-                                                                target="_blank">Join</a>
-                                                        </div>
+
+                                                    <div class="hidden-button">
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                                     <div class="text-white period-text">{{$item->period}}</div>
                                                 </div>
@@ -103,21 +105,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="carousel-item">
-                                        <div class="row row-cols-4">
-                                            @foreach($thursday as $item)
-                                            <div class="col-sm-3">
-                                                <div id="subject_card" class="card">
-                                                    <div class="card-body hidden-div">
-                                                        <div>
-                                                            <p class="card-text fs-3"></p>
-                                                            <p class="card-text fs-3">{{$item->subject_name}}</p>
-                                                        </div>
-                                                        <div class="hidden-button">
-                                                            <a type="button" class="btn btn-primary"
-                                                                href="{{getTodayClassLink($item->id)}}"
-                                                                target="_blank">Join</a>
-                                                        </div>
+
+                            <div class="carousel-item">
+                            <div class="row row-cols-4">
+                                    @foreach($thursday as $item)
+                                    <div class="col-sm-3">
+                                        <div id="subject_card" class="card">
+                                            <div class="card-body hidden-div">
+                                                    <div>
+                                                        <p class="card-text fs-3"></p>
+                                                        <p class="card-text fs-3">{{$item->subject_name}}</p>
+                                                    </div>
+                                                    <div class="hidden-button">
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                                     <div class="text-white period-text">{{$item->period}}</div>
                                                 </div>
@@ -129,21 +129,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="carousel-item">
-                                        <div class="row row-cols-4">
-                                            @foreach($friday as $item)
-                                            <div class="col-sm-3">
-                                                <div id="subject_card" class="card">
-                                                    <div class="card-body hidden-div">
-                                                        <div>
-                                                            <p class="card-text fs-3"></p>
-                                                            <p class="card-text fs-3">{{$item->subject_name}}</p>
-                                                        </div>
-                                                        <div class="hidden-button">
-                                                            <a type="button" class="btn btn-primary"
-                                                                href="{{getTodayClassLink($item->id)}}"
-                                                                target="_blank">Join</a>
-                                                        </div>
+
+                            <div class="carousel-item">
+                            <div class="row row-cols-4">
+                                    @foreach($friday as $item)
+                                    <div class="col-sm-3">
+                                        <div id="subject_card" class="card">
+                                            <div class="card-body hidden-div">
+                                                    <div>
+                                                        <p class="card-text fs-3"></p>
+                                                        <p class="card-text fs-3">{{$item->subject_name}}</p>
+                                                    </div>
+                                                    <div class="hidden-button">
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                                     <div class="text-white period-text">{{$item->period}}</div>
                                                 </div>

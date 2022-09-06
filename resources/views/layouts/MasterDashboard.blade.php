@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{asset('assets/front/fonts/fontawesome5-overrides.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/student.css')}}">
+    
 
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
@@ -129,11 +130,24 @@
                             </div>
                         </div>
 
+
+                        @if (isset($both_class))
+                        <div class="col-4">
+                            <div class="d-flex justify-content-center">
+                                <div class="box mx-3 rounded">
+                                    <p class="classnum">{{$both_class->class}}</p>
+                                </div>
+
+                                <p class="classname">:{{$both_class->subject}}</p>
+                            </div>
+                        </div>
+                        @else
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group"><input class="bg-light form-control border-0 small" type="hidden"
                                     placeholder="Search for ..."></div>
                         </form>
 
+                        @endif
 
                         <!-- notification -->
                         <!-- <div class="wrapper"> -->

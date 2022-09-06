@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 resources/views/Student/student_relink/relinklist.blade.php
+resources/views/layouts/MasterDashboardold.blade.php
