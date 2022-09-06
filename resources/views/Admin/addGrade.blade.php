@@ -20,10 +20,18 @@
                     <img src="http://localhost:8000/assets/front/images/avatars/student{{$item->grade_name}}.png"
                         class="rounded mx-auto d-block" alt="...">
                     <div>
-                        <span class="card-title fw-bold pe-5 card-span"><a
-                                href="{{route('grade.edit',[$item->id])}}">Edit</a></span>
-                        <span class="card-title fw-bold card-span-rm" data-bs-toggle="modal"
-                            data-bs-target="#removeModal" id="{{$item->id}}">Remove</span>
+                        <span class="card-title fw-bold pe-5 card-span "><a href="{{route('grade.edit',[$item->id])}}"
+                                class="text-decoration-none">Edit</a></span>
+
+                        <a href="{{ route('delete.Grade') }}" class="text-decoration-none" onclick="event.preventDefault();
+                                                     document.getElementById('gradedelete').submit();">
+                            <form id="gradedelete" action="{{ route('delete.Grade') }}" method="POST" class="d-none">
+
+                                @csrf
+                                <input type="hidden" class="form-control" name="grade_id" value="{{$item->id}}">
+                            </form>
+                            <span class="card-title fw-bold card-span-rm"> Remove</span>
+                        </a>
                     </div>
                 </div>
             </div>

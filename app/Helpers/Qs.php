@@ -18,7 +18,7 @@ class Qs
     //***Define Team groups****
     public static function getTeamSu()  // super admin group---
     {
-        return [ 'super_admin'];    
+        return [ 'class_teacher'];    
     }
     public static function getTeamAd()  //  admin group---
     {

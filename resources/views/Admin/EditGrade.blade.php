@@ -6,6 +6,9 @@
 <!-- content section -->
 @section('content')
 <div class="container_AssStudent">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> {{ Breadcrumbs::render('Edit-grades') }} </li>
+    </ol>
     @foreach ($gradeName as $item)
     <div class="row">
         <div class="col-lg-12">

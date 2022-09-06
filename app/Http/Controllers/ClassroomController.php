@@ -6,9 +6,13 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Classroom;
+use App\Imports\Classtimetable;
 use App\Models\Subject_class;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use Excel;
+
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -100,9 +104,14 @@ class ClassroomController extends Controller
             ->join('subject', 'teacher_subject.subject_id', '=', 'subject.id')
             ->select( 'teacher_subject.*','subject.subject_name as sub', 'teacher.full_name as name')
             ->get();
-
-
-
+           
+            // $classtimetable=DB::table('class_timetable')
+            // ->where('class_timetable.class_id','=',$class_id)
+            // ->join('subject', 'class_timetable.subject_id', '=', 'subject.id')
+            // ->select('class_timetable.*','subject.subject_name as subname')
+            // ->get();
+            // dd($classtimetable);
+           
 
             return view('Admin.editClass',compact('class','subject','classroom','class_sub'));
         }
@@ -127,4 +136,13 @@ class ClassroomController extends Controller
 
         }
 
+        public function addclass_timetable(Request $request){
+            Excel:: import(new ClasstimetableImport,$request->file);
+           
+        return back()->with('success', 'Excel Data Imported successfully.');
+        }
 }
+
+
+
+

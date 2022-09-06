@@ -5,6 +5,9 @@
 @endsection
 @section('content')
 <div class="container_AssStudent ">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> {{ Breadcrumbs::render('Student') }} </li>
+    </ol>
     <header>Student Registration</header>
 
     <form class="row g-3" method="POST" action="{{route('admin.addstudent')}}">
@@ -71,7 +74,7 @@
         </div>
     </form>
     <div class="row">
-        <header class="mb-3">Teacher List</header>
+        <header class="mb-3">Student List</header>
 
         <table class="table table-bordered table-striped">
             <thead>

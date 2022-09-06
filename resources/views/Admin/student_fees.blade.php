@@ -5,6 +5,7 @@
 @endsection
 @section('content')
 <div class="container_AssStudent ">
+
     <header>View Submited Facility Fees </header>
     <form action="{{route('view.payments')}}" method="POST" class="row g-3">@csrf
         <div class="row g-3 mt-2 mb-2">

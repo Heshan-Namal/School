@@ -36,7 +36,7 @@
                 <nav class="navbar navbar-light navbar-expand bg-white shadow topbar static-top">
                     <div class="container-fluid">
                         <!-- droup down nav items-->
-                        <img class="rounded-circle" src="{{asset('assets/front/images/avatars/avatar4.jpeg')}}">
+                        <img class="rounded-circle" src="{{asset('assets/front/images/avatars/logo2.jpeg')}}">
 
                         <div class="navDroupdown form-control border-0 small">
                             <input type="text" class="navtext" placeholder="Home" readonly>
@@ -47,40 +47,72 @@
                                     </div>
                                 </a>
                                 @if(Qs::userIsTeamAd())
-                                <a href="#">
+                                <a href="{{route('admin.student')}}">
+                                    <div>
+                                        <ion-icon name="person-outline"></ion-icon>Students
+                                    </div>
+                                </a>
+                                <a href="{{route('view.fees')}}">
+                                    <div>
+                                        <ion-icon name="person-outline"></ion-icon>Facilities fees
+                                    </div>
+                                </a>
+                                <a href="{{route('admin.teacher')}}">
+                                    <div>
+                                        <ion-icon name="woman-outline"></ion-icon>Teachers
+                                    </div>
+                                </a>
+                                @endif
+                                @if(Qs::userIsTeamSu())
+                                <a href="{{route('myclass.students')}}">
                                     <div>
                                         <ion-icon name="person-outline"></ion-icon>Students
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div>
-                                        <ion-icon name="woman-outline"></ion-icon>Teachers
+                                        <ion-icon name="book-outline"></ion-icon>View term test
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div>
-                                        <ion-icon name="bookmark-outline"></ion-icon>Classes
+                                        <ion-icon name="book-outline"></ion-icon>View term test
                                     </div>
                                 </a>
-                                <a href="#">
+                                <a href="{{route('myclass.termtest')}}">
                                     <div>
-                                        <ion-icon name="time-outline"></ion-icon>Time Table
+                                        <ion-icon name="book-outline"></ion-icon>Add termtest result
                                     </div>
                                 </a>
                                 @endif
                                 @if(Qs::userIsTeamTe())
-                                @endif
-                                @if(Qs::userIsTeamLe())
-                                    <a href="{{route('Student.student_subject.mysubjects',[getAdmissionNo()])}}"><div><ion-icon name="book-outline"></ion-icon>Subjects</div></a>
-                                    <a href="#"><div><ion-icon name="time-outline"></ion-icon>Time Table</div></a>
-                                @endif
 
-
-                                <a href="#">
+                                <a href="{{route('teacher.subjects')}}">
                                     <div>
-                                        <ion-icon name="alert-circle-outline"></ion-icon>Notices
+                                        <ion-icon name="book-outline"></ion-icon>Subjects
                                     </div>
                                 </a>
+                                @endif
+                                @if(Qs::userIsTeamLe())
+                                <a href="{{route('Student.student_subject.mysubjects',[getAdmissionNo()])}}">
+                                    <div>
+                                        <ion-icon name="book-outline"></ion-icon>Subjects
+                                    </div>
+                                </a>
+                                <a href="{{route('Student.student.examResults')}}">
+                                    <div>
+                                        <ion-icon name="book-outline"></ion-icon>Termtest results
+                                    </div>
+                                </a>
+                                <a href="{{route('std.fees')}}">
+                                    <div>
+                                        <ion-icon name="time-outline"></ion-icon>Facilities fees
+                                    </div>
+                                </a>
+                                @endif
+
+
+
                                 <a href="{{route('user.edit',[auth()->user()->id])}}">
                                     <div>
                                         <ion-icon name="alert-circle-outline"></ion-icon>Profile
@@ -97,6 +129,8 @@
                                 </a>
                             </div>
                         </div>
+
+
                         @if (isset($both_class))
                         <div class="col-4">
                             <div class="d-flex justify-content-center">
@@ -112,6 +146,7 @@
                             <div class="input-group"><input class="bg-light form-control border-0 small" type="hidden"
                                     placeholder="Search for ..."></div>
                         </form>
+
                         @endif
 
                         <!-- notification -->

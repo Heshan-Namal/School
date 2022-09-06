@@ -10,6 +10,52 @@ Breadcrumbs::for('Grades', function ($trail) {
     $trail->parent('Dashboard');
     $trail->push('Grades', route('admin.grade'));
 });
+//1111111111111111111111111111111111111111
+Breadcrumbs::for('Edit-grades', function ($trail) {
+    $trail->parent('Grades');
+    $trail->push('Edit-grades', route('grade.edit',[2]));
+});
+Breadcrumbs::for('Edit-Class', function ($trail) {
+    $trail->parent('Edit-grades');
+    $trail->push('Edit-class', route('edit.class',[3,9]));
+});
+Breadcrumbs::for('Teacher', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Add teacher', route('admin.teacher'));
+});
+Breadcrumbs::for('Student', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Add student', route('admin.student'));
+});
+// Breadcrumbs::for('Grades', function ($trail) {
+//     $trail->parent('Dashboard');
+//     $trail->push('Grades', route('admin.grade'));
+// });
+// Breadcrumbs::for('Grades', function ($trail) {
+//     $trail->parent('Dashboard');
+//     $trail->push('Grades', route('admin.grade'));
+// });
+// Breadcrumbs::for('Grades', function ($trail) {
+//     $trail->parent('Dashboard');
+//     $trail->push('Grades', route('admin.grade'));
+// });
+// Breadcrumbs::for('Grades', function ($trail) {
+//     $trail->parent('Dashboard');
+//     $trail->push('Grades', route('admin.grade'));
+// });
+// Breadcrumbs::for('Grades', function ($trail) {
+//     $trail->parent('Dashboard');
+//     $trail->push('Grades', route('admin.grade'));
+// });
+// Breadcrumbs::for('Grades', function ($trail) {
+//     $trail->parent('Dashboard');
+//     $trail->push('Grades', route('admin.grade'));
+// });
+// Breadcrumbs::for('Grades', function ($trail) {
+//     $trail->parent('Dashboard');
+//     $trail->push('Grades', route('admin.grade'));
+// });
+
 
 // // Home > Blog
 // Breadcrumbs::for('blog', function ($trail) {

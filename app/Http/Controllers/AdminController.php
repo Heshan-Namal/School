@@ -15,6 +15,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class AdminController extends Controller
@@ -91,11 +93,11 @@ class AdminController extends Controller
         $teacher->full_name=$request->Full_name;
         $teacher->contact_no=$request->Contact_Number;
         $teacher->address=$request->Address;
-        $teacher->photo='public\assets\front\images\defualt.jpg';
+        $teacher->photo='default.jpg';
         $teacher->admin_id=auth::user()->id;
         $teacher->user_id= $user_id[0]->id ;
         $teacher->save();
-
+        Mail::to('admin@admin.com')->send(new WelcomeMail() );
         $teacher = Teacher::all();
         return redirect('/addteacher')->with(compact('teacher'))->with('success', 'Teacher added successfully');
 
@@ -152,7 +154,7 @@ class AdminController extends Controller
         $student->guardian_email=$request->guardian_email;
         $student->guardian_contact_no=$request->guardian_contact_no;
         $student->address=$request->address;
-        $student->photo='public\assets\front\images\defualt.jpg';
+        $student->photo='default.jpg';
         $student->admin_id=auth::user()->id;
         $student->user_id= $user_id[0]->id ;
         $student->grade_id= $grade_id[0]->id;
@@ -161,7 +163,7 @@ class AdminController extends Controller
 
         // $grade = Grade::all();
         $classroom = Classroom::all();
-
+        Mail::to('admin@admin.com')->send(new WelcomeMail() );
         return back()->with('success', 'Student has been added successfully.');
 
     }
@@ -454,4 +456,29 @@ class AdminController extends Controller
 //         return redirect()->back();
 
 // }
+
+public function delete_teacher(Request $request)
+    {
+        //subjects delete
+
+        $Teacher = Teacher::findOrFail($request->teacher_id);
+
+        $Teacher->delete();
+
+        return back()->with('success', 'Teacher Data deleted successfully');
+    }
+
+    public function delete_grade(Request $request)
+    {
+        //grade delete
+
+        $grade = Grade::findOrFail($request->grade_id);
+
+        $grade->delete();
+
+        return back()->with('success', 'grade Data deleted successfully');
+    }
 }
+
+
+

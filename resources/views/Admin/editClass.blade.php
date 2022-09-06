@@ -6,6 +6,7 @@
 <!-- content section -->
 @section('content')
 <div class="container_AssStudent">
+
     @foreach ($class as $item)
 
     <div class="row">
@@ -14,7 +15,7 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <h3 class="my-auto text-primary">Grade 1{{$item->class_name}} details </h3>
+                            <h3 class="my-auto text-primary">Grade {{$item->class_name}} details </h3>
                         </div>
                     </div>
                 </div>
@@ -118,12 +119,17 @@
                             <label for="formFile" class="form-label">Import time table</label>
 
                         </div>
-                        <div class="col-sm-4 text-secondary mb-4">
-                            <input class="form-control" type="file" id="formFile">
-                        </div>
-                        <div class="col-sm-3 text-secondary mb-4">
-                            <input type="button" class="btn btn-primary " value="Import">
-                        </div>
+                        <form method="POST" enctype="multipart/form-data" action="{{route('edit.class_sub')}}">
+                            {{csrf_field()}}
+                            <div class="col-sm-4 text-secondary mb-4">
+                                <span class="text-danger">@error('timetable'){{ $message }} @enderror</span>
+                                <input class="form-control" type="file" name="select_file">
+                            </div>
+                            <div class="col-sm-3 text-secondary mb-4">
+                                <button class="btn btn-primary d-block w-100" type="submit">Save Changes</button>
+
+                            </div>
+                        </form>
                         <table class="table table-bordered">
                             <!--<caption>Timetable</caption>-->
                             <tr>
@@ -142,8 +148,9 @@
                                 <td align="center" height="50" width="100">
                                     <b>IV<br>12:40-1:30</b>
                                 </td>
-                                <td align="center" height="50" width="100">
-                                    <b>12:00-12:40</b>
+                                <td rowspan="6" align="center" width="100">
+                                    <b>IV<br>12:40-1:30</b><br>
+                                    <h2>L<br>U<br>N<br>C<br>H</h2>
                                 </td>
                                 <td align="center" height="50" width="100">
                                     <b>V<br>1:30-2:20</b>
@@ -162,14 +169,13 @@
                                 <td align="center" height="50">
                                     <b>Monday</b>
                                 </td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
                                 <td align="center" height="50">Eng</td>
-                                <td align="center" height="50">Mat</td>
                                 <td align="center" height="50">Che</td>
-                                <td align="center" height="50">Phy</td>
-                                <td rowspan="6" align="center" height="50">
-                                    <h2>L<br>U<br>N<br>C<br>H</h2>
-                                </td>
-                                <td colspan="3" align="center" height="50">LAB</td>
+                                <td align="center" height="50">Mat</td>
+                                <td align="center" height="50">SPORTS</td>
                                 <td align="center" height="50">Phy</td>
 
                             </tr>
@@ -177,8 +183,9 @@
                                 <td align="center" height="50">
                                     <b>Tuesday</b>
                                 </td>
-                                <td colspan="3" align="center" height="50">LAB
-                                </td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
                                 <td align="center" height="50">Eng</td>
                                 <td align="center" height="50">Che</td>
                                 <td align="center" height="50">Mat</td>
@@ -189,36 +196,39 @@
                                 <td align="center" height="50">
                                     <b>Wednesday</b>
                                 </td>
-                                <td align="center" height="50">Mat</td>
-                                <td align="center" height="50">phy</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
                                 <td align="center" height="50">Eng</td>
                                 <td align="center" height="50">Che</td>
+                                <td align="center" height="50">Mat</td>
+                                <td align="center" height="50">SPORTS</td>
                                 <td align="center" height="50">Phy</td>
-                                <td colspan="3" align="center" height="50">LIBRARY
-                                </td>
                             </tr>
                             <tr>
                                 <td align="center" height="50">
                                     <b>Thursday</b>
                                 </td>
-                                <td align="center" height="50">Phy</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
                                 <td align="center" height="50">Eng</td>
                                 <td align="center" height="50">Che</td>
-                                <td align="center" height="50">Phy</td>
-                                <td colspan="3" align="center" height="50">LAB
-                                </td>
                                 <td align="center" height="50">Mat</td>
+                                <td align="center" height="50">SPORTS</td>
+                                <td align="center" height="50">Phy</td>
                             </tr>
                             <tr>
                                 <td align="center" height="50">
                                     <b>Friday</b>
                                 </td>
-                                <td colspan="3" align="center" height="50">LAB
-                                </td>
-                                <td align="center" height="50">Mat</td>
-                                <td align="center" height="50">Che</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
+                                <td align="center" height="50">LAB</td>
                                 <td align="center" height="50">Eng</td>
-                                <td align="center" height="50">Phy</td>
+                                <td align="center" height="50">Che</td>
+                                <td align="center" height="50">Mat</td>
+                                <td align="center" height="50">SPORTS</td>
                                 <td align="center" height="50">Phy</td>
                             </tr>
                         </table>
