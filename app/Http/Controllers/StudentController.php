@@ -352,9 +352,10 @@ class StudentController extends Controller
 
         if (isset($submission)) {
             $submission->answer_file= $path;
+            $submission->uploaded_date=now()->format('y-m-d');
             $submission->save();
             return redirect()->route('Student.student.homeworklist', [$class_id, $subject_id])->with('message', 'submission Has been updated successfully');
-        } else {
+        }else{
 
             Student_assesment::create(
                 [
