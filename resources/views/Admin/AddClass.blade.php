@@ -1,4 +1,4 @@
-@extends('layouts.MasterDashboard')
+<!-- @extends('layouts.MasterDashboard')
 
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/front/css/content.css')}}">
@@ -83,4 +83,4 @@
 
     </div>
 </div>
-@endsection
+@endsection -->

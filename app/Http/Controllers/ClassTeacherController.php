@@ -33,12 +33,33 @@ class ClassTeacherController extends Controller
     }
     public function student_view($id)
     {
+        $user_id=DB::table('student')
+        ->where('student.admission_no',$id)
+        ->get('user_id');
+
+        $user_type=DB::table('user')
+        ->where('id','=',$user_id[0]->user_id)
+        ->select('user_type')
+        ->get();
+        
+
+        $result=DB::table('student')
+            ->join('grade','grade.id','=','student.grade_id')
+            ->join('class','student.class_id','=','class.id')
+            ->where('student.user_id','=',$user_id[0]->user_id)
+            ->select('student.*','grade.grade_name as gname','class.class_name as cname')
+            
+            ->get();
+            $result2=DB::table('user')
+            ->where('id','=',$user_id[0]->user_id)
+            ->select('email')
+            ->get();
 
         $std=DB::table('student')
-        ->where('student.admission_no',$id)
+        ->where('student.admission_no',$user_id[0]->user_id)
         ->get();
-        // dd($std);
-        return view('class_teacher.student_view',compact(['std','id']));
+        // dd($result);
+        return view('class_teacher.student_view',compact(['std','id','result','result2']));
     }
     
 }

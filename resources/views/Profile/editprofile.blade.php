@@ -14,7 +14,7 @@
                     <div class="card-body">
 
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="{{asset('assets/front/images/avatars/avatar3.jpeg')}}" alt="Admin"
+                            <img src="http://localhost:8000/assets/front/images/avatars/{{$item->photo}}" alt="Admin"
                                 class="rounded-circle p-1 bg-primary" width="110">
                             <div class="mt-3">
                                 <h4{>{{$item->full_name}}</h4>
@@ -307,12 +307,12 @@
                 <h5 class="modal-title">Change Profile Picture</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="{{ route('Update.Profilepic') }}">
+            <form method="POST" action="{{ route('Update.Profilepic') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="formFileSm" class="form-label">Select the Picture on computer</label>
-                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="Ppicture">
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="image">
                     </div>
                 </div>
                 <div class="modal-footer">

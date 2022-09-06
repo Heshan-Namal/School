@@ -5,6 +5,15 @@
 
 @section('content')
 <div class="content">
+    @if(Qs::userIsTeamAd())
+    <div class="row mt-2">
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#menualModal">
+                Admin manual
+            </button>
+        </div>
+    </div>
+    @endif
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"> {{ Breadcrumbs::render('Dashboard') }} </li>
@@ -12,6 +21,8 @@
 
 
     @if(Qs::userIsTeamAd())
+
+
     <div class="row">
         <div class="col-sm-3">
             <div class="card">
@@ -105,119 +116,7 @@
     </div>
     @endif
     @if(Qs::userIsTeamLe())
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">Science</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">Sinhala</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">Maths</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">Buddisht</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">History</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">English</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">Music</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">Art</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">Accounting</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{asset('assets/front/images/avatars/science.png')}}" class="rounded mx-auto d-block"
-                        alt="...">
-                    <div>
-                        <p class="card-text">ICT</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    @include('Dashboard.studentDashboard')
     @endif
     @if(Qs::userIsTeamTe())
     <a href="{{route('lead.index')}}"></a>
@@ -277,5 +176,30 @@
 </div> --}}
 
 @endif
+</div>
+
+<!-- menual Modal -->
+<div class="modal fade" id="menualModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Admin manual read first</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ol>
+                    <li>Add teachers</li>
+                    <li>Add grades</li>
+                    <li>Click 'Edit' to add grade subjects & classes</li>
+                    <li>Inside grades edit click view to add subject for class </li>
+                    <li>Finally add students</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

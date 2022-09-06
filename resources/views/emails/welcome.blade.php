@@ -1,10 +1,11 @@
 @component('mail::message')
-# Introduction
+# Welcome to Viduhala
 
-The body of your message.
+<br>
+your password is 'viduhalapwd'
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => 'http://127.0.0.1:8000/'])
+Click here to login
 @endcomponent
 
 Thanks,<br>

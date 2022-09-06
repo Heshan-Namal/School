@@ -116,6 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'grade'], function(){
             Route::GET('/class/edit/{grade_id}/{class_id}',[ClassroomController::class,'editgrade_class'])->name('edit.class');
             Route::POST('/class/subject/add',[ClassroomController::class,'addclass_subject'])->name('edit.class_sub');
+            Route::POST('/class/add/timetable',[ClassroomController::class,'addclass_timetable'])->name('add.timetable');
         });
 
          //User edit routes
@@ -133,6 +134,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
         //emails
         Route::get('/email',function(){
+            Mail::to('admin@admin.com')->send(new WelcomeMail() );
             return new WelcomeMail();
         });
 
@@ -217,10 +219,6 @@ Route::put('/attendance-update',[AttendanceController::class,'attendanceupdate']
 //class_teacher-report
 Route::get('result/exportpdf/{term}/{studentid}/{classid}', [TermController::class, 'exportpdf'])->name('resultpdf');
 
-
-});
-
-
 //admin
 Route::get('/addfees',[AdminController::class,'Addfees'])->name('view.fees');
 Route::post('/storefee',[AdminController::class,'Storefees'])->name('store.fee');
@@ -230,6 +228,15 @@ Route::post('/stdpayments',[AdminController::class,'studentfees'])->name('view.p
 //student
 Route::get('/add-std-fees',[AdminController::class,'getstd_fees'])->name('std.fees');
 Route::post('/storestd-fee',[AdminController::class,'Storestdfees'])->name('store.std.fee');
+
+//delete roots
+Route::post('/delete/teacher/{id}',[AdminController::class,'delete_teacher'])->name('delete.teacher');
+Route::post('/delete/grade',[AdminController::class,'delete_grade'])->name('delete.Grade');
+
+});
+
+
+
 
 
 

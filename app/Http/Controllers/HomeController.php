@@ -46,6 +46,9 @@ class HomeController extends Controller
         $d=[];
         if(Qs::userIsTeamAll()){
             $d['users'] = $this->user->getAll();
+
+            
+
         }
         if(Qs::userIsTeamLe()){
             // select classes for today from class timetable
@@ -135,8 +138,9 @@ class HomeController extends Controller
                 ->groupBy('assessment.id','class.class_name','assessment.title')
                 ->get();
             }
-$name=DB::table('teacher')
-->where('teacher.id','=',Auth::user()->id)->first();
+                $name=DB::table('teacher')
+                ->where('teacher.id','=',Auth::user()->id)->first();
+                
             // $now = Carbon::now();
             // dd($now->weekOfYear);
             $data=DB::table('teacher_subject')
@@ -170,8 +174,11 @@ $name=DB::table('teacher')
         $teacher = User:: where('user_type', 'teacher')->count();
         $class_teacher = User:: where('user_type', 'class_teacher')->count();
         $grades = Grade:: count();
+        $notification = DB::table('notification')
+            ->select('*')
+            ->get();
         
-        return view('Dashboard.dashboard', $d,compact('student','teacher','class_teacher','grades'));
+        return view('Dashboard.dashboard', $d,compact('student','teacher','class_teacher','grades','notification'));
     }
     public function back()
     {

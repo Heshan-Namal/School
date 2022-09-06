@@ -5,6 +5,9 @@
 @endsection
 @section('content')
 <div class="container_AssStudent ">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> {{ Breadcrumbs::render('Teacher') }} </li>
+    </ol>
     <header>Teacher Registration</header>
 
     <form class="row g-3" method="POST" action="teacher/AddTeacher">
@@ -55,7 +58,14 @@
                         <a href="{{route('user.edit',[$item->user_id])}}" class="btn btn-primary btn-sm">Edit</a>
                     </td>
                     <td>
-                        <a href="" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{{route('delete.teacher',[$item->user_id])}}" class="btn btn-danger btn-sm" onclick="event.preventDefault();
+                                                     document.getElementById('delete-teacher').submit();">Delete
+                            <form id="delete-teacher" action="{{route('delete.teacher',[$item->user_id])}}"
+                                method="POST" class="d-none">
+                                @csrf
+                                <input type="hidden" class="form-control" name="teacher_id" value="{{$item->id}}">
+                            </form>
+                        </a>
                     </td>
                 </tr>
                 @endforeach

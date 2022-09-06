@@ -97,7 +97,37 @@ class UserController extends Controller
     return back()->with('success', 'Your Bio data has been updated successfully.');
     }
     public function Update_Profilepic(Request $request){
-        // return back()->with('success', 'Your Profile Picture has been updated successfully.');
+       
+        
+        if($request->hasFile('image')){
+            $destination_path = 'public/assets/front/images/avatars';
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $path = $request->file('image')->storeAs($destination_path,$image_name);
+            
+            
+        }
+        
+        if(Auth::user()->user_type == 'teacher'||Auth::user()->user_type == 'class_teacher'){
+            Teacher::where('id', Auth::user()->id)->update([
+                'photo'=>$image_name,
+                
+            ]);
+            
+            
+        }
+        else if(Auth::user()->user_type == 'student'){
+            Student::where('id', Auth::user()->id)->update([
+                'photo'=>$image_name,
+            ]);
+            
+        }
+        else{ Admin::where('id', Auth::user()->id)->update([
+            'photo'=>$image_name,
+        ]);
+        }
+
+        return back()->with('success', 'Your Profile Picture has been updated successfully.');
     }
     // public function View_student($userid){
 
