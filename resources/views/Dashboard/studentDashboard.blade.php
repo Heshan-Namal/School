@@ -1,7 +1,7 @@
 @extends('layouts.MasterDashboard')
 @section('style')
-<link rel="stylesheet" href="{{asset('assets/front/css/student.css')}}">
 @endsection
+
 @section('content')
 <div class='content'>
 <div class="row">
@@ -30,7 +30,7 @@
                                                         <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                     </div>
                                                     <div class="hidden-button">
-                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                             </div>
                                             <div class="text-white period-text">{{$item->period}}</div>
@@ -53,7 +53,7 @@
                                                         <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                     </div>
                                                     <div class="hidden-button">
-                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                             </div>
                                             <div class="text-white period-text">{{$item->period}}</div>
@@ -78,7 +78,7 @@
                                                     </div>
 
                                                     <div class="hidden-button">
-                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                             </div>
                                             <div class="text-white period-text">{{$item->period}}</div>
@@ -102,7 +102,7 @@
                                                         <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                     </div>
                                                     <div class="hidden-button">
-                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                             </div>
                                             <div class="text-white period-text">{{$item->period}}</div>
@@ -126,7 +126,7 @@
                                                         <p class="card-text fs-3">{{$item->subject_name}}</p>
                                                     </div>
                                                     <div class="hidden-button">
-                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id)}}" target="_blank">Join</a>
+                                                        <a type="button" class="btn btn-primary" href="{{getTodayClassLink($item->id,$item->day)}}" target="_blank">Join</a>
                                                     </div>
                                             </div>
                                             <div class="text-white period-text">{{$item->period}}</div>
